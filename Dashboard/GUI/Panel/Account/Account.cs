@@ -1,4 +1,6 @@
-﻿using Dashboard.GUI.Panel.Account;
+﻿using Dashboard.DAO;
+using Dashboard.DTO;
+using Dashboard.GUI.Panel.Account;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -9,6 +11,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
+
 namespace Dashboard.Panel
 {
     public partial class Account : Form
@@ -16,8 +20,14 @@ namespace Dashboard.Panel
         public Account()
         {
             InitializeComponent();
+            AccountLoad();
         }
-
+        public void AccountLoad()
+        {
+            AccountDTO acc = AccountDAO.Instance.GetInforEmployeeByID();
+            txtName.Text = acc.fullName;
+            txtAuthor.Text = acc.role;
+        }
         private void btnChangePassword_Click(object sender, EventArgs e)
         {
             ChangePassword change = new ChangePassword();

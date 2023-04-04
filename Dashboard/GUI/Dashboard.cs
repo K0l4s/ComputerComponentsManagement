@@ -1,4 +1,7 @@
 ﻿using Dashboard.DAO;
+using Dashboard.DTO;
+using Dashboard.GUI.Panel;
+using Dashboard.GUI.Panel.Account;
 using Dashboard.Panel;
 using System;
 using System.Collections.Generic;
@@ -31,8 +34,8 @@ namespace Dashboard
         {
             this.WindowState = FormWindowState.Maximized;
             pMenu.Width = 250;
-            Panel_Show(new Account());
-            TransBackColor(btnBill, btnCustomer, btnEmployee, btnProduct, btnStatistic);
+            btnClick(new Account());
+            
         }
         private void TransBackColor(Button One, Button Two, Button Three, Button Four, Button Five)
         {
@@ -77,15 +80,41 @@ namespace Dashboard
 
         private void btnBill_Click(object sender, EventArgs e)
         {
-            Panel_Show(new Bill());
+            /*Panel_Show(new Bill());
             TransBackColor(btnBill, btnCustomer, btnEmployee, btnProduct, btnStatistic);
-            btnBill.BackColor = Color.DarkGray;
+            btnBill.BackColor = Color.DarkGray;*/
+            btnClick(new Bill(), btnBill);
         }
 
-        private void pictureBox1_Click(object sender, EventArgs e)
+        private void btnHome_Click(object sender, EventArgs e)
         {
-            Panel_Show(new Account());
+            btnClick(new Account());
+        }
+        private void btnClick(object Fill, Button btnClick = null)
+        {
+            Form f = Fill as Form;
+            Panel_Show(f);
             TransBackColor(btnBill, btnCustomer, btnEmployee, btnProduct, btnStatistic);
+            if(btnClick != null)
+                btnClick.BackColor = Color.DarkGray;
+        }
+        private void btnEmployee_Click(object sender, EventArgs e)
+        {
+            btnClick(new Employee(),btnEmployee);
+        }
+        private void btnCustomer_Click(object sender, EventArgs e)
+        {
+            btnClick(new Customer(),btnCustomer);
+        }
+
+        private void btnProduct_Click(object sender, EventArgs e)
+        {
+            btnClick(new Product(), btnProduct);
+        }
+
+        private void btnStatistic_Click(object sender, EventArgs e)
+        {
+            btnClick(new Statistic(), btnStatistic);
         }
     }
 }

@@ -46,10 +46,10 @@
             // 
             this.txtNewPass.BackColor = System.Drawing.SystemColors.HighlightText;
             this.txtNewPass.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtNewPass.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtNewPass.Font = new System.Drawing.Font("#9Slide03 AmpleSoft", 13.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtNewPass.Location = new System.Drawing.Point(77, 176);
             this.txtNewPass.Name = "txtNewPass";
-            this.txtNewPass.Size = new System.Drawing.Size(248, 25);
+            this.txtNewPass.Size = new System.Drawing.Size(248, 26);
             this.txtNewPass.TabIndex = 18;
             this.txtNewPass.Text = "MẬT KHẨU MỚI";
             this.txtNewPass.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -60,10 +60,10 @@
             // 
             this.txtOldPass.BackColor = System.Drawing.SystemColors.HighlightText;
             this.txtOldPass.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtOldPass.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtOldPass.Font = new System.Drawing.Font("#9Slide03 AmpleSoft", 13.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtOldPass.Location = new System.Drawing.Point(77, 126);
             this.txtOldPass.Name = "txtOldPass";
-            this.txtOldPass.Size = new System.Drawing.Size(248, 25);
+            this.txtOldPass.Size = new System.Drawing.Size(248, 26);
             this.txtOldPass.TabIndex = 17;
             this.txtOldPass.Text = "MẬT KHẨU CŨ";
             this.txtOldPass.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -127,10 +127,10 @@
             // 
             this.txtRepeat.BackColor = System.Drawing.SystemColors.HighlightText;
             this.txtRepeat.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtRepeat.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtRepeat.Font = new System.Drawing.Font("#9Slide03 AmpleSoft", 13.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtRepeat.Location = new System.Drawing.Point(77, 226);
             this.txtRepeat.Name = "txtRepeat";
-            this.txtRepeat.Size = new System.Drawing.Size(248, 25);
+            this.txtRepeat.Size = new System.Drawing.Size(248, 26);
             this.txtRepeat.TabIndex = 20;
             this.txtRepeat.Text = "LẶP LẠI MẬT KHẨU MỚI";
             this.txtRepeat.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;

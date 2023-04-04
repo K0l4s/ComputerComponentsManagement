@@ -89,6 +89,7 @@
             this.btnStatistic.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnStatistic.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnStatistic.UseVisualStyleBackColor = true;
+            this.btnStatistic.Click += new System.EventHandler(this.btnStatistic_Click);
             // 
             // btnProduct
             // 
@@ -107,6 +108,7 @@
             this.btnProduct.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnProduct.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnProduct.UseVisualStyleBackColor = true;
+            this.btnProduct.Click += new System.EventHandler(this.btnProduct_Click);
             // 
             // btnCustomer
             // 
@@ -125,6 +127,7 @@
             this.btnCustomer.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnCustomer.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnCustomer.UseVisualStyleBackColor = true;
+            this.btnCustomer.Click += new System.EventHandler(this.btnCustomer_Click);
             // 
             // btnEmployee
             // 
@@ -143,6 +146,7 @@
             this.btnEmployee.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnEmployee.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnEmployee.UseVisualStyleBackColor = true;
+            this.btnEmployee.Click += new System.EventHandler(this.btnEmployee_Click);
             // 
             // btnBill
             // 
@@ -174,7 +178,7 @@
             this.btnHome.Size = new System.Drawing.Size(250, 108);
             this.btnHome.TabIndex = 0;
             this.btnHome.TabStop = false;
-            this.btnHome.Click += new System.EventHandler(this.pictureBox1_Click);
+            this.btnHome.Click += new System.EventHandler(this.btnHome_Click);
             // 
             // pCenter
             // 

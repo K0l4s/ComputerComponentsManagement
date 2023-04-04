@@ -1,4 +1,5 @@
 ﻿using Dashboard.DAO;
+using Dashboard.DTO;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;

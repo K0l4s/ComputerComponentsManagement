@@ -91,19 +91,21 @@
             // txtName
             // 
             this.txtName.Enabled = false;
-            this.txtName.Font = new System.Drawing.Font("#9Slide07 FS North Land Sans", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtName.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtName.ForeColor = System.Drawing.SystemColors.MenuText;
             this.txtName.Location = new System.Drawing.Point(344, 23);
             this.txtName.Name = "txtName";
-            this.txtName.Size = new System.Drawing.Size(301, 33);
+            this.txtName.Size = new System.Drawing.Size(301, 34);
             this.txtName.TabIndex = 3;
             // 
             // txtEmployeeID
             // 
             this.txtEmployeeID.Enabled = false;
-            this.txtEmployeeID.Font = new System.Drawing.Font("#9Slide07 FS North Land Sans", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtEmployeeID.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtEmployeeID.ForeColor = System.Drawing.SystemColors.MenuText;
             this.txtEmployeeID.Location = new System.Drawing.Point(403, 64);
             this.txtEmployeeID.Name = "txtEmployeeID";
-            this.txtEmployeeID.Size = new System.Drawing.Size(301, 33);
+            this.txtEmployeeID.Size = new System.Drawing.Size(301, 34);
             this.txtEmployeeID.TabIndex = 5;
             // 
             // label2
@@ -119,10 +121,11 @@
             // txtAuthor
             // 
             this.txtAuthor.Enabled = false;
-            this.txtAuthor.Font = new System.Drawing.Font("#9Slide07 FS North Land Sans", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtAuthor.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtAuthor.ForeColor = System.Drawing.SystemColors.MenuText;
             this.txtAuthor.Location = new System.Drawing.Point(302, 105);
             this.txtAuthor.Name = "txtAuthor";
-            this.txtAuthor.Size = new System.Drawing.Size(301, 33);
+            this.txtAuthor.Size = new System.Drawing.Size(301, 34);
             this.txtAuthor.TabIndex = 7;
             // 
             // label3

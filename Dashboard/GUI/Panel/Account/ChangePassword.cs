@@ -37,6 +37,7 @@ namespace Dashboard.GUI.Panel.Account
             if(txtOldPass.Text == "MẬT KHẨU CŨ")
             {
                 txtOldPass.Text = "";
+                txtOldPass.UseSystemPasswordChar = true;
             }    
         }
 
@@ -45,6 +46,7 @@ namespace Dashboard.GUI.Panel.Account
             if(txtOldPass.Text == "")
             {
                 txtOldPass.Text = "MẬT KHẨU CŨ";
+                txtOldPass.UseSystemPasswordChar = false;
             }    
         }
 
@@ -53,14 +55,16 @@ namespace Dashboard.GUI.Panel.Account
             if (txtNewPass.Text == "MẬT KHẨU MỚI")
             {
                 txtNewPass.Text = "";
+                txtNewPass.UseSystemPasswordChar = true;
             }
         }
 
         private void txtNewPass_Leave(object sender, EventArgs e)
         {
-            if (txtOldPass.Text == "")
+            if (txtNewPass.Text == "")
             {
-                txtOldPass.Text = "MẬT KHẨU MỚI";
+                txtNewPass.Text = "MẬT KHẨU MỚI";
+                txtNewPass.UseSystemPasswordChar = false;
             }
         }
 
@@ -69,6 +73,7 @@ namespace Dashboard.GUI.Panel.Account
             if (txtRepeat.Text == "LẶP LẠI MẬT KHẨU MỚI")
             {
                 txtRepeat.Text = "";
+                txtRepeat.UseSystemPasswordChar = true;
             }
         }
 
@@ -77,6 +82,7 @@ namespace Dashboard.GUI.Panel.Account
             if (txtRepeat.Text == "")
             {
                 txtRepeat.Text = "LẶP LẠI MẬT KHẨU MỚI";
+                txtRepeat.UseSystemPasswordChar = false;
             }
         }
     }
