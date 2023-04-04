@@ -13,3 +13,7 @@ F:\HỆ QUẢN TRỊ CƠ SỞ DỮ LIỆU\Project\Dashboard\Dashboard\obj\Debug\
 F:\HỆ QUẢN TRỊ CƠ SỞ DỮ LIỆU\Project\Dashboard\Dashboard\obj\Debug\Dashboard.pdb
 F:\HỆ QUẢN TRỊ CƠ SỞ DỮ LIỆU\Project\Dashboard\Dashboard\obj\Debug\Dashboard.GUI.Panel.Account.ChangePassword.resources
 F:\HỆ QUẢN TRỊ CƠ SỞ DỮ LIỆU\Project\Dashboard\Dashboard\obj\Debug\Dashboard.Panel.Account.resources
+F:\HỆ QUẢN TRỊ CƠ SỞ DỮ LIỆU\Project\Dashboard\Dashboard\obj\Debug\Dashboard.GUI.Panel.Account.Customer.resources
+F:\HỆ QUẢN TRỊ CƠ SỞ DỮ LIỆU\Project\Dashboard\Dashboard\obj\Debug\Dashboard.GUI.Panel.Account.Employee.resources
+F:\HỆ QUẢN TRỊ CƠ SỞ DỮ LIỆU\Project\Dashboard\Dashboard\obj\Debug\Dashboard.GUI.Panel.Product.resources
+F:\HỆ QUẢN TRỊ CƠ SỞ DỮ LIỆU\Project\Dashboard\Dashboard\obj\Debug\Dashboard.GUI.Panel.Statistic.resources

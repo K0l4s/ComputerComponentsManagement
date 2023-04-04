@@ -82,9 +82,9 @@
             this.btnLogin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnLogin.Font = new System.Drawing.Font("#9Slide03 SVNCintra", 13F);
             this.btnLogin.ForeColor = System.Drawing.Color.Black;
-            this.btnLogin.Location = new System.Drawing.Point(95, 261);
+            this.btnLogin.Location = new System.Drawing.Point(96, 273);
             this.btnLogin.Name = "btnLogin";
-            this.btnLogin.Size = new System.Drawing.Size(201, 44);
+            this.btnLogin.Size = new System.Drawing.Size(201, 41);
             this.btnLogin.TabIndex = 16;
             this.btnLogin.Text = "LOGIN";
             this.btnLogin.UseVisualStyleBackColor = false;
@@ -152,7 +152,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(425, 470);
+            this.ClientSize = new System.Drawing.Size(409, 332);
             this.Controls.Add(this.txtRepeat);
             this.Controls.Add(this.pictureBox3);
             this.Controls.Add(this.txtNewPass);

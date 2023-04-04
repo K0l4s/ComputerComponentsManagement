@@ -66,6 +66,18 @@
     <Compile Include="GUI\Panel\Account\ChangePassword.Designer.cs">
       <DependentUpon>ChangePassword.cs</DependentUpon>
     </Compile>
+    <Compile Include="GUI\Panel\Customer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\Panel\Customer.Designer.cs">
+      <DependentUpon>Customer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\Panel\Employee.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\Panel\Employee.Designer.cs">
+      <DependentUpon>Employee.cs</DependentUpon>
+    </Compile>
     <Compile Include="GUI\Panel\Bill.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -77,6 +89,18 @@
     </Compile>
     <Compile Include="GUI\Panel\Account\Account.Designer.cs">
       <DependentUpon>Account.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\Panel\Product.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\Panel\Product.Designer.cs">
+      <DependentUpon>Product.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\Panel\Statistic.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\Panel\Statistic.Designer.cs">
+      <DependentUpon>Statistic.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -94,6 +118,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\Panel\Account\Account.resx">
       <DependentUpon>Account.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\Panel\Customer.resx">
+      <DependentUpon>Customer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\Panel\Employee.resx">
+      <DependentUpon>Employee.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\Panel\Product.resx">
+      <DependentUpon>Product.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\Panel\Statistic.resx">
+      <DependentUpon>Statistic.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

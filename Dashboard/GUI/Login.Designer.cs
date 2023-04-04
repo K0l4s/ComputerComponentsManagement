@@ -92,6 +92,7 @@
             this.txtPassword.Text = "MẬT KHẨU";
             this.txtPassword.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txtPassword.Enter += new System.EventHandler(this.txtPassword_Enter);
+            this.txtPassword.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtPassword_KeyPress);
             this.txtPassword.Leave += new System.EventHandler(this.txtPassword_Leave);
             // 
             // txtEmployeeID
@@ -106,6 +107,7 @@
             this.txtEmployeeID.Text = "MÃ NHÂN VIÊN";
             this.txtEmployeeID.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txtEmployeeID.Enter += new System.EventHandler(this.txtEmployeeID_Enter);
+            this.txtEmployeeID.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtEmployeeID_KeyPress);
             this.txtEmployeeID.Leave += new System.EventHandler(this.txtEmployeeID_Leave);
             // 
             // btnLogin

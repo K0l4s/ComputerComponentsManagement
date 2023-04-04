@@ -19,15 +19,18 @@ namespace Dashboard
         }
         private void btnLogin_Click(object sender, EventArgs e)
         {
+            login();
+        }
+        private void login()
+        {
             String employeeID = txtEmployeeID.Text;
             String password = txtPassword.Text;
-            if(AccountDAO.Instance.Login(employeeID, password))
+            if (AccountDAO.Instance.Login(employeeID, password))
             {
-                Dashboard dashboard = new Dashboard();
-                dashboard.Show();
-            }   
-            else
-                MessageBox.Show("Đăng nhập thất bại do tài khoản hoặc mật khẩu không khớp với cơ sở dữ liệu! Vui lòng kiểm tra lại hoặc liên hệ với QUẢN TRỊ VIÊN để được cấp quyền!","ERROR",MessageBoxButtons.OK,MessageBoxIcon.Error);
+                Dashboard.Instance.Show();
+            }
+            else 
+                MessageBox.Show("Đăng nhập thất bại do tài khoản hoặc mật khẩu không khớp với cơ sở dữ liệu! Vui lòng kiểm tra lại hoặc liên hệ với QUẢN TRỊ VIÊN để được cấp quyền!", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
         private void btnLogin_MouseHover(object sender, EventArgs e)
         {
@@ -57,7 +60,6 @@ namespace Dashboard
             if (txtPassword.UseSystemPasswordChar == false)
                 txtPassword.UseSystemPasswordChar = true;
         }
-
         private void txtPassword_Leave(object sender, EventArgs e)
         {
             if (txtPassword.Text == "")
@@ -65,6 +67,22 @@ namespace Dashboard
                 txtPassword.Text = "MẬT KHẨU";
                 if (txtPassword.UseSystemPasswordChar == true)
                     txtPassword.UseSystemPasswordChar = false;
+            }
+        }
+
+        private void txtEmployeeID_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if(e.KeyChar == (char)Keys.Enter)
+            {
+                login();
+            }
+        }
+
+        private void txtPassword_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Enter)
+            {
+                login();
             }
         }
     }
