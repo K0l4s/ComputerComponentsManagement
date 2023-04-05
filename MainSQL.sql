@@ -419,13 +419,7 @@ AS
 	SELECT *
 	FROM VIEW_EMPLOYEE
 	WHERE employeeID = @employeeID;
-
-
-SELECT * FROM ACCOUNT
-UPDATE ACCOUNT
-SET emp_password = 'admin123'
-WHERE employeeID = 1
-
+GO
 CREATE PROCEDURE Change_Password 
 	@employeeID INT, 
 	@newPassword VARCHAR(255), 
@@ -447,7 +441,7 @@ BEGIN
 	ELSE
 		RETURN 0
 END
-
+GO
 -- INSERT DATA FOR DATABASE
 
 INSERT INTO AUTHORIZATION_USER VALUES (1, 'Manager');
@@ -464,5 +458,8 @@ INSERT INTO EMPLOYEE(employeeID,fullName,formatName,phoneNumber,Em_address,citiz
 values (2,'Nguyen Van Ba','Part Time','0123409799','Ho Chi Minh','050303116663','2003-8-20',23000,'Female',2,0.2);
 INSERT INTO EMPLOYEE(employeeID,fullName,formatName,phoneNumber,Em_address,citizenID,dateOfBirth,wage,sex,authorID,commissionRate)
 values (3,'Nguyen A','Full Time','0123477799','Ho Chi Minh','050303110053','2003-8-20',21000,'Female',2,0.4);
-
+GO
+UPDATE ACCOUNT
+SET emp_password = 'admin123'
+WHERE employeeID = 1
 GO
