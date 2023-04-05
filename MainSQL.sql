@@ -41,35 +41,23 @@ CREATE TABLE PRODUCT_DETAIL(
 				Check(sellPrice >=0),
 				descript VARCHAR(1000));
 				GO
-CREATE TABLE FORMAT_EMPLOYEE(
-				formatID INT NOT NULL PRIMARY KEY,
-				formatName VARCHAR(10) NOT NULL);
-				GO
-CREATE TABLE WAGE(
-				wageID INT NOT NULL PRIMARY KEY,
-				wage_detail FLOAT NOT NULL
-				CHECK(wage_detail > 0));
-				GO
 CREATE TABLE EMPLOYEE(
 				employeeID INT PRIMARY KEY NOT NULL,
 				fullName VARCHAR(50) NOT NULL,
 				sex VARCHAR(6) NOT NULL,
-				formatID INT NOT NULL REFERENCES FORMAT_EMPLOYEE(formatID),
+				formatName VARCHAR(10) NOT NULL,
+				wage FLOAT NOT NULL,
 				employeeImage VARBINARY(max),
 				phoneNumber VARCHAR(10) UNIQUE NOT NULL,
 				Em_address VARCHAR(255),
 				citizenID VARCHAR(12) UNIQUE NOT NULL,
-				wageID INT NOT NULL REFERENCES WAGE(wageID),
+				commissionRate FLOAT  NOT NULL,
 				dateOfBirth DATE NOT NULL,
 				age INT,
 				statusJob VARCHAR(255), 
 				authorID INT NOT NULL REFERENCES AUTHORIZATION_USER(authorID),
 				CHECK(len(citizenID) =12), --CCCD phải có đúng 12 chữ số
 				CHECK(len(phoneNumber) = 10)); --Số điện thoại phải có đúng 10 chữ số
-				GO
-CREATE TABLE COMMISSION(
-				employeeID INT NOT NULL PRIMARY KEY REFERENCES EMPLOYEE(employeeID),
-				commissionRate FLOAT NOT NULL);
 				GO
 CREATE TABLE COMMISSION_DETAIL(
 				comAnaID INT NOT NULL PRIMARY KEY,
@@ -144,34 +132,9 @@ CREATE TABLE WARRANTY_CARD(
 				GO
 
 --TRIGGER FINAL
-CREATE TRIGGER UPDATE_EMPLOYEE_AGE
-ON EMPLOYEE
-FOR INSERT, UPDATE
-AS
-BEGIN
-	DECLARE @age INT, @employeeID INT, @sex VARCHAR(1)
-	SELECT @age = DATEDIFF (YEAR, dateOfBirth, GETDATE()), @employeeID = employeeID, @sex = sex FROM inserted
-	IF (@age <18)
-	BEGIN
-		Print('Tao tai khoan nhan vien that bai do nhan vien khong nam trong do tuoi lao dong! Vui long chinh sua lai ngay sinh da nhap!')
-		ROLLBACK TRANSACTION
-	END
-
-	ELSE IF( ( (@age>55 ) and ( @sex = 'Female')) or ((@age>60) and (@sex = 'Male')) )
-	BEGIN
-		Print('Tao tai khoan nhan vien that bai do nhan vien khong nam trong do tuoi lao dong! Vui long chinh sua lai ngay sinh da nhap!')
-		ROLLBACK TRANSACTION
-	END
-	ELSE
-	BEGIN
-		UPDATE EMPLOYEE
-		SET age = @age
-		WHERE employeeID = @employeeID
-	END
-END;
 GO
 
-CREATE TRIGGER AUTO_CREATE_ACCOUNT ON EMPLOYEE
+CREATE  TRIGGER AUTO_CREATE_ACCOUNT ON EMPLOYEE
 FOR INSERT
 AS
 BEGIN
@@ -195,19 +158,29 @@ BEGIN
     END
 END;
 GO
-
+--Drop trigger AUTO_CREATE_ACCOUNT_CONTINUE_WORK
 CREATE TRIGGER AUTO_CREATE_ACCOUNT_CONTINUE_WORK
 ON EMPLOYEE
 AFTER UPDATE
 AS
 BEGIN
-	IF UPDATE(statusJob) AND EXISTS(SELECT 1 FROM inserted WHERE statusJob = 'Active')
-	BEGIN
-		DECLARE @employeeID INT, @employeeName VARCHAR(255), @password VARCHAR(255)
-		SELECT @employeeID = employeeID FROM inserted
-		SET @password = SUBSTRING(CAST(NEWID() AS VARCHAR(36)), 1, 6)
-		INSERT INTO Account (employeeID, emp_Password)
-		VALUES (@employeeID, @password) 
+IF ((SELECT statusJob FROM inserted) = 'Active')
+BEGIN
+	DECLARE @employeeID INT, @employeeName VARCHAR(255), @password VARCHAR(255)
+	SELECT @employeeID = employeeID FROM inserted
+		-- Kiểm tra xem đã có bản ghi nào trong bảng ACCOUNT có cùng employeeID chưa
+		IF NOT EXISTS (SELECT * FROM ACCOUNT WHERE employeeID = @employeeID)
+		BEGIN
+			SET @password = SUBSTRING(CAST(NEWID() AS VARCHAR(36)), 1, 6)
+			INSERT INTO Account (employeeID, emp_Password)
+			VALUES (@employeeID, @password) 
+		END
+		ELSE
+		BEGIN
+			-- Nếu đã có bản ghi thì cập nhật lại mật khẩu
+			SET @password = SUBSTRING(CAST(NEWID() AS VARCHAR(36)), 1, 6)
+			UPDATE ACCOUNT SET emp_Password = @password WHERE employeeID = @employeeID
+		END
 	END
 END;
 GO
@@ -229,7 +202,7 @@ go
 
 CREATE TRIGGER AUTO_CHECK_VOUCHER
 ON VOUCHER_APPLY
-FOR INSERT, UPDATE
+AFTER INSERT, UPDATE
 AS
 BEGIN
 		
@@ -295,7 +268,7 @@ BEGIN
 	END
 END;
 GO
-
+--drop trigger CHECK_CITIZENID
 CREATE TRIGGER CHECK_CITIZENID
 ON EMPLOYEE
 FOR INSERT, UPDATE
@@ -328,7 +301,6 @@ BEGIN
 
 		DECLARE @yearOBirth VARCHAR(2), @currentYear INT
 		SELECT @currentYear = YEAR(GETDATE()) - 2000
-		Print(@currentYear)
 		IF ( (SELECT YEAR(dateOfBirth) FROM inserted) > 1999 )
 		BEGIN
 			IF(CONVERT(INT,@maNamSinh) > @currentYear)
@@ -406,15 +378,11 @@ CREATE VIEW VIEW_CUSTOMER AS
 	GO
 
 CREATE VIEW VIEW_EMPLOYEE AS
-	SELECT em.employeeID , fullName , sex ,employeeImage,fmem.formatName ,phoneNumber ,
-	Em_address As [Address] , citizenID ,wag.wage_detail ,dateOfBirth , age , statusJob , authorName as [role]
+	SELECT em.employeeID , fullName , sex ,employeeImage,formatName ,phoneNumber ,
+	Em_address As [Address] , citizenID ,wage ,dateOfBirth , age , statusJob , authorName as [role]
 	FROM EMPLOYEE AS em
-	INNER JOIN WAGE AS wag
-    ON em.wageID = wag.wageID
 	INNER JOIN AUTHORIZATION_USER AS ath
     ON em.authorID = ath.authorID
-	INNER JOIN FORMAT_EMPLOYEE AS fmem
-    ON em.formatID = fmem.formatID;
 	GO
 
 CREATE VIEW COMPLETED_BILL_DETAIL AS
@@ -445,21 +413,6 @@ CREATE VIEW VIEW_WARRENTY AS
 	GROUP BY wr.productID, wr.warr_StatusID, wr.descript;
 	GO
 
--- FUNC FINAL
-CREATE PROC Get_Infor_Login @employeeID INT
-AS
-	SELECT emp_password, authorID, a.employeeID
-	FROM ACCOUNT a, EMPLOYEE e
-	WHERE a.employeeID = e.employeeID
-	AND @employeeID = a.employeeID;
-	GO
-
-CREATE PROC Get_Infor_Employee @employeeID  INT
-AS
-	SELECT employeeID, fullName, sex, employeeImage, formatName, phoneNumber, Em_address, citizenID, dateOfBirth, age, statusJob, authorName
-	FROM EMPLOYEE e, FORMAT_EMPLOYEE f, AUTHORIZATION_USER a
-	WHERE e.formatID = f.formatID AND e.authorID = a.authorID AND e.employeeID = @employeeID;
-	GO
 
 
 -- INSERT DATA FOR DATABASE
@@ -467,33 +420,18 @@ AS
 INSERT INTO AUTHORIZATION_USER VALUES (1, 'Manager');
 INSERT INTO AUTHORIZATION_USER VALUES (2, 'Cashier');
 GO
-INSERT INTO FORMAT_EMPLOYEE VALUES (1, 'Full Time');
-INSERT INTO FORMAT_EMPLOYEE VALUES (2, 'Part Time');
-GO
 INSERT INTO WARRANTY_STATUS VALUES (1, 'NON-PROCESSED');
 INSERT INTO WARRANTY_STATUS VALUES (2, 'PROCESSED');
 GO
-INSERT INTO WAGE(wageID,wage_detail) 
-VALUES (1,20000),(2,23000),(3,25000),(4,30000);
+--delete ACCOUNT
+--delete EMPLOYEE
+INSERT INTO EMPLOYEE(employeeID,fullName,formatName,phoneNumber,Em_address,citizenID,dateOfBirth,wage,sex,authorID,commissionRate)
+values (1,'Nguyen Ngan','Full Time','0123456799','Ho Chi Minh','050303116553','2003-8-20',27000,'Female',1,0.5);
+INSERT INTO EMPLOYEE(employeeID,fullName,formatName,phoneNumber,Em_address,citizenID,dateOfBirth,wage,sex,authorID,commissionRate)
+values (2,'Nguyen Van Ba','Part Time','0123409799','Ho Chi Minh','050303116663','2003-8-20',23000,'Female',2,0.2);
+INSERT INTO EMPLOYEE(employeeID,fullName,formatName,phoneNumber,Em_address,citizenID,dateOfBirth,wage,sex,authorID,commissionRate)
+values (3,'Nguyen A','Full Time','0123477799','Ho Chi Minh','050303110053','2003-8-20',21000,'Female',2,0.4);
 GO
-INSERT INTO EMPLOYEE(employeeID,fullName,formatID,phoneNumber,Em_address,citizenID,dateOfBirth,wageID,sex,authorID)
-values (1,'Nguyen Ngan',1,'0123456799','Ho Chi Minh','050303116553','2003-8-20',1,'Female',1);
- INSERT INTO EMPLOYEE(employeeID,fullName,formatID,phoneNumber,Em_address,citizenID,dateOfBirth,wageID,sex,authorID)
-values (2,'Nguyen Van Ba',2,'0123409799','Ho Chi Minh','050303116663','2003-8-20',1,'Female',2);
-INSERT INTO EMPLOYEE(employeeID,fullName,formatID,phoneNumber,Em_address,citizenID,dateOfBirth,wageID,sex,authorID)
-values (3,'Nguyen A',1,'0123477799','Ho Chi Minh','050303110053','2003-8-20',1,'Female',2);
+Select * from EMPLOYEE;
+select * from ACCOUNT;
 GO
-select * from ACCOUNT ;
-
-INSERT INTO ACCOUNT(employeeID, emp_password)
-VALUES (1, '123456'),
-(2, '123456'),
-(3, '123456');
-GO
-
-
---EXECUTE Get_Infor_Login 2
---SELECT * FROM ACCOUNT
---UPDATE ACCOUNT
---SET emp_password = 'admin123'
---WHERE employeeID = 1

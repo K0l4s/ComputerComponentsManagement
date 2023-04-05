@@ -27,6 +27,12 @@ namespace Dashboard.Panel
             AccountDTO acc = AccountDAO.Instance.GetInforEmployeeByID();
             txtName.Text = acc.fullName;
             txtAuthor.Text = acc.role;
+            if (acc.sex == "Female")
+            {
+                cbbSex.SelectedIndex = 1;
+            }
+            else
+                cbbSex.SelectedIndex = 0;
         }
         private void btnChangePassword_Click(object sender, EventArgs e)
         {

@@ -38,6 +38,8 @@
             this.label2 = new System.Windows.Forms.Label();
             this.txtAuthor = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.cbbSex = new System.Windows.Forms.ComboBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -138,11 +140,36 @@
             this.label3.TabIndex = 6;
             this.label3.Text = "VỊ TRÍ:";
             // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("#9Slide07 Crocante", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(215, 149);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(121, 27);
+            this.label4.TabIndex = 8;
+            this.label4.Text = "GIỚI TÍNH:";
+            // 
+            // cbbSex
+            // 
+            this.cbbSex.Enabled = false;
+            this.cbbSex.FormattingEnabled = true;
+            this.cbbSex.ItemHeight = 16;
+            this.cbbSex.Items.AddRange(new object[] {
+            "Nam",
+            "Nữ"});
+            this.cbbSex.Location = new System.Drawing.Point(344, 149);
+            this.cbbSex.Name = "cbbSex";
+            this.cbbSex.Size = new System.Drawing.Size(121, 24);
+            this.cbbSex.TabIndex = 9;
+            // 
             // Account
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(986, 675);
+            this.Controls.Add(this.cbbSex);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.txtAuthor);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.txtEmployeeID);
@@ -172,5 +199,7 @@
         private System.Windows.Forms.TextBox txtAuthor;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button btnChangePassword;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.ComboBox cbbSex;
     }
 }
