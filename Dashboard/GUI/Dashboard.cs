@@ -2,6 +2,7 @@
 using Dashboard.DTO;
 using Dashboard.GUI.Panel;
 using Dashboard.GUI.Panel.Account;
+using Dashboard.GUI.Panel.Voucher;
 using Dashboard.Panel;
 using System;
 using System.Collections.Generic;
@@ -37,13 +38,14 @@ namespace Dashboard
             btnClick(new Account());
             
         }
-        private void TransBackColor(Button One, Button Two, Button Three, Button Four, Button Five)
+        private void TransBackColor(Button One, Button Two, Button Three, Button Four, Button Five, Button Six)
         {
             One.BackColor = Color.Transparent;
             Two.BackColor = Color.Transparent;
             Three.BackColor = Color.Transparent;
             Four.BackColor = Color.Transparent;
             Five.BackColor = Color.Transparent;
+            Six.BackColor = Color.Transparent;
         }
         private void btnMenu_Click(object sender, EventArgs e)
         {
@@ -94,7 +96,7 @@ namespace Dashboard
         {
             Form f = Fill as Form;
             Panel_Show(f);
-            TransBackColor(btnBill, btnCustomer, btnEmployee, btnProduct, btnStatistic);
+            TransBackColor(btnBill, btnCustomer, btnEmployee, btnProduct, btnStatistic,btnVoucher);
             if(btnClick != null)
                 btnClick.BackColor = Color.DarkGray;
         }
@@ -115,6 +117,11 @@ namespace Dashboard
         private void btnStatistic_Click(object sender, EventArgs e)
         {
             btnClick(new Statistic(), btnStatistic);
+        }
+
+        private void btnVoucher_Click(object sender, EventArgs e)
+        {
+            btnClick(new Voucher(), btnVoucher);
         }
     }
 }

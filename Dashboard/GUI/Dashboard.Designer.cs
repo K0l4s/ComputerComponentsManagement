@@ -38,6 +38,7 @@
             this.btnBill = new System.Windows.Forms.Button();
             this.btnHome = new System.Windows.Forms.PictureBox();
             this.pCenter = new System.Windows.Forms.Panel();
+            this.btnVoucher = new System.Windows.Forms.Button();
             this.pMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btnMenu)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnHome)).BeginInit();
@@ -46,6 +47,7 @@
             // pMenu
             // 
             this.pMenu.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.pMenu.Controls.Add(this.btnVoucher);
             this.pMenu.Controls.Add(this.btnMenu);
             this.pMenu.Controls.Add(this.btnStatistic);
             this.pMenu.Controls.Add(this.btnProduct);
@@ -188,6 +190,25 @@
             this.pCenter.Size = new System.Drawing.Size(1012, 673);
             this.pCenter.TabIndex = 2;
             // 
+            // btnVoucher
+            // 
+            this.btnVoucher.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnVoucher.FlatAppearance.BorderSize = 0;
+            this.btnVoucher.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnVoucher.Font = new System.Drawing.Font("#9Slide03 Neutra", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnVoucher.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btnVoucher.Image = ((System.Drawing.Image)(resources.GetObject("btnVoucher.Image")));
+            this.btnVoucher.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnVoucher.Location = new System.Drawing.Point(0, 358);
+            this.btnVoucher.Name = "btnVoucher";
+            this.btnVoucher.Size = new System.Drawing.Size(250, 50);
+            this.btnVoucher.TabIndex = 6;
+            this.btnVoucher.Text = "VOUCHER";
+            this.btnVoucher.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnVoucher.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnVoucher.UseVisualStyleBackColor = true;
+            this.btnVoucher.Click += new System.EventHandler(this.btnVoucher_Click);
+            // 
             // Dashboard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -217,5 +238,6 @@
         private System.Windows.Forms.Button btnCustomer;
         private System.Windows.Forms.Panel pCenter;
         private System.Windows.Forms.PictureBox btnMenu;
+        private System.Windows.Forms.Button btnVoucher;
     }
 }
