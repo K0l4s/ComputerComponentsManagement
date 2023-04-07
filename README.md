@@ -1,3 +1,17 @@
+# Cách connect tới database:
+Bước 1: Trước hết bạn chạy file dưới trong SQL Server
+```
+MainSQL.sql
+```
+Bước 2: Sau đó mở file
+```
+Dashboard.sln
+```
+trong Visual Code Studio và nhấn nút Run để test chương trình. Nếu lỗi liên quan tới database (không kết nối được hoặc không đăng nhập được) thì tiến hành xóa Database vừa mới khởi tạo và chạy file
+```
+MainSQL2.sql
+```
+rồi thực hiện lại từ bước 2
 # Cách làm việc với git
 ## Mới bắt đầu code
 Trước khi bắt đầu code thì dùng dòng lệnh dưới đây trước
