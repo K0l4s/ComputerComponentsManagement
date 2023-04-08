@@ -24,7 +24,7 @@ namespace Dashboard.Panel
         }
         public void AccountLoad()
         {
-            AccountDTO acc = AccountDAO.Instance.GetInforEmployeeByID();
+         /*   AccountDTO acc = AccountDAO.Instance.GetInforEmployeeByID();
             txtName.Text = acc.fullName;
             txtAuthor.Text = acc.role;
             txtEmployeeID.Text = acc.emloyeeID.ToString();
@@ -41,7 +41,7 @@ namespace Dashboard.Panel
             }
             else
                 cbbFormatEmp.SelectedIndex = 0;
-            txtPhoneNumber.Text = acc.phoneNumber;
+            txtPhoneNumber.Text = acc.phoneNumber;*/
         }
         private void btnChangePassword_Click(object sender, EventArgs e)
         {

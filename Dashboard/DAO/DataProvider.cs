@@ -21,7 +21,6 @@ namespace Dashboard.DAO
         private static string ServerName = "(local)"; //Đổi tên lại theo Server Name của SQL 
         private static string DatabaseName = "HEQUANTRICOSODULIEU"; //Tên database
         private string ConnStr = $@"Data Source={ServerName}; Initial Catalog={DatabaseName};Integrated Security=True";
-        SqlConnection conn = null;
         
         public DataTable ExecuteQuery(string query, object[] paramenter = null) //Hàm thực thi câu lệnh sqlCommand, giá trị trả về là 1 bảng giá trị
         {

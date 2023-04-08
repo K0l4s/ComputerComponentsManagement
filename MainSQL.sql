@@ -463,3 +463,32 @@ UPDATE ACCOUNT
 SET emp_password = 'admin123'
 WHERE employeeID = 1
 GO
+--UPDATE
+Create View View_Account
+AS
+	SELECT a.employeeID, fullName, emp_password
+	FROM ACCOUNT a, EMPLOYEE e
+	WHERE a.employeeID = e.employeeID
+GO
+CREATE PROCEDURE GetInforVoucher
+@voucherID VARCHAR(15) = NULL,
+@voucherName VARCHAR(255) = NULL,
+@percentReduction FLOAT = NULL,
+@statusVoucher VARCHAR(255) = NULL,
+@expiryDate DATETIME = NULL,
+@limitNumber INT = NULL,
+@numberUsed INT = NULL
+AS
+BEGIN
+	SELECT *
+	FROM VIEW_VOUCHER
+	WHERE   (@voucherID IS NULL OR voucherID = @voucherID)
+		AND (@voucherName IS NULL OR [Name Voucher] = @voucherName)
+		AND (@percentReduction IS  NULL OR [Percent Reduction ] = @percentReduction)
+		AND (@statusVoucher IS NULL OR [Name of status] = @statusVoucher)
+		AND (@expiryDate IS NULL OR expiryDate = @expiryDate)
+ 		AND (@limitNumber IS NULL OR limitNumber = @limitNumber)
+		AND (@numberUsed IS NULL OR numberUsed = @numberUsed)
+END
+EXEC GetInforVoucher NULL, NULL, NULL, NULL, NULL, NULL, NULL
+GO

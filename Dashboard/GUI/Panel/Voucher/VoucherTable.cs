@@ -12,11 +12,13 @@ namespace Dashboard.GUI.Panel.Voucher
 {
     public partial class VoucherTable : Form
     {
+        DataView dtv;
         public VoucherTable(DataTable dt)
         {
             InitializeComponent();
-            dtgvTable.Refresh();
-            dtgvTable.DataSource = dt;
+            //MessageBox.Show("Hiển thị được kết quả! Hàm được gọi!");
+            dtv = new DataView(dt);
+            dtgvTable.DataSource = dtv;
         }
     }
 }

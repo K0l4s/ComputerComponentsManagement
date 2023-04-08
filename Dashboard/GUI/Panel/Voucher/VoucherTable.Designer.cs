@@ -28,15 +28,63 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.dtgvTable = new System.Windows.Forms.DataGridView();
-            this.voucherID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.voucherName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.PercentReduction = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.status = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.limitNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.numberUsed = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.limitNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.status = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PercentReduction = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.voucherName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.voucherID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dtgvTable = new System.Windows.Forms.DataGridView();
             ((System.ComponentModel.ISupportInitialize)(this.dtgvTable)).BeginInit();
             this.SuspendLayout();
+            // 
+            // numberUsed
+            // 
+            this.numberUsed.DataPropertyName = "numberUsed";
+            this.numberUsed.HeaderText = "numberUsed";
+            this.numberUsed.MinimumWidth = 6;
+            this.numberUsed.Name = "numberUsed";
+            this.numberUsed.Width = 125;
+            // 
+            // limitNumber
+            // 
+            this.limitNumber.DataPropertyName = "limitNumber";
+            this.limitNumber.HeaderText = "limitNumber";
+            this.limitNumber.MinimumWidth = 6;
+            this.limitNumber.Name = "limitNumber";
+            this.limitNumber.Width = 125;
+            // 
+            // status
+            // 
+            this.status.DataPropertyName = "Name of Status";
+            this.status.HeaderText = "Name of Status";
+            this.status.MinimumWidth = 6;
+            this.status.Name = "status";
+            this.status.Width = 125;
+            // 
+            // PercentReduction
+            // 
+            this.PercentReduction.DataPropertyName = "Percent Reduction";
+            this.PercentReduction.HeaderText = "Percent Reduction";
+            this.PercentReduction.MinimumWidth = 6;
+            this.PercentReduction.Name = "PercentReduction";
+            this.PercentReduction.Width = 125;
+            // 
+            // voucherName
+            // 
+            this.voucherName.DataPropertyName = "Name Voucher";
+            this.voucherName.HeaderText = "Name Voucher";
+            this.voucherName.MinimumWidth = 6;
+            this.voucherName.Name = "voucherName";
+            this.voucherName.Width = 125;
+            // 
+            // voucherID
+            // 
+            this.voucherID.DataPropertyName = "voucherID";
+            this.voucherID.HeaderText = "voucherID";
+            this.voucherID.MinimumWidth = 6;
+            this.voucherID.Name = "voucherID";
+            this.voucherID.Width = 125;
             // 
             // dtgvTable
             // 
@@ -53,56 +101,14 @@
             this.dtgvTable.Name = "dtgvTable";
             this.dtgvTable.RowHeadersWidth = 51;
             this.dtgvTable.RowTemplate.Height = 24;
-            this.dtgvTable.Size = new System.Drawing.Size(946, 610);
+            this.dtgvTable.Size = new System.Drawing.Size(802, 610);
             this.dtgvTable.TabIndex = 0;
-            // 
-            // voucherID
-            // 
-            this.voucherID.HeaderText = "voucherID";
-            this.voucherID.MinimumWidth = 6;
-            this.voucherID.Name = "voucherID";
-            this.voucherID.Width = 125;
-            // 
-            // voucherName
-            // 
-            this.voucherName.HeaderText = "Name Voucher";
-            this.voucherName.MinimumWidth = 6;
-            this.voucherName.Name = "voucherName";
-            this.voucherName.Width = 125;
-            // 
-            // PercentReduction
-            // 
-            this.PercentReduction.HeaderText = "Percent Reduction";
-            this.PercentReduction.MinimumWidth = 6;
-            this.PercentReduction.Name = "PercentReduction";
-            this.PercentReduction.Width = 125;
-            // 
-            // status
-            // 
-            this.status.HeaderText = "Name of Status";
-            this.status.MinimumWidth = 6;
-            this.status.Name = "status";
-            this.status.Width = 125;
-            // 
-            // limitNumber
-            // 
-            this.limitNumber.HeaderText = "limitNumber";
-            this.limitNumber.MinimumWidth = 6;
-            this.limitNumber.Name = "limitNumber";
-            this.limitNumber.Width = 125;
-            // 
-            // numberUsed
-            // 
-            this.numberUsed.HeaderText = "numberUsed";
-            this.numberUsed.MinimumWidth = 6;
-            this.numberUsed.Name = "numberUsed";
-            this.numberUsed.Width = 125;
             // 
             // VoucherTable
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(946, 610);
+            this.ClientSize = new System.Drawing.Size(802, 610);
             this.Controls.Add(this.dtgvTable);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "VoucherTable";
@@ -114,12 +120,12 @@
 
         #endregion
 
-        private System.Windows.Forms.DataGridView dtgvTable;
-        private System.Windows.Forms.DataGridViewTextBoxColumn voucherID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn voucherName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn PercentReduction;
-        private System.Windows.Forms.DataGridViewTextBoxColumn status;
-        private System.Windows.Forms.DataGridViewTextBoxColumn limitNumber;
         private System.Windows.Forms.DataGridViewTextBoxColumn numberUsed;
+        private System.Windows.Forms.DataGridViewTextBoxColumn limitNumber;
+        private System.Windows.Forms.DataGridViewTextBoxColumn status;
+        private System.Windows.Forms.DataGridViewTextBoxColumn PercentReduction;
+        private System.Windows.Forms.DataGridViewTextBoxColumn voucherName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn voucherID;
+        private System.Windows.Forms.DataGridView dtgvTable;
     }
 }

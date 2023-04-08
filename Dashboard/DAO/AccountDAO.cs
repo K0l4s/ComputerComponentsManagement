@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -21,13 +22,53 @@ namespace Dashboard.DAO
         {
 
         }
+        public static DataTable ToDataTable(AccountDTO account)
+        {
+            DataTable dataTable = new DataTable();
+
+            // Lấy tất cả các thuộc tính của đối tượng AccountDTO
+            PropertyInfo[] properties = typeof(AccountDTO).GetProperties();
+
+            // Thêm các cột vào DataTable dựa trên các thuộc tính của đối tượng AccountDTO
+            foreach (PropertyInfo property in properties)
+            {
+                dataTable.Columns.Add(property.Name, property.PropertyType);
+            }
+
+            // Thêm hàng dữ liệu vào DataTable
+            DataRow dataRow = dataTable.NewRow();
+            foreach (PropertyInfo property in properties)
+            {
+                object value = property.GetValue(account);
+                dataRow[property.Name] = value ?? DBNull.Value;
+            }
+            dataTable.Rows.Add(dataRow);
+            return dataTable;
+        }
+        public static AccountDTO ConvertDataTableToDTO(DataTable dt)
+        {
+            DataRow row = dt.Rows[0];
+            int employeeID = Convert.ToInt32(row["EmployeeID"]);
+            string fullName = row["FullName"].ToString();
+            string sex = row["Sex"].ToString();
+            DateTime dateOfBirth = Convert.ToDateTime(row["DateOfBirth"]);
+            byte[] employeeImage = (byte[])row["EmployeeImage"];
+            string phoneNumber = row["PhoneNumber"].ToString();
+            string formatName = row["FormatName"].ToString();
+            string address = row["Address"].ToString();
+            string citizenID = row["CitizenID"].ToString();
+            int age = Convert.ToInt32(row["Age"]);
+            string statusJob = row["StatusJob"].ToString();
+            string role = row["Role"].ToString();
+            return new AccountDTO(employeeID,fullName,sex,dateOfBirth,employeeImage,phoneNumber,formatName,address,citizenID,age,statusJob,role);
+        }
         private string username;
         public List<AccountDTO> employees = new List<AccountDTO>();
         public bool Login(string username, string password)
         {
             this.username = username;
-            String query = "SELECT * FROM ACCOUNT WHERE employeeID = "+username+" AND emp_password = '"+password+"'";
-            DataTable result = DataProvider.Instance.ExecuteQuery(query);
+            String query = "Select * From View_Employee";
+            DataTable result = DataProvider.Instance.ExecuteQuery(query) ;
             return result.Rows.Count > 0;
         }
         public bool ChangePassword(string newpass, string oldpass)
