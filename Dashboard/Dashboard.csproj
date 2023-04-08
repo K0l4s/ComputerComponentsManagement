@@ -154,6 +154,9 @@
   <ItemGroup>
     <None Include="GUI\App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="BUS\" />
+    <Folder Include="Utilies\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
