@@ -3,27 +3,31 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Net.NetworkInformation;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ProgressBar;
 
 namespace Dashboard.DAO
 {
     public class DataProvider
     {
+        private static string ServerName = "DESKTOP-M1IF6PS\\SQLEXPRESS"; //Đổi tên lại theo Server Name của SQL 
+        private static string DatabaseName = "HEQUANTRICOSODULIEU"; //Tên database
+        private string ConnStr = $@"Data Source={ServerName}; Initial Catalog={DatabaseName};Integrated Security=True";
         private static DataProvider instance;
+
+        private DataProvider() { }
+
         public static DataProvider Instance
         {
             get { if (instance == null) instance = new DataProvider(); return DataProvider.instance; }
             private set { DataProvider.instance = value; } 
         }
-        private DataProvider() { }
-        private static string ServerName = "(local)"; //Đổi tên lại theo Server Name của SQL 
-        private static string DatabaseName = "HEQUANTRICOSODULIEU"; //Tên database
-        private string ConnStr = $@"Data Source={ServerName}; Initial Catalog={DatabaseName};Integrated Security=True";
-        SqlConnection conn = null;
-        
-        public DataTable ExecuteQuery(string query, object[] paramenter = null) //Hàm thực thi câu lệnh sqlCommand, giá trị trả về là 1 bảng giá trị
+       
+        //Hàm thực thi câu lệnh sqlCommand, giá trị trả về là 1 bảng giá trị
+        public DataTable ExecuteQuery(string query, object[] paramenter = null) 
         {
             DataTable data = new DataTable(); //Khai báo biến data là 1 bảng dữ liệu
             using (SqlConnection conn = new SqlConnection(ConnStr)) //đảm bảo rằng đối tượng SqlConnection được giải phóng tự động sau khi sử dụng, mà không cần phải gọi phương thức Dispose() của đối tượng
@@ -60,7 +64,9 @@ namespace Dashboard.DAO
             }
             return data; //Trả về giá trị data
         }
-        public int ExecuteNonQuery(string query, object[] parament = null) //Hàm trả về giá trị số cột
+
+        //Hàm trả về giá trị số cột
+        public int ExecuteNonQuery(string query, object[] parament = null) 
         {
             int data = 0;
             using (SqlConnection conn = new SqlConnection(ConnStr))
@@ -92,7 +98,9 @@ namespace Dashboard.DAO
             }
             return data;
         }
-        public object ExecuteScalar(string query, object[] parament = null) //Thực thi query trả về giá trị đầu tiên của kết quả
+
+        //Thực thi query trả về giá trị đầu tiên của kết quả
+        public object ExecuteScalar(string query, object[] parament = null) 
         {
             object data = 0;
             using (SqlConnection conn = new SqlConnection(ConnStr))
@@ -124,5 +132,118 @@ namespace Dashboard.DAO
             }
             return data;
         }
+
+        //Trả về Datatable để load dữ liệu lên form từ view
+        public DataTable LoadData(string nameView, CommandType ct = CommandType.Text)
+        {
+            DataTable dt = new DataTable();
+
+            using (SqlConnection conn = new SqlConnection(ConnStr))
+            {
+                string query = "SELECT * FROM " + nameView;
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.CommandType = ct;
+
+                conn.Open();
+                SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+                adapter.Fill(dt);
+                conn.Close();
+            }
+
+            return dt;
+        }
+
+        //Tra ve Datatable khi thuc thi ham
+        public DataTable ExecuteFunction(SqlCommand cmdFunction, ref string error)
+        {
+            error = "";
+            DataTable dt = new DataTable();
+
+            using (SqlConnection conn = new SqlConnection(ConnStr))
+            {
+                try
+                {
+                    conn.Open();
+                    cmdFunction.Connection = conn;
+                    SqlDataAdapter adapter = new SqlDataAdapter(cmdFunction);
+                    adapter.Fill(dt);
+                }
+                catch (SqlException ex)
+                {
+                    error = ex.Message;
+                    MessageBox.Show(error);
+                    dt = null;
+                }
+            }
+
+            return dt;
+        }
+
+        //Tra ve bool khi thuc hien procedure
+        public bool ExecuteProcedure(string sqlProcedure, CommandType ct, List<SqlParameter> parameters, ref string error)
+        {
+            bool f = false;
+            error = "";
+
+            using (SqlConnection conn = new SqlConnection(ConnStr))
+            {
+                using (SqlCommand cmd = new SqlCommand())
+                {
+                    cmd.Connection = conn;
+                    conn.Open();
+                    cmd.CommandText = sqlProcedure;
+                    cmd.CommandType = ct;
+                    cmd.Parameters.Clear();
+                    foreach (SqlParameter i in parameters)
+                    {
+                        cmd.Parameters.Add(i);
+                    }
+
+                    try
+                    {
+                        cmd.ExecuteNonQuery();
+                        f = true;
+                    }
+                    catch (SqlException ex)
+                    {
+                        error = ex.Message;
+                    }
+                }
+            }
+
+            return f;
+        }
+
+        //Tra ve datatable khi thuc thi procedure
+        public DataTable Procedure(string sqlProcedure, CommandType ct, List<SqlParameter> parameters, ref string error)
+        {
+            error = "";
+            DataTable dt = new DataTable();
+
+            using (SqlConnection conn = new SqlConnection(ConnStr))
+            {
+                using (SqlCommand cmd = new SqlCommand(sqlProcedure, conn))
+                {
+                    cmd.CommandType = ct;
+                    foreach (SqlParameter i in parameters)
+                    {
+                        cmd.Parameters.Add(i);
+                    }
+
+                    try
+                    {
+                        conn.Open();
+                        SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+                        adapter.Fill(dt);
+                    }
+                    catch (SqlException ex)
+                    {
+                        error = ex.Message;
+                    }
+                }
+            }
+            return dt;
+        }
+
     }
 }

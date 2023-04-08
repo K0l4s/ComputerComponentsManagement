@@ -18,10 +18,9 @@ namespace Dashboard.DAO
             get { if (instance == null) instance = new VoucherDAO(); return instance; }
             private set { instance = value; }
         }
-        private VoucherDAO()
-        {
 
-        }
+        private VoucherDAO() { }
+
         public DataTable LoadTable(string voucherID, string voucherName, string percentReduction,string status, string expiryDate, string limitNumber, string numberUsed)
         {
             //percentReduction;

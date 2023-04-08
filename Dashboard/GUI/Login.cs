@@ -26,13 +26,14 @@ namespace Dashboard
         {
             String employeeID = txtEmployeeID.Text;
             String password = txtPassword.Text;
-            if (AccountDAO.Instance.Login(employeeID, password))
+            if (EmployeeDAO.Instance.Login(employeeID, password))
             {
                 Dashboard.Instance.Show();
             }
             else 
                 MessageBox.Show("Đăng nhập thất bại do tài khoản hoặc mật khẩu không khớp với cơ sở dữ liệu! Vui lòng kiểm tra lại hoặc liên hệ với QUẢN TRỊ VIÊN để được cấp quyền!", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
+
         private void btnLogin_MouseHover(object sender, EventArgs e)
         {
             btnLogin.ForeColor = Color.DarkGray ;

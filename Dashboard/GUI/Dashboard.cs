@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.Common;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -20,33 +21,39 @@ namespace Dashboard
     {
         private static Dashboard instance;
 
-        public static Dashboard Instance 
+        public static Dashboard Instance
         {
-            get { if (instance == null) instance = new Dashboard(); return instance; }
+            get
+            {
+                if (instance == null)
+                    instance = new Dashboard();
+                return Dashboard.instance;
+            }
             private set { Dashboard.instance = value; }
         }
 
         private Dashboard()
         {
             InitializeComponent();
-            Dashboar_Load();
+            Dashboard_Load();
         }
-        private void Dashboar_Load()
+
+        private void Dashboard_Load()
         {
             this.WindowState = FormWindowState.Maximized;
             pMenu.Width = 250;
-            btnClick(new Account());
-            
+            //btnClick(new Account());
         }
-        private void TransBackColor(Button One, Button Two, Button Three, Button Four, Button Five, Button Six)
+
+        private void btnClick(object Fill, Button btnClick = null)
         {
-            One.BackColor = Color.Transparent;
-            Two.BackColor = Color.Transparent;
-            Three.BackColor = Color.Transparent;
-            Four.BackColor = Color.Transparent;
-            Five.BackColor = Color.Transparent;
-            Six.BackColor = Color.Transparent;
+            Form f = Fill as Form;
+            Panel_Show(f);
+            TransBackColor(btnBill, btnCustomer, btnEmployee, btnProduct, btnStatistic, btnVoucher);
+            if (btnClick != null)
+                btnClick.BackColor = Color.DarkGray;
         }
+
         private void btnMenu_Click(object sender, EventArgs e)
         {
             if (pMenu.Width == 250)
@@ -68,6 +75,7 @@ namespace Dashboard
                 btnStatistic.Text = "THỐNG KÊ";
             }
         }
+
         private void Panel_Show(object Formhijo)
         {
             if (this.pCenter.Controls.Count > 0)
@@ -82,28 +90,19 @@ namespace Dashboard
 
         private void btnBill_Click(object sender, EventArgs e)
         {
-            /*Panel_Show(new Bill());
-            TransBackColor(btnBill, btnCustomer, btnEmployee, btnProduct, btnStatistic);
-            btnBill.BackColor = Color.DarkGray;*/
-            btnClick(new Bill(), btnBill);
+            btnClick(new fBill(), btnBill);
         }
 
         private void btnHome_Click(object sender, EventArgs e)
         {
             btnClick(new Account());
         }
-        private void btnClick(object Fill, Button btnClick = null)
-        {
-            Form f = Fill as Form;
-            Panel_Show(f);
-            TransBackColor(btnBill, btnCustomer, btnEmployee, btnProduct, btnStatistic,btnVoucher);
-            if(btnClick != null)
-                btnClick.BackColor = Color.DarkGray;
-        }
+
         private void btnEmployee_Click(object sender, EventArgs e)
         {
-            btnClick(new Employee(),btnEmployee);
+            btnClick(new fEmployee(),btnEmployee);
         }
+
         private void btnCustomer_Click(object sender, EventArgs e)
         {
             btnClick(new Customer(),btnCustomer);
@@ -122,6 +121,16 @@ namespace Dashboard
         private void btnVoucher_Click(object sender, EventArgs e)
         {
             btnClick(new Voucher(), btnVoucher);
+        }
+        
+        private void TransBackColor(Button One, Button Two, Button Three, Button Four, Button Five, Button Six)
+        {
+            One.BackColor = Color.Transparent;
+            Two.BackColor = Color.Transparent;
+            Three.BackColor = Color.Transparent;
+            Four.BackColor = Color.Transparent;
+            Five.BackColor = Color.Transparent;
+            Six.BackColor = Color.Transparent;
         }
     }
 }

@@ -22,7 +22,7 @@ namespace Dashboard.GUI.Panel.Account
         {
             if (txtNewPass.Text == txtRepeat.Text)
             {
-                if(AccountDAO.Instance.ChangePassword(txtNewPass.Text, txtOldPass.Text))
+                if(EmployeeDAO.Instance.ChangePassword(txtNewPass.Text, txtOldPass.Text))
                 {
                     MessageBox.Show("Đổi mật khẩu thành công!", "SUCCESS!", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     this.Close();

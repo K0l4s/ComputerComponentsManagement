@@ -398,7 +398,6 @@ CREATE VIEW COMPLETED_BILL AS
 	GROUP BY b.billID, b.employeeID, b.phoneNumber, b.billExportTime;
 	GO
 
-
 CREATE VIEW VIEW_PRODUCT AS 
 	SELECT pd.productID, pd.productName, pd.productImageURL, pd.quantity
 	FROM PRODUCT pd INNER JOIN PRODUCT_DETAIL pdt
@@ -414,6 +413,7 @@ CREATE VIEW VIEW_WARRENTY AS
 	GO
 
 --Func + Proc
+--Kien
 CREATE PROC GetInforEmployeeByID @employeeID  INT
 AS
 	SELECT *
@@ -442,6 +442,9 @@ BEGIN
 		RETURN 0
 END
 GO
+
+--Nhat
+
 -- INSERT DATA FOR DATABASE
 
 INSERT INTO AUTHORIZATION_USER VALUES (1, 'Manager');
@@ -450,8 +453,7 @@ GO
 INSERT INTO WARRANTY_STATUS VALUES (1, 'NON-PROCESSED');
 INSERT INTO WARRANTY_STATUS VALUES (2, 'PROCESSED');
 GO
---delete ACCOUNT
---delete EMPLOYEE
+
 INSERT INTO EMPLOYEE(employeeID,fullName,formatName,phoneNumber,Em_address,citizenID,dateOfBirth,wage,sex,authorID,commissionRate)
 values (1,'Nguyen Ngan','Full Time','0123456799','Ho Chi Minh','050303116553','2003-8-20',27000,'Female',1,0.5);
 INSERT INTO EMPLOYEE(employeeID,fullName,formatName,phoneNumber,Em_address,citizenID,dateOfBirth,wage,sex,authorID,commissionRate)

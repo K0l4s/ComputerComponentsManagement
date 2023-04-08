@@ -9,20 +9,19 @@ using System.Windows.Forms;
 
 namespace Dashboard.DAO
 {
-    public class AccountDAO
+    public class EmployeeDAO
     {
-        private static AccountDAO instance;
+        private string username;
+        public List<EmployeeDTO> employees = new List<EmployeeDTO>();
+        private static EmployeeDAO instance;
 
-        public static AccountDAO Instance { 
-            get { if (instance == null) instance = new AccountDAO(); return instance; }
+        public static EmployeeDAO Instance {
+            get { if (instance == null) instance = new EmployeeDAO(); return instance; }
             private set { instance = value; }
         }
-        private AccountDAO()
-        {
 
-        }
-        private string username;
-        public List<AccountDTO> employees = new List<AccountDTO>();
+        private EmployeeDAO() { }
+
         public bool Login(string username, string password)
         {
             this.username = username;
@@ -30,6 +29,7 @@ namespace Dashboard.DAO
             DataTable result = DataProvider.Instance.ExecuteQuery(query);
             return result.Rows.Count > 0;
         }
+
         public bool ChangePassword(string newpass, string oldpass)
         {
             string query = "EXECUTE Change_Password "+username+" , '"+newpass+"' , '"+oldpass+"'";
@@ -39,7 +39,8 @@ namespace Dashboard.DAO
             else
                 return false;
         }
-        public AccountDTO GetInforEmployeeByID()
+
+        public EmployeeDTO GetInforEmployeeByID()
         {
             DataTable dt = new DataTable();
             string query = "EXECUTE GetInforEmployeeByID " + username;
@@ -75,10 +76,11 @@ namespace Dashboard.DAO
                 string statusJob = row["statusJob"].ToString();
                 string role = row["role"].ToString();
 
-                AccountDTO account = new AccountDTO(employeeID, fullName, sex, dateOfBirth, employeeImage, formatName,phoneNumber, address, citizenID, age, statusJob, role);
-                return account;
+                //EmployeeDTO account = new EmployeeDTO(employeeID, fullName, sex, dateOfBirth, employeeImage, formatName,phoneNumber, address, citizenID, age, statusJob, role)
+                //return account;
             }
             return null;
         }
+
     }
 }

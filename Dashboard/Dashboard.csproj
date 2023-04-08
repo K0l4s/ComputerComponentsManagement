@@ -75,17 +75,17 @@
     <Compile Include="GUI\Panel\Customer.Designer.cs">
       <DependentUpon>Customer.cs</DependentUpon>
     </Compile>
-    <Compile Include="GUI\Panel\Employee.cs">
+    <Compile Include="GUI\Panel\fEmployee.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="GUI\Panel\Employee.Designer.cs">
-      <DependentUpon>Employee.cs</DependentUpon>
+    <Compile Include="GUI\Panel\fEmployee.Designer.cs">
+      <DependentUpon>fEmployee.cs</DependentUpon>
     </Compile>
-    <Compile Include="GUI\Panel\Bill.cs">
+    <Compile Include="GUI\Panel\fBill.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="GUI\Panel\Bill.Designer.cs">
-      <DependentUpon>Bill.cs</DependentUpon>
+    <Compile Include="GUI\Panel\fBill.Designer.cs">
+      <DependentUpon>fBill.cs</DependentUpon>
     </Compile>
     <Compile Include="GUI\Panel\Account\Account.cs">
       <SubType>Form</SubType>
@@ -139,8 +139,8 @@
     <EmbeddedResource Include="GUI\Panel\Account\ChangePassword.resx">
       <DependentUpon>ChangePassword.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="GUI\Panel\Bill.resx">
-      <DependentUpon>Bill.cs</DependentUpon>
+    <EmbeddedResource Include="GUI\Panel\fBill.resx">
+      <DependentUpon>fBill.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\Panel\Account\Account.resx">
       <DependentUpon>Account.cs</DependentUpon>
@@ -148,8 +148,8 @@
     <EmbeddedResource Include="GUI\Panel\Customer.resx">
       <DependentUpon>Customer.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="GUI\Panel\Employee.resx">
-      <DependentUpon>Employee.cs</DependentUpon>
+    <EmbeddedResource Include="GUI\Panel\fEmployee.resx">
+      <DependentUpon>fEmployee.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\Panel\Product.resx">
       <DependentUpon>Product.cs</DependentUpon>
@@ -202,7 +202,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="BUS\" />
-    <Folder Include="Utilies\" />
+    <Folder Include="Utilities\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
