@@ -24,7 +24,7 @@ namespace Dashboard.Panel
         }
         public void AccountLoad()
         {
-            EmployeeDTO acc = AccountDAO.Instance.GetInforEmployeeByID();
+            EmployeeDTO acc = EmployeeDAO.Instance.GetInforEmployeeByID();
             txtName.Text = acc.FullName;
             txtAuthor.Text = acc.AuthorName;
             txtEmployeeID.Text = acc.EmloyeeID.ToString();
