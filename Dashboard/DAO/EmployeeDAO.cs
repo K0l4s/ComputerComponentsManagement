@@ -33,7 +33,7 @@ namespace Dashboard.DAO
         public bool Login(string username, string password)
         {
             this.username  = username;
-            String query = "SELECT * FROM ACCOUNT WHERE employeeID = "+username+" AND emp_password = '"+password+"'";
+            String query = "SELECT * FROM View_Account WHERE employeeID = "+username+" AND emp_password = '"+password+"'";
             DataTable result = DataProvider.Instance.ExecuteQuery(query);
             return result.Rows.Count > 0;
         }
