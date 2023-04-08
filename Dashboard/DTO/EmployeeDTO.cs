@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlTypes;
+using System.Drawing;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -17,8 +18,8 @@ namespace Dashboard.DTO
         public string FullName { get; set; }
         public string Sex { get; set; }
         public string FormatName { get; set; }
-        public string Wage { get; set; }
-        public byte[] EmployeeImage { get; set; }
+        public float Wage { get; set; }
+        public Image EmployeeImage { get; set; }
         public string PhoneNumber { get; set; }
         public string Address { get; set; }
         public string CitizenID { get; set; }
@@ -30,7 +31,7 @@ namespace Dashboard.DTO
 
         public EmployeeDTO() { }
 
-        public EmployeeDTO(string password, int emloyeeID, string fullName, string sex, string formatName, string wage, byte[] employeeImage, string phoneNumber, string address, string citizenID, string commissionRate, DateTime dateOfBirth, int age, string statusJob, string authorName)
+        public EmployeeDTO(string password, int emloyeeID, string fullName, string sex, string formatName, float wage, Image employeeImage, string phoneNumber, string address, string citizenID, string commissionRate, DateTime dateOfBirth, int age, string statusJob, string authorName)
         {
             Password=password;
             EmloyeeID=emloyeeID;
@@ -48,7 +49,5 @@ namespace Dashboard.DTO
             StatusJob=statusJob;
             AuthorName=authorName;
         }
-
-
     }
 }

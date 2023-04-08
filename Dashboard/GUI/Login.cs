@@ -38,6 +38,7 @@ namespace Dashboard
         {
             btnLogin.ForeColor = Color.DarkGray ;
         }
+
         private void btnLogin_MouseLeave(object sender, EventArgs e)
         {
             btnLogin.ForeColor = Color.Black;

@@ -268,7 +268,7 @@ BEGIN
 	END
 END;
 GO
---drop trigger CHECK_CITIZENID
+
 CREATE TRIGGER CHECK_CITIZENID
 ON EMPLOYEE
 FOR INSERT, UPDATE
@@ -318,7 +318,9 @@ BEGIN
 	END
 	ELSE
 	BEGIN
-		PRINT('Can Cuoc Cong Dan Khong Hop Le! Tao tai khoan that bai!')
+		--PRINT('fgsdg')
+		 PRINT(CONVERT(VARCHAR,@maTinh) + ' ' + CONVERT(VARCHAR,@maGioiTinh) + ' '+ CONVERT(VARCHAR,@maNamSinh) )
+		 --PRINT('Can Cuoc Cong Dan Khong Hop Le! Tao tai khoan that bai!')
 		ROLLBACK TRANSACTION
 	END
 END
@@ -328,6 +330,7 @@ go
 CREATE TRIGGER BUY_PRODUCT
 ON BILL_DETAIL
 AFTER INSERT, UPDATE
+--làm trc về sau dính nhiều thứ lắm ,
 AS 
 BEGIN
 	DECLARE @buyQuantity INT, @oldBQuantity INT
@@ -377,19 +380,34 @@ CREATE VIEW VIEW_CUSTOMER AS
 	FROM CUSTOMER;
 	GO
 
-CREATE VIEW VIEW_EMPLOYEE AS
-	SELECT em.employeeID , fullName , sex ,employeeImage,formatName ,phoneNumber ,
-	Em_address As [Address] , citizenID ,wage ,dateOfBirth , age , statusJob , authorName as [role]
-	FROM EMPLOYEE AS em
-	INNER JOIN AUTHORIZATION_USER AS ath
-    ON em.authorID = ath.authorID
-	GO
+CREATE VIEW VIEW_EMPLOYEE
+AS
+SELECT 
+    e.employeeID AS EmloyeeID,
+    a.emp_password AS Password,
+    e.fullName AS FullName,
+    e.sex AS Sex,
+    e.formatName AS FormatName,
+    e.wage AS Wage,
+    e.employeeImage AS EmployeeImage,
+    e.phoneNumber AS PhoneNumber,
+    e.Em_address AS Address,
+    e.citizenID AS CitizenID,
+    e.commissionRate AS CommissionRate,
+    e.dateOfBirth AS DateOfBirth,
+    e.age AS Age,
+    e.statusJob AS StatusJob,
+    u.authorName AS AuthorName
+FROM EMPLOYEE e
+INNER JOIN AUTHORIZATION_USER u ON e.authorID = u.authorID
+INNER JOIN ACCOUNT a ON e.employeeID = a.employeeID
+GO
 
 CREATE VIEW COMPLETED_BILL_DETAIL AS
 	SELECT billID, pd.productID, number, sellPrice*number as totalMoney
 	FROM BILL_DETAIL bd INNER JOIN PRODUCT_DETAIL pd
-			ON bd.productID = pd.productID;
-	GO
+	ON bd.productID = pd.productID;
+GO
 	
 CREATE VIEW COMPLETED_BILL AS
 	SELECT b.billID, b.employeeID, b.phoneNumber, b.billExportTime, SUM(cbd.totalMoney) as totalPay
@@ -414,42 +432,112 @@ CREATE VIEW VIEW_WARRENTY AS
 
 --Func + Proc
 --Kien
-CREATE PROC GetInforEmployeeByID @employeeID  INT
-AS
-	SELECT *
-	FROM VIEW_EMPLOYEE
-	WHERE employeeID = @employeeID;
-GO
-CREATE PROCEDURE Change_Password 
-	@employeeID INT, 
-	@newPassword VARCHAR(255), 
-	@oldPassword VARCHAR(255)
+--CREATE PROC GetInforEmployeeByID @employeeID  INT
+--AS
+--	SELECT *
+--	FROM VIEW_EMPLOYEE
+--	WHERE employeeID = @employeeID;
+--GO
+--CREATE PROCEDURE Change_Password 
+--	@employeeID INT, 
+--	@newPassword VARCHAR(255), 
+--	@oldPassword VARCHAR(255)
+--AS
+--BEGIN
+--	DECLARE @oldPasswordData VARCHAR(255)
+--	SELECT @oldPasswordData = emp_password
+--	FROM ACCOUNT
+--	WHERE employeeID = @employeeID
+	
+--	IF(@oldPassword = @oldPasswordData)
+--	BEGIN
+--		UPDATE ACCOUNT
+--		SET emp_password = @newPassword
+--		WHERE employeeID = @employeeID
+--		RETURN 1
+--	END
+--	ELSE
+--		RETURN 0
+--END
+--GO
+
+--Nhat
+--view 
+
+CREATE PROCEDURE PROD_InsertEmployee
+    @FullName nvarchar(max),
+    @Sex nvarchar(max),
+    @FormatName nvarchar(max),
+    @Wage FLOAT ,
+    @EmployeeImage varbinary(max),
+    @PhoneNumber nvarchar(max),
+    @Address nvarchar(max),
+    @CitizenID nvarchar(max),
+    @CommissionRate nvarchar(max),
+    @DateOfBirth date,
+    @Age int,
+    @AuthorName nvarchar(max)
 AS
 BEGIN
-	DECLARE @oldPasswordData VARCHAR(255)
-	SELECT @oldPasswordData = emp_password
-	FROM ACCOUNT
-	WHERE employeeID = @employeeID
-	
-	IF(@oldPassword = @oldPasswordData)
+	DECLARE @maxID INT = 4 , @AuthorID INT = 2 
+	SELECT @maxID = MAX(employeeID) + 1 FROM EMPLOYEE
+	IF @AuthorName = 'Manager'
 	BEGIN
-		UPDATE ACCOUNT
-		SET emp_password = @newPassword
-		WHERE employeeID = @employeeID
-		RETURN 1
+		SET @AuthorID = 1
 	END
-	ELSE
-		RETURN 0
+	 PRINT ('Employee ID: ' + CONVERT(VARCHAR,@AuthorName) + CONVERT(VARCHAR, @AuthorID) + CONVERT(VARCHAR, @maxID));
+
+    INSERT INTO Employee(employeeID, FullName, Sex, FormatName, Wage, EmployeeImage, PhoneNumber, Em_address, CitizenID, CommissionRate, DateOfBirth, Age, AuthorID)
+    VALUES ( @maxID , @FullName, @Sex, @FormatName, @Wage, @EmployeeImage, @PhoneNumber, @Address, @CitizenID, @CommissionRate, @DateOfBirth, @Age, @AuthorID)
 END
 GO
 
---Nhat
+CREATE PROCEDURE PROD_UpdateEmployee
+    @FullName nvarchar(max),
+    @Sex nvarchar(max),
+    @FormatName nvarchar(max),
+    @Wage FLOAT ,
+    @EmployeeImage varbinary(max),
+    @PhoneNumber nvarchar(max),
+    @Address nvarchar(max),
+    @CitizenID nvarchar(max),
+    @CommissionRate nvarchar(max),
+    @DateOfBirth date,
+    @Age int,
+    @AuthorName nvarchar(max)
+AS
+BEGIN
+	DECLARE @maxID INT  , @AuthorID INT = 2 
+	SELECT @maxID = MAX(employeeID) + 1 FROM EMPLOYEE
+	IF @AuthorName = 'Manager'
+	BEGIN
+		SET @AuthorID = 1
+	END
+	 PRINT ('Employee ID: ' + CONVERT(VARCHAR,@AuthorName) + CONVERT(VARCHAR, @AuthorID) + CONVERT(VARCHAR, @maxID));
+
+    INSERT INTO Employee(employeeID, FullName, Sex, FormatName, Wage, EmployeeImage, PhoneNumber, Em_address, CitizenID, CommissionRate, DateOfBirth, Age, AuthorID)
+    VALUES ( @maxID , @FullName, @Sex, @FormatName, @Wage, @EmployeeImage, @PhoneNumber, @Address, @CitizenID, @CommissionRate, @DateOfBirth, @Age, @AuthorID)
+END
+GO
+
+CREATE PROCEDURE PROD_DeleteEmployee
+    @employeeID INT
+AS
+BEGIN
+	DECLARE @maxID INT = 4 , @AuthorID INT = 2 
+	SELECT @maxID = MAX(employeeID)  FROM EMPLOYEE
+	
+	DELETE FROM EMPLOYEE
+	FROM EMPLOYEE e
+
+END
+GO
 
 -- INSERT DATA FOR DATABASE
-
 INSERT INTO AUTHORIZATION_USER VALUES (1, 'Manager');
 INSERT INTO AUTHORIZATION_USER VALUES (2, 'Cashier');
 GO
+
 INSERT INTO WARRANTY_STATUS VALUES (1, 'NON-PROCESSED');
 INSERT INTO WARRANTY_STATUS VALUES (2, 'PROCESSED');
 GO
@@ -464,4 +552,19 @@ GO
 UPDATE ACCOUNT
 SET emp_password = 'admin123'
 WHERE employeeID = 1
+GO
+
+EXEC PROD_InsertEmployee
+    @FullName = 'Mai',
+    @Sex = 'FeMale',
+    @FormatName = 'Full Time',
+    @Wage = 27000.5,
+    @EmployeeImage = NULL,
+    @PhoneNumber = '0123456795',
+    @Address = '123 Main Street',
+    @CitizenID = '030303110053',
+    @CommissionRate = 0.1,
+    @DateOfBirth = '2003-08-20',
+    @Age = 41,
+    @AuthorName = 'Manager'
 GO

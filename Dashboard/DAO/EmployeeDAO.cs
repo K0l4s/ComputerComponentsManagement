@@ -2,6 +2,9 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.SqlClient;
+using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,8 +14,13 @@ namespace Dashboard.DAO
 {
     public class EmployeeDAO
     {
-        private string username;
-        public List<EmployeeDTO> employees = new List<EmployeeDTO>();
+        public  string username;
+        private EmployeeDTO employeeDTO;
+        private static string nameView = "view_Employee";
+        private static string strSQL = "";
+        private static SqlParameter parameter;
+        private static List<SqlParameter> parameters;
+        public  static List<EmployeeDTO> employees = new List<EmployeeDTO>();
         private static EmployeeDAO instance;
 
         public static EmployeeDAO Instance {
@@ -24,7 +32,7 @@ namespace Dashboard.DAO
 
         public bool Login(string username, string password)
         {
-            this.username = username;
+            this.username  = username;
             String query = "SELECT * FROM ACCOUNT WHERE employeeID = "+username+" AND emp_password = '"+password+"'";
             DataTable result = DataProvider.Instance.ExecuteQuery(query);
             return result.Rows.Count > 0;
@@ -38,6 +46,29 @@ namespace Dashboard.DAO
                 return true;
             else
                 return false;
+        }
+
+        public Image ByteArrayToImage(byte[] byteArrayIn)
+        {
+            using (MemoryStream mStream = new MemoryStream(byteArrayIn))
+            {
+                return Image.FromStream(mStream);
+            }
+        }
+
+        public byte[] ImgToByteArray(Image img)
+        {
+            if (img != null)
+            {
+                Bitmap bmp = new Bitmap(img);
+                using (var ms = new MemoryStream())
+                {
+                    bmp.Save(ms, img.RawFormat);
+                    return ms.ToArray();
+                }
+            }
+            else
+                return null;
         }
 
         public EmployeeDTO GetInforEmployeeByID()
@@ -80,6 +111,58 @@ namespace Dashboard.DAO
                 //return account;
             }
             return null;
+        }
+
+        public DataTable getDataAccount()
+        {
+            return DataProvider.Instance.LoadData(nameView, CommandType.Text);
+        }
+
+        public bool addNewEmployee( EmployeeDTO employeeDTO ,ref string err)
+        {
+            strSQL = "PROD_InsertEmployee";
+            this.employeeDTO = employeeDTO ;
+            parameters = new List<SqlParameter>();
+
+            SqlParameter parameter = new SqlParameter("@fullName", employeeDTO.FullName);
+            parameters.Add(parameter);
+
+            parameter = new SqlParameter("@sex", employeeDTO.Sex);
+            parameters.Add(parameter);
+
+            parameter = new SqlParameter("@formatName", employeeDTO.FormatName);
+            parameters.Add(parameter);
+
+            parameter = new SqlParameter("@wage", employeeDTO.Wage);
+            parameters.Add(parameter);
+
+            byte[] employeeImageBytes = ImgToByteArray(employeeDTO.EmployeeImage);
+            parameter = new SqlParameter("@employeeImage", employeeImageBytes);
+            parameters.Add(parameter);
+
+            parameter = new SqlParameter("@phoneNumber", employeeDTO.PhoneNumber);
+            parameters.Add(parameter);
+
+            parameter = new SqlParameter("@address", employeeDTO.Address);
+            parameters.Add(parameter);
+
+            parameter = new SqlParameter("@citizenID", employeeDTO.CitizenID);
+            parameters.Add(parameter);
+
+            parameter = new SqlParameter("@commissionRate", employeeDTO.CommissionRate);
+            parameters.Add(parameter);
+
+            parameter = new SqlParameter("@dateOfBirth", employeeDTO.DateOfBirth);
+            parameters.Add(parameter);
+
+            parameter = new SqlParameter("@age", employeeDTO.Age);
+            parameters.Add(parameter);
+
+            parameter = new SqlParameter("@authorName", employeeDTO.AuthorName);
+            parameters.Add(parameter);
+
+
+            return DataProvider.Instance.ExecuteProcedure(strSQL, CommandType.StoredProcedure, parameters, ref err);
         }
 
     }
