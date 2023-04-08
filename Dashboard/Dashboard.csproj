@@ -48,7 +48,9 @@
   <ItemGroup>
     <Compile Include="DAO\AccountDAO.cs" />
     <Compile Include="DAO\DataProvider.cs" />
+    <Compile Include="DAO\VoucherDAO.cs" />
     <Compile Include="DTO\AccountDTO.cs" />
+    <Compile Include="DTO\VoucherDTO.cs" />
     <Compile Include="GUI\Dashboard.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -103,6 +105,29 @@
     <Compile Include="GUI\Panel\Statistic.Designer.cs">
       <DependentUpon>Statistic.cs</DependentUpon>
     </Compile>
+    <Compile Include="GUI\Panel\Voucher\Voucher.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\Panel\Voucher\Voucher.Designer.cs">
+      <DependentUpon>Voucher.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\Panel\Voucher\VoucherSearch.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\Panel\Voucher\VoucherSearch.Designer.cs">
+      <DependentUpon>VoucherSearch.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\Panel\Voucher\VoucherTable.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\Panel\Voucher\VoucherTable.Designer.cs">
+      <DependentUpon>VoucherTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="HEQUANTRICOSODULIEUDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>HEQUANTRICOSODULIEUDataSet.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="GUI\Dashboard.resx">
@@ -132,6 +157,15 @@
     <EmbeddedResource Include="GUI\Panel\Statistic.resx">
       <DependentUpon>Statistic.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="GUI\Panel\Voucher\Voucher.resx">
+      <DependentUpon>Voucher.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\Panel\Voucher\VoucherSearch.resx">
+      <DependentUpon>VoucherSearch.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\Panel\Voucher\VoucherTable.resx">
+      <DependentUpon>VoucherTable.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -141,6 +175,18 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <None Include="app.config" />
+    <None Include="HEQUANTRICOSODULIEUDataSet.xsc">
+      <DependentUpon>HEQUANTRICOSODULIEUDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="HEQUANTRICOSODULIEUDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>HEQUANTRICOSODULIEUDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="HEQUANTRICOSODULIEUDataSet.xss">
+      <DependentUpon>HEQUANTRICOSODULIEUDataSet.xsd</DependentUpon>
+    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

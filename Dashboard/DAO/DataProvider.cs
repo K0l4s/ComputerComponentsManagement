@@ -18,7 +18,7 @@ namespace Dashboard.DAO
             private set { DataProvider.instance = value; } 
         }
         private DataProvider() { }
-        private static string ServerName = "DESKTOP-5A6LVJ9"; //Đổi tên lại theo Server Name của SQL 
+        private static string ServerName = "(local)"; //Đổi tên lại theo Server Name của SQL 
         private static string DatabaseName = "HEQUANTRICOSODULIEU"; //Tên database
         private string ConnStr = $@"Data Source={ServerName}; Initial Catalog={DatabaseName};Integrated Security=True";
         SqlConnection conn = null;

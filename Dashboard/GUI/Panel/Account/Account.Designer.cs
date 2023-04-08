@@ -40,6 +40,10 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.cbbSex = new System.Windows.Forms.ComboBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.cbbFormatEmp = new System.Windows.Forms.ComboBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.txtPhoneNumber = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -75,7 +79,7 @@
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
             this.pictureBox1.Location = new System.Drawing.Point(12, 26);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(197, 160);
+            this.pictureBox1.Size = new System.Drawing.Size(197, 187);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 1;
             this.pictureBox1.TabStop = false;
@@ -163,11 +167,58 @@
             this.cbbSex.Size = new System.Drawing.Size(121, 24);
             this.cbbSex.TabIndex = 9;
             // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("#9Slide07 Crocante", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(215, 189);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(240, 27);
+            this.label5.TabIndex = 10;
+            this.label5.Text = "Hình thức làm việc:";
+            // 
+            // cbbFormatEmp
+            // 
+            this.cbbFormatEmp.Enabled = false;
+            this.cbbFormatEmp.FormattingEnabled = true;
+            this.cbbFormatEmp.ItemHeight = 16;
+            this.cbbFormatEmp.Items.AddRange(new object[] {
+            "Toàn thời gian",
+            "Bán thời gian"});
+            this.cbbFormatEmp.Location = new System.Drawing.Point(482, 189);
+            this.cbbFormatEmp.Name = "cbbFormatEmp";
+            this.cbbFormatEmp.Size = new System.Drawing.Size(121, 24);
+            this.cbbFormatEmp.TabIndex = 11;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("#9Slide07 Crocante", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Location = new System.Drawing.Point(12, 239);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(176, 27);
+            this.label6.TabIndex = 12;
+            this.label6.Text = "SỐ ĐIỆN THOẠI:";
+            // 
+            // txtPhoneNumber
+            // 
+            this.txtPhoneNumber.Enabled = false;
+            this.txtPhoneNumber.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtPhoneNumber.ForeColor = System.Drawing.SystemColors.MenuText;
+            this.txtPhoneNumber.Location = new System.Drawing.Point(194, 238);
+            this.txtPhoneNumber.Name = "txtPhoneNumber";
+            this.txtPhoneNumber.Size = new System.Drawing.Size(239, 34);
+            this.txtPhoneNumber.TabIndex = 13;
+            // 
             // Account
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(986, 675);
+            this.Controls.Add(this.txtPhoneNumber);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.cbbFormatEmp);
+            this.Controls.Add(this.label5);
             this.Controls.Add(this.cbbSex);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.txtAuthor);
@@ -201,5 +252,9 @@
         private System.Windows.Forms.Button btnChangePassword;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ComboBox cbbSex;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.ComboBox cbbFormatEmp;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.TextBox txtPhoneNumber;
     }
 }
