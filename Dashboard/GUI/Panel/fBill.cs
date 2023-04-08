@@ -11,9 +11,9 @@ using System.Windows.Forms;
 
 namespace Dashboard.Panel
 {
-    public partial class Bill : Form
+    public partial class fBill : Form
     {
-        public Bill()
+        public fBill()
         {
             InitializeComponent();
             Load_Bill();

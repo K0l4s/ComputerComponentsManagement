@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace Dashboard.GUI.Panel.Account
 {
-    public partial class Employee : Form
+    public partial class fEmployee : Form
     {
-        public Employee()
+        public fEmployee()
         {
             InitializeComponent();
         }
