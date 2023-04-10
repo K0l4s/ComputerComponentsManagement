@@ -100,22 +100,22 @@ namespace Dashboard
 
         private void btnEmployee_Click(object sender, EventArgs e)
         {
-            btnClick(new fEmployee(),btnEmployee);
+            btnClick(new fEmployee(), btnEmployee);
         }
 
         private void btnCustomer_Click(object sender, EventArgs e)
         {
-            btnClick(new Customer(),btnCustomer);
+            btnClick(new fCustomer(),btnCustomer);
         }
 
         private void btnProduct_Click(object sender, EventArgs e)
         {
-            btnClick(new Product(), btnProduct);
+            btnClick(new fProduct(), btnProduct);
         }
 
         private void btnStatistic_Click(object sender, EventArgs e)
         {
-            btnClick(new Statistic(), btnStatistic);
+            btnClick(new fStatistic(), btnStatistic);
         }
 
         private void btnVoucher_Click(object sender, EventArgs e)

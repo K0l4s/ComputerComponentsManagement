@@ -13,8 +13,8 @@ namespace Dashboard.DTO
 {
     public class EmployeeDTO
     {
-        public string Password { get; set; }
         public int EmloyeeID { get; set; }
+        public string Password { get; set; }
         public string FullName { get; set; }
         public string Sex { get; set; }
         public string FormatName { get; set; }

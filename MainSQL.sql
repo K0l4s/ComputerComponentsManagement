@@ -553,7 +553,7 @@ UPDATE ACCOUNT
 SET emp_password = 'admin123'
 WHERE employeeID = 1
 GO
-<<<<<<< HEAD
+
 --UPDATE
 Create View View_Account
 AS
@@ -582,7 +582,6 @@ BEGIN
 		AND (@numberUsed IS NULL OR numberUsed = @numberUsed)
 END
 EXEC GetInforVoucher NULL, NULL, NULL, NULL, NULL, NULL, NULL
-=======
 
 EXEC PROD_InsertEmployee
     @FullName = 'Mai',
@@ -597,5 +596,4 @@ EXEC PROD_InsertEmployee
     @DateOfBirth = '2003-08-20',
     @Age = 41,
     @AuthorName = 'Manager'
->>>>>>> 0c6fea3820eaa22e760312ed94971966266b89ec
 GO

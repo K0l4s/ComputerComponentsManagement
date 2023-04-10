@@ -8,13 +8,14 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Dashboard.GUI.Panel
+namespace Dashboard
 {
-    public partial class Product : Form
+    public partial class fProduct : Form
     {
-        public Product()
+        public fProduct()
         {
             InitializeComponent();
         }
+
     }
 }

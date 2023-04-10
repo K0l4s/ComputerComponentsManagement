@@ -21,7 +21,7 @@ namespace Dashboard.Panel
         public void Load_Bill()
         {
             string query = "SELECT * FROM COMPLETED_BILL";
-            dtgvBill.DataSource = DataProvider.Instance.ExecuteQuery(query);
+            //dtgvBill.DataSource = DataProvider.Instance.ExecuteQuery(query);
         }
     }
 }

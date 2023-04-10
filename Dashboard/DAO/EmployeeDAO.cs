@@ -113,7 +113,7 @@ namespace Dashboard.DAO
             return null;
         }
 
-        public DataTable getDataAccount()
+        public DataTable getDataEmployee()
         {
             return DataProvider.Instance.LoadData(nameView, CommandType.Text);
         }
@@ -164,6 +164,7 @@ namespace Dashboard.DAO
 
             return DataProvider.Instance.ExecuteProcedure(strSQL, CommandType.StoredProcedure, parameters, ref err);
         }
+
 
     }
 }

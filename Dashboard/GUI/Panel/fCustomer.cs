@@ -8,11 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Dashboard.GUI.Panel
+namespace Dashboard
 {
-    public partial class Statistic : Form
+    public partial class fCustomer : Form
     {
-        public Statistic()
+        public fCustomer()
         {
             InitializeComponent();
         }

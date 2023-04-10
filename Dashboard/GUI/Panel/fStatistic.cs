@@ -8,19 +8,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Dashboard
+namespace Dashboard.GUI.Panel
 {
-    public partial class fEmployee : Form
+    public partial class fStatistic : Form
     {
-        public fEmployee()
+        public fStatistic()
         {
             InitializeComponent();
-        }
-
-
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
         }
     }
 }
