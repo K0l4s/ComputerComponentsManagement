@@ -39,6 +39,7 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.btnRefresh = new System.Windows.Forms.Button();
             this.panelTools = new System.Windows.Forms.Panel();
+            this.label11 = new System.Windows.Forms.Label();
             this.btnClearData = new System.Windows.Forms.Button();
             this.label10 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
@@ -61,12 +62,12 @@
             this.txtReduction = new System.Windows.Forms.TextBox();
             this.txtID = new System.Windows.Forms.TextBox();
             this.pCenter = new System.Windows.Forms.Panel();
-            this.label11 = new System.Windows.Forms.Label();
             this.dtgvTable = new System.Windows.Forms.DataGridView();
             this.voucherID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.expiryDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.voucherName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.PercentReduction = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.status = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PercentReduction = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.limitNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.numberUsed = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel2.SuspendLayout();
@@ -219,6 +220,17 @@
             this.panelTools.Name = "panelTools";
             this.panelTools.Size = new System.Drawing.Size(355, 570);
             this.panelTools.TabIndex = 8;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.label11.Location = new System.Drawing.Point(307, 154);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(26, 22);
+            this.label11.TabIndex = 24;
+            this.label11.Text = "%";
             // 
             // btnClearData
             // 
@@ -424,34 +436,28 @@
             this.pCenter.Size = new System.Drawing.Size(704, 570);
             this.pCenter.TabIndex = 9;
             // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.label11.Location = new System.Drawing.Point(307, 154);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(26, 22);
-            this.label11.TabIndex = 24;
-            this.label11.Text = "%";
-            // 
             // dtgvTable
             // 
+            this.dtgvTable.AllowUserToAddRows = false;
+            this.dtgvTable.AllowUserToDeleteRows = false;
             this.dtgvTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dtgvTable.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.voucherID,
+            this.expiryDate,
             this.voucherName,
-            this.PercentReduction,
             this.status,
+            this.PercentReduction,
             this.limitNumber,
             this.numberUsed});
             this.dtgvTable.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dtgvTable.Location = new System.Drawing.Point(0, 0);
             this.dtgvTable.Name = "dtgvTable";
+            this.dtgvTable.ReadOnly = true;
             this.dtgvTable.RowHeadersWidth = 51;
             this.dtgvTable.RowTemplate.Height = 24;
             this.dtgvTable.Size = new System.Drawing.Size(704, 570);
             this.dtgvTable.TabIndex = 1;
+            this.dtgvTable.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtgvTable_CellClick);
             // 
             // voucherID
             // 
@@ -459,7 +465,17 @@
             this.voucherID.HeaderText = "voucherID";
             this.voucherID.MinimumWidth = 6;
             this.voucherID.Name = "voucherID";
+            this.voucherID.ReadOnly = true;
             this.voucherID.Width = 125;
+            // 
+            // expiryDate
+            // 
+            this.expiryDate.DataPropertyName = "expiryDate";
+            this.expiryDate.HeaderText = "expiryDate";
+            this.expiryDate.MinimumWidth = 6;
+            this.expiryDate.Name = "expiryDate";
+            this.expiryDate.ReadOnly = true;
+            this.expiryDate.Width = 125;
             // 
             // voucherName
             // 
@@ -467,15 +483,8 @@
             this.voucherName.HeaderText = "Name Voucher";
             this.voucherName.MinimumWidth = 6;
             this.voucherName.Name = "voucherName";
+            this.voucherName.ReadOnly = true;
             this.voucherName.Width = 125;
-            // 
-            // PercentReduction
-            // 
-            this.PercentReduction.DataPropertyName = "Percent Reduction";
-            this.PercentReduction.HeaderText = "Percent Reduction";
-            this.PercentReduction.MinimumWidth = 6;
-            this.PercentReduction.Name = "PercentReduction";
-            this.PercentReduction.Width = 125;
             // 
             // status
             // 
@@ -483,7 +492,17 @@
             this.status.HeaderText = "Name of Status";
             this.status.MinimumWidth = 6;
             this.status.Name = "status";
+            this.status.ReadOnly = true;
             this.status.Width = 125;
+            // 
+            // PercentReduction
+            // 
+            this.PercentReduction.DataPropertyName = "Percent Reduction ";
+            this.PercentReduction.HeaderText = "PercentReduction";
+            this.PercentReduction.MinimumWidth = 6;
+            this.PercentReduction.Name = "PercentReduction";
+            this.PercentReduction.ReadOnly = true;
+            this.PercentReduction.Width = 125;
             // 
             // limitNumber
             // 
@@ -491,6 +510,7 @@
             this.limitNumber.HeaderText = "limitNumber";
             this.limitNumber.MinimumWidth = 6;
             this.limitNumber.Name = "limitNumber";
+            this.limitNumber.ReadOnly = true;
             this.limitNumber.Width = 125;
             // 
             // numberUsed
@@ -499,6 +519,7 @@
             this.numberUsed.HeaderText = "numberUsed";
             this.numberUsed.MinimumWidth = 6;
             this.numberUsed.Name = "numberUsed";
+            this.numberUsed.ReadOnly = true;
             this.numberUsed.Width = 125;
             // 
             // Voucher
@@ -561,9 +582,10 @@
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.DataGridView dtgvTable;
         private System.Windows.Forms.DataGridViewTextBoxColumn voucherID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn expiryDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn voucherName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn PercentReduction;
         private System.Windows.Forms.DataGridViewTextBoxColumn status;
+        private System.Windows.Forms.DataGridViewTextBoxColumn PercentReduction;
         private System.Windows.Forms.DataGridViewTextBoxColumn limitNumber;
         private System.Windows.Forms.DataGridViewTextBoxColumn numberUsed;
     }
