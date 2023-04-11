@@ -35,32 +35,36 @@ namespace Dashboard.DAO
             {
                 conn.Open(); //Mở kết nối
                 SqlCommand cmd = new SqlCommand(query, conn); //Thực hiện truy vấn
-                if(paramenter != null) 
+                if (paramenter != null)
                 {
-                    string[] listPara = query.Split(' '); 
-                    int i = 0; //Gọi biến chạy
-                    foreach(string item in listPara)
+                    string[] listPara = query.Split(' ');
+                    int i = 0;
+                    foreach (string item in listPara)
                     {
-                        if(item.Contains('@'))
+                        if (item.Contains('@'))
                         {
-                            cmd.Parameters.AddWithValue(item, paramenter[i]);
+                            if (paramenter[i] != null)
+                            {
+                                SqlParameter parameter = new SqlParameter(item, paramenter[i]);
+                                cmd.Parameters.Add(parameter);
+                            }
+                            else
+                            {
+                                cmd.Parameters.AddWithValue(item, DBNull.Value);
+                            }
                             i++;
                         }
                     }
                 }
+
                 /* GIẢI THÍCH ĐOẠN CODE PHÍA TRÊN: Đoạn mã trên là một điều kiện IF trong ngôn ngữ lập trình C#. Nó kiểm tra xem giá trị của biến "parameter" có khác NULL hay không. Nếu khác NULL, nó sẽ thực hiện các câu lệnh trong phần thân của IF.
                 Phần thân của IF bắt đầu bằng việc tách câu truy vấn "query" thành một danh sách các chuỗi bằng cách sử dụng phương thức Split() và chia nhỏ chuỗi thành các phần tử của một mảng. Việc chia nhỏ được thực hiện bằng cách tách các chuỗi theo khoảng trắng ' '.
                 Sau khi có danh sách các chuỗi, vòng lặp foreach được sử dụng để duyệt qua từng phần tử trong danh sách. Nếu phần tử đó chứa ký tự '@', nó được coi là một tham số và thêm giá trị của tham số này vào trong đối tượng SqlCommand cmd bằng cách sử dụng phương thức AddWithValue(). Tham số này được lấy từ mảng "parameter" bằng cách sử dụng biến "i" như một chỉ mục để lấy giá trị tương ứng.
                 Đoạn mã này thường được sử dụng để thêm các tham số vào câu truy vấn SQL để tránh các lỗ hổng bảo mật, cũng như đảm bảo tính nhất quán và độ tin cậy của câu truy vấn.*/
-                try
-                {
-                    SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+
+                SqlDataAdapter adapter = new SqlDataAdapter(cmd);
                     adapter.Fill(data); //Lấy dữ liệu từ một nguồn dữ liệu và đổ dữ liệu này vào một đối tượng data.
-                }
-                catch(SqlException ex)
-                {
-                    MessageBox.Show("Có lỗi rồi! \n TÊN LỖI: " + ex.Message + "\n MÃ LỖI:" + ex.ErrorCode, "ERROR!",MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
+                
                 conn.Close(); //Đóng kết nối
             }
             return data; //Trả về giá trị data
