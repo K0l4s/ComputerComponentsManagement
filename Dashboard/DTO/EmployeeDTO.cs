@@ -13,28 +13,28 @@ namespace Dashboard.DTO
 {
     public class EmployeeDTO
     {
-        public int EmloyeeID { get; set; }
+        public int EmployeeID { get; set; }
         public string Password { get; set; }
         public string FullName { get; set; }
         public string Sex { get; set; }
         public string FormatName { get; set; }
         public float Wage { get; set; }
-        public Image EmployeeImage { get; set; }
+        public byte[] EmployeeImage { get; set; }
         public string PhoneNumber { get; set; }
         public string Address { get; set; }
         public string CitizenID { get; set; }
         public string CommissionRate { get; set; }
         public DateTime DateOfBirth { get; set; }
-        public int Age { get; set; }
+        public string Age { get; set; }
         public string StatusJob { get; set; }
         public string AuthorName { get; set; }
 
         public EmployeeDTO() { }
 
-        public EmployeeDTO(string password, int emloyeeID, string fullName, string sex, string formatName, float wage, Image employeeImage, string phoneNumber, string address, string citizenID, string commissionRate, DateTime dateOfBirth, int age, string statusJob, string authorName)
+        public EmployeeDTO(int employeeID, string password, string fullName, string sex, string formatName, float wage, byte[] employeeImage, string phoneNumber, string address, string citizenID, string commissionRate, DateTime dateOfBirth, string age, string statusJob, string authorName)
         {
+            EmployeeID=employeeID;
             Password=password;
-            EmloyeeID=emloyeeID;
             FullName=fullName;
             Sex=sex;
             FormatName=formatName;
@@ -49,5 +49,23 @@ namespace Dashboard.DTO
             StatusJob=statusJob;
             AuthorName=authorName;
         }
+
+        public EmployeeDTO( string password, string fullName, string sex, string formatName, float wage, byte[] employeeImage, string phoneNumber, string address, string citizenID, string commissionRate, DateTime dateOfBirth, string age, string authorName)
+        {
+            Password=password;
+            FullName=fullName;
+            Sex=sex;
+            FormatName=formatName;
+            Wage=wage;
+            EmployeeImage=employeeImage;
+            PhoneNumber=phoneNumber;
+            Address=address;
+            CitizenID=citizenID;
+            CommissionRate=commissionRate;
+            DateOfBirth=dateOfBirth;
+            Age=age;
+            AuthorName=authorName;
+        }
+
     }
 }
