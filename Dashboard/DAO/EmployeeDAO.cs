@@ -48,29 +48,6 @@ namespace Dashboard.DAO
                 return false;
         }
 
-        public Image ByteArrayToImage(byte[] byteArrayIn)
-        {
-            using (MemoryStream mStream = new MemoryStream(byteArrayIn))
-            {
-                return Image.FromStream(mStream);
-            }
-        }
-
-        public byte[] ImgToByteArray(Image img)
-        {
-            if (img != null)
-            {
-                Bitmap bmp = new Bitmap(img);
-                using (var ms = new MemoryStream())
-                {
-                    bmp.Save(ms, img.RawFormat);
-                    return ms.ToArray();
-                }
-            }
-            else
-                return null;
-        }
-
         public EmployeeDTO GetInforEmployeeByID()
         {
             DataTable dt = new DataTable();
@@ -136,8 +113,16 @@ namespace Dashboard.DAO
             parameter = new SqlParameter("@wage", employeeDTO.Wage);
             parameters.Add(parameter);
 
-            byte[] employeeImageBytes = ImgToByteArray(employeeDTO.EmployeeImage);
-            parameter = new SqlParameter("@employeeImage", employeeImageBytes);
+            byte[] employeeImageBytes = employeeDTO.EmployeeImage;
+            if (employeeImageBytes != null)
+            {
+                parameter = new SqlParameter("@employeeImage", SqlDbType.VarBinary, employeeImageBytes.Length);
+                parameter.Value = employeeImageBytes;
+            }
+            else
+            {
+                parameter = new SqlParameter("@employeeImage", DBNull.Value);
+            }
             parameters.Add(parameter);
 
             parameter = new SqlParameter("@phoneNumber", employeeDTO.PhoneNumber);
@@ -160,7 +145,6 @@ namespace Dashboard.DAO
 
             parameter = new SqlParameter("@authorName", employeeDTO.AuthorName);
             parameters.Add(parameter);
-
 
             return DataProvider.Instance.ExecuteProcedure(strSQL, CommandType.StoredProcedure, parameters, ref err);
         }
