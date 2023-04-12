@@ -35,7 +35,7 @@ namespace Dashboard.GUI.Panel.Voucher
             DataTable dt = null;
             
                 string query = "EXEC GetInforVoucher @voucherID , @voucherName , @percent , @statusVoucher , @expiryDate , @limitNumber , @numberUsed";
-                object[] parameters = new object[] { voucherID , voucherName, percent , statusVoucher , expiryDate , limitNumber , numberUsed };
+                object[] parameters = new object[] { voucherID , voucherName , percent , statusVoucher , expiryDate , limitNumber , numberUsed };
                 dt = DataProvider.Instance.ExecuteQuery(query, parameters);
             return dt;
         }
@@ -61,62 +61,77 @@ namespace Dashboard.GUI.Panel.Voucher
                 
                 find_Info();
             }
+            else if(btnTools.Text == "Thêm")
+            {
+                add_Info();
+            }    
         }
-        private void find_Info()
+        private void add_Info()
         {
 
-            string voucherID = null, voucherName = null, status = null;
+        }    
+        private void find_Info()
+        {
+            try
+            {
+                string voucherID = null, voucherName = null, status = null;
                 int? reduction = null;
                 int? limit = null, used = null;
                 DateTime? expiry = null;
+                if (!String.IsNullOrEmpty(txtID.Text))
+                    voucherID = txtID.Text;
+                if (!String.IsNullOrEmpty(txtName.Text))
+                    voucherName = txtName.Text;
+                if (!String.IsNullOrEmpty(cbStatus.Text))
+                    status = cbStatus.Text;
+                if (!String.IsNullOrEmpty(txtReduction.Text))
+                    try
+                    {
+                        reduction = Int32.Parse(txtReduction.Text);
+                    }
+                    catch (FormatException)
+                    {
+                        MessageBox.Show("Có lẽ tham số truyền vào không hợp lệ rồi! Thử lại sau nhé!");
+                    }
+                if (!String.IsNullOrEmpty(txtLimit.Text))
+                    try
+                    {
+                        limit = Int32.Parse(txtLimit.Text);
+                    }
+                    catch (FormatException)
+                    {
+                        MessageBox.Show("Có lẽ tham số truyền vào không hợp lệ rồi! Thử lại sau nhé!");
+                    }
+                if (!String.IsNullOrEmpty(txtNumberUsed.Text))
+                    try
+                    {
+                        used = Int32.Parse(txtNumberUsed.Text);
+                    }
+                    catch (FormatException)
+                    {
+                        MessageBox.Show("Có lẽ tham số truyền vào không hợp lệ rồi! Thử lại sau nhé!");
+                    }
+                if (!String.IsNullOrEmpty(txtDay.Text) || !String.IsNullOrEmpty(txtMonth.Text) || !String.IsNullOrEmpty(txtYear.Text))
+                    try
+                    {
+                        expiry = new DateTime(Int32.Parse(txtYear.Text), Int32.Parse(txtMonth.Text), Int32.Parse(txtDay.Text));
+                    }
+                    catch (FormatException)
+                    {
+                        MessageBox.Show("Có lẽ tham số truyền vào không hợp lệ rồi! Thử lại sau nhé!");
+                    }
 
-            if (!String.IsNullOrEmpty(txtID.Text))
-                voucherID = txtID.Text;
-            if (!String.IsNullOrEmpty(txtName.Text))
-                voucherName = txtName.Text;
-            if(!String.IsNullOrEmpty(cbStatus.Text))
-                status = cbStatus.Text;
-            if (!String.IsNullOrEmpty(txtReduction.Text))
-                try
-                {
-                    reduction = Int32.Parse(txtReduction.Text);
-                }
-                catch(FormatException)
-                {
-                    MessageBox.Show("Có lẽ tham số truyền vào không hợp lệ rồi! Thử lại sau nhé!");
-                }
-            if (!String.IsNullOrEmpty(txtLimit.Text))
-                try
-                {
-                    limit = Int32.Parse(txtLimit.Text);
-                }
-                catch (FormatException)
-                {
-                    MessageBox.Show("Có lẽ tham số truyền vào không hợp lệ rồi! Thử lại sau nhé!");
-                }
-            if (!String.IsNullOrEmpty(txtNumberUsed.Text))
-                try
-                {
-                    used = Int32.Parse(txtNumberUsed.Text);
-                }
-                catch (FormatException)
-                {
-                    MessageBox.Show("Có lẽ tham số truyền vào không hợp lệ rồi! Thử lại sau nhé!");
-                }
-            if (!String.IsNullOrEmpty(txtDay.Text) || !String.IsNullOrEmpty(txtMonth.Text) || !String.IsNullOrEmpty(txtYear.Text))
-                try
-                {
-                    expiry = new DateTime(Int32.Parse(txtYear.Text), Int32.Parse(txtMonth.Text), Int32.Parse(txtDay.Text));
-                }
-                catch (FormatException)
-                {
-                    MessageBox.Show("Có lẽ tham số truyền vào không hợp lệ rồi! Thử lại sau nhé!");
-                }
-
-            MessageBox.Show("CHẠY ĐƯỢC");
                 dta = LoadTable(voucherID, voucherName, reduction, status, expiry, limit, used);
                 dtgvTable.DataSource = dta;
-
+            }
+            catch(SqlException ex)
+            {
+                MessageBox.Show("Lỗi của bạn có thể từ dữ liệu. Thử lại nhé! \n Mã lỗi:" +ex.ErrorCode +"\n Nội dung: " +ex.Errors   );
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show("Có lẽ bạn gặp phải lỗi rồi. Liên hệ DEVELOPER để được hỗ trợ nhé! \n Nội dung lỗi:" + ex.Message);
+            }
         }
         private void btnSearch_Click(object sender, EventArgs e)
         {

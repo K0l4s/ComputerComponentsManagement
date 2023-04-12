@@ -31,8 +31,11 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Voucher));
             this.panel2 = new System.Windows.Forms.Panel();
             this.btnUpdate = new System.Windows.Forms.Button();
+            this.label14 = new System.Windows.Forms.Label();
             this.btnDelete = new System.Windows.Forms.Button();
+            this.label13 = new System.Windows.Forms.Label();
             this.btnAdd = new System.Windows.Forms.Button();
+            this.label12 = new System.Windows.Forms.Label();
             this.btnSearch = new System.Windows.Forms.Button();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -81,13 +84,16 @@
             // 
             this.panel2.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.panel2.Controls.Add(this.btnUpdate);
+            this.panel2.Controls.Add(this.label14);
             this.panel2.Controls.Add(this.btnDelete);
+            this.panel2.Controls.Add(this.label13);
             this.panel2.Controls.Add(this.btnAdd);
+            this.panel2.Controls.Add(this.label12);
             this.panel2.Controls.Add(this.btnSearch);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel2.Location = new System.Drawing.Point(1059, 100);
+            this.panel2.Location = new System.Drawing.Point(1060, 186);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(53, 570);
+            this.panel2.Size = new System.Drawing.Size(52, 484);
             this.panel2.TabIndex = 6;
             // 
             // btnUpdate
@@ -98,12 +104,22 @@
             this.btnUpdate.Dock = System.Windows.Forms.DockStyle.Top;
             this.btnUpdate.FlatAppearance.BorderSize = 0;
             this.btnUpdate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnUpdate.Location = new System.Drawing.Point(0, 150);
+            this.btnUpdate.Location = new System.Drawing.Point(0, 162);
             this.btnUpdate.Name = "btnUpdate";
-            this.btnUpdate.Size = new System.Drawing.Size(53, 50);
-            this.btnUpdate.TabIndex = 3;
+            this.btnUpdate.Size = new System.Drawing.Size(52, 50);
+            this.btnUpdate.TabIndex = 12;
             this.btnUpdate.UseVisualStyleBackColor = false;
             this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Dock = System.Windows.Forms.DockStyle.Top;
+            this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 1.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label14.Location = new System.Drawing.Point(0, 158);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(0, 4);
+            this.label14.TabIndex = 11;
             // 
             // btnDelete
             // 
@@ -113,12 +129,22 @@
             this.btnDelete.Dock = System.Windows.Forms.DockStyle.Top;
             this.btnDelete.FlatAppearance.BorderSize = 0;
             this.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnDelete.Location = new System.Drawing.Point(0, 100);
+            this.btnDelete.Location = new System.Drawing.Point(0, 108);
             this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(53, 50);
-            this.btnDelete.TabIndex = 2;
+            this.btnDelete.Size = new System.Drawing.Size(52, 50);
+            this.btnDelete.TabIndex = 9;
             this.btnDelete.UseVisualStyleBackColor = false;
             this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Dock = System.Windows.Forms.DockStyle.Top;
+            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 1.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label13.Location = new System.Drawing.Point(0, 104);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(0, 4);
+            this.label13.TabIndex = 8;
             // 
             // btnAdd
             // 
@@ -128,12 +154,22 @@
             this.btnAdd.Dock = System.Windows.Forms.DockStyle.Top;
             this.btnAdd.FlatAppearance.BorderSize = 0;
             this.btnAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAdd.Location = new System.Drawing.Point(0, 50);
+            this.btnAdd.Location = new System.Drawing.Point(0, 54);
             this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(53, 50);
-            this.btnAdd.TabIndex = 1;
+            this.btnAdd.Size = new System.Drawing.Size(52, 50);
+            this.btnAdd.TabIndex = 5;
             this.btnAdd.UseVisualStyleBackColor = false;
             this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Dock = System.Windows.Forms.DockStyle.Top;
+            this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 1.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label12.Location = new System.Drawing.Point(0, 50);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(0, 4);
+            this.label12.TabIndex = 4;
             // 
             // btnSearch
             // 
@@ -145,7 +181,7 @@
             this.btnSearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSearch.Location = new System.Drawing.Point(0, 0);
             this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new System.Drawing.Size(53, 50);
+            this.btnSearch.Size = new System.Drawing.Size(52, 50);
             this.btnSearch.TabIndex = 0;
             this.btnSearch.UseVisualStyleBackColor = false;
             this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
@@ -171,18 +207,17 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.panel1.Controls.Add(this.btnRefresh);
             this.panel1.Controls.Add(this.textBox2);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1112, 100);
+            this.panel1.Size = new System.Drawing.Size(1112, 186);
             this.panel1.TabIndex = 5;
             // 
             // btnRefresh
             // 
-            this.btnRefresh.Location = new System.Drawing.Point(0, 77);
+            this.btnRefresh.Location = new System.Drawing.Point(6, 7);
             this.btnRefresh.Name = "btnRefresh";
             this.btnRefresh.Size = new System.Drawing.Size(168, 23);
             this.btnRefresh.TabIndex = 23;
@@ -193,6 +228,7 @@
             // panelTools
             // 
             this.panelTools.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.panelTools.Controls.Add(this.btnRefresh);
             this.panelTools.Controls.Add(this.label11);
             this.panelTools.Controls.Add(this.btnClearData);
             this.panelTools.Controls.Add(this.label10);
@@ -216,9 +252,9 @@
             this.panelTools.Controls.Add(this.txtReduction);
             this.panelTools.Controls.Add(this.txtID);
             this.panelTools.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panelTools.Location = new System.Drawing.Point(704, 100);
+            this.panelTools.Location = new System.Drawing.Point(702, 186);
             this.panelTools.Name = "panelTools";
-            this.panelTools.Size = new System.Drawing.Size(355, 570);
+            this.panelTools.Size = new System.Drawing.Size(358, 484);
             this.panelTools.TabIndex = 8;
             // 
             // label11
@@ -431,9 +467,9 @@
             // 
             this.pCenter.Controls.Add(this.dtgvTable);
             this.pCenter.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pCenter.Location = new System.Drawing.Point(0, 100);
+            this.pCenter.Location = new System.Drawing.Point(0, 186);
             this.pCenter.Name = "pCenter";
-            this.pCenter.Size = new System.Drawing.Size(704, 570);
+            this.pCenter.Size = new System.Drawing.Size(702, 484);
             this.pCenter.TabIndex = 9;
             // 
             // dtgvTable
@@ -455,7 +491,7 @@
             this.dtgvTable.ReadOnly = true;
             this.dtgvTable.RowHeadersWidth = 51;
             this.dtgvTable.RowTemplate.Height = 24;
-            this.dtgvTable.Size = new System.Drawing.Size(704, 570);
+            this.dtgvTable.Size = new System.Drawing.Size(702, 484);
             this.dtgvTable.TabIndex = 1;
             this.dtgvTable.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtgvTable_CellClick);
             // 
@@ -536,6 +572,7 @@
             this.Text = "Voucher";
             this.Load += new System.EventHandler(this.Voucher_Load);
             this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.panelTools.ResumeLayout(false);
@@ -562,9 +599,6 @@
         private System.Windows.Forms.Button btnTools;
         private System.Windows.Forms.Button btnCloseTool;
         private System.Windows.Forms.Panel pCenter;
-        private System.Windows.Forms.Button btnUpdate;
-        private System.Windows.Forms.Button btnDelete;
-        private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.TextBox txtYear;
         private System.Windows.Forms.TextBox txtMonth;
         private System.Windows.Forms.TextBox txtDay;
@@ -588,5 +622,11 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn PercentReduction;
         private System.Windows.Forms.DataGridViewTextBoxColumn limitNumber;
         private System.Windows.Forms.DataGridViewTextBoxColumn numberUsed;
+        private System.Windows.Forms.Button btnUpdate;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Button btnDelete;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Button btnAdd;
+        private System.Windows.Forms.Label label12;
     }
 }

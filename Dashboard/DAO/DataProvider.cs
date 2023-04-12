@@ -35,22 +35,22 @@ namespace Dashboard.DAO
             {
                 conn.Open(); //Mở kết nối
                 SqlCommand cmd = new SqlCommand(query, conn); //Thực hiện truy vấn
-                if (paramenter != null)
+                if (paramenter != null) //Nếu không có tham số nào truyền vào
                 {
-                    string[] listPara = query.Split(' ');
-                    int i = 0;
-                    foreach (string item in listPara)
+                    string[] listPara = query.Split(' '); //Thực hiện tách chuỗi để tách phần tên của tham số cần truyền giá trị
+                    int i = 0; //Khai báo biến đếm, biến này lưu trữ giá trị trong object[] paramenter
+                    foreach (string item in listPara) //Bắt đầu duyệt qua từng phần tử
                     {
-                        if (item.Contains('@'))
+                        if (item.Contains('@')) //Nếu tìm thấy giá trị có chứa "@" tức mở đầu của khai báo paramenter
                         {
-                            if (paramenter[i] != null)
+                            if (paramenter[i] != null) //Nếu phần tử paramenter đang duyệt không rỗng
                             {
-                                SqlParameter parameter = new SqlParameter(item, paramenter[i]);
-                                cmd.Parameters.Add(parameter);
+                                SqlParameter parameter = new SqlParameter(item, paramenter[i]); // Khai báo paramenter và sẽ nhận giá trị truyền vào
+                                cmd.Parameters.Add(parameter); //Gán paramenter vào
                             }
                             else
                             {
-                                cmd.Parameters.AddWithValue(item, DBNull.Value);
+                                cmd.Parameters.AddWithValue(item, DBNull.Value); //Còn không thì set giá trị default của paramenter
                             }
                             i++;
                         }
@@ -61,7 +61,10 @@ namespace Dashboard.DAO
                 Phần thân của IF bắt đầu bằng việc tách câu truy vấn "query" thành một danh sách các chuỗi bằng cách sử dụng phương thức Split() và chia nhỏ chuỗi thành các phần tử của một mảng. Việc chia nhỏ được thực hiện bằng cách tách các chuỗi theo khoảng trắng ' '.
                 Sau khi có danh sách các chuỗi, vòng lặp foreach được sử dụng để duyệt qua từng phần tử trong danh sách. Nếu phần tử đó chứa ký tự '@', nó được coi là một tham số và thêm giá trị của tham số này vào trong đối tượng SqlCommand cmd bằng cách sử dụng phương thức AddWithValue(). Tham số này được lấy từ mảng "parameter" bằng cách sử dụng biến "i" như một chỉ mục để lấy giá trị tương ứng.
                 Đoạn mã này thường được sử dụng để thêm các tham số vào câu truy vấn SQL để tránh các lỗ hổng bảo mật, cũng như đảm bảo tính nhất quán và độ tin cậy của câu truy vấn.*/
-
+                //LƯU Ý: Đối với Procedure và Function thì Khi gọi string query để truyền vào tham số thì cần chú ý phải nhập theo
+                //đúng định dạng EXECUTE/SELECT [Name] @para1 , @para2 , ... dấu phẩy giữa 2 tham số phải cách ký tự phía
+                //trước và phía sau 1 ký tự khoảng trắng ví dụ:
+                // EXECUTE GetInfo @id , @name
                 SqlDataAdapter adapter = new SqlDataAdapter(cmd);
                     adapter.Fill(data); //Lấy dữ liệu từ một nguồn dữ liệu và đổ dữ liệu này vào một đối tượng data.
                 
@@ -71,68 +74,70 @@ namespace Dashboard.DAO
         }
 
         //Hàm trả về giá trị số cột
-        public int ExecuteNonQuery(string query, object[] parament = null) 
+        public int ExecuteNonQuery(string query, object[] paramenter = null) 
         {
             int data = 0;
-            using (SqlConnection conn = new SqlConnection(ConnStr))
+            using (SqlConnection conn = new SqlConnection(ConnStr)) //đảm bảo rằng đối tượng SqlConnection được giải phóng tự động sau khi sử dụng, mà không cần phải gọi phương thức Dispose() của đối tượng
             {
-                conn.Open();
-                SqlCommand cmd = new SqlCommand(query, conn);
-                if (parament != null)
+                conn.Open(); //Mở kết nối
+                SqlCommand cmd = new SqlCommand(query, conn); //Thực hiện truy vấn
+                if (paramenter != null) //Nếu không có tham số nào truyền vào
                 {
-                    string[] listPara = query.Split(' ');
-                    int i = 0;
-                    foreach (string item in listPara)
+                    string[] listPara = query.Split(' '); //Thực hiện tách chuỗi để tách phần tên của tham số cần truyền giá trị
+                    int i = 0; //Khai báo biến đếm, biến này lưu trữ giá trị trong object[] paramenter
+                    foreach (string item in listPara) //Bắt đầu duyệt qua từng phần tử
                     {
-                        if (item.Contains('@'))
+                        if (item.Contains('@')) //Nếu tìm thấy giá trị có chứa "@" tức mở đầu của khai báo paramenter
                         {
-                            cmd.Parameters.AddWithValue(item, parament[i]);
+                            if (paramenter[i] != null) //Nếu phần tử paramenter đang duyệt không rỗng
+                            {
+                                SqlParameter parameter = new SqlParameter(item, paramenter[i]); // Khai báo paramenter và sẽ nhận giá trị truyền vào
+                                cmd.Parameters.Add(parameter); //Gán paramenter vào
+                            }
+                            else
+                            {
+                                cmd.Parameters.AddWithValue(item, DBNull.Value); //Còn không thì set giá trị default của paramenter
+                            }
                             i++;
                         }
                     }
                 }
-                try
-                {
-                    data = cmd.ExecuteNonQuery();
-                }
-                catch(SqlException ex)
-                {
-                    MessageBox.Show("Có lỗi rồi! \n TÊN LỖI: " + ex.Message + "\n MÃ LỖI:" + ex.ErrorCode, "ERROR!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
+                data = cmd.ExecuteNonQuery();
                 conn.Close();
             }
             return data;
         }
 
         //Thực thi query trả về giá trị đầu tiên của kết quả
-        public object ExecuteScalar(string query, object[] parament = null) 
+        public object ExecuteScalar(string query, object[] paramenter = null) 
         {
             object data = 0;
-            using (SqlConnection conn = new SqlConnection(ConnStr))
+            using (SqlConnection conn = new SqlConnection(ConnStr)) //đảm bảo rằng đối tượng SqlConnection được giải phóng tự động sau khi sử dụng, mà không cần phải gọi phương thức Dispose() của đối tượng
             {
-                conn.Open();
-                SqlCommand cmd = new SqlCommand(query, conn);
-                if (parament != null)
+                conn.Open(); //Mở kết nối
+                SqlCommand cmd = new SqlCommand(query, conn); //Thực hiện truy vấn
+                if (paramenter != null) //Nếu không có tham số nào truyền vào
                 {
-                    string[] listPara = query.Split(' ');
-                    int i = 0;
-                    foreach (string item in listPara)
+                    string[] listPara = query.Split(' '); //Thực hiện tách chuỗi để tách phần tên của tham số cần truyền giá trị
+                    int i = 0; //Khai báo biến đếm, biến này lưu trữ giá trị trong object[] paramenter
+                    foreach (string item in listPara) //Bắt đầu duyệt qua từng phần tử
                     {
-                        if (item.Contains('@'))
+                        if (item.Contains('@')) //Nếu tìm thấy giá trị có chứa "@" tức mở đầu của khai báo paramenter
                         {
-                            cmd.Parameters.AddWithValue(item, parament[i]);
+                            if (paramenter[i] != null) //Nếu phần tử paramenter đang duyệt không rỗng
+                            {
+                                SqlParameter parameter = new SqlParameter(item, paramenter[i]); // Khai báo paramenter và sẽ nhận giá trị truyền vào
+                                cmd.Parameters.Add(parameter); //Gán paramenter vào
+                            }
+                            else
+                            {
+                                cmd.Parameters.AddWithValue(item, DBNull.Value); //Còn không thì set giá trị default của paramenter
+                            }
                             i++;
                         }
                     }
                 }
-                try
-                {
-                    data = cmd.ExecuteScalar();
-                }
-                catch (SqlException ex)
-                {
-                    MessageBox.Show("Có lỗi rồi! \n TÊN LỖI: " + ex.Message + "\n MÃ LỖI:" + ex.ErrorCode, "ERROR!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
+                data = cmd.ExecuteScalar();
                 conn.Close();
             }
             return data;
