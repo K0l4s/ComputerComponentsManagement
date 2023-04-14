@@ -52,6 +52,7 @@
     <Compile Include="DAO\EmployeeDAO.cs" />
     <Compile Include="DAO\DataProvider.cs" />
     <Compile Include="DAO\VoucherDAO.cs" />
+    <Compile Include="Upload.cs" />
     <Compile Include="Utilities\DataConvert.cs" />
     <Compile Include="DTO\EmployeeDTO.cs" />
     <Compile Include="DTO\VoucherDTO.cs" />
@@ -206,6 +207,8 @@
   <ItemGroup>
     <None Include="GUI\App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Resources\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
