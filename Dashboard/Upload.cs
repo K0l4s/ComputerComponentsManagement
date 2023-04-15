@@ -32,12 +32,14 @@ namespace Dashboard
                 string destinationPath = Path.Combine(resourcesFolderPath, imageName + imageExtension);
                 File.Copy(imagePath, destinationPath, true);
 
-                picturebox.Image = Image.FromFile(destinationPath);
+                picturebox.ImageLocation = destinationPath;
+                //picturebox.Image = Image.FromFile(destinationPath);
                 pathResult = destinationPath ;
                 MessageBox.Show($"Upload image thanh cong !");
             }
             return pathResult;
         }
+        
         public static string GetImageName(string fullpath) {
             string name = Path.GetFileName(fullpath);
             if (!File.Exists(fullpath) && !Directory.Exists(fullpath))
@@ -47,11 +49,10 @@ namespace Dashboard
         }
 
         public static string GetFullImgPath(string filename) {
-            string name = null;
-            string fullpath =  resourcesFolderPath + filename ;
+            string fullpath = Path.Combine(resourcesFolderPath,filename);
             if (!File.Exists(fullpath) && !Directory.Exists(fullpath))
                 MessageBox.Show("File path does not exist !!!");
-            return name;
+            return fullpath;
         }
     }
 }

@@ -47,7 +47,7 @@ CREATE TABLE EMPLOYEE(
 				sex VARCHAR(6) NOT NULL,
 				formatName VARCHAR(10) NOT NULL,
 				wage FLOAT NOT NULL,
-				employeeImage VARBINARY(max),
+				employeeImage VARCHAR(255),
 				phoneNumber VARCHAR(10) UNIQUE NOT NULL,
 				Em_address VARCHAR(255),
 				citizenID VARCHAR(12) UNIQUE NOT NULL,
@@ -236,7 +236,7 @@ BEGIN
 END;
 GO
 
-CREATE TRIGGER TRG_Auto_Set_Statusjob
+CREATE TRIGGER TRG_AUTO_SET_STATUSJOB
 ON EMPLOYEE
 AFTER INSERT
 AS
@@ -426,6 +426,78 @@ CREATE VIEW VIEW_WARRENTY AS
 	GO
 
 --Func + Proc
+--FUNCTION FINAL
+
+CREATE FUNCTION FUNC_GetMaxEmployeeId()
+RETURNS INT
+AS
+BEGIN
+    DECLARE @maxId INT
+    SELECT @maxId = MAX(employeeID) FROM EMPLOYEE
+    RETURN @maxId
+END
+GO
+
+CREATE FUNCTION FUNC_CheckAuthorExists(@AuthorName VARCHAR(50))
+RETURNS INT
+AS
+BEGIN
+    DECLARE @AuthorId INT
+    SELECT TOP 1 @AuthorId = authorID FROM AUTHORIZATION_USER WHERE authorName = @AuthorName
+    IF @AuthorId IS NULL
+        SELECT TOP 1 @AuthorId = authorID FROM AUTHORIZATION_USER
+    RETURN @AuthorId
+END
+GO
+
+CREATE FUNCTION FUNC_CHECK_EMPLOYEE_VALUE(
+	@Sex nvarchar(max),
+	@PhoneNumber nvarchar(max),
+	@CitizenID nvarchar(max),
+	@Wage float,
+	@CommissionRate float
+)
+RETURNS nvarchar(max)
+AS
+BEGIN
+	DECLARE @result nvarchar(max) = ''
+
+	IF @Sex NOT IN ('Male', 'Female')
+	BEGIN
+		SET @result = 'Sex must be "Male" or "Female". '
+	END
+
+	IF LEN(@PhoneNumber) <> 10 OR @PhoneNumber NOT LIKE '[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]'
+	BEGIN
+		SET @result = @result + 'PhoneNumber must have 10 digits. '
+	END
+
+	IF @CitizenID IS NULL OR LEN(@CitizenID) <> 12 OR @CitizenID NOT LIKE '[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]'
+	BEGIN
+		SET @result = @result + 'CitizenID must have 12 digits. '
+	END
+	--ELSE IF EXISTS (SELECT 1 FROM EMPLOYEE WHERE citizenID = @CitizenID)
+	--BEGIN
+	--	SET @result = @result + 'CitizenID is already in use. '
+	--END
+
+	IF @Wage <= 0
+	BEGIN
+		SET @result = @result + 'Wage must be greater than 0. '
+	END
+
+	IF @CommissionRate < 0 OR @CommissionRate > 1
+	BEGIN
+		SET @result = @result + 'CommissionRate must be between 0 and 1. '
+	END
+
+	RETURN @result
+END
+GO
+
+
+-- PROCEDURE FINAL
+
 --Kien
 --CREATE PROC GetInforEmployeeByID @employeeID  INT
 --AS
@@ -463,7 +535,7 @@ CREATE PROCEDURE PROD_InsertEmployee
     @Sex nvarchar(max),
     @FormatName nvarchar(max),
     @Wage FLOAT ,
-    @EmployeeImage varbinary(max),
+    @EmployeeImage nvarchar(max),
     @PhoneNumber nvarchar(max),
     @Address nvarchar(max),
     @CitizenID nvarchar(max),
@@ -473,25 +545,29 @@ CREATE PROCEDURE PROD_InsertEmployee
     @AuthorName nvarchar(max)
 AS
 BEGIN
-	DECLARE @maxID INT = 4 , @AuthorID INT = 2 
-	SELECT @maxID = MAX(employeeID) + 1 FROM EMPLOYEE
-	IF @AuthorName = 'Manager'
+	DECLARE @maxID INT = dbo.FUNC_GetMaxEmployeeId() + 1
+	DECLARE @AuthorID INT =  dbo.FUNC_CheckAuthorExists(@AuthorName)
+	DECLARE @errorMsg nvarchar(max) = dbo.FUNC_CHECK_EMPLOYEE_VALUE(@Sex, @PhoneNumber, @CitizenID, @Wage , @CommissionRate)
+	IF @errorMsg <> ''
 	BEGIN
-		SET @AuthorID = 1
+		RAISERROR(@errorMsg, 16, 1)
+		ROLLBACK TRANSACTION
+		RETURN
 	END
-	 PRINT ('Employee ID: ' + CONVERT(VARCHAR,@AuthorName) + CONVERT(VARCHAR, @AuthorID) + CONVERT(VARCHAR, @maxID));
-
+	
+	
     INSERT INTO Employee(employeeID, FullName, Sex, FormatName, Wage, EmployeeImage, PhoneNumber, Em_address, CitizenID, CommissionRate, DateOfBirth, Age, AuthorID)
     VALUES ( @maxID , @FullName, @Sex, @FormatName, @Wage, @EmployeeImage, @PhoneNumber, @Address, @CitizenID, @CommissionRate, @DateOfBirth, @Age, @AuthorID)
 END
 GO
 
 CREATE PROCEDURE PROD_UpdateEmployee
+	@employeeID INT,
     @FullName nvarchar(max),
     @Sex nvarchar(max),
     @FormatName nvarchar(max),
     @Wage FLOAT ,
-    @EmployeeImage varbinary(max),
+    @EmployeeImage nvarchar(max),
     @PhoneNumber nvarchar(max),
     @Address nvarchar(max),
     @CitizenID nvarchar(max),
@@ -501,16 +577,32 @@ CREATE PROCEDURE PROD_UpdateEmployee
     @AuthorName nvarchar(max)
 AS
 BEGIN
-	DECLARE @maxID INT  , @AuthorID INT = 2 
-	SELECT @maxID = MAX(employeeID) + 1 FROM EMPLOYEE
-	IF @AuthorName = 'Manager'
+	BEGIN TRANSACTION 
+	DECLARE @AuthorID INT =  dbo.FUNC_CheckAuthorExists(@AuthorName)
+	DECLARE @errorMsg nvarchar(max) = dbo.FUNC_CHECK_EMPLOYEE_VALUE(@Sex, @PhoneNumber, @CitizenID, @Wage , @CommissionRate)
+	IF @errorMsg <> ''
 	BEGIN
-		SET @AuthorID = 1
+		RAISERROR(@errorMsg, 16, 1)
+		ROLLBACK TRANSACTION
+		RETURN
 	END
-	 PRINT ('Employee ID: ' + CONVERT(VARCHAR,@AuthorName) + CONVERT(VARCHAR, @AuthorID) + CONVERT(VARCHAR, @maxID));
+	
+    UPDATE Employee 
+    SET FullName = @FullName, 
+        Sex = @Sex, 
+        FormatName = @FormatName, 
+        Wage = @Wage, 
+        EmployeeImage = @EmployeeImage, 
+        PhoneNumber = @PhoneNumber, 
+        Em_address = @Address, 
+        CitizenID = @CitizenID, 
+        CommissionRate = @CommissionRate, 
+        DateOfBirth = @DateOfBirth, 
+        Age = @Age, 
+        AuthorID = @AuthorID
+    WHERE employeeID = @employeeID
 
-    INSERT INTO Employee(employeeID, FullName, Sex, FormatName, Wage, EmployeeImage, PhoneNumber, Em_address, CitizenID, CommissionRate, DateOfBirth, Age, AuthorID)
-    VALUES ( @maxID , @FullName, @Sex, @FormatName, @Wage, @EmployeeImage, @PhoneNumber, @Address, @CitizenID, @CommissionRate, @DateOfBirth, @Age, @AuthorID)
+	COMMIT TRANSACTION
 END
 GO
 
@@ -518,14 +610,10 @@ CREATE PROCEDURE PROD_DeleteEmployee
     @employeeID INT
 AS
 BEGIN
-	DECLARE @maxID INT = 4 , @AuthorID INT = 2 
-	SELECT @maxID = MAX(employeeID)  FROM EMPLOYEE
-	
-	DELETE FROM EMPLOYEE
-	FROM EMPLOYEE e
-
+    UPDATE EMPLOYEE SET statusJob = 'Non-Active' WHERE employeeID = @employeeID;
 END
 GO
+
 
 -- INSERT DATA FOR DATABASE
 INSERT INTO AUTHORIZATION_USER VALUES (1, 'Manager');
@@ -536,12 +624,12 @@ INSERT INTO WARRANTY_STATUS VALUES (1, 'NON-PROCESSED');
 INSERT INTO WARRANTY_STATUS VALUES (2, 'PROCESSED');
 GO
 
-INSERT INTO EMPLOYEE(employeeID,fullName,formatName,phoneNumber,Em_address,citizenID,dateOfBirth,wage,sex,authorID,commissionRate)
-values (1,'Nguyen Ngan','Full Time','0123456799','Ho Chi Minh','050303116553','2003-8-20',27000,'Female',1,0.5);
-INSERT INTO EMPLOYEE(employeeID,fullName,formatName,phoneNumber,Em_address,citizenID,dateOfBirth,wage,sex,authorID,commissionRate)
-values (2,'Nguyen Van Ba','Part Time','0123409799','Ho Chi Minh','050303116663','2003-8-20',23000,'Female',2,0.2);
-INSERT INTO EMPLOYEE(employeeID,fullName,formatName,phoneNumber,Em_address,citizenID,dateOfBirth,wage,sex,authorID,commissionRate)
-values (3,'Nguyen A','Full Time','0123477799','Ho Chi Minh','050303110053','2003-8-20',21000,'Female',2,0.4);
+INSERT INTO EMPLOYEE(employeeID,fullName,formatName,phoneNumber,Em_address,citizenID,dateOfBirth,wage,sex,authorID,commissionRate,employeeImage)
+values (1,'Nguyen Ngan','Full Time','0123456799','Ho Chi Minh','050303116553','2003-8-20',27000,'Female',1,0.5,'20230415135620453_45412b9b-d7b6-4fb9-8498-1fc5aa5648e5.png');
+INSERT INTO EMPLOYEE(employeeID,fullName,formatName,phoneNumber,Em_address,citizenID,dateOfBirth,wage,sex,authorID,commissionRate,employeeImage)
+values (2,'Nguyen Van Ba','Part Time','0123409799','Ho Chi Minh','050303116663','2003-8-20',23000,'Female',2,0.2,'20230415135628769_72dc12d9-7230-4aca-8c6e-0198ba3aa40c.png');
+INSERT INTO EMPLOYEE(employeeID,fullName,formatName,phoneNumber,Em_address,citizenID,dateOfBirth,wage,sex,authorID,commissionRate,employeeImage)
+values (3,'Nguyen A','Full Time','0123477799','Ho Chi Minh','050303110053','2003-8-20',21000,'Female',2,0.4,'20230415135647299_3994139f-fa20-4fe9-a062-3bb1b268e7c6.png');
 GO
 UPDATE ACCOUNT
 SET emp_password = 'admin123'
@@ -576,18 +664,19 @@ BEGIN
 		AND (@numberUsed IS NULL OR numberUsed = @numberUsed)
 END
 EXEC GetInforVoucher NULL, NULL, NULL, NULL, NULL, NULL, NULL
-
-EXEC PROD_InsertEmployee
-    @FullName = 'Mai',
-    @Sex = 'FeMale',
-    @FormatName = 'Full Time',
-    @Wage = 27000.5,
-    @EmployeeImage = NULL,
-    @PhoneNumber = '0123456795',
-    @Address = '123 Main Street',
-    @CitizenID = '030303110053',
-    @CommissionRate = 0.1,
-    @DateOfBirth = '2003-08-20',
-    @Age = 41,
-    @AuthorName = 'Manager'
 GO
+
+--EXEC PROD_InsertEmployee
+--    @FullName = 'Mai',
+--    @Sex = 'FeMale',
+--    @FormatName = 'Full Time',
+--    @Wage = 27000.5,
+--    @EmployeeImage = '20230415135312990_383f8789-49f8-4533-af40-81a7dec43f8d.png',
+--    @PhoneNumber = '0123456795',
+--    @Address = '123 Main Street',
+--    @CitizenID = '030303110053',
+--    @CommissionRate = 0.1,
+--    @DateOfBirth = '2003-08-20',
+--    @Age = 41,
+--    @AuthorName = 'Manager'
+--GO
