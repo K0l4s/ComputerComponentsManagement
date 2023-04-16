@@ -28,15 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea5 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend5 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series5 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea6 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend6 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series6 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.btnCustomDate = new System.Windows.Forms.Button();
             this.btnToday = new System.Windows.Forms.Button();
             this.btnLast7Days = new System.Windows.Forms.Button();
@@ -62,10 +62,10 @@
             this.chartGrossRevenue = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.panel3 = new System.Windows.Forms.Panel();
             this.panel6 = new System.Windows.Forms.Panel();
+            this.chartBottomProducts = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.chartTopProducts = new System.Windows.Forms.DataVisualization.Charting.Chart();
-            this.label5 = new System.Windows.Forms.Label();
-            this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.label6 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
             this.panel2.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -75,8 +75,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.chartGrossRevenue)).BeginInit();
             this.panel3.SuspendLayout();
             this.panel6.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.chartBottomProducts)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chartTopProducts)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             this.SuspendLayout();
             // 
             // btnCustomDate
@@ -360,35 +360,35 @@
             // 
             this.chartGrossRevenue.BackColor = System.Drawing.Color.Transparent;
             this.chartGrossRevenue.BorderlineColor = System.Drawing.Color.MediumPurple;
-            chartArea4.AxisX.Crossing = -1.7976931348623157E+308D;
-            chartArea4.AxisX.IsMarginVisible = false;
-            chartArea4.AxisX.LabelStyle.ForeColor = System.Drawing.Color.LightGray;
-            chartArea4.AxisX.LineColor = System.Drawing.Color.White;
-            chartArea4.AxisX.LineWidth = 0;
-            chartArea4.AxisX.MajorGrid.LineColor = System.Drawing.Color.Gray;
-            chartArea4.AxisX.MajorTickMark.LineColor = System.Drawing.Color.WhiteSmoke;
-            chartArea4.AxisY.IsMarginVisible = false;
-            chartArea4.AxisY.LabelStyle.ForeColor = System.Drawing.Color.Gainsboro;
-            chartArea4.AxisY.LineColor = System.Drawing.Color.Transparent;
-            chartArea4.AxisY.MajorGrid.LineColor = System.Drawing.Color.Gray;
-            chartArea4.BackColor = System.Drawing.Color.DimGray;
-            chartArea4.BackGradientStyle = System.Windows.Forms.DataVisualization.Charting.GradientStyle.LeftRight;
-            chartArea4.BackImageTransparentColor = System.Drawing.Color.Transparent;
-            chartArea4.BackSecondaryColor = System.Drawing.Color.DimGray;
-            chartArea4.BorderWidth = 8;
-            chartArea4.Name = "ChartArea1";
-            chartArea4.ShadowColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.chartGrossRevenue.ChartAreas.Add(chartArea4);
-            legend4.Name = "Legend1";
-            this.chartGrossRevenue.Legends.Add(legend4);
+            chartArea1.AxisX.Crossing = -1.7976931348623157E+308D;
+            chartArea1.AxisX.IsMarginVisible = false;
+            chartArea1.AxisX.LabelStyle.ForeColor = System.Drawing.Color.LightGray;
+            chartArea1.AxisX.LineColor = System.Drawing.Color.White;
+            chartArea1.AxisX.LineWidth = 0;
+            chartArea1.AxisX.MajorGrid.LineColor = System.Drawing.Color.Gray;
+            chartArea1.AxisX.MajorTickMark.LineColor = System.Drawing.Color.WhiteSmoke;
+            chartArea1.AxisY.IsMarginVisible = false;
+            chartArea1.AxisY.LabelStyle.ForeColor = System.Drawing.Color.Gainsboro;
+            chartArea1.AxisY.LineColor = System.Drawing.Color.Transparent;
+            chartArea1.AxisY.MajorGrid.LineColor = System.Drawing.Color.Gray;
+            chartArea1.BackColor = System.Drawing.Color.DimGray;
+            chartArea1.BackGradientStyle = System.Windows.Forms.DataVisualization.Charting.GradientStyle.LeftRight;
+            chartArea1.BackImageTransparentColor = System.Drawing.Color.Transparent;
+            chartArea1.BackSecondaryColor = System.Drawing.Color.DimGray;
+            chartArea1.BorderWidth = 8;
+            chartArea1.Name = "ChartArea1";
+            chartArea1.ShadowColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.chartGrossRevenue.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            this.chartGrossRevenue.Legends.Add(legend1);
             this.chartGrossRevenue.Location = new System.Drawing.Point(32, 29);
             this.chartGrossRevenue.Name = "chartGrossRevenue";
-            series4.ChartArea = "ChartArea1";
-            series4.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.SplineArea;
-            series4.Color = System.Drawing.Color.MediumPurple;
-            series4.Legend = "Legend1";
-            series4.Name = "Series1";
-            this.chartGrossRevenue.Series.Add(series4);
+            series1.ChartArea = "ChartArea1";
+            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.SplineArea;
+            series1.Color = System.Drawing.Color.MediumPurple;
+            series1.Legend = "Legend1";
+            series1.Name = "Series1";
+            this.chartGrossRevenue.Series.Add(series1);
             this.chartGrossRevenue.Size = new System.Drawing.Size(609, 199);
             this.chartGrossRevenue.TabIndex = 0;
             this.chartGrossRevenue.Text = "chart1";
@@ -404,7 +404,7 @@
             // 
             // panel6
             // 
-            this.panel6.Controls.Add(this.chart1);
+            this.panel6.Controls.Add(this.chartBottomProducts);
             this.panel6.Controls.Add(this.chartTopProducts);
             this.panel6.Controls.Add(this.label6);
             this.panel6.Controls.Add(this.label5);
@@ -415,21 +415,59 @@
             this.panel6.Size = new System.Drawing.Size(383, 578);
             this.panel6.TabIndex = 0;
             // 
+            // chartBottomProducts
+            // 
+            this.chartBottomProducts.BackColor = System.Drawing.Color.Transparent;
+            chartArea2.AxisX.Crossing = -1.7976931348623157E+308D;
+            chartArea2.AxisX.IsMarginVisible = false;
+            chartArea2.AxisY.IsMarginVisible = false;
+            chartArea2.BackColor = System.Drawing.Color.DimGray;
+            chartArea2.BackGradientStyle = System.Windows.Forms.DataVisualization.Charting.GradientStyle.LeftRight;
+            chartArea2.BackImageTransparentColor = System.Drawing.Color.Transparent;
+            chartArea2.BackSecondaryColor = System.Drawing.Color.DimGray;
+            chartArea2.Name = "ChartArea1";
+            chartArea2.ShadowColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.chartBottomProducts.ChartAreas.Add(chartArea2);
+            legend2.Name = "Legend1";
+            this.chartBottomProducts.Legends.Add(legend2);
+            this.chartBottomProducts.Location = new System.Drawing.Point(41, 333);
+            this.chartBottomProducts.Name = "chartBottomProducts";
+            this.chartBottomProducts.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.None;
+            this.chartBottomProducts.PaletteCustomColors = new System.Drawing.Color[] {
+        System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192))))),
+        System.Drawing.Color.FromArgb(((int)(((byte)(137)))), ((int)(((byte)(137)))), ((int)(((byte)(255))))),
+        System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(127))))),
+        System.Drawing.Color.FromArgb(((int)(((byte)(189)))), ((int)(((byte)(189)))), ((int)(((byte)(189))))),
+        System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(194)))), ((int)(((byte)(231))))),
+        System.Drawing.Color.FromArgb(((int)(((byte)(247)))), ((int)(((byte)(195)))), ((int)(((byte)(45))))),
+        System.Drawing.Color.MediumPurple};
+            series2.BorderColor = System.Drawing.Color.DimGray;
+            series2.BorderWidth = 6;
+            series2.ChartArea = "ChartArea1";
+            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Doughnut;
+            series2.Color = System.Drawing.Color.MediumPurple;
+            series2.Legend = "Legend1";
+            series2.Name = "Series1";
+            this.chartBottomProducts.Series.Add(series2);
+            this.chartBottomProducts.Size = new System.Drawing.Size(293, 206);
+            this.chartBottomProducts.TabIndex = 1;
+            this.chartBottomProducts.Text = "chart2";
+            // 
             // chartTopProducts
             // 
             this.chartTopProducts.BackColor = System.Drawing.Color.Transparent;
-            chartArea5.AxisX.Crossing = -1.7976931348623157E+308D;
-            chartArea5.AxisX.IsMarginVisible = false;
-            chartArea5.AxisY.IsMarginVisible = false;
-            chartArea5.BackColor = System.Drawing.Color.DimGray;
-            chartArea5.BackGradientStyle = System.Windows.Forms.DataVisualization.Charting.GradientStyle.LeftRight;
-            chartArea5.BackImageTransparentColor = System.Drawing.Color.Transparent;
-            chartArea5.BackSecondaryColor = System.Drawing.Color.DimGray;
-            chartArea5.Name = "ChartArea1";
-            chartArea5.ShadowColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.chartTopProducts.ChartAreas.Add(chartArea5);
-            legend5.Name = "Legend1";
-            this.chartTopProducts.Legends.Add(legend5);
+            chartArea3.AxisX.Crossing = -1.7976931348623157E+308D;
+            chartArea3.AxisX.IsMarginVisible = false;
+            chartArea3.AxisY.IsMarginVisible = false;
+            chartArea3.BackColor = System.Drawing.Color.DimGray;
+            chartArea3.BackGradientStyle = System.Windows.Forms.DataVisualization.Charting.GradientStyle.LeftRight;
+            chartArea3.BackImageTransparentColor = System.Drawing.Color.Transparent;
+            chartArea3.BackSecondaryColor = System.Drawing.Color.DimGray;
+            chartArea3.Name = "ChartArea1";
+            chartArea3.ShadowColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.chartTopProducts.ChartAreas.Add(chartArea3);
+            legend3.Name = "Legend1";
+            this.chartTopProducts.Legends.Add(legend3);
             this.chartTopProducts.Location = new System.Drawing.Point(41, 65);
             this.chartTopProducts.Name = "chartTopProducts";
             this.chartTopProducts.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.None;
@@ -441,66 +479,17 @@
         System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(194)))), ((int)(((byte)(231))))),
         System.Drawing.Color.FromArgb(((int)(((byte)(247)))), ((int)(((byte)(195)))), ((int)(((byte)(45))))),
         System.Drawing.Color.MediumPurple};
-            series5.BorderColor = System.Drawing.Color.DimGray;
-            series5.BorderWidth = 6;
-            series5.ChartArea = "ChartArea1";
-            series5.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Doughnut;
-            series5.Color = System.Drawing.Color.MediumPurple;
-            series5.Legend = "Legend1";
-            series5.Name = "Series1";
-            this.chartTopProducts.Series.Add(series5);
+            series3.BorderColor = System.Drawing.Color.DimGray;
+            series3.BorderWidth = 6;
+            series3.ChartArea = "ChartArea1";
+            series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Doughnut;
+            series3.Color = System.Drawing.Color.MediumPurple;
+            series3.Legend = "Legend1";
+            series3.Name = "Series1";
+            this.chartTopProducts.Series.Add(series3);
             this.chartTopProducts.Size = new System.Drawing.Size(293, 206);
             this.chartTopProducts.TabIndex = 1;
             this.chartTopProducts.Text = "chart2";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.ForeColor = System.Drawing.SystemColors.Control;
-            this.label5.Location = new System.Drawing.Point(62, 20);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(227, 25);
-            this.label5.TabIndex = 2;
-            this.label5.Text = "Top Sản phẩm bán chạy";
-            // 
-            // chart1
-            // 
-            this.chart1.BackColor = System.Drawing.Color.Transparent;
-            chartArea6.AxisX.Crossing = -1.7976931348623157E+308D;
-            chartArea6.AxisX.IsMarginVisible = false;
-            chartArea6.AxisY.IsMarginVisible = false;
-            chartArea6.BackColor = System.Drawing.Color.DimGray;
-            chartArea6.BackGradientStyle = System.Windows.Forms.DataVisualization.Charting.GradientStyle.LeftRight;
-            chartArea6.BackImageTransparentColor = System.Drawing.Color.Transparent;
-            chartArea6.BackSecondaryColor = System.Drawing.Color.DimGray;
-            chartArea6.Name = "ChartArea1";
-            chartArea6.ShadowColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.chart1.ChartAreas.Add(chartArea6);
-            legend6.Name = "Legend1";
-            this.chart1.Legends.Add(legend6);
-            this.chart1.Location = new System.Drawing.Point(41, 333);
-            this.chart1.Name = "chart1";
-            this.chart1.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.None;
-            this.chart1.PaletteCustomColors = new System.Drawing.Color[] {
-        System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192))))),
-        System.Drawing.Color.FromArgb(((int)(((byte)(137)))), ((int)(((byte)(137)))), ((int)(((byte)(255))))),
-        System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(127))))),
-        System.Drawing.Color.FromArgb(((int)(((byte)(189)))), ((int)(((byte)(189)))), ((int)(((byte)(189))))),
-        System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(194)))), ((int)(((byte)(231))))),
-        System.Drawing.Color.FromArgb(((int)(((byte)(247)))), ((int)(((byte)(195)))), ((int)(((byte)(45))))),
-        System.Drawing.Color.MediumPurple};
-            series6.BorderColor = System.Drawing.Color.DimGray;
-            series6.BorderWidth = 6;
-            series6.ChartArea = "ChartArea1";
-            series6.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Doughnut;
-            series6.Color = System.Drawing.Color.MediumPurple;
-            series6.Legend = "Legend1";
-            series6.Name = "Series1";
-            this.chart1.Series.Add(series6);
-            this.chart1.Size = new System.Drawing.Size(293, 206);
-            this.chart1.TabIndex = 1;
-            this.chart1.Text = "chart2";
             // 
             // label6
             // 
@@ -512,6 +501,17 @@
             this.label6.Size = new System.Drawing.Size(199, 25);
             this.label6.TabIndex = 2;
             this.label6.Text = "Top Sản Phẩm Bán Ít";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.ForeColor = System.Drawing.SystemColors.Control;
+            this.label5.Location = new System.Drawing.Point(62, 20);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(227, 25);
+            this.label5.TabIndex = 2;
+            this.label5.Text = "Top Sản phẩm bán chạy";
             // 
             // fStatistic
             // 
@@ -538,8 +538,8 @@
             this.panel3.ResumeLayout(false);
             this.panel6.ResumeLayout(false);
             this.panel6.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.chartBottomProducts)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chartTopProducts)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -573,7 +573,7 @@
         private System.Windows.Forms.Panel panel6;
         private System.Windows.Forms.DataVisualization.Charting.Chart chartTopProducts;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
+        private System.Windows.Forms.DataVisualization.Charting.Chart chartBottomProducts;
         private System.Windows.Forms.Label label6;
     }
 }

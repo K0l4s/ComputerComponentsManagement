@@ -499,10 +499,11 @@ CREATE FUNCTION FUNC_TOP5_PRODUCT(@Daystart DATE, @Dayend DATE)
 RETURNS TABLE
 AS
 RETURN
-    SELECT TOP 5 pd.productID, SUM(bd.number) AS totalSold 
+    SELECT TOP 5 pd.productID , p.productName , SUM(bd.number) AS totalSold 
     FROM BILL_DETAIL bd 
     INNER JOIN PRODUCT_DETAIL pd ON bd.productID = pd.productID 
     INNER JOIN BILL b ON bd.billID = b.billID
+	INNER JOIN PRODUCT p ON p.productID = pd.productID
     WHERE b.billExportTime BETWEEN @Daystart AND @Dayend
     GROUP BY pd.productID
     ORDER BY totalSold DESC;
@@ -512,10 +513,11 @@ CREATE FUNCTION FUNC_BOTTOM5_PRODUCT(@Daystart DATE, @Dayend DATE)
 RETURNS TABLE
 AS
 RETURN
-    SELECT TOP 5 pd.productID, pd.brandID, pd.typeID, SUM(bd.number) AS totalSold, b.billExportTime
+    SELECT TOP 5 pd.productID, pd.brandID, pd.typeID, p.productName , SUM(bd.number) AS totalSold, b.billExportTime
 	FROM BILL_DETAIL bd 
 	INNER JOIN PRODUCT_DETAIL pd ON bd.productID = pd.productID
 	INNER JOIN BILL b ON bd.billID = b.billID
+	INNER JOIN PRODUCT p ON p.productID = pd.productID
 	WHERE b.billExportTime BETWEEN @Daystart AND @Dayend
 	GROUP BY pd.productID, pd.brandID, pd.typeID, b.billExportTime
 	ORDER BY totalSold ASC;

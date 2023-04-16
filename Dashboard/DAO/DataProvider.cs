@@ -166,37 +166,36 @@ namespace Dashboard.DAO
         //Tra ve Datatable khi thuc thi ham
         public DataTable ExecuteFunction(string cmdFunction, CommandType ct, List<SqlParameter> parameters, ref string error)
         {
-            cmdFunction = "SELECT * FROM dbo.FUNC_TOP5_PRODUCT('04/09/2023 2:53:55 PM','04/16/2023 2:53:55 PM')";
-            
+            DataTable result =  new DataTable();
             error = "";
-            DataTable dt = new DataTable();
 
             using (SqlConnection conn = new SqlConnection(ConnStr))
             {
-                cmdFunction = "SELECT * FROM BILL";
-                SqlCommand cmd = new SqlCommand(cmdFunction, conn);
-                cmd.CommandType = ct;
-                //foreach (SqlParameter i in parameters)
-                //{
-                //    cmd.Parameters.Add(i);
-                //}
-
-                try
+                using (SqlCommand cmd = new SqlCommand(cmdFunction, conn))
                 {
-                    MessageBox.Show($"{cmd.CommandText}"); // SELECT * FROM dbo.FUNC_TOP5_PRODUCT(@Daystart, @Dayend)
-                    conn.Open();
-                    //"SELECT * FROM dbo.FUNC_TOP5_PRODUCT('04/09/2023 2:53:55 PM','04/16/2023 2:53:55 PM')";
-                    SqlDataAdapter adapter = new SqlDataAdapter(cmd);// Run in sql is true but got null in here
-                    adapter.Fill(dt);
-                    conn.Close();
-                }
-                catch (SqlException ex)
-                {
-                    error = ex.Message;
-                }
+                    cmd.CommandType = ct;
 
+                    foreach (SqlParameter i in parameters)
+                    {
+                        cmd.Parameters.Add(i);
+                    }
+
+                    try
+                    {
+                        //cmdFunction = "SELECT * FROM EMPLOYEE"; 
+                        conn.Open();
+                        SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+                        adapter.Fill(result);
+                        conn.Close();
+                    }
+                    catch (SqlException ex)
+                    {
+                        error = ex.Message;
+                    }
+                }
             }
-            return dt;
+
+            return result;
         }
 
         //Tra ve bool khi thuc hien procedure

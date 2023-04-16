@@ -43,7 +43,7 @@ namespace Dashboard
             return DataProvider.Instance.ExecuteFunction(strSQL, ct ,parameters, ref err);
         }
 
-        public DataTable GetTop5MinStock(DateTime begin, DateTime end, ref string err)
+        public DataTable GetTop5MinProduct(DateTime begin, DateTime end, ref string err)
         {
             strSQL = "SELECT * FROM dbo.FUNC_BOTTOM5_PRODUCT(@Daystart, @Dayend)";
             parameters = new List<SqlParameter>();

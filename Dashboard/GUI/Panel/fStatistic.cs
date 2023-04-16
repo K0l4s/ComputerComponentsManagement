@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Forms.DataVisualization.Charting;
 
 namespace Dashboard.GUI.Panel
 {
@@ -22,31 +23,11 @@ namespace Dashboard.GUI.Panel
         private void LoadData(DateTime begin, DateTime end)
         {
             string err = "";
-            //chartGrossRevenue.DataBind();
+            chartGrossRevenue.DataBind();
+            DrawDoughtTop5(begin, end);
+            DrawDoughBottom5(begin, end);
             //chartTopProducts.DataBind();
 
-
-            //revenue = new Revenue();
-            //dtCategory = revenue.getRevenue(begin, end, ref err);
-            //chartGrossRevenue.DataSource = dtCategory;
-            //chartGrossRevenue.Series["Series1"].XValueMember = "dateOfBill";
-            //chartGrossRevenue.Series["Series1"].YValueMembers = "total";
-
-            //revenue = new Revenue();
-            charData= StatisticsDAO.Instance.GetTop5Product(begin, end, ref err);
-            chartTopProducts.DataSource = charData;
-            MessageBox.Show(err);
-            chartTopProducts.Series["Series1"].XValueMember = "nameBook";
-            chartTopProducts.Series["Series1"].YValueMembers = "amountOutput";
-
-
-            //revenue = new Revenue();
-            //dtCategory = revenue.getTop5MinStock();
-            //chartMinStock.DataSource = dtCategory;
-            //chartMinStock.Series["Series1"].XValueMember = "nameBook";
-            //chartMinStock.Series["Series1"].YValueMembers = "amount";
-
-            //revenue = new Revenue();
             int totalrevenue = StatisticsDAO.Instance.GetTotalRevenue(begin, end, ref err);
             lblTotalRevenue.Text = $"{totalrevenue}đ";
 
@@ -55,6 +36,56 @@ namespace Dashboard.GUI.Panel
 
             int totalProduct = StatisticsDAO.Instance.GetTotalProduct(begin, end, ref err);
             lblAmountComponent.Text = $"{totalProduct}";
+
+        }
+
+        private void DrawDoughtTop5(DateTime begin, DateTime end)
+        {
+            String err = "";
+            chartTopProducts.Series.Clear();
+            DataTable dataTable = StatisticsDAO.Instance.GetTop5Product(begin, end, ref err);
+            //MessageBox.Show($"{charData.Rows[0]["productID"]}");
+
+            int totalSold = 0;
+            foreach (DataRow row in dataTable.Rows)
+            {
+                totalSold += Convert.ToInt32(row["totalSold"]);
+            }
+            chartTopProducts.Series.Clear(); // Xóa tất cả các series trên biểu đồ
+            Series series1 = new Series("Series1");
+            series1.ChartType = SeriesChartType.Doughnut;
+            chartTopProducts.Series.Add(series1);
+            foreach (DataRow row in dataTable.Rows)
+            {
+                double percentage = Convert.ToDouble(row["totalSold"]) / totalSold * 100;
+                chartTopProducts.Series["Series1"].Points.AddXY(row["productName"], percentage);
+            }
+            chartTopProducts.DataBind();
+
+
+        }
+
+        private void DrawDoughBottom5(DateTime begin, DateTime end)
+        {
+            string err = "";
+            chartBottomProducts.Series.Clear();
+            DataTable dataTable = StatisticsDAO.Instance.GetTop5MinProduct(begin, end, ref err);
+
+            int totalSold = 0;
+            foreach (DataRow row in dataTable.Rows)
+            {
+                totalSold += Convert.ToInt32(row["totalSold"]);
+            }
+            chartBottomProducts.Series.Clear(); // Xóa tất cả các series trên biểu đồ
+            Series series1 = new Series("Series2");
+            series1.ChartType = SeriesChartType.Doughnut;
+            chartBottomProducts.Series.Add(series1);
+            foreach (DataRow row in dataTable.Rows)
+            {
+                double percentage = Convert.ToDouble(row["totalSold"]) / totalSold * 100;
+                chartBottomProducts.Series["Series2"].Points.AddXY(row["productName"], percentage);
+            }
+            chartBottomProducts.DataBind();
 
         }
 
