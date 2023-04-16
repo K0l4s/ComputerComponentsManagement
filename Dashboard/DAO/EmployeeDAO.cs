@@ -90,12 +90,12 @@ namespace Dashboard.DAO
             return null;
         }
 
-        public DataTable getDataEmployee()
+        public DataTable GetDataEmployee()
         {
             return DataProvider.Instance.LoadData(nameView, CommandType.Text);
         }
 
-        public bool addNewEmployee( EmployeeDTO employeeDTO ,ref string err)
+        public bool AddNewEmployee( EmployeeDTO employeeDTO ,ref string err)
         {
             strSQL = "PROD_InsertEmployee";
             this.employeeDTO = employeeDTO ;
@@ -113,16 +113,7 @@ namespace Dashboard.DAO
             parameter = new SqlParameter("@wage", employeeDTO.Wage);
             parameters.Add(parameter);
 
-            byte[] employeeImageBytes = employeeDTO.EmployeeImage;
-            if (employeeImageBytes != null)
-            {
-                parameter = new SqlParameter("@employeeImage", SqlDbType.VarBinary, employeeImageBytes.Length);
-                parameter.Value = employeeImageBytes;
-            }
-            else
-            {
-                parameter = new SqlParameter("@employeeImage", DBNull.Value);
-            }
+            parameter = new SqlParameter("@employeeImage", employeeDTO.EmployeeImage);
             parameters.Add(parameter);
 
             parameter = new SqlParameter("@phoneNumber", employeeDTO.PhoneNumber);
@@ -137,7 +128,67 @@ namespace Dashboard.DAO
             parameter = new SqlParameter("@commissionRate", employeeDTO.CommissionRate);
             parameters.Add(parameter);
 
-            parameter = new SqlParameter("@dateOfBirth", employeeDTO.DateOfBirth);
+            parameter = new SqlParameter("@dateOfBirth", employeeDTO.DateOfBirth.Date);
+            parameters.Add(parameter);
+
+            parameter = new SqlParameter("@age", employeeDTO.Age);
+            parameters.Add(parameter);
+
+            parameter = new SqlParameter("@authorName", employeeDTO.AuthorName);
+            parameters.Add(parameter);
+
+            return DataProvider.Instance.ExecuteProcedure(strSQL, CommandType.StoredProcedure, parameters, ref err);
+        }
+
+        public bool DeleteEmployee(EmployeeDTO employeeDTO, ref string err)
+        {
+            strSQL = "PROD_DeleteEmployee";
+            this.employeeDTO = employeeDTO;
+            parameters = new List<SqlParameter>();
+
+            SqlParameter parameter = new SqlParameter("@employeeID", employeeDTO.EmployeeID);
+            parameters.Add(parameter);
+
+            return DataProvider.Instance.ExecuteProcedure(strSQL, CommandType.StoredProcedure, parameters, ref err);
+        }
+
+        public bool UpdateEmployee(EmployeeDTO employeeDTO, ref string err)
+        {
+            strSQL = "PROD_UpdateEmployee";
+            this.employeeDTO = employeeDTO;
+            parameters = new List<SqlParameter>();
+
+            SqlParameter parameter = new SqlParameter("@employeeID", employeeDTO.EmployeeID);
+            parameters.Add(parameter);
+
+            parameter = new SqlParameter("@fullName", employeeDTO.FullName);
+            parameters.Add(parameter);
+
+            parameter = new SqlParameter("@sex", employeeDTO.Sex);
+            parameters.Add(parameter);
+
+            parameter = new SqlParameter("@formatName", employeeDTO.FormatName);
+            parameters.Add(parameter);
+
+            parameter = new SqlParameter("@wage", employeeDTO.Wage);
+            parameters.Add(parameter);
+
+            parameter = new SqlParameter("@employeeImage", employeeDTO.EmployeeImage);
+            parameters.Add(parameter);
+
+            parameter = new SqlParameter("@phoneNumber", employeeDTO.PhoneNumber);
+            parameters.Add(parameter);
+
+            parameter = new SqlParameter("@address", employeeDTO.Address);
+            parameters.Add(parameter);
+
+            parameter = new SqlParameter("@citizenID", employeeDTO.CitizenID);
+            parameters.Add(parameter);
+
+            parameter = new SqlParameter("@commissionRate", employeeDTO.CommissionRate);
+            parameters.Add(parameter);
+
+            parameter = new SqlParameter("@dateOfBirth", employeeDTO.DateOfBirth.Date);
             parameters.Add(parameter);
 
             parameter = new SqlParameter("@age", employeeDTO.Age);

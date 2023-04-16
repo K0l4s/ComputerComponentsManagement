@@ -34,7 +34,30 @@
             this.panel7 = new System.Windows.Forms.Panel();
             this.gvEmployee = new System.Windows.Forms.DataGridView();
             this.panel6 = new System.Windows.Forms.Panel();
-            this.lbIdEmployee = new System.Windows.Forms.Label();
+            this.lbEmployeeID = new System.Windows.Forms.Label();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.cbAuthorName = new System.Windows.Forms.ComboBox();
+            this.datepkDateOfBirth = new System.Windows.Forms.DateTimePicker();
+            this.label15 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.txtPhoneNumber = new System.Windows.Forms.TextBox();
+            this.label12 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.lbStatusJob = new System.Windows.Forms.Label();
+            this.lbFormatName = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.txtCommissionRate = new System.Windows.Forms.TextBox();
+            this.txtAge = new System.Windows.Forms.TextBox();
+            this.txtSex = new System.Windows.Forms.TextBox();
+            this.txtCitizenID = new System.Windows.Forms.TextBox();
+            this.txtAddress = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.txtFullName = new System.Windows.Forms.TextBox();
             this.picEmployeeImage = new System.Windows.Forms.PictureBox();
             this.label6 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
@@ -51,38 +74,16 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.label20 = new System.Windows.Forms.Label();
             this.label21 = new System.Windows.Forms.Label();
-            this.lbWage = new System.Windows.Forms.Label();
             this.label19 = new System.Windows.Forms.Label();
             this.label18 = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
-            this.txtFullName = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.txtAddress = new System.Windows.Forms.TextBox();
-            this.txtCitizenID = new System.Windows.Forms.TextBox();
-            this.txtSex = new System.Windows.Forms.TextBox();
-            this.txtAge = new System.Windows.Forms.TextBox();
-            this.txtCommissionRate = new System.Windows.Forms.TextBox();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.lbFormatName = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label12 = new System.Windows.Forms.Label();
-            this.txtPhoneNumber = new System.Windows.Forms.TextBox();
-            this.label11 = new System.Windows.Forms.Label();
-            this.label13 = new System.Windows.Forms.Label();
-            this.label15 = new System.Windows.Forms.Label();
-            this.datepkDateOfBirth = new System.Windows.Forms.DateTimePicker();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.lbStatusJob = new System.Windows.Forms.Label();
-            this.lbAuthorName = new System.Windows.Forms.Label();
+            this.txtWage = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel7.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gvEmployee)).BeginInit();
             this.panel6.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picEmployeeImage)).BeginInit();
             this.panel2.SuspendLayout();
             this.panel5.SuspendLayout();
@@ -90,7 +91,6 @@
             this.panel4.SuspendLayout();
             this.panel3.SuspendLayout();
             this.groupBox2.SuspendLayout();
-            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -146,7 +146,7 @@
             // panel6
             // 
             this.panel6.BackColor = System.Drawing.Color.Transparent;
-            this.panel6.Controls.Add(this.lbIdEmployee);
+            this.panel6.Controls.Add(this.lbEmployeeID);
             this.panel6.Controls.Add(this.groupBox1);
             this.panel6.Controls.Add(this.picEmployeeImage);
             this.panel6.Controls.Add(this.label6);
@@ -158,15 +158,253 @@
             this.panel6.Size = new System.Drawing.Size(618, 278);
             this.panel6.TabIndex = 19;
             // 
-            // lbIdEmployee
+            // lbEmployeeID
             // 
-            this.lbIdEmployee.AutoSize = true;
-            this.lbIdEmployee.ForeColor = System.Drawing.SystemColors.Control;
-            this.lbIdEmployee.Location = new System.Drawing.Point(9, 131);
-            this.lbIdEmployee.Name = "lbIdEmployee";
-            this.lbIdEmployee.Size = new System.Drawing.Size(13, 13);
-            this.lbIdEmployee.TabIndex = 24;
-            this.lbIdEmployee.Text = "1";
+            this.lbEmployeeID.AutoSize = true;
+            this.lbEmployeeID.ForeColor = System.Drawing.SystemColors.Control;
+            this.lbEmployeeID.Location = new System.Drawing.Point(9, 131);
+            this.lbEmployeeID.Name = "lbEmployeeID";
+            this.lbEmployeeID.Size = new System.Drawing.Size(13, 13);
+            this.lbEmployeeID.TabIndex = 24;
+            this.lbEmployeeID.Text = "1";
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.groupBox1.Controls.Add(this.cbAuthorName);
+            this.groupBox1.Controls.Add(this.datepkDateOfBirth);
+            this.groupBox1.Controls.Add(this.label15);
+            this.groupBox1.Controls.Add(this.label13);
+            this.groupBox1.Controls.Add(this.label11);
+            this.groupBox1.Controls.Add(this.txtPhoneNumber);
+            this.groupBox1.Controls.Add(this.label12);
+            this.groupBox1.Controls.Add(this.label2);
+            this.groupBox1.Controls.Add(this.label8);
+            this.groupBox1.Controls.Add(this.lbStatusJob);
+            this.groupBox1.Controls.Add(this.lbFormatName);
+            this.groupBox1.Controls.Add(this.label5);
+            this.groupBox1.Controls.Add(this.label3);
+            this.groupBox1.Controls.Add(this.label10);
+            this.groupBox1.Controls.Add(this.label7);
+            this.groupBox1.Controls.Add(this.txtCommissionRate);
+            this.groupBox1.Controls.Add(this.txtAge);
+            this.groupBox1.Controls.Add(this.txtSex);
+            this.groupBox1.Controls.Add(this.txtCitizenID);
+            this.groupBox1.Controls.Add(this.txtAddress);
+            this.groupBox1.Controls.Add(this.label1);
+            this.groupBox1.Controls.Add(this.txtFullName);
+            this.groupBox1.ForeColor = System.Drawing.SystemColors.Control;
+            this.groupBox1.Location = new System.Drawing.Point(126, 15);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(465, 226);
+            this.groupBox1.TabIndex = 20;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Thông Tin Nhân Viên";
+            // 
+            // cbAuthorName
+            // 
+            this.cbAuthorName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbAuthorName.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
+            this.cbAuthorName.FormattingEnabled = true;
+            this.cbAuthorName.Items.AddRange(new object[] {
+            "Manager",
+            "Cashier"});
+            this.cbAuthorName.Location = new System.Drawing.Point(99, 180);
+            this.cbAuthorName.Name = "cbAuthorName";
+            this.cbAuthorName.Size = new System.Drawing.Size(85, 25);
+            this.cbAuthorName.TabIndex = 19;
+            // 
+            // datepkDateOfBirth
+            // 
+            this.datepkDateOfBirth.CustomFormat = "dd/MM/yyyy";
+            this.datepkDateOfBirth.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.datepkDateOfBirth.Location = new System.Drawing.Point(345, 23);
+            this.datepkDateOfBirth.Name = "datepkDateOfBirth";
+            this.datepkDateOfBirth.Size = new System.Drawing.Size(86, 20);
+            this.datepkDateOfBirth.TabIndex = 18;
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.ForeColor = System.Drawing.SystemColors.Control;
+            this.label15.Location = new System.Drawing.Point(283, 56);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(28, 13);
+            this.label15.TabIndex = 9;
+            this.label15.Text = "Tuổi";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.ForeColor = System.Drawing.SystemColors.Control;
+            this.label13.Location = new System.Drawing.Point(133, 82);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(51, 13);
+            this.label13.TabIndex = 9;
+            this.label13.Text = "Giới Tính";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(6, 53);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(85, 13);
+            this.label11.TabIndex = 9;
+            this.label11.Text = "CommissionRate";
+            // 
+            // txtPhoneNumber
+            // 
+            this.txtPhoneNumber.Location = new System.Drawing.Point(190, 23);
+            this.txtPhoneNumber.Name = "txtPhoneNumber";
+            this.txtPhoneNumber.Size = new System.Drawing.Size(85, 20);
+            this.txtPhoneNumber.TabIndex = 8;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.ForeColor = System.Drawing.SystemColors.Control;
+            this.label12.Location = new System.Drawing.Point(283, 26);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(56, 13);
+            this.label12.TabIndex = 10;
+            this.label12.Text = "Ngày Sinh";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.ForeColor = System.Drawing.SystemColors.Control;
+            this.label2.Location = new System.Drawing.Point(161, 26);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(23, 13);
+            this.label2.TabIndex = 17;
+            this.label2.Text = "Sdt";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.ForeColor = System.Drawing.SystemColors.Control;
+            this.label8.Location = new System.Drawing.Point(283, 85);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(41, 13);
+            this.label8.TabIndex = 11;
+            this.label8.Text = "Địa Chỉ";
+            // 
+            // lbStatusJob
+            // 
+            this.lbStatusJob.AutoSize = true;
+            this.lbStatusJob.Font = new System.Drawing.Font("Microsoft Uighur", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbStatusJob.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.lbStatusJob.Location = new System.Drawing.Point(99, 145);
+            this.lbStatusJob.Margin = new System.Windows.Forms.Padding(0);
+            this.lbStatusJob.Name = "lbStatusJob";
+            this.lbStatusJob.Size = new System.Drawing.Size(49, 25);
+            this.lbStatusJob.TabIndex = 12;
+            this.lbStatusJob.Text = "Active";
+            // 
+            // lbFormatName
+            // 
+            this.lbFormatName.AutoSize = true;
+            this.lbFormatName.Font = new System.Drawing.Font("Microsoft Uighur", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbFormatName.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.lbFormatName.Location = new System.Drawing.Point(99, 111);
+            this.lbFormatName.Margin = new System.Windows.Forms.Padding(0);
+            this.lbFormatName.Name = "lbFormatName";
+            this.lbFormatName.Size = new System.Drawing.Size(70, 25);
+            this.lbFormatName.TabIndex = 12;
+            this.lbFormatName.Text = "Full-Time";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.label5.Location = new System.Drawing.Point(6, 116);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(80, 13);
+            this.label5.TabIndex = 12;
+            this.label5.Text = "Loại Nhân Viên";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.label3.Location = new System.Drawing.Point(6, 186);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(41, 13);
+            this.label3.TabIndex = 14;
+            this.label3.Text = "Vai Trò";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.label10.Location = new System.Drawing.Point(6, 150);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(59, 13);
+            this.label10.TabIndex = 14;
+            this.label10.Text = "Tình Trạng";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.ForeColor = System.Drawing.SystemColors.Control;
+            this.label7.Location = new System.Drawing.Point(148, 56);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(36, 13);
+            this.label7.TabIndex = 15;
+            this.label7.Text = "CCCD";
+            // 
+            // txtCommissionRate
+            // 
+            this.txtCommissionRate.Location = new System.Drawing.Point(9, 80);
+            this.txtCommissionRate.Name = "txtCommissionRate";
+            this.txtCommissionRate.Size = new System.Drawing.Size(117, 20);
+            this.txtCommissionRate.TabIndex = 3;
+            // 
+            // txtAge
+            // 
+            this.txtAge.Location = new System.Drawing.Point(345, 56);
+            this.txtAge.Name = "txtAge";
+            this.txtAge.Size = new System.Drawing.Size(85, 20);
+            this.txtAge.TabIndex = 4;
+            // 
+            // txtSex
+            // 
+            this.txtSex.Location = new System.Drawing.Point(190, 82);
+            this.txtSex.Name = "txtSex";
+            this.txtSex.Size = new System.Drawing.Size(85, 20);
+            this.txtSex.TabIndex = 4;
+            // 
+            // txtCitizenID
+            // 
+            this.txtCitizenID.Location = new System.Drawing.Point(190, 53);
+            this.txtCitizenID.Name = "txtCitizenID";
+            this.txtCitizenID.Size = new System.Drawing.Size(85, 20);
+            this.txtCitizenID.TabIndex = 5;
+            // 
+            // txtAddress
+            // 
+            this.txtAddress.Location = new System.Drawing.Point(286, 110);
+            this.txtAddress.Multiline = true;
+            this.txtAddress.Name = "txtAddress";
+            this.txtAddress.Size = new System.Drawing.Size(159, 70);
+            this.txtAddress.TabIndex = 7;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(6, 26);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(26, 13);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "Tên";
+            // 
+            // txtFullName
+            // 
+            this.txtFullName.Location = new System.Drawing.Point(38, 23);
+            this.txtFullName.Name = "txtFullName";
+            this.txtFullName.Size = new System.Drawing.Size(105, 20);
+            this.txtFullName.TabIndex = 0;
             // 
             // picEmployeeImage
             // 
@@ -174,8 +412,10 @@
             this.picEmployeeImage.Location = new System.Drawing.Point(9, 15);
             this.picEmployeeImage.Name = "picEmployeeImage";
             this.picEmployeeImage.Size = new System.Drawing.Size(108, 76);
+            this.picEmployeeImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.picEmployeeImage.TabIndex = 19;
             this.picEmployeeImage.TabStop = false;
+            this.picEmployeeImage.Click += new System.EventHandler(this.picEmployeeImage_Click);
             // 
             // label6
             // 
@@ -315,6 +555,7 @@
             this.btnSearch.Size = new System.Drawing.Size(37, 41);
             this.btnSearch.TabIndex = 1;
             this.btnSearch.UseVisualStyleBackColor = false;
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
             // panel3
             // 
@@ -328,9 +569,9 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.txtWage);
             this.groupBox2.Controls.Add(this.label20);
             this.groupBox2.Controls.Add(this.label21);
-            this.groupBox2.Controls.Add(this.lbWage);
             this.groupBox2.Controls.Add(this.label19);
             this.groupBox2.Controls.Add(this.label18);
             this.groupBox2.Controls.Add(this.label17);
@@ -350,9 +591,9 @@
             this.label20.ForeColor = System.Drawing.SystemColors.Control;
             this.label20.Location = new System.Drawing.Point(184, 116);
             this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(60, 26);
+            this.label20.Size = new System.Drawing.Size(24, 26);
             this.label20.TabIndex = 24;
-            this.label20.Text = "9000";
+            this.label20.Text = "0";
             // 
             // label21
             // 
@@ -364,17 +605,6 @@
             this.label21.Size = new System.Drawing.Size(24, 26);
             this.label21.TabIndex = 24;
             this.label21.Text = "0";
-            // 
-            // lbWage
-            // 
-            this.lbWage.AutoSize = true;
-            this.lbWage.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.25F);
-            this.lbWage.ForeColor = System.Drawing.SystemColors.Control;
-            this.lbWage.Location = new System.Drawing.Point(184, 32);
-            this.lbWage.Name = "lbWage";
-            this.lbWage.Size = new System.Drawing.Size(60, 26);
-            this.lbWage.TabIndex = 24;
-            this.lbWage.Text = "9000";
             // 
             // label19
             // 
@@ -406,242 +636,12 @@
             this.label17.TabIndex = 24;
             this.label17.Text = "Mức Lương";
             // 
-            // txtFullName
+            // txtWage
             // 
-            this.txtFullName.Location = new System.Drawing.Point(38, 23);
-            this.txtFullName.Name = "txtFullName";
-            this.txtFullName.Size = new System.Drawing.Size(105, 20);
-            this.txtFullName.TabIndex = 0;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(6, 26);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(26, 13);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Tên";
-            // 
-            // txtAddress
-            // 
-            this.txtAddress.Location = new System.Drawing.Point(286, 110);
-            this.txtAddress.Multiline = true;
-            this.txtAddress.Name = "txtAddress";
-            this.txtAddress.Size = new System.Drawing.Size(159, 70);
-            this.txtAddress.TabIndex = 7;
-            // 
-            // txtCitizenID
-            // 
-            this.txtCitizenID.Location = new System.Drawing.Point(190, 53);
-            this.txtCitizenID.Name = "txtCitizenID";
-            this.txtCitizenID.Size = new System.Drawing.Size(85, 20);
-            this.txtCitizenID.TabIndex = 5;
-            // 
-            // txtSex
-            // 
-            this.txtSex.Location = new System.Drawing.Point(190, 82);
-            this.txtSex.Name = "txtSex";
-            this.txtSex.Size = new System.Drawing.Size(85, 20);
-            this.txtSex.TabIndex = 4;
-            // 
-            // txtAge
-            // 
-            this.txtAge.Location = new System.Drawing.Point(345, 56);
-            this.txtAge.Name = "txtAge";
-            this.txtAge.Size = new System.Drawing.Size(85, 20);
-            this.txtAge.TabIndex = 4;
-            // 
-            // txtCommissionRate
-            // 
-            this.txtCommissionRate.Location = new System.Drawing.Point(9, 80);
-            this.txtCommissionRate.Name = "txtCommissionRate";
-            this.txtCommissionRate.Size = new System.Drawing.Size(117, 20);
-            this.txtCommissionRate.TabIndex = 3;
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.ForeColor = System.Drawing.SystemColors.Control;
-            this.label7.Location = new System.Drawing.Point(148, 56);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(36, 13);
-            this.label7.TabIndex = 15;
-            this.label7.Text = "CCCD";
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.label10.Location = new System.Drawing.Point(6, 150);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(59, 13);
-            this.label10.TabIndex = 14;
-            this.label10.Text = "Tình Trạng";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.label3.Location = new System.Drawing.Point(6, 186);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(41, 13);
-            this.label3.TabIndex = 14;
-            this.label3.Text = "Vai Trò";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.label5.Location = new System.Drawing.Point(6, 116);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(80, 13);
-            this.label5.TabIndex = 12;
-            this.label5.Text = "Loại Nhân Viên";
-            // 
-            // lbFormatName
-            // 
-            this.lbFormatName.AutoSize = true;
-            this.lbFormatName.Font = new System.Drawing.Font("Microsoft Uighur", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbFormatName.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.lbFormatName.Location = new System.Drawing.Point(99, 111);
-            this.lbFormatName.Margin = new System.Windows.Forms.Padding(0);
-            this.lbFormatName.Name = "lbFormatName";
-            this.lbFormatName.Size = new System.Drawing.Size(70, 25);
-            this.lbFormatName.TabIndex = 12;
-            this.lbFormatName.Text = "Full-Time";
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.ForeColor = System.Drawing.SystemColors.Control;
-            this.label8.Location = new System.Drawing.Point(283, 85);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(41, 13);
-            this.label8.TabIndex = 11;
-            this.label8.Text = "Địa Chỉ";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.ForeColor = System.Drawing.SystemColors.Control;
-            this.label2.Location = new System.Drawing.Point(161, 26);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(23, 13);
-            this.label2.TabIndex = 17;
-            this.label2.Text = "Sdt";
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.ForeColor = System.Drawing.SystemColors.Control;
-            this.label12.Location = new System.Drawing.Point(283, 26);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(56, 13);
-            this.label12.TabIndex = 10;
-            this.label12.Text = "Ngày Sinh";
-            // 
-            // txtPhoneNumber
-            // 
-            this.txtPhoneNumber.Location = new System.Drawing.Point(190, 23);
-            this.txtPhoneNumber.Name = "txtPhoneNumber";
-            this.txtPhoneNumber.Size = new System.Drawing.Size(85, 20);
-            this.txtPhoneNumber.TabIndex = 8;
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(6, 53);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(85, 13);
-            this.label11.TabIndex = 9;
-            this.label11.Text = "CommissionRate";
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.ForeColor = System.Drawing.SystemColors.Control;
-            this.label13.Location = new System.Drawing.Point(133, 82);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(51, 13);
-            this.label13.TabIndex = 9;
-            this.label13.Text = "Giới Tính";
-            // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.ForeColor = System.Drawing.SystemColors.Control;
-            this.label15.Location = new System.Drawing.Point(283, 56);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(28, 13);
-            this.label15.TabIndex = 9;
-            this.label15.Text = "Tuổi";
-            // 
-            // datepkDateOfBirth
-            // 
-            this.datepkDateOfBirth.CustomFormat = "dd/MM/yyyy";
-            this.datepkDateOfBirth.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.datepkDateOfBirth.Location = new System.Drawing.Point(345, 23);
-            this.datepkDateOfBirth.Name = "datepkDateOfBirth";
-            this.datepkDateOfBirth.Size = new System.Drawing.Size(86, 20);
-            this.datepkDateOfBirth.TabIndex = 18;
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.groupBox1.Controls.Add(this.datepkDateOfBirth);
-            this.groupBox1.Controls.Add(this.label15);
-            this.groupBox1.Controls.Add(this.label13);
-            this.groupBox1.Controls.Add(this.label11);
-            this.groupBox1.Controls.Add(this.txtPhoneNumber);
-            this.groupBox1.Controls.Add(this.label12);
-            this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Controls.Add(this.label8);
-            this.groupBox1.Controls.Add(this.lbAuthorName);
-            this.groupBox1.Controls.Add(this.lbStatusJob);
-            this.groupBox1.Controls.Add(this.lbFormatName);
-            this.groupBox1.Controls.Add(this.label5);
-            this.groupBox1.Controls.Add(this.label3);
-            this.groupBox1.Controls.Add(this.label10);
-            this.groupBox1.Controls.Add(this.label7);
-            this.groupBox1.Controls.Add(this.txtCommissionRate);
-            this.groupBox1.Controls.Add(this.txtAge);
-            this.groupBox1.Controls.Add(this.txtSex);
-            this.groupBox1.Controls.Add(this.txtCitizenID);
-            this.groupBox1.Controls.Add(this.txtAddress);
-            this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Controls.Add(this.txtFullName);
-            this.groupBox1.ForeColor = System.Drawing.SystemColors.Control;
-            this.groupBox1.Location = new System.Drawing.Point(126, 15);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(465, 226);
-            this.groupBox1.TabIndex = 20;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Thông Tin Nhân Viên";
-            // 
-            // lbStatusJob
-            // 
-            this.lbStatusJob.AutoSize = true;
-            this.lbStatusJob.Font = new System.Drawing.Font("Microsoft Uighur", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbStatusJob.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.lbStatusJob.Location = new System.Drawing.Point(99, 145);
-            this.lbStatusJob.Margin = new System.Windows.Forms.Padding(0);
-            this.lbStatusJob.Name = "lbStatusJob";
-            this.lbStatusJob.Size = new System.Drawing.Size(49, 25);
-            this.lbStatusJob.TabIndex = 12;
-            this.lbStatusJob.Text = "Active";
-            // 
-            // lbAuthorName
-            // 
-            this.lbAuthorName.AutoSize = true;
-            this.lbAuthorName.Font = new System.Drawing.Font("Microsoft Uighur", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbAuthorName.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.lbAuthorName.Location = new System.Drawing.Point(99, 181);
-            this.lbAuthorName.Margin = new System.Windows.Forms.Padding(0);
-            this.lbAuthorName.Name = "lbAuthorName";
-            this.lbAuthorName.Size = new System.Drawing.Size(63, 25);
-            this.lbAuthorName.TabIndex = 12;
-            this.lbAuthorName.Text = "Manager";
+            this.txtWage.Location = new System.Drawing.Point(189, 39);
+            this.txtWage.Name = "txtWage";
+            this.txtWage.Size = new System.Drawing.Size(78, 23);
+            this.txtWage.TabIndex = 25;
             // 
             // fEmployee
             // 
@@ -661,6 +661,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.gvEmployee)).EndInit();
             this.panel6.ResumeLayout(false);
             this.panel6.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picEmployeeImage)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel5.ResumeLayout(false);
@@ -669,8 +671,6 @@
             this.panel3.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -687,13 +687,12 @@
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.Label label21;
-        private System.Windows.Forms.Label lbWage;
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.Panel panel6;
         private System.Windows.Forms.Panel panel7;
-        private System.Windows.Forms.Label lbIdEmployee;
+        private System.Windows.Forms.Label lbEmployeeID;
         private System.Windows.Forms.PictureBox picEmployeeImage;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label9;
@@ -712,7 +711,6 @@
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Label lbAuthorName;
         private System.Windows.Forms.Label lbStatusJob;
         private System.Windows.Forms.Label lbFormatName;
         private System.Windows.Forms.Label label5;
@@ -726,5 +724,7 @@
         private System.Windows.Forms.TextBox txtAddress;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtFullName;
+        private System.Windows.Forms.ComboBox cbAuthorName;
+        private System.Windows.Forms.TextBox txtWage;
     }
 }
