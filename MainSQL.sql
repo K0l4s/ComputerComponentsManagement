@@ -505,7 +505,7 @@ RETURN
     INNER JOIN BILL b ON bd.billID = b.billID
 	INNER JOIN PRODUCT p ON p.productID = pd.productID
     WHERE b.billExportTime BETWEEN @Daystart AND @Dayend
-    GROUP BY pd.productID
+    GROUP BY pd.productID ,p.productName
     ORDER BY totalSold DESC;
 GO
 
@@ -519,7 +519,7 @@ RETURN
 	INNER JOIN BILL b ON bd.billID = b.billID
 	INNER JOIN PRODUCT p ON p.productID = pd.productID
 	WHERE b.billExportTime BETWEEN @Daystart AND @Dayend
-	GROUP BY pd.productID, pd.brandID, pd.typeID, b.billExportTime
+	GROUP BY pd.productID, pd.brandID, pd.typeID, b.billExportTime,p.productName
 	ORDER BY totalSold ASC;
 GO
 
