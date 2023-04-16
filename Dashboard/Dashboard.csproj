@@ -54,16 +54,13 @@
     <Compile Include="DAO\DataProvider.cs" />
     <Compile Include="DAO\VoucherDAO.cs" />
     <Compile Include="DAO\StatisticsDAO.cs" />
-<<<<<<< HEAD
     <Compile Include="GUI\Panel\Product.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="GUI\Panel\Product.Designer.cs">
       <DependentUpon>Product.cs</DependentUpon>
     </Compile>
-=======
     <Compile Include="Utilities\Upload.cs" />
->>>>>>> 4d3bb0e9f84043c09afafc2909a73ca013ed8485
     <Compile Include="Utilities\DataConvert.cs" />
     <Compile Include="DTO\EmployeeDTO.cs" />
     <Compile Include="DTO\VoucherDTO.cs" />
@@ -168,6 +165,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\Panel\Voucher\Voucher.resx">
       <DependentUpon>Voucher.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
