@@ -35,7 +35,7 @@ namespace Dashboard
         private Dashboard()
         {
             InitializeComponent();
-            Dashboard_Load();
+            
         }
 
         private void Dashboard_Load()
@@ -110,7 +110,7 @@ namespace Dashboard
 
         private void btnProduct_Click(object sender, EventArgs e)
         {
-            btnClick(new fProduct(), btnProduct);
+            btnClick(new Product(), btnProduct);
         }
 
         private void btnStatistic_Click(object sender, EventArgs e)
@@ -135,7 +135,7 @@ namespace Dashboard
 
         private void Dashboard_Load(object sender, EventArgs e)
         {
-
+            Dashboard_Load();
         }
     }
 }
