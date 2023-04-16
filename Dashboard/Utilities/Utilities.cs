@@ -15,6 +15,7 @@ namespace Dashboard
 {
     public class Utilities
     {
+        public List<string> ListComboxItems { get; set; }
         private List<Control> Controls { get; set; }
         private DataGridView DataGV { get; set; }
 
@@ -35,6 +36,14 @@ namespace Dashboard
                 if (control is ComboBox)
                 {
                     (control as ComboBox).SelectedIndex = -1;
+                }
+                if (control is PictureBox)
+                {
+                    (control as PictureBox).Image = null;
+                }
+                if (control is DateTimePicker)
+                {
+                    (control as DateTimePicker).Value = DateTime.Now;
                 }
             }
         }
@@ -89,20 +98,33 @@ namespace Dashboard
                     }
                     else if (Controls[i] is PictureBox)
                     {
-                        byte[] value = DataGV.Rows[selectedRowIndex].Cells[i].Value as byte[];
-                        if (value != null && value.Length > 0)
+                        string nameImage = DataGV.Rows[selectedRowIndex].Cells[i].Value as string;
+                        string imagePath = Upload.GetFullImgPath(nameImage);
+                        if (File.Exists(imagePath))
                         {
-                            using (MemoryStream ms = new MemoryStream(value))
-                            {
-                                ((PictureBox)Controls[i]).Image = Image.FromStream(ms);
-                            }
+                            ((PictureBox)Controls[i]).ImageLocation = imagePath;
                         }
                     }
-                    Controls[i].Text = DataGV.Rows[selectedRowIndex].Cells[i].Value?.ToString().Trim();
+                    else if (Controls[i] is ComboBox)
+                    {
+                        if (this.ListComboxItems != null)
+                        {
+                            string selectedvalue = DataGV.Rows[selectedRowIndex].Cells[i].Value?.ToString().Trim();
+                            (Controls[i] as ComboBox).DataSource = ListComboxItems;
+                            int index = ListComboxItems.IndexOf(selectedvalue);
+                            (Controls[i] as ComboBox).SelectedIndex = index;
+                        }
+                    }
+                    else
+                    {
+                        Controls[i].Text = DataGV.Rows[selectedRowIndex].Cells[i].Value?.ToString().Trim();
+
+                    }
                 }
             }
             catch
             {
+                SetNullTextBox();
                 MessageBox.Show("Thao tác quá nhanh, vui lòng thực hiện lại!!!!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
@@ -127,27 +149,29 @@ namespace Dashboard
                 {
                     // Get the control that matches the property name
                     Control control = Controls.FirstOrDefault(c => c.Name.Contains(propInfo.Name));
-
                     if (control != null)
                     {
                         object value = null;
 
                         if (propInfo.PropertyType == typeof(DateTime))
                         {
-                            string date = control.Text;//08/
-                            DateTime.ParseExact(date, "dd/MM/yyyy", null);
+                            string date = control.Text;// value = 20/08/2003
+                            value = DateTime.ParseExact(date, "dd/MM/yyyy", null);
+                            propInfo.SetValue(dto, value);
+                            continue;
                         }
-                        else if (propInfo.PropertyType == typeof(byte[]))
+                        else if (propInfo.PropertyType == typeof(string))
                         {
                             if (control is PictureBox pictureBox && pictureBox.Image != null)
                             {
-                                value = DataConvert.ImgToByteArray(pictureBox.Image);
+                                value = Upload.GetImageName(pictureBox.ImageLocation);
+                                //value = "20230415164726936_1612c0e2-2a92-4fc3-be83-6e0af7e019fc.jpg";
+                                propInfo.SetValue(dto, value);
+                                continue;
                             }
                         }
-                        else
-                        {
-                            value = string.IsNullOrEmpty(control.Text)  ? Convert.ChangeType(control.Text, propInfo.PropertyType) : null;
-                        }
+
+                        value = string.IsNullOrEmpty(control.Text) ?  null : Convert.ChangeType(control.Text, propInfo.PropertyType);
 
                         // Set the property value on the DTO object
                         propInfo.SetValue(dto, value);

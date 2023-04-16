@@ -121,7 +121,11 @@
   <data name="btnUpdate.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
+<<<<<<< HEAD
         DQAACw0B7QfALAAACfVJREFUaEO9mmts1eUdx58/EbIhiBvGAZviYImJM4Ng4i4hWbIXLDPZkiVzMzUW
+=======
+        DAAACwwBP0AiyAAACfVJREFUaEO9mmts1eUdx58/EbIhiBvGAZviYImJM4Ng4i4hWbIXLDPZkiVzMzUW
+>>>>>>> 4d3bb0e9f84043c09afafc2909a73ca013ed8485
         Y5NBogFdBntByl6soeeNKV5C6QunZSFhZK51I0VsK8ROlkyTXbxMN18M5zbphZZLaQ9Gzj7f53LO8/+f
         p1erLz7hnP/5X37f/q7P88eYU1cWipugER6HE/A2jMAkvAg/gBvgOlgGn4JFkLqXo69sTM+kybomjDly
         2Zhnxo05eMmYtgvGtI6ZrHnUZLvPmWzHiEnfwMJNksdz3AzN8AZUpuAVWAqH4X8wDIM5Tha+67q+8inT
@@ -170,7 +174,11 @@
   <data name="btnDelete.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
+<<<<<<< HEAD
         DgAACw4BQL7hQQAADexJREFUaEOtmEtsnOUVhv+Z8YwNglJLFSJUgdZRdxWNksqOE9uJnYkT536xncQJ
+=======
+        DAAACwwBP0AiyAAADexJREFUaEOtmEtsnOUVhv+Z8YwNglJLFSJUgdZRdxWNksqOE9uJnYkT536xncQJ
+>>>>>>> 4d3bb0e9f84043c09afafc2909a73ca013ed8485
         hF7kNZVAroTYtIs6Oy4VxZsWqNiYDVLZpBEqQoFFa5ZQUuGuoVIdhdiJbzPT5z3n+/7/n7HTQNXFq28c
         X3Keec97zvdPcvO+n+f0s+Rmx09NX3X8JOjpoEtBTyVftT+V3Gp/MllEt9ovmhbbL2xFTy22T7y82H7+
         ylL7+euLlXP/XqqcfRUltyvjyVJljFMaRWeS22WdpzlPJ3fKpzhPckonkjttJ5LltuPoWLJcRpwrbUc5
@@ -235,7 +243,11 @@
   <data name="btnAdd.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
+<<<<<<< HEAD
         DwAACw8BkvkDpQAADq5JREFUaEOtmmtwVdUZhlenwowUiAKGJJBwUyQiEIJAuMjd0Ol0OlNnsE5K0Sqg
+=======
+        DAAACwwBP0AiyAAADq5JREFUaEOtmmtwVdUZhlenwowUiAKGJJBwUyQiEIJAuMjd0Ol0OlNnsE5K0Sqg
+>>>>>>> 4d3bb0e9f84043c09afafc2909a73ca013ed8485
         VSxeUAJICypwjBRFETmUIkRpBW8IBxWUi0jxAv5rUawz9Se2Vex0oBUkX59v7bX2WWefHS6d/nhHgRNZ
         j2u/73fZx3Q4LP8vVaJp6Em0Ex1FX6L/oG/cv+vv6Z/pZ8o6fCim5AMxlxwUc+kBMZ3eEdNlr5jL3hbT
         daeY8jfEVGwX032rmKqXxfTcLKbX78X0aRbTd72YK38rpvoZMVevEpN2oAtRFVqI/ozkAvRxRw/xnoPY

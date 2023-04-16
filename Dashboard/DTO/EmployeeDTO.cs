@@ -19,11 +19,11 @@ namespace Dashboard.DTO
         public string Sex { get; set; }
         public string FormatName { get; set; }
         public float Wage { get; set; }
-        public byte[] EmployeeImage { get; set; }
+        public string EmployeeImage { get; set; }
         public string PhoneNumber { get; set; }
         public string Address { get; set; }
         public string CitizenID { get; set; }
-        public string CommissionRate { get; set; }
+        public float CommissionRate { get; set; }
         public DateTime DateOfBirth { get; set; }
         public string Age { get; set; }
         public string StatusJob { get; set; }
@@ -31,7 +31,7 @@ namespace Dashboard.DTO
 
         public EmployeeDTO() { }
 
-        public EmployeeDTO(int employeeID, string password, string fullName, string sex, string formatName, float wage, byte[] employeeImage, string phoneNumber, string address, string citizenID, string commissionRate, DateTime dateOfBirth, string age, string statusJob, string authorName)
+        public EmployeeDTO(int employeeID, string password, string fullName, string sex, string formatName, float wage, string employeeImage, string phoneNumber, string address, string citizenID, float commissionRate, DateTime dateOfBirth, string age, string statusJob, string authorName)
         {
             EmployeeID=employeeID;
             Password=password;
@@ -50,7 +50,7 @@ namespace Dashboard.DTO
             AuthorName=authorName;
         }
 
-        public EmployeeDTO( string password, string fullName, string sex, string formatName, float wage, byte[] employeeImage, string phoneNumber, string address, string citizenID, string commissionRate, DateTime dateOfBirth, string age, string authorName)
+        public EmployeeDTO( string password, string fullName, string sex, string formatName, float wage, string employeeImage, string phoneNumber, string address, string citizenID, float commissionRate, DateTime dateOfBirth, string age, string authorName)
         {
             Password=password;
             FullName=fullName;
