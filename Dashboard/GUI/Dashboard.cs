@@ -105,7 +105,7 @@ namespace Dashboard
 
         private void btnCustomer_Click(object sender, EventArgs e)
         {
-            btnClick(new fCustomer(),btnCustomer);
+            btnClick(new Customer(),btnCustomer);
         }
 
         private void btnProduct_Click(object sender, EventArgs e)
@@ -131,6 +131,11 @@ namespace Dashboard
             Four.BackColor = Color.Transparent;
             Five.BackColor = Color.Transparent;
             Six.BackColor = Color.Transparent;
+        }
+
+        private void Dashboard_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
