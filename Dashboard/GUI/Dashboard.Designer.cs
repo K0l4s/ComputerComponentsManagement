@@ -57,9 +57,9 @@
             this.pMenu.Controls.Add(this.btnHome);
             this.pMenu.Dock = System.Windows.Forms.DockStyle.Left;
             this.pMenu.Location = new System.Drawing.Point(0, 0);
-            this.pMenu.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pMenu.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pMenu.Name = "pMenu";
-            this.pMenu.Size = new System.Drawing.Size(188, 547);
+            this.pMenu.Size = new System.Drawing.Size(376, 1052);
             this.pMenu.TabIndex = 0;
             // 
             // btnVoucher
@@ -71,10 +71,10 @@
             this.btnVoucher.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btnVoucher.Image = ((System.Drawing.Image)(resources.GetObject("btnVoucher.Image")));
             this.btnVoucher.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnVoucher.Location = new System.Drawing.Point(0, 293);
-            this.btnVoucher.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnVoucher.Location = new System.Drawing.Point(0, 564);
+            this.btnVoucher.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnVoucher.Name = "btnVoucher";
-            this.btnVoucher.Size = new System.Drawing.Size(188, 41);
+            this.btnVoucher.Size = new System.Drawing.Size(376, 79);
             this.btnVoucher.TabIndex = 6;
             this.btnVoucher.Text = "VOUCHER";
             this.btnVoucher.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -87,10 +87,10 @@
             this.btnMenu.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnMenu.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnMenu.Image = ((System.Drawing.Image)(resources.GetObject("btnMenu.Image")));
-            this.btnMenu.Location = new System.Drawing.Point(9, 505);
-            this.btnMenu.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnMenu.Location = new System.Drawing.Point(18, 971);
+            this.btnMenu.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnMenu.Name = "btnMenu";
-            this.btnMenu.Size = new System.Drawing.Size(36, 32);
+            this.btnMenu.Size = new System.Drawing.Size(72, 62);
             this.btnMenu.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.btnMenu.TabIndex = 0;
             this.btnMenu.TabStop = false;
@@ -105,10 +105,10 @@
             this.btnStatistic.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btnStatistic.Image = ((System.Drawing.Image)(resources.GetObject("btnStatistic.Image")));
             this.btnStatistic.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnStatistic.Location = new System.Drawing.Point(0, 252);
-            this.btnStatistic.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnStatistic.Location = new System.Drawing.Point(0, 485);
+            this.btnStatistic.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnStatistic.Name = "btnStatistic";
-            this.btnStatistic.Size = new System.Drawing.Size(188, 41);
+            this.btnStatistic.Size = new System.Drawing.Size(376, 79);
             this.btnStatistic.TabIndex = 5;
             this.btnStatistic.Text = "THỐNG KÊ";
             this.btnStatistic.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -125,10 +125,10 @@
             this.btnProduct.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btnProduct.Image = ((System.Drawing.Image)(resources.GetObject("btnProduct.Image")));
             this.btnProduct.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnProduct.Location = new System.Drawing.Point(0, 211);
-            this.btnProduct.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnProduct.Location = new System.Drawing.Point(0, 406);
+            this.btnProduct.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnProduct.Name = "btnProduct";
-            this.btnProduct.Size = new System.Drawing.Size(188, 41);
+            this.btnProduct.Size = new System.Drawing.Size(376, 79);
             this.btnProduct.TabIndex = 4;
             this.btnProduct.Text = "SẢN PHẨM";
             this.btnProduct.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -145,10 +145,10 @@
             this.btnCustomer.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btnCustomer.Image = ((System.Drawing.Image)(resources.GetObject("btnCustomer.Image")));
             this.btnCustomer.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnCustomer.Location = new System.Drawing.Point(0, 170);
-            this.btnCustomer.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnCustomer.Location = new System.Drawing.Point(0, 327);
+            this.btnCustomer.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnCustomer.Name = "btnCustomer";
-            this.btnCustomer.Size = new System.Drawing.Size(188, 41);
+            this.btnCustomer.Size = new System.Drawing.Size(376, 79);
             this.btnCustomer.TabIndex = 3;
             this.btnCustomer.Text = "KHÁCH HÀNG";
             this.btnCustomer.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -165,10 +165,10 @@
             this.btnEmployee.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btnEmployee.Image = ((System.Drawing.Image)(resources.GetObject("btnEmployee.Image")));
             this.btnEmployee.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnEmployee.Location = new System.Drawing.Point(0, 129);
-            this.btnEmployee.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnEmployee.Location = new System.Drawing.Point(0, 248);
+            this.btnEmployee.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnEmployee.Name = "btnEmployee";
-            this.btnEmployee.Size = new System.Drawing.Size(188, 41);
+            this.btnEmployee.Size = new System.Drawing.Size(376, 79);
             this.btnEmployee.TabIndex = 2;
             this.btnEmployee.Text = "NHÂN VIÊN";
             this.btnEmployee.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -185,10 +185,10 @@
             this.btnBill.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btnBill.Image = ((System.Drawing.Image)(resources.GetObject("btnBill.Image")));
             this.btnBill.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnBill.Location = new System.Drawing.Point(0, 88);
-            this.btnBill.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnBill.Location = new System.Drawing.Point(0, 169);
+            this.btnBill.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnBill.Name = "btnBill";
-            this.btnBill.Size = new System.Drawing.Size(188, 41);
+            this.btnBill.Size = new System.Drawing.Size(376, 79);
             this.btnBill.TabIndex = 1;
             this.btnBill.Text = "HÓA ĐƠN";
             this.btnBill.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -203,9 +203,9 @@
             this.btnHome.Dock = System.Windows.Forms.DockStyle.Top;
             this.btnHome.Image = ((System.Drawing.Image)(resources.GetObject("btnHome.Image")));
             this.btnHome.Location = new System.Drawing.Point(0, 0);
-            this.btnHome.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnHome.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnHome.Name = "btnHome";
-            this.btnHome.Size = new System.Drawing.Size(188, 88);
+            this.btnHome.Size = new System.Drawing.Size(376, 169);
             this.btnHome.TabIndex = 0;
             this.btnHome.TabStop = false;
             this.btnHome.Click += new System.EventHandler(this.btnHome_Click);
@@ -213,24 +213,25 @@
             // pCenter
             // 
             this.pCenter.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pCenter.Location = new System.Drawing.Point(188, 0);
-            this.pCenter.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pCenter.Location = new System.Drawing.Point(376, 0);
+            this.pCenter.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pCenter.Name = "pCenter";
-            this.pCenter.Size = new System.Drawing.Size(758, 547);
+            this.pCenter.Size = new System.Drawing.Size(1516, 1052);
             this.pCenter.TabIndex = 2;
             // 
             // Dashboard
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(946, 547);
+            this.ClientSize = new System.Drawing.Size(1892, 1052);
             this.Controls.Add(this.pCenter);
             this.Controls.Add(this.pMenu);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "Dashboard";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Dashboard";
+            this.Load += new System.EventHandler(this.Dashboard_Load);
             this.pMenu.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.btnMenu)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnHome)).EndInit();

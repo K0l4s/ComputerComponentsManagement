@@ -13,8 +13,7 @@ namespace Dashboard.DAO
 {
     public class DataProvider
     {
-        //private static string ServerName = "(local)"; //Đổi tên lại theo Server Name của SQL 
-        private static string ServerName = "DESKTOP-M1IF6PS\\SQLEXPRESS";
+        private static string ServerName = "LAPTOP-PHUONGNG\\SQLEXPRESS"; //Đổi tên lại theo Server Name của SQL 
         private static string DatabaseName = "HEQUANTRICOSODULIEU"; //Tên database
         private string ConnStr = $@"Data Source={ServerName}; Initial Catalog={DatabaseName};Integrated Security=True";
         private static DataProvider instance;
