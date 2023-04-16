@@ -52,6 +52,12 @@
     <Compile Include="DAO\EmployeeDAO.cs" />
     <Compile Include="DAO\DataProvider.cs" />
     <Compile Include="DAO\VoucherDAO.cs" />
+    <Compile Include="GUI\Panel\Product.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\Panel\Product.Designer.cs">
+      <DependentUpon>Product.cs</DependentUpon>
+    </Compile>
     <Compile Include="Utilities\DataConvert.cs" />
     <Compile Include="DTO\EmployeeDTO.cs" />
     <Compile Include="DTO\VoucherDTO.cs" />
@@ -165,6 +171,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\Panel\fStatistic.resx">
       <DependentUpon>fStatistic.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\Panel\Product.resx">
+      <DependentUpon>Product.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\Panel\Voucher\Voucher.resx">
       <DependentUpon>Voucher.cs</DependentUpon>
