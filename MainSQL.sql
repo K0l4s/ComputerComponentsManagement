@@ -495,6 +495,69 @@ BEGIN
 END
 GO
 
+CREATE FUNCTION FUNC_TOP5_PRODUCT(@Daystart DATE, @Dayend DATE)
+RETURNS TABLE
+AS
+RETURN
+    SELECT TOP 5 pd.productID, SUM(bd.number) AS totalSold 
+    FROM BILL_DETAIL bd 
+    INNER JOIN PRODUCT_DETAIL pd ON bd.productID = pd.productID 
+    INNER JOIN BILL b ON bd.billID = b.billID
+    WHERE b.billExportTime BETWEEN @Daystart AND @Dayend
+    GROUP BY pd.productID
+    ORDER BY totalSold DESC;
+GO
+
+CREATE FUNCTION FUNC_BOTTOM5_PRODUCT(@Daystart DATE, @Dayend DATE)
+RETURNS TABLE
+AS
+RETURN
+    SELECT TOP 5 pd.productID, pd.brandID, pd.typeID, SUM(bd.number) AS totalSold, b.billExportTime
+	FROM BILL_DETAIL bd 
+	INNER JOIN PRODUCT_DETAIL pd ON bd.productID = pd.productID
+	INNER JOIN BILL b ON bd.billID = b.billID
+	WHERE b.billExportTime BETWEEN @Daystart AND @Dayend
+	GROUP BY pd.productID, pd.brandID, pd.typeID, b.billExportTime
+	ORDER BY totalSold ASC;
+GO
+
+CREATE FUNCTION FUNC_TOTAL_REVENUE(@Daystart DATE, @Dayend DATE)
+RETURNS INT
+AS
+BEGIN
+    DECLARE @TotalValue INT
+    SELECT @TotalValue = SUM(totalPay)
+    FROM COMPLETED_BILL
+    WHERE billExportTime BETWEEN @DayStart AND @DayEnd
+    RETURN @TotalValue
+END
+GO
+
+CREATE FUNCTION FUNC_TOTAL_COMPLETE_BILL(@Daystart DATE, @Dayend DATE)
+RETURNS INT
+AS
+BEGIN
+    DECLARE @TotalValue INT
+    SELECT @TotalValue = COUNT(CB.billID)
+    FROM COMPLETED_BILL CB
+    WHERE CB.billExportTime BETWEEN @DayStart AND @DayEnd
+    RETURN @TotalValue
+END
+GO
+
+CREATE FUNCTION FUNC_TOTAL_COMPLETE_BILL_COMPONENT(@Daystart DATE, @Dayend DATE)
+RETURNS INT
+AS
+BEGIN
+    DECLARE @TotalValue INT
+    SELECT @TotalValue = COUNT(CBL.productID)
+    FROM COMPLETED_BILL CB 
+	INNER JOIN COMPLETED_BILL_DETAIL CBL ON CB.billID = CBL.billID
+    WHERE CB.billExportTime BETWEEN @DayStart AND @DayEnd
+    RETURN @TotalValue
+END
+GO
+
 
 -- PROCEDURE FINAL
 
@@ -631,10 +694,49 @@ values (2,'Nguyen Van Ba','Part Time','0123409799','Ho Chi Minh','050303116663',
 INSERT INTO EMPLOYEE(employeeID,fullName,formatName,phoneNumber,Em_address,citizenID,dateOfBirth,wage,sex,authorID,commissionRate,employeeImage)
 values (3,'Nguyen A','Full Time','0123477799','Ho Chi Minh','050303110053','2003-8-20',21000,'Female',2,0.4,'20230415135647299_3994139f-fa20-4fe9-a062-3bb1b268e7c6.png');
 GO
+
+INSERT INTO CUSTOMER (phoneNumber, fullName, cus_address) VALUES ('0123456789', 'Nguyễn Văn A', '123 Đường ABC, Quận 1, TP. HCM');
+INSERT INTO CUSTOMER (phoneNumber, fullName, cus_address) VALUES ('0987654321', 'Trần Thị B', '456 Đường XYZ, Quận 2, TP. HCM');
+INSERT INTO CUSTOMER (phoneNumber, fullName, cus_address) VALUES ('0909090909', 'Lê Văn C', '789 Đường LMN, Quận 3, TP. HCM');
+
+INSERT INTO PRODUCT (productID, productName, productImageURL, quantity) VALUES (1, 'Product A', NULL, 10);
+INSERT INTO PRODUCT (productID, productName, productImageURL, quantity) VALUES (2, 'Product B', NULL, 15);
+INSERT INTO PRODUCT (productID, productName, productImageURL, quantity) VALUES (3, 'Product C', NULL, 10);
+INSERT INTO PRODUCT (productID, productName, productImageURL, quantity) VALUES (4, 'Product D', NULL, 20);
+
+INSERT INTO BRAND (brandID, brandName) VALUES ('1', 'Brand A');
+INSERT INTO BRAND (brandID, brandName) VALUES ('2', 'Brand B');
+INSERT INTO BRAND (brandID, brandName) VALUES ('3', 'Brand C');
+
+INSERT INTO PRODUCT_TYPE (typeID, typeName) VALUES ('1', 'Type A');
+INSERT INTO PRODUCT_TYPE (typeID, typeName) VALUES ('2', 'Type B');
+INSERT INTO PRODUCT_TYPE (typeID, typeName) VALUES ('3', 'Type C');
+
+INSERT INTO PRODUCT_DETAIL (productID, typeID, brandID, importPrice, sellPrice, descript)
+VALUES
+    ('1', '1', '1', 100000, 150000, 'Product P001 - Type A - Brand A'),
+    ('2', '2', '2', 120000, 180000, 'Product P002 - Type B - Brand B'),
+    ('3', '3', '3', 90000, 140000, 'Product P003 - Type C - Brand C'),
+    ('4', '1', '2', 110000, 170000, 'Product P004 - Type A - Brand B');
+
+INSERT INTO BILL(billID, employeeID, phoneNumber, billExportTime)
+VALUES ('1', 1, '0123456789', '2023-04-15'),
+('2', 2, '0987654321', '2023-04-15'),
+('3', 3, '0909090909', '2023-04-15');
+
+INSERT INTO BILL_DETAIL (billID, productID, number) VALUES ('1', '1', 3);
+INSERT INTO BILL_DETAIL (billID, productID, number) VALUES ('1', '2', 3);
+INSERT INTO BILL_DETAIL (billID, productID, number) VALUES ('1', '3', 3);
+INSERT INTO BILL_DETAIL (billID, productID, number) VALUES ('2', '1', 3);
+INSERT INTO BILL_DETAIL (billID, productID, number) VALUES ('2', '2', 3);
+INSERT INTO BILL_DETAIL (billID, productID, number) VALUES ('2', '3', 3);
+
+
 UPDATE ACCOUNT
 SET emp_password = 'admin123'
 WHERE employeeID = 1
 GO
+
 
 --UPDATE
 Create View View_Account

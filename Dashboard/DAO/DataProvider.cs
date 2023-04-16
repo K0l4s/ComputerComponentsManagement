@@ -24,11 +24,11 @@ namespace Dashboard.DAO
         public static DataProvider Instance
         {
             get { if (instance == null) instance = new DataProvider(); return DataProvider.instance; }
-            private set { DataProvider.instance = value; } 
+            private set { DataProvider.instance = value; }
         }
-       
+
         //Hàm thực thi câu lệnh sqlCommand, giá trị trả về là 1 bảng giá trị
-        public DataTable ExecuteQuery(string query, object[] paramenter = null) 
+        public DataTable ExecuteQuery(string query, object[] paramenter = null)
         {
             DataTable data = new DataTable(); //Khai báo biến data là 1 bảng dữ liệu
             using (SqlConnection conn = new SqlConnection(ConnStr)) //đảm bảo rằng đối tượng SqlConnection được giải phóng tự động sau khi sử dụng, mà không cần phải gọi phương thức Dispose() của đối tượng
@@ -66,15 +66,15 @@ namespace Dashboard.DAO
                 //trước và phía sau 1 ký tự khoảng trắng ví dụ:
                 // EXECUTE GetInfo @id , @name
                 SqlDataAdapter adapter = new SqlDataAdapter(cmd);
-                    adapter.Fill(data); //Lấy dữ liệu từ một nguồn dữ liệu và đổ dữ liệu này vào một đối tượng data.
-                
+                adapter.Fill(data); //Lấy dữ liệu từ một nguồn dữ liệu và đổ dữ liệu này vào một đối tượng data.
+
                 conn.Close(); //Đóng kết nối
             }
             return data; //Trả về giá trị data
         }
 
         //Hàm trả về giá trị số cột
-        public int ExecuteNonQuery(string query, object[] paramenter = null) 
+        public int ExecuteNonQuery(string query, object[] paramenter = null)
         {
             int data = 0;
             using (SqlConnection conn = new SqlConnection(ConnStr)) //đảm bảo rằng đối tượng SqlConnection được giải phóng tự động sau khi sử dụng, mà không cần phải gọi phương thức Dispose() của đối tượng
@@ -109,7 +109,7 @@ namespace Dashboard.DAO
         }
 
         //Thực thi query trả về giá trị đầu tiên của kết quả
-        public object ExecuteScalar(string query, object[] paramenter = null) 
+        public object ExecuteScalar(string query, object[] paramenter = null)
         {
             object data = 0;
             using (SqlConnection conn = new SqlConnection(ConnStr)) //đảm bảo rằng đối tượng SqlConnection được giải phóng tự động sau khi sử dụng, mà không cần phải gọi phương thức Dispose() của đối tượng
@@ -164,28 +164,38 @@ namespace Dashboard.DAO
         }
 
         //Tra ve Datatable khi thuc thi ham
-        public DataTable ExecuteFunction(SqlCommand cmdFunction, ref string error)
+        public DataTable ExecuteFunction(string cmdFunction, CommandType ct, List<SqlParameter> parameters, ref string error)
         {
+            cmdFunction = "SELECT * FROM dbo.FUNC_TOP5_PRODUCT('04/09/2023 2:53:55 PM','04/16/2023 2:53:55 PM')";
+            
             error = "";
             DataTable dt = new DataTable();
 
             using (SqlConnection conn = new SqlConnection(ConnStr))
             {
+                cmdFunction = "SELECT * FROM BILL";
+                SqlCommand cmd = new SqlCommand(cmdFunction, conn);
+                cmd.CommandType = ct;
+                //foreach (SqlParameter i in parameters)
+                //{
+                //    cmd.Parameters.Add(i);
+                //}
+
                 try
                 {
+                    MessageBox.Show($"{cmd.CommandText}"); // SELECT * FROM dbo.FUNC_TOP5_PRODUCT(@Daystart, @Dayend)
                     conn.Open();
-                    cmdFunction.Connection = conn;
-                    SqlDataAdapter adapter = new SqlDataAdapter(cmdFunction);
+                    //"SELECT * FROM dbo.FUNC_TOP5_PRODUCT('04/09/2023 2:53:55 PM','04/16/2023 2:53:55 PM')";
+                    SqlDataAdapter adapter = new SqlDataAdapter(cmd);// Run in sql is true but got null in here
                     adapter.Fill(dt);
+                    conn.Close();
                 }
                 catch (SqlException ex)
                 {
                     error = ex.Message;
-                    MessageBox.Show(error);
-                    dt = null;
                 }
-            }
 
+            }
             return dt;
         }
 
@@ -224,17 +234,17 @@ namespace Dashboard.DAO
             return f;
         }
 
-        //Tra ve datatable khi thuc thi procedure
-        public DataTable Procedure(string sqlProcedure, CommandType ct, List<SqlParameter> parameters, ref string error)
+        public int ExecuteFunctionInt(string cmdFunction, CommandType ct, List<SqlParameter> parameters, ref string error)
         {
+            int result = 0;
             error = "";
-            DataTable dt = new DataTable();
 
             using (SqlConnection conn = new SqlConnection(ConnStr))
             {
-                using (SqlCommand cmd = new SqlCommand(sqlProcedure, conn))
+                using (SqlCommand cmd = new SqlCommand(cmdFunction, conn))
                 {
                     cmd.CommandType = ct;
+
                     foreach (SqlParameter i in parameters)
                     {
                         cmd.Parameters.Add(i);
@@ -243,8 +253,11 @@ namespace Dashboard.DAO
                     try
                     {
                         conn.Open();
-                        SqlDataAdapter adapter = new SqlDataAdapter(cmd);
-                        adapter.Fill(dt);
+                        object scalarResult = cmd.ExecuteScalar();
+                        if (scalarResult != DBNull.Value)
+                        {
+                            result = Convert.ToInt32(scalarResult);
+                        }
                     }
                     catch (SqlException ex)
                     {
@@ -252,7 +265,8 @@ namespace Dashboard.DAO
                     }
                 }
             }
-            return dt;
+
+            return result;
         }
 
     }
