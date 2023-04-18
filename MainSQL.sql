@@ -647,66 +647,6 @@ END
 GO
 
 
--- INSERT DATA FOR DATABASE
-INSERT INTO AUTHORIZATION_USER VALUES (1, 'Manager');
-INSERT INTO AUTHORIZATION_USER VALUES (2, 'Cashier');
-GO
-
-INSERT INTO WARRANTY_STATUS VALUES (1, 'NON-PROCESSED');
-INSERT INTO WARRANTY_STATUS VALUES (2, 'PROCESSED');
-GO
-
-INSERT INTO EMPLOYEE(employeeID,fullName,formatName,phoneNumber,Em_address,citizenID,dateOfBirth,wage,sex,authorID,commissionRate,employeeImage)
-values (1,'Nguyen Ngan','Full Time','0123456799','Ho Chi Minh','050303116553','2003-8-20',27000,'Female',1,0.5,'20230415135620453_45412b9b-d7b6-4fb9-8498-1fc5aa5648e5.png');
-INSERT INTO EMPLOYEE(employeeID,fullName,formatName,phoneNumber,Em_address,citizenID,dateOfBirth,wage,sex,authorID,commissionRate,employeeImage)
-values (2,'Nguyen Van Ba','Part Time','0123409799','Ho Chi Minh','050303116663','2003-8-20',23000,'Female',2,0.2,'20230415135628769_72dc12d9-7230-4aca-8c6e-0198ba3aa40c.png');
-INSERT INTO EMPLOYEE(employeeID,fullName,formatName,phoneNumber,Em_address,citizenID,dateOfBirth,wage,sex,authorID,commissionRate,employeeImage)
-values (3,'Nguyen A','Full Time','0123477799','Ho Chi Minh','050303110053','2003-8-20',21000,'Female',2,0.4,'20230415135312990_383f8789-49f8-4533-af40-81a7dec43f8d.png');
-GO
-
-INSERT INTO CUSTOMER (phoneNumber, fullName, cus_address) VALUES ('0123456789', 'Nguyễn Văn A', '123 Đường ABC, Quận 1, TP. HCM');
-INSERT INTO CUSTOMER (phoneNumber, fullName, cus_address) VALUES ('0987654321', 'Trần Thị B', '456 Đường XYZ, Quận 2, TP. HCM');
-INSERT INTO CUSTOMER (phoneNumber, fullName, cus_address) VALUES ('0909090909', 'Lê Văn C', '789 Đường LMN, Quận 3, TP. HCM');
-
-INSERT INTO PRODUCT (productID, productName, productImageURL, quantity) VALUES (1, 'Product A', NULL, 10);
-INSERT INTO PRODUCT (productID, productName, productImageURL, quantity) VALUES (2, 'Product B', NULL, 15);
-INSERT INTO PRODUCT (productID, productName, productImageURL, quantity) VALUES (3, 'Product C', NULL, 10);
-INSERT INTO PRODUCT (productID, productName, productImageURL, quantity) VALUES (4, 'Product D', NULL, 20);
-
-INSERT INTO BRAND (brandID, brandName) VALUES ('1', 'Brand A');
-INSERT INTO BRAND (brandID, brandName) VALUES ('2', 'Brand B');
-INSERT INTO BRAND (brandID, brandName) VALUES ('3', 'Brand C');
-
-INSERT INTO PRODUCT_TYPE (typeID, typeName) VALUES ('1', 'Type A');
-INSERT INTO PRODUCT_TYPE (typeID, typeName) VALUES ('2', 'Type B');
-INSERT INTO PRODUCT_TYPE (typeID, typeName) VALUES ('3', 'Type C');
-
-INSERT INTO PRODUCT_DETAIL (productID, typeID, brandID, importPrice, sellPrice, descript)
-VALUES
-    ('1', '1', '1', 100000, 150000, 'Product P001 - Type A - Brand A'),
-    ('2', '2', '2', 120000, 180000, 'Product P002 - Type B - Brand B'),
-    ('3', '3', '3', 90000, 140000, 'Product P003 - Type C - Brand C'),
-    ('4', '1', '2', 110000, 170000, 'Product P004 - Type A - Brand B');
-
-INSERT INTO BILL(billID, employeeID, phoneNumber, billExportTime)
-VALUES ('1', 1, '0123456789', '2023-04-15'),
-('2', 2, '0987654321', '2023-04-15'),
-('3', 3, '0909090909', '2023-04-15');
-
-INSERT INTO BILL_DETAIL (billID, productID, number) VALUES ('1', '1', 3);
-INSERT INTO BILL_DETAIL (billID, productID, number) VALUES ('1', '2', 3);
-INSERT INTO BILL_DETAIL (billID, productID, number) VALUES ('1', '3', 3);
-INSERT INTO BILL_DETAIL (billID, productID, number) VALUES ('2', '1', 3);
-INSERT INTO BILL_DETAIL (billID, productID, number) VALUES ('2', '2', 3);
-INSERT INTO BILL_DETAIL (billID, productID, number) VALUES ('2', '3', 3);
-
-
-UPDATE ACCOUNT
-SET emp_password = 'admin123'
-WHERE employeeID = 1
-GO
-
-
 --UPDATE
 Create View View_Account
 AS
@@ -1117,3 +1057,64 @@ AS
 	FROM VIEW_TOTALWORKTIME v1 INNER JOIN (SELECT employeeID, SUM(salaryInShift) as salary FROM VIEW_TOTALWORKTIME WHERE checkOut BETWEEN @dayStart and @dayEnd GROUP BY employeeID ) v2 ON v1.employeeID = v2.employeeID 
 	WHERE checkOut BETWEEN @dayStart and @dayEnd)
 GO
+
+
+-- INSERT DATA FOR DATABASE
+INSERT INTO AUTHORIZATION_USER VALUES (1, 'Manager');
+INSERT INTO AUTHORIZATION_USER VALUES (2, 'Cashier');
+GO
+
+INSERT INTO WARRANTY_STATUS VALUES (1, 'NON-PROCESSED');
+INSERT INTO WARRANTY_STATUS VALUES (2, 'PROCESSED');
+GO
+
+INSERT INTO EMPLOYEE(employeeID,fullName,formatName,phoneNumber,Em_address,citizenID,dateOfBirth,wage,sex,authorID,commissionRate,employeeImage)
+values (1,'Nguyen Ngan','Full Time','0123456799','Ho Chi Minh','050303116553','2003-8-20',27000,'Female',1,0.5,'20230415135620453_45412b9b-d7b6-4fb9-8498-1fc5aa5648e5.png');
+INSERT INTO EMPLOYEE(employeeID,fullName,formatName,phoneNumber,Em_address,citizenID,dateOfBirth,wage,sex,authorID,commissionRate,employeeImage)
+values (2,'Nguyen Van Ba','Part Time','0123409799','Ho Chi Minh','050303116663','2003-8-20',23000,'Female',2,0.2,'20230415135628769_72dc12d9-7230-4aca-8c6e-0198ba3aa40c.png');
+INSERT INTO EMPLOYEE(employeeID,fullName,formatName,phoneNumber,Em_address,citizenID,dateOfBirth,wage,sex,authorID,commissionRate,employeeImage)
+values (3,'Nguyen A','Full Time','0123477799','Ho Chi Minh','050303110053','2003-8-20',21000,'Female',2,0.4,'20230415135312990_383f8789-49f8-4533-af40-81a7dec43f8d.png');
+GO
+
+INSERT INTO CUSTOMER (phoneNumber, fullName, cus_address) VALUES ('0123456789', 'Nguyễn Văn A', '123 Đường ABC, Quận 1, TP. HCM');
+INSERT INTO CUSTOMER (phoneNumber, fullName, cus_address) VALUES ('0987654321', 'Trần Thị B', '456 Đường XYZ, Quận 2, TP. HCM');
+INSERT INTO CUSTOMER (phoneNumber, fullName, cus_address) VALUES ('0909090909', 'Lê Văn C', '789 Đường LMN, Quận 3, TP. HCM');
+
+INSERT INTO PRODUCT (productID, productName, productImageURL, quantity) VALUES (1, 'Product A', NULL, 10);
+INSERT INTO PRODUCT (productID, productName, productImageURL, quantity) VALUES (2, 'Product B', NULL, 15);
+INSERT INTO PRODUCT (productID, productName, productImageURL, quantity) VALUES (3, 'Product C', NULL, 10);
+INSERT INTO PRODUCT (productID, productName, productImageURL, quantity) VALUES (4, 'Product D', NULL, 20);
+
+INSERT INTO BRAND (brandID, brandName) VALUES ('1', 'Brand A');
+INSERT INTO BRAND (brandID, brandName) VALUES ('2', 'Brand B');
+INSERT INTO BRAND (brandID, brandName) VALUES ('3', 'Brand C');
+
+INSERT INTO PRODUCT_TYPE (typeID, typeName) VALUES ('1', 'Type A');
+INSERT INTO PRODUCT_TYPE (typeID, typeName) VALUES ('2', 'Type B');
+INSERT INTO PRODUCT_TYPE (typeID, typeName) VALUES ('3', 'Type C');
+
+INSERT INTO PRODUCT_DETAIL (productID, typeID, brandID, importPrice, sellPrice, descript)
+VALUES
+    ('1', '1', '1', 100000, 150000, 'Product P001 - Type A - Brand A'),
+    ('2', '2', '2', 120000, 180000, 'Product P002 - Type B - Brand B'),
+    ('3', '3', '3', 90000, 140000, 'Product P003 - Type C - Brand C'),
+    ('4', '1', '2', 110000, 170000, 'Product P004 - Type A - Brand B');
+
+INSERT INTO BILL(billID, employeeID, phoneNumber, billExportTime)
+VALUES ('1', 1, '0123456789', '2023-04-15'),
+('2', 2, '0987654321', '2023-04-15'),
+('3', 3, '0909090909', '2023-04-15');
+
+INSERT INTO BILL_DETAIL (billID, productID, number) VALUES ('1', '1', 3);
+INSERT INTO BILL_DETAIL (billID, productID, number) VALUES ('1', '2', 3);
+INSERT INTO BILL_DETAIL (billID, productID, number) VALUES ('1', '3', 3);
+INSERT INTO BILL_DETAIL (billID, productID, number) VALUES ('2', '1', 3);
+INSERT INTO BILL_DETAIL (billID, productID, number) VALUES ('2', '2', 3);
+INSERT INTO BILL_DETAIL (billID, productID, number) VALUES ('2', '3', 3);
+
+
+UPDATE ACCOUNT
+SET emp_password = 'admin123'
+WHERE employeeID = 1
+GO
+
