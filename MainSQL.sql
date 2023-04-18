@@ -27,7 +27,7 @@ CREATE TABLE PRODUCT_TYPE(
 CREATE TABLE PRODUCT(
 				productID VARCHAR(10) PRIMARY KEY NOT NULL,
 				productName VARCHAR(255) NOT NULL,
-				productImageURL VARBINARY(max),
+				productImageURL varchar(max),
 				quantity INT NOT NULL,
 				CHECK(quantity >= 0));
 				GO
@@ -707,6 +707,8 @@ BEGIN
 	SET @id = @newID
 END
 GO
+Insert Into VOUCHER_STATUS VALUES (1,'Active'),(2,'Non-Active')
+GO
 CREATE PROC InsertVoucher 
 @voucherID VARCHAR(15) = NULL,
 @voucherName VARCHAR(255) = NULL,
@@ -717,7 +719,7 @@ CREATE PROC InsertVoucher
 @numberUsed INT = NULL
 AS
 BEGIN
-	DECLARE @statusID INT = 2
+	DECLARE @statusID INT = 1
 	IF(@percent IS NULL)
 	BEGIN
 		SET @percent = 0
@@ -726,15 +728,15 @@ BEGIN
 	BEGIN
 		SET @voucherName = '[VOUCHER CHUA DUOC DAT TEN]'
 	END
-	IF(@statusVoucher = 'Con HSD')
+	IF(@statusVoucher IS NOT NULL)
 	BEGIN
-		SET @statusID = 1
+		SELECT @statusID = voucherStatusID FROM VOUCHER_STATUS WHERE voucherStatusName = @statusVoucher 
 	END
 	IF(@voucherID IS NULL)
 	BEGIN
 		EXEC GenerateNewVoucherID @id = @voucherID OUTPUT
 	END
-	INSERT INTO VOUCHER(voucherID, voucherName, percentReduction, voucherStatusID,expiryDate,limitNumber,numberUsed) VALUES (@voucherID, @voucherName, @percent, @statusID, @expiryDate, @limitNumber, @numberUsed)
+	INSERT INTO VOUCHER(voucherID, voucherName, percentReduction, voucherStatusID,expiryDate,limitNumber,numberUsed) VALUES (@voucherID, @voucherName, @percent, @statusID, @expiryDate, @limitNumber, @numberUsed)	
 END
 GO
 
@@ -753,7 +755,7 @@ END
 GO
 
 CREATE PROC insertProduct 
-@productID varchar(10)=null,@productName varchar(255)=null,@productImageUR0L varbinary(max) = null, @quantity int = null
+@productID varchar(10)=null,@productName varchar(255)=null,@productImageUR0L varchar(max) = null, @quantity int = null
 , @typeID varchar(10) = null, @brandID varchar(10) = null, @importPrice float = null, @sellPrice float = null, @descript int = null
 AS BEGIN
 	IF(@typeID IS NULL)
@@ -871,7 +873,6 @@ BEGIN
 	--
 END
 GO
-
 CREATE PROCEDURE UpdateVoucherByID 
 @voucherID VARCHAR(15) = NULL,
 @voucherName VARCHAR(255) = NULL,
@@ -917,7 +918,7 @@ END
 GO
 
 CREATE PROC updateProductByID
-@productID varchar(10)=null,@productName varchar(255)=null,@productImageUR0L varbinary(max) = null, @quantity int = null
+@productID varchar(10)=null,@productName varchar(255)=null,@productImageUR0L varchar(max) = null, @quantity int = null
 , @typeID varchar(10) = null, @brandID varchar(10) = null, @importPrice float = null, @sellPrice float = null, @descript int = null
 AS BEGIN
 	IF (@productID IS NULL)
@@ -1024,7 +1025,7 @@ AS
 		AND (@numberUsed IS NULL OR numberUsed = @numberUsed)
 GO
 
-CREATE FUNCTION searchProduct (@productID varchar(10)=null,@productName varchar(255)=null,@productImageUR0L varbinary(max) = null, @quantity int = null
+CREATE FUNCTION searchProduct (@productID varchar(10)=null,@productName varchar(255)=null,@productImageUR0L varchar(max) = null, @quantity int = null
 , @typeName varchar(255) = null, @brandName varchar(255), @importPrice float = null, @sellPrice float = null, @descript int = null)
 RETURNS TABLE
 AS

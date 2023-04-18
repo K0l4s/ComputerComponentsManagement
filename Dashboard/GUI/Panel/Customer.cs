@@ -34,6 +34,7 @@ namespace Dashboard.GUI.Panel.Account
         private void Customer_Load(object sender, EventArgs e)
         {
             panelTools.Visible = false;
+
             TableDefault();
         }
 

@@ -1,5 +1,6 @@
 ﻿using Dashboard.DAO;
 using Dashboard.DTO;
+using Dashboard.GUI;
 using Dashboard.GUI.Panel;
 using Dashboard.GUI.Panel.Account;
 using Dashboard.GUI.Panel.Voucher;
@@ -90,7 +91,7 @@ namespace Dashboard
 
         private void btnBill_Click(object sender, EventArgs e)
         {
-            btnClick(new fBill(), btnBill);
+            btnClick(new Bill(), btnBill);
         }
 
         private void btnHome_Click(object sender, EventArgs e)
