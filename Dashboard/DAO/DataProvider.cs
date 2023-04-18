@@ -66,8 +66,9 @@ namespace Dashboard.DAO
                 //đúng định dạng EXECUTE/SELECT [Name] @para1 , @para2 , ... dấu phẩy giữa 2 tham số phải cách ký tự phía
                 //trước và phía sau 1 ký tự khoảng trắng ví dụ:
                 // EXECUTE GetInfo @id , @name
-                SqlDataAdapter adapter = new SqlDataAdapter(cmd);
-                adapter.Fill(data); //Lấy dữ liệu từ một nguồn dữ liệu và đổ dữ liệu này vào một đối tượng data.
+
+                    SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+                    adapter.Fill(data); //Lấy dữ liệu từ một nguồn dữ liệu và đổ dữ liệu này vào một đối tượng data.
 
                 conn.Close(); //Đóng kết nối
             }
@@ -103,6 +104,7 @@ namespace Dashboard.DAO
                         }
                     }
                 }
+                
                 data = cmd.ExecuteNonQuery();
                 conn.Close();
             }

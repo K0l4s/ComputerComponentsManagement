@@ -118,11 +118,6 @@
     <Compile Include="GUI\Panel\Voucher\Voucher.Designer.cs">
       <DependentUpon>Voucher.cs</DependentUpon>
     </Compile>
-    <Compile Include="HEQUANTRICOSODULIEUDataSet.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>HEQUANTRICOSODULIEUDataSet.xsd</DependentUpon>
-    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utilities\Session.cs" />
@@ -168,17 +163,6 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <None Include="app.config" />
-    <None Include="HEQUANTRICOSODULIEUDataSet.xsc">
-      <DependentUpon>HEQUANTRICOSODULIEUDataSet.xsd</DependentUpon>
-    </None>
-    <None Include="HEQUANTRICOSODULIEUDataSet.xsd">
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>HEQUANTRICOSODULIEUDataSet.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="HEQUANTRICOSODULIEUDataSet.xss">
-      <DependentUpon>HEQUANTRICOSODULIEUDataSet.xsd</DependentUpon>
-    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
