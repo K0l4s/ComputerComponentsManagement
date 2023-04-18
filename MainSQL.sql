@@ -715,28 +715,7 @@ AS
 	WHERE a.employeeID = e.employeeID
 GO
 --Procedure and Function
-CREATE PROCEDURE GetInforVoucher
-@voucherID VARCHAR(15) = NULL,
-@voucherName VARCHAR(255) = NULL,
-@percentReduction FLOAT = NULL,
-@statusVoucher VARCHAR(255) = NULL,
-@expiryDate DATETIME = NULL,
-@limitNumber INT = NULL,
-@numberUsed INT = NULL
-AS
-BEGIN
-	SELECT *
-	FROM VIEW_VOUCHER
-	WHERE   (@voucherID IS NULL OR voucherID = @voucherID)
-		AND (@voucherName IS NULL OR [Name Voucher] = @voucherName)
-		AND (@percentReduction IS  NULL OR [Percent Reduction ] = @percentReduction)
-		AND (@statusVoucher IS NULL OR [Name of status] = @statusVoucher)
-		AND (@expiryDate IS NULL OR expiryDate = @expiryDate)
- 		AND (@limitNumber IS NULL OR limitNumber = @limitNumber)
-		AND (@numberUsed IS NULL OR numberUsed = @numberUsed)
-END
-EXEC GetInforVoucher NULL, NULL, NULL, NULL, NULL, NULL, NULL
-GO
+
 
 CREATE PROCEDURE insert_Customer 
 @phoneNumber varchar(10) = NULL,
@@ -819,6 +798,19 @@ BEGIN
 END
 GO
 
+CREATE PROCEDURE GenerateNewProductID
+	@id VARCHAR(6) OUTPUT
+AS
+BEGIN
+	DECLARE @newID VARCHAR(6)
+	SET @newID = SUBSTRING(CAST(NEWID() AS VARCHAR(36)), 1, 6)
+	WHILE EXISTS(SELECT 1 FROM PRODUCT WHERE productID = @newID)
+	BEGIN
+		SET @newID = SUBSTRING(CAST(NEWID() AS VARCHAR(36)), 1, 6)
+	END
+	SET @id = @newID
+END
+GO
 
 CREATE PROC insertProduct 
 @productID varchar(10)=null,@productName varchar(255)=null,@productImageUR0L varbinary(max) = null, @quantity int = null
@@ -1038,7 +1030,7 @@ CREATE PROC GetInforEmployeeByID @employeeID  INT
 AS
 	SELECT *
 	FROM VIEW_EMPLOYEE
-	WHERE employeeID = @employeeID;
+	WHERE @employeeID = EmloyeeID;
 GO
 
 CREATE PROCEDURE Change_Password 
@@ -1125,5 +1117,3 @@ AS
 	FROM VIEW_TOTALWORKTIME v1 INNER JOIN (SELECT employeeID, SUM(salaryInShift) as salary FROM VIEW_TOTALWORKTIME WHERE checkOut BETWEEN @dayStart and @dayEnd GROUP BY employeeID ) v2 ON v1.employeeID = v2.employeeID 
 	WHERE checkOut BETWEEN @dayStart and @dayEnd)
 GO
-
-
