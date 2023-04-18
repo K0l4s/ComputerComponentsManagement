@@ -57,6 +57,99 @@ namespace Dashboard.GUI.Panel.Voucher
             {
                 add_Info();
             }    
+            else if(btnTools.Text == "Xóa")
+            {
+                delete_Info();
+            }
+            else if (btnTools.Text == "Sửa")
+            {
+                update_Info();
+            }
+        }
+        private void update_Info()
+        {
+            try
+            {
+                string err;
+                string voucherID = null, voucherName = null;
+                int? reduction = null;
+                int? limit = null, used = null;
+                DateTime? expiry = null;
+                if (!String.IsNullOrEmpty(txtID.Text))
+                    voucherID = txtID.Text;
+                if (!String.IsNullOrEmpty(txtName.Text))
+                    voucherName = txtName.Text;
+                if (!String.IsNullOrEmpty(txtReduction.Text))
+                    try
+                    {
+                        reduction = Int32.Parse(txtReduction.Text);
+                    }
+                    catch (FormatException)
+                    {
+                        MessageBox.Show("Có lẽ tham số truyền vào không hợp lệ rồi! Thử lại sau nhé!");
+                    }
+                if (!String.IsNullOrEmpty(txtLimit.Text))
+                    try
+                    {
+                        limit = Int32.Parse(txtLimit.Text);
+                    }
+                    catch (FormatException)
+                    {
+                        MessageBox.Show("Có lẽ tham số truyền vào không hợp lệ rồi! Thử lại sau nhé!");
+                    }
+                if (!String.IsNullOrEmpty(txtNumberUsed.Text))
+                    try
+                    {
+                        used = Int32.Parse(txtNumberUsed.Text);
+                    }
+                    catch (FormatException)
+                    {
+                        MessageBox.Show("Có lẽ tham số truyền vào không hợp lệ rồi! Thử lại sau nhé!");
+                    }
+                if (!String.IsNullOrEmpty(txtDay.Text) || !String.IsNullOrEmpty(txtMonth.Text) || !String.IsNullOrEmpty(txtYear.Text))
+                    try
+                    {
+                        expiry = new DateTime(Int32.Parse(txtYear.Text), Int32.Parse(txtMonth.Text), Int32.Parse(txtDay.Text));
+                    }
+                    catch (FormatException)
+                    {
+                        MessageBox.Show("Có lẽ tham số truyền vào không hợp lệ rồi! Thử lại sau nhé!");
+                    }
+
+                err = VoucherDAO.Instance.UpdateVoucher(voucherID, voucherName, reduction, expiry, limit, used);
+                TableDefault();
+                MessageBox.Show(err);
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show("Lỗi của bạn có thể từ dữ liệu. Thử lại nhé! \n Mã lỗi:" + ex.ErrorCode + "\n Nội dung: " + ex.Errors);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Có lẽ bạn gặp phải lỗi rồi. Liên hệ DEVELOPER để được hỗ trợ nhé! \n Nội dung lỗi:" + ex.Message);
+            }
+        }
+        private void delete_Info()
+        {
+            try
+            {
+                string err;
+                string voucherID = null;
+
+                if (!String.IsNullOrEmpty(txtID.Text))
+                    voucherID = txtID.Text;
+                err = VoucherDAO.Instance.DeleteVoucher(voucherID);
+                MessageBox.Show(err);
+                TableDefault();
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show("Lỗi của bạn có thể từ dữ liệu. Thử lại nhé! \n Mã lỗi:" + ex.ErrorCode + "\n Nội dung: " + ex.Errors);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Có lẽ bạn gặp phải lỗi rồi. Liên hệ DEVELOPER để được hỗ trợ nhé! \n Nội dung lỗi:" + ex.Message);
+            }
         }
         private void add_Info()
         {
@@ -190,25 +283,61 @@ namespace Dashboard.GUI.Panel.Voucher
         {
             btnTools.Text = "Tìm kiếm";
             panelTools.Visible = true;
+            txtDay.Enabled = true;
+            txtID.Enabled = true;
+            txtLimit.Enabled = true;
+            txtMonth.Enabled = true;
+            txtName.Enabled = true;
+            txtNumberUsed.Enabled = true;
+            txtReduction.Enabled = true;
+            txtYear.Enabled = true;
+            cbStatus.Enabled = true;
         }
         private void btnAdd_Click(object sender, EventArgs e)
         {
             btnTools.Text = "Thêm";
             panelTools.Visible = true;
+            txtDay.Enabled = true;
+            txtID.Enabled = true;
+            txtLimit.Enabled = true;
+            txtMonth.Enabled = true;
+            txtName.Enabled = true;
+            txtNumberUsed.Enabled = true;
+            txtReduction.Enabled = true;
+            txtYear.Enabled = true;
+            cbStatus.Enabled = true;
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
             btnTools.Text = "Xóa";
             panelTools.Visible = true;
+            txtID.Enabled = true;
+            txtDay.Enabled = false;
+            txtLimit.Enabled = false;
+            txtMonth.Enabled = false;
+            txtName.Enabled = false;
+            txtNumberUsed.Enabled = false;
+            txtReduction.Enabled = false;
+            txtYear.Enabled = false;
+            cbStatus.Enabled = false;
         }
 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
             btnTools.Text = "Sửa";
             panelTools.Visible = true;
+            txtDay.Enabled = true;
+            txtID.Enabled = true;
+            txtLimit.Enabled = true;
+            txtMonth.Enabled = true;
+            txtName.Enabled = true;
+            txtNumberUsed.Enabled = true;
+            txtReduction.Enabled = true;
+            txtYear.Enabled = true;
+            cbStatus.Enabled = false;
         }
-
+        
         private void btnRefresh_Click(object sender, EventArgs e)
         {
             TableDefault();

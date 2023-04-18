@@ -48,5 +48,41 @@ namespace Dashboard.DAO
             }
             return err;
         }
+        public string DeleteVoucher(string voucherID = null)
+        {
+            string err = "";
+            int e;
+            try
+            {
+                string query = "EXECUTE DeleteVoucherByID  @id  ";
+                object[] parameters = new object[] { voucherID };
+                e = DataProvider.Instance.ExecuteNonQuery(query, parameters);
+                err = "Xóa voucher thành công";
+            }
+
+            catch (SqlException ex)
+            {
+                err = ex.Message;
+            }
+            return err;
+        }
+        public string UpdateVoucher(string voucherID = null, string voucherName = null, int? percent = null, DateTime? expiryDate = null, int? limitNumber = null, int? numberUsed = null)
+        {
+            string err = "";
+            int e;
+            try
+            {
+                string query = "EXECUTE UpdateVoucherByID @voucherID , @voucherName , @percent , @expiryDate , @limitNumber , @numberUsed ";
+                object[] parameters = new object[] { voucherID, voucherName, percent, expiryDate, limitNumber, numberUsed };
+                e = DataProvider.Instance.ExecuteNonQuery(query, parameters);
+                err = "Sửa voucher thành công";
+            }
+
+            catch (SqlException ex)
+            {
+                err = ex.Message;
+            }
+            return err;
+        }
     }
 }

@@ -411,12 +411,13 @@ CREATE VIEW COMPLETED_BILL AS
 	GROUP BY b.billID, b.employeeID, b.phoneNumber, b.billExportTime;
 	GO
 
-CREATE VIEW VIEW_PRODUCT AS 
-	SELECT pd.productID, pd.productName, pd.productImageURL, pd.quantity
-	FROM PRODUCT pd INNER JOIN PRODUCT_DETAIL pdt
-	ON pd.productID = pdt.productID
-	GROUP BY pd.productID, pd.productName, pd.productImageURL, pd.quantity;
-	GO
+CREATE VIEW VIEW_PRODUCT
+AS
+	SELECT p.productID, productName, productImageURL, quantity, typeName, brandName, importPrice, sellPrice, descript
+	FROM PRODUCT p
+	FULL OUTER JOIN (SELECT pde.productID, typeName, brandName,importPrice,sellPrice,descript FROM PRODUCT_DETAIL pde, PRODUCT_TYPE pt, BRAND b WHERE pde.brandID = b.brandID AND pde.typeID = pt.typeID ) pd
+	ON p.productID = pd.productID
+GO
 
 CREATE VIEW VIEW_WARRENTY AS
 	SELECT wr.productID, wr.warr_StatusID, wr.descript
@@ -560,40 +561,6 @@ BEGIN
 END
 GO
 
-
--- PROCEDURE FINAL
-
---Kien
---CREATE PROC GetInforEmployeeByID @employeeID  INT
---AS
---	SELECT *
---	FROM VIEW_EMPLOYEE
---	WHERE employeeID = @employeeID;
---GO
---CREATE PROCEDURE Change_Password 
---	@employeeID INT, 
---	@newPassword VARCHAR(255), 
---	@oldPassword VARCHAR(255)
---AS
---BEGIN
---	DECLARE @oldPasswordData VARCHAR(255)
---	SELECT @oldPasswordData = emp_password
---	FROM ACCOUNT
---	WHERE employeeID = @employeeID
-	
---	IF(@oldPassword = @oldPasswordData)
---	BEGIN
---		UPDATE ACCOUNT
---		SET emp_password = @newPassword
---		WHERE employeeID = @employeeID
---		RETURN 1
---	END
---	ELSE
---		RETURN 0
---END
---GO
-
---Nhat
 
 CREATE PROCEDURE PROD_InsertEmployee
     @FullName nvarchar(max),
@@ -747,6 +714,7 @@ AS
 	FROM ACCOUNT a, EMPLOYEE e
 	WHERE a.employeeID = e.employeeID
 GO
+--Procedure and Function
 CREATE PROCEDURE GetInforVoucher
 @voucherID VARCHAR(15) = NULL,
 @voucherName VARCHAR(255) = NULL,
@@ -770,17 +738,392 @@ END
 EXEC GetInforVoucher NULL, NULL, NULL, NULL, NULL, NULL, NULL
 GO
 
---EXEC PROD_InsertEmployee
---    @FullName = 'Mai',
---    @Sex = 'FeMale',
---    @FormatName = 'Full Time',
---    @Wage = 27000.5,
---    @EmployeeImage = '20230415135312990_383f8789-49f8-4533-af40-81a7dec43f8d.png',
---    @PhoneNumber = '0123456795',
---    @Address = '123 Main Street',
---    @CitizenID = '030303110053',
---    @CommissionRate = 0.1,
---    @DateOfBirth = '2003-08-20',
---    @Age = 41,
---    @AuthorName = 'Manager'
---GO
+CREATE PROCEDURE insert_Customer 
+@phoneNumber varchar(10) = NULL,
+@fullName varchar(50) = NULL,
+@cus_address varchar(255) = NULL
+AS
+BEGIN 
+
+    -- Kiểm tra xem SĐT đã tồn tại chưa
+    IF EXISTS (SELECT * FROM CUSTOMER WHERE phoneNumber = @phoneNumber)
+    BEGIN
+        RAISERROR (N'SĐT đã tồn tại', 16, 1);
+        RETURN
+    END
+
+	-- Set giá trị default khi tham số nhận giá trị null
+	IF (@phoneNumber is NULL)
+    BEGIN
+        RAISERROR (N'Số điện thoại chưa được nhập. Vui lòng nhập số điện thoại', 16, 1);
+        RETURN
+    END
+
+	IF(@fullName is NULL)
+	BEGIN
+		SET @fullName = N'Khách hàng chưa đăng ký tên'
+	END
+
+	IF(@cus_address is NULL)
+	BEGIN
+		SET @cus_address = N'Khách hàng chưa đưa địa chỉ'
+	END
+
+	--Thêm khách hàng mới
+	INSERT INTO CUSTOMER(phoneNumber, fullName, cus_address) VALUES (@phoneNumber, @fullName, @cus_address) 
+END
+GO
+
+--PROCEDURE TẠO VOUCHERID NGẪU NHIÊN (PROCEDURE HỖ TRỢ)----------------------
+CREATE PROCEDURE GenerateNewVoucherID
+	@id VARCHAR(6) OUTPUT
+AS
+BEGIN
+	DECLARE @newID VARCHAR(6)
+	SET @newID = SUBSTRING(CAST(NEWID() AS VARCHAR(36)), 1, 6)
+	WHILE EXISTS(SELECT 1 FROM VOUCHER WHERE voucherID = @newID)
+	BEGIN
+		SET @newID = SUBSTRING(CAST(NEWID() AS VARCHAR(36)), 1, 6)
+	END
+	SET @id = @newID
+END
+GO
+CREATE PROC InsertVoucher 
+@voucherID VARCHAR(15) = NULL,
+@voucherName VARCHAR(255) = NULL,
+@percent INT = NULL,
+@statusVoucher VARCHAR(255) = NULL,
+@expiryDate DATETIME = NULL,
+@limitNumber INT = NULL,
+@numberUsed INT = NULL
+AS
+BEGIN
+	DECLARE @statusID INT = 2
+	IF(@percent IS NULL)
+	BEGIN
+		SET @percent = 0
+	END
+	IF(@voucherName IS NULL)
+	BEGIN
+		SET @voucherName = '[VOUCHER CHUA DUOC DAT TEN]'
+	END
+	IF(@statusVoucher = 'Con HSD')
+	BEGIN
+		SET @statusID = 1
+	END
+	IF(@voucherID IS NULL)
+	BEGIN
+		EXEC GenerateNewVoucherID @id = @voucherID OUTPUT
+	END
+	INSERT INTO VOUCHER(voucherID, voucherName, percentReduction, voucherStatusID,expiryDate,limitNumber,numberUsed) VALUES (@voucherID, @voucherName, @percent, @statusID, @expiryDate, @limitNumber, @numberUsed)
+END
+GO
+
+
+CREATE PROC insertProduct 
+@productID varchar(10)=null,@productName varchar(255)=null,@productImageUR0L varbinary(max) = null, @quantity int = null
+, @typeID varchar(10) = null, @brandID varchar(10) = null, @importPrice float = null, @sellPrice float = null, @descript int = null
+AS BEGIN
+	IF(@typeID IS NULL)
+	BEGIN
+		RAISERROR (N'Phân loại sản phẩm chưa được chọn. Vui lòng thử lại! ', 16, 1);
+        RETURN
+	END
+	IF(@brandID IS NULL)
+	BEGIN
+		RAISERROR (N'Nhãn hàng của sản phẩm chưa được chọn. Vui lòng thử lại! ', 16, 1);
+        RETURN
+	END
+	IF (@productID IS NULL)
+	BEGIN
+		EXEC GenerateNewProductID @id = @productID OUTPUT
+	END
+	IF (@productName IS NULL)
+	BEGIN
+		SET @productName = '[SAN PHAM CHUA CO TEN]'
+	END
+	IF(@quantity IS NULL)
+	BEGIN
+		SET @quantity = 0
+	END
+	IF(@importPrice IS NULL)
+	BEGIN
+		SET @importPrice = 0
+	END
+	IF(@sellPrice IS NULL)
+	BEGIN
+		SET @sellPrice = 0
+	END
+	INSERT INTO PRODUCT(productID, productName, productImageURL, quantity) VALUES (@productID, @productName, @productImageUR0L, @quantity)
+	INSERT INTO PRODUCT_DETAIL(productID, typeID, brandID,importPrice, sellPrice,descript) VALUES (@productID, @typeID, @brandID, @importPrice, @sellPrice, @descript)
+END
+GO
+
+CREATE PROCEDURE delete_Customer
+@phoneNumber varchar(10) NULL
+AS
+BEGIN
+	--Kiểm tra sđt khách hàng có tồn tại hay không
+
+	IF NOT EXISTS (SELECT * FROM CUSTOMER WHERE phoneNumber = @phoneNumber)
+	BEGIN
+		RAISERROR (N'SĐT không tồn tại', 16, 1);
+		RETURN
+	END
+
+	--Xóa khách hàng
+	DELETE FROM CUSTOMER WHERE phoneNumber = @phoneNumber
+END
+GO
+
+CREATE PROC DeleteVoucherByID 
+@id VARCHAR(15)
+AS
+BEGIN
+	IF NOT EXISTS (SELECT * FROM VOUCHER WHERE voucherID = @id)
+	BEGIN
+		RAISERROR (N'Mã giảm giá không tồn tại', 16, 1);
+		RETURN
+	END
+	DELETE FROM VOUCHER WHERE voucherID = @id
+END
+GO
+
+CREATE PROC deleteProductByID
+@productID VARCHAR(10)
+AS
+BEGIN
+	IF NOT EXISTS (SELECT * FROM VIEW_PRODUCT WHERE productID = @productID)
+	BEGIN
+		RAISERROR (N'Mã sản phẩm không tồn tại', 16, 1);
+		RETURN
+	END
+	DELETE FROM PRODUCT_DETAIL WHERE productID = @productID
+	DELETE FROM PRODUCT WHERE productID = @productID
+END
+GO
+
+CREATE PROCEDURE update_Customer --phoneNumber ko dc update, nếu ko tồn tại sđt thì thôi. Nếu cập nhật giá trị @fullName is not null and @fullName != select fullName from CUSTOMER --> update, còn ko th
+@phoneNumber varchar(10) = NULL,
+@fullName varchar(50) = NULL,
+@cus_address varchar(255) = NULL
+AS
+BEGIN
+	--Kiểm tra sđt khách hàng có tồn tại không
+	IF NOT EXISTS (SELECT * FROM CUSTOMER WHERE phoneNumber = @phoneNumber)
+	BEGIN
+		RAISERROR (N'SĐT không tồn tại', 16, 1);
+		RETURN
+	END
+
+	--Kiểm tra sđt có rỗng hay không
+	IF (@phoneNumber IS NULL)
+	BEGIN
+		RAISERROR (N'Số điện thoại chưa được nhập. Vui lòng nhập số điện thoại ', 16, 1);
+        RETURN
+	END
+
+	IF(@fullName IS NULL)
+	BEGIN
+		SELECT @fullName = fullName FROM CUSTOMER WHERE phoneNumber = @phoneNumber
+	END
+	IF(@cus_address IS NULL)
+	BEGIN
+		SELECT @cus_address = cus_address FROM CUSTOMER WHERE phoneNumber = @phoneNumber
+	END
+
+	--Cập nhật mới
+	UPDATE CUSTOMER
+	SET fullName = @fullName, cus_address = @cus_address
+	WHERE phoneNumber = @phoneNumber
+	--
+END
+GO
+
+CREATE PROCEDURE UpdateVoucherByID 
+@voucherID VARCHAR(15) = NULL,
+@voucherName VARCHAR(255) = NULL,
+@percent INT = NULL,
+@expiryDate DATETIME = NULL,
+@limitNumber INT = NULL,
+@numberUsed INT = NULL
+AS
+BEGIN
+	IF NOT EXISTS (SELECT * FROM VOUCHER WHERE voucherID = @voucherID)
+	BEGIN
+		RAISERROR (N'Voucher không tồn tại', 16, 1);
+		RETURN
+	END
+
+	IF(@voucherName IS NULL)
+	BEGIN
+		SELECT @voucherName = voucherName FROM VOUCHER WHERE voucherID = @voucherID
+	END
+	IF(@percent IS NULL)
+	BEGIN
+		SELECT @percent = percentReduction FROM VOUCHER WHERE voucherID = @voucherID
+	END
+	IF(@limitNumber IS NULL)
+	BEGIN
+		SELECT @limitNumber = limitNumber FROM VOUCHER WHERE voucherID = @voucherID
+	END
+	
+	IF(@numberUsed IS NULL)
+	BEGIN
+		SELECT @numberUsed = numberUsed FROM VOUCHER WHERE voucherID = @voucherID
+	END
+	IF(@numberUsed IS NULL)
+	BEGIN
+		SELECT @numberUsed = numberUsed FROM VOUCHER WHERE voucherID = @voucherID
+	END
+	--Cập nhật mới
+	UPDATE VOUCHER
+	SET voucherName = @voucherName, expiryDate = @expiryDate, limitNumber = @limitNumber, numberUsed = @numberUsed, percentReduction = @percent
+	WHERE voucherID = @voucherID
+	--
+END
+GO
+
+CREATE PROC updateProductByID
+@productID varchar(10)=null,@productName varchar(255)=null,@productImageUR0L varbinary(max) = null, @quantity int = null
+, @typeID varchar(10) = null, @brandID varchar(10) = null, @importPrice float = null, @sellPrice float = null, @descript int = null
+AS BEGIN
+	IF (@productID IS NULL)
+	BEGIN
+		RAISERROR (N'Mã sản phẩm không tồn tại', 16, 1);
+	END
+	IF(@typeID IS NULL)
+	BEGIN
+		SELECT @typeID = typeID FROM PRODUCT_DETAIL WHERE productID = @productID
+	END
+	IF(@brandID IS NULL)
+	BEGIN
+		SELECT @brandID = brandID FROM PRODUCT_DETAIL WHERE productID = @productID
+	END
+	
+	IF (@productName IS NULL)
+	BEGIN
+		SELECT @productName = productName FROM PRODUCT WHERE productID = @productID
+	END
+	IF(@quantity IS NULL)
+	BEGIN
+		SELECT @quantity = quantity FROM PRODUCT WHERE productID = @productID
+	END
+	IF(@importPrice IS NULL)
+	BEGIN
+		SELECT @importPrice = importPrice FROM PRODUCT_DETAIL WHERE productID = @productID
+	END
+	IF(@sellPrice IS NULL)
+	BEGIN
+		SELECT @sellPrice = sellPrice FROM PRODUCT_DETAIL WHERE productID = @productID
+	END
+	IF(@descript IS NULL)
+	BEGIN
+		SELECT @descript = descript FROM PRODUCT_DETAIL WHERE productID = @productID
+	END
+	IF(@productImageUR0L IS NULL)
+	BEGIN
+		SELECT @productImageUR0L = productImageURL FROM PRODUCT WHERE productID = @productID
+	END
+	UPDATE PRODUCT_DETAIL
+	SET productID = @productID , typeID = @typeID , brandID = @brandID , sellPrice = @sellPrice , importPrice = @importPrice , descript = @descript
+	WHERE productID = @productID
+	UPDATE PRODUCT
+	SET productID = @productID , productName = @productName , productImageURL = @productImageUR0L , quantity = @quantity
+	WHERE productID = @productID
+END
+GO
+
+CREATE PROC GetInforEmployeeByID @employeeID  INT
+AS
+	SELECT *
+	FROM VIEW_EMPLOYEE
+	WHERE employeeID = @employeeID;
+GO
+
+CREATE PROCEDURE Change_Password 
+	@employeeID INT, 
+	@newPassword VARCHAR(255), 
+	@oldPassword VARCHAR(255)
+AS
+BEGIN
+	DECLARE @oldPasswordData VARCHAR(255)
+	SELECT @oldPasswordData = emp_password
+	FROM ACCOUNT
+	WHERE employeeID = @employeeID
+	
+	IF(@oldPassword = @oldPasswordData)
+	BEGIN
+		UPDATE ACCOUNT
+		SET emp_password = @newPassword
+		WHERE employeeID = @employeeID
+	END
+END
+GO
+
+CREATE FUNCTION search_Customer (@phoneNumber varchar(10) = NULL, @fullName varchar(50) = NULL, @cus_address varchar(255) = NULL)
+RETURNS TABLE
+AS
+RETURN 
+	(SELECT *
+	FROM VIEW_CUSTOMER
+	WHERE (@phoneNumber IS NULL OR [Number Phone] = @phoneNumber)
+		AND (@fullName IS NULL OR [Full Name] = @fullName)
+		AND (@cus_address IS NULL OR Address = @cus_address))
+GO
+
+CREATE FUNCTION GetInforVoucher
+(@voucherID VARCHAR(15) = NULL,
+@voucherName VARCHAR(255) = NULL,
+@percent INT = NULL,
+@statusVoucher VARCHAR(255) = NULL,
+@expiryDate DATETIME = NULL,
+@limitNumber INT = NULL,
+@numberUsed INT = NULL) RETURNS TABLE
+AS
+	RETURN SELECT *
+	FROM VIEW_VOUCHER
+	WHERE   (@voucherID IS NULL OR voucherID = @voucherID)
+		AND (@voucherName IS NULL OR [Name Voucher] = @voucherName)
+		AND (@percent IS  NULL OR [Percent Reduction ] = @percent)
+		AND (@statusVoucher IS NULL OR [Name of status] = @statusVoucher)
+		AND (@expiryDate IS NULL OR expiryDate = @expiryDate)
+ 		AND (@limitNumber IS NULL OR limitNumber = @limitNumber)
+		AND (@numberUsed IS NULL OR numberUsed = @numberUsed)
+GO
+
+CREATE FUNCTION searchProduct (@productID varchar(10)=null,@productName varchar(255)=null,@productImageUR0L varbinary(max) = null, @quantity int = null
+, @typeName varchar(255) = null, @brandName varchar(255), @importPrice float = null, @sellPrice float = null, @descript int = null)
+RETURNS TABLE
+AS
+RETURN 
+	(SELECT *
+	FROM VIEW_PRODUCT
+	WHERE (@productID IS NULL OR productID = @productID)
+		AND (@productName IS NULL OR productName = @productName)
+		AND (@productImageUR0L IS NULL OR productImageURL = @productImageUR0L)
+		AND (@quantity IS NULL OR quantity = @quantity)
+		AND (@typeName IS NULL OR typeName = @typeName)
+		AND (@brandName IS NULL OR brandName = @brandName)
+		AND (@importPrice IS NULL OR importPrice = @importPrice)
+		AND (@sellPrice IS NULL OR sellPrice = @sellPrice)
+		AND (@descript IS NULL OR descript = @descript))
+GO
+
+CREATE VIEW VIEW_TOTALWORKTIME
+AS
+	SELECT w.employeeID, fullName, checkIn, checkOut, wage, SUM(DATEDIFF(MINUTE, checkIn, checkOut)) / 60 as totalTime,
+	SUM(DATEDIFF(MINUTE, checkIn, checkOut)) * wage / 60 as salaryInShift
+	FROM WORK_TIME w INNER JOIN EMPLOYEE e ON w.employeeID = e.employeeID
+	GROUP BY w.employeeID, checkIn, checkOut, wage, fullName
+GO
+
+CREATE FUNCTION calEm (@dayStart DATETIME, @dayEnd DATETIME)
+RETURNS TABLE 
+AS
+	RETURN (SELECT DISTINCT v1.employeeID,wage, fullName, salary
+	FROM VIEW_TOTALWORKTIME v1 INNER JOIN (SELECT employeeID, SUM(salaryInShift) as salary FROM VIEW_TOTALWORKTIME WHERE checkOut BETWEEN @dayStart and @dayEnd GROUP BY employeeID ) v2 ON v1.employeeID = v2.employeeID 
+	WHERE checkOut BETWEEN @dayStart and @dayEnd)
+GO
+
+

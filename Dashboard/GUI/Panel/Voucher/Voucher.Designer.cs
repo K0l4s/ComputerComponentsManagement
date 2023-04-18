@@ -484,6 +484,7 @@
             // 
             this.dtgvTable.AllowUserToAddRows = false;
             this.dtgvTable.AllowUserToDeleteRows = false;
+            this.dtgvTable.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
             this.dtgvTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dtgvTable.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.voucherID,
@@ -528,7 +529,6 @@
             // PercentReduction
             // 
             this.PercentReduction.DataPropertyName = "Percent Reduction ";
-            dataGridViewCellStyle3.Format = "N2";
             dataGridViewCellStyle3.NullValue = "0";
             this.PercentReduction.DefaultCellStyle = dataGridViewCellStyle3;
             this.PercentReduction.HeaderText = "Giảm (%)";
