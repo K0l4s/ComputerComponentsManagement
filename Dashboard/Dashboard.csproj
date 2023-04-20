@@ -52,8 +52,10 @@
     <Compile Include="DAO\CustomerDAO.cs" />
     <Compile Include="DAO\EmployeeDAO.cs" />
     <Compile Include="DAO\DataProvider.cs" />
+    <Compile Include="DAO\ProductDAO.cs" />
     <Compile Include="DAO\VoucherDAO.cs" />
     <Compile Include="DAO\StatisticsDAO.cs" />
+    <Compile Include="DTO\ProductDTO.cs" />
     <Compile Include="GUI\Bill.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -30,35 +30,39 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Product));
             this.panel2 = new System.Windows.Forms.Panel();
+            this.btnUpdate = new System.Windows.Forms.Button();
+            this.btnDelete = new System.Windows.Forms.Button();
+            this.btnAdd = new System.Windows.Forms.Button();
+            this.btnSearch = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.dtgvBill = new System.Windows.Forms.DataGridView();
             this.panelTools = new System.Windows.Forms.Panel();
-            this.textBox9 = new System.Windows.Forms.TextBox();
+            this.txtDescript = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
-            this.textBox8 = new System.Windows.Forms.TextBox();
+            this.txtSell = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
-            this.textBox7 = new System.Windows.Forms.TextBox();
+            this.txtImport = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
-            this.textBox6 = new System.Windows.Forms.TextBox();
+            this.txtBrand = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
-            this.textBox5 = new System.Windows.Forms.TextBox();
+            this.txtType = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.txtQuantity = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.txtName = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.txtID = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.picImage = new System.Windows.Forms.PictureBox();
             this.btnRefresh = new System.Windows.Forms.Button();
             this.btnClearData = new System.Windows.Forms.Button();
             this.btnCloseTool = new System.Windows.Forms.Button();
             this.btnTools = new System.Windows.Forms.Button();
             this.panel3 = new System.Windows.Forms.Panel();
             this.dtgvTable = new System.Windows.Forms.DataGridView();
-            this.productImageURL = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.productImageURL = new System.Windows.Forms.DataGridViewImageColumn();
             this.productID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.productName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.quantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -67,15 +71,11 @@
             this.importPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.sellPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.descript = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.btnUpdate = new System.Windows.Forms.Button();
-            this.btnDelete = new System.Windows.Forms.Button();
-            this.btnAdd = new System.Windows.Forms.Button();
-            this.btnSearch = new System.Windows.Forms.Button();
             this.panel2.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dtgvBill)).BeginInit();
             this.panelTools.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picImage)).BeginInit();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dtgvTable)).BeginInit();
             this.SuspendLayout();
@@ -91,6 +91,66 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(45, 917);
             this.panel2.TabIndex = 9;
+            // 
+            // btnUpdate
+            // 
+            this.btnUpdate.BackColor = System.Drawing.Color.Transparent;
+            this.btnUpdate.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnUpdate.BackgroundImage")));
+            this.btnUpdate.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnUpdate.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnUpdate.FlatAppearance.BorderSize = 0;
+            this.btnUpdate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnUpdate.Location = new System.Drawing.Point(0, 150);
+            this.btnUpdate.Name = "btnUpdate";
+            this.btnUpdate.Size = new System.Drawing.Size(45, 50);
+            this.btnUpdate.TabIndex = 16;
+            this.btnUpdate.UseVisualStyleBackColor = false;
+            this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
+            // 
+            // btnDelete
+            // 
+            this.btnDelete.BackColor = System.Drawing.Color.Transparent;
+            this.btnDelete.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnDelete.BackgroundImage")));
+            this.btnDelete.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnDelete.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnDelete.FlatAppearance.BorderSize = 0;
+            this.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDelete.Location = new System.Drawing.Point(0, 100);
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(45, 50);
+            this.btnDelete.TabIndex = 15;
+            this.btnDelete.UseVisualStyleBackColor = false;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
+            // 
+            // btnAdd
+            // 
+            this.btnAdd.BackColor = System.Drawing.Color.Transparent;
+            this.btnAdd.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnAdd.BackgroundImage")));
+            this.btnAdd.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnAdd.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnAdd.FlatAppearance.BorderSize = 0;
+            this.btnAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAdd.Location = new System.Drawing.Point(0, 50);
+            this.btnAdd.Name = "btnAdd";
+            this.btnAdd.Size = new System.Drawing.Size(45, 50);
+            this.btnAdd.TabIndex = 14;
+            this.btnAdd.UseVisualStyleBackColor = false;
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
+            // 
+            // btnSearch
+            // 
+            this.btnSearch.BackColor = System.Drawing.Color.Transparent;
+            this.btnSearch.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnSearch.BackgroundImage")));
+            this.btnSearch.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnSearch.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnSearch.FlatAppearance.BorderSize = 0;
+            this.btnSearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSearch.Location = new System.Drawing.Point(0, 0);
+            this.btnSearch.Name = "btnSearch";
+            this.btnSearch.Size = new System.Drawing.Size(45, 50);
+            this.btnSearch.TabIndex = 13;
+            this.btnSearch.UseVisualStyleBackColor = false;
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
             // panel1
             // 
@@ -135,23 +195,23 @@
             // panelTools
             // 
             this.panelTools.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.panelTools.Controls.Add(this.textBox9);
+            this.panelTools.Controls.Add(this.txtDescript);
             this.panelTools.Controls.Add(this.label9);
-            this.panelTools.Controls.Add(this.textBox8);
+            this.panelTools.Controls.Add(this.txtSell);
             this.panelTools.Controls.Add(this.label8);
-            this.panelTools.Controls.Add(this.textBox7);
+            this.panelTools.Controls.Add(this.txtImport);
             this.panelTools.Controls.Add(this.label7);
-            this.panelTools.Controls.Add(this.textBox6);
+            this.panelTools.Controls.Add(this.txtBrand);
             this.panelTools.Controls.Add(this.label6);
-            this.panelTools.Controls.Add(this.textBox5);
+            this.panelTools.Controls.Add(this.txtType);
             this.panelTools.Controls.Add(this.label5);
-            this.panelTools.Controls.Add(this.textBox4);
+            this.panelTools.Controls.Add(this.txtQuantity);
             this.panelTools.Controls.Add(this.label4);
-            this.panelTools.Controls.Add(this.textBox3);
+            this.panelTools.Controls.Add(this.txtName);
             this.panelTools.Controls.Add(this.label3);
-            this.panelTools.Controls.Add(this.textBox1);
+            this.panelTools.Controls.Add(this.txtID);
             this.panelTools.Controls.Add(this.label2);
-            this.panelTools.Controls.Add(this.pictureBox1);
+            this.panelTools.Controls.Add(this.picImage);
             this.panelTools.Controls.Add(this.btnRefresh);
             this.panelTools.Controls.Add(this.btnClearData);
             this.panelTools.Controls.Add(this.btnCloseTool);
@@ -162,12 +222,12 @@
             this.panelTools.Size = new System.Drawing.Size(358, 917);
             this.panelTools.TabIndex = 10;
             // 
-            // textBox9
+            // txtDescript
             // 
-            this.textBox9.Location = new System.Drawing.Point(18, 307);
-            this.textBox9.Name = "textBox9";
-            this.textBox9.Size = new System.Drawing.Size(334, 22);
-            this.textBox9.TabIndex = 28;
+            this.txtDescript.Location = new System.Drawing.Point(18, 307);
+            this.txtDescript.Name = "txtDescript";
+            this.txtDescript.Size = new System.Drawing.Size(334, 22);
+            this.txtDescript.TabIndex = 28;
             // 
             // label9
             // 
@@ -179,12 +239,12 @@
             this.label9.TabIndex = 27;
             this.label9.Text = "MÔ TẢ SẢN PHẨM:";
             // 
-            // textBox8
+            // txtSell
             // 
-            this.textBox8.Location = new System.Drawing.Point(197, 255);
-            this.textBox8.Name = "textBox8";
-            this.textBox8.Size = new System.Drawing.Size(155, 22);
-            this.textBox8.TabIndex = 38;
+            this.txtSell.Location = new System.Drawing.Point(197, 255);
+            this.txtSell.Name = "txtSell";
+            this.txtSell.Size = new System.Drawing.Size(155, 22);
+            this.txtSell.TabIndex = 38;
             // 
             // label8
             // 
@@ -196,12 +256,12 @@
             this.label8.TabIndex = 37;
             this.label8.Text = "GIÁ BÁN:";
             // 
-            // textBox7
+            // txtImport
             // 
-            this.textBox7.Location = new System.Drawing.Point(18, 255);
-            this.textBox7.Name = "textBox7";
-            this.textBox7.Size = new System.Drawing.Size(173, 22);
-            this.textBox7.TabIndex = 36;
+            this.txtImport.Location = new System.Drawing.Point(18, 255);
+            this.txtImport.Name = "txtImport";
+            this.txtImport.Size = new System.Drawing.Size(173, 22);
+            this.txtImport.TabIndex = 36;
             // 
             // label7
             // 
@@ -213,12 +273,12 @@
             this.label7.TabIndex = 35;
             this.label7.Text = "GIÁ NHẬP:";
             // 
-            // textBox6
+            // txtBrand
             // 
-            this.textBox6.Location = new System.Drawing.Point(198, 205);
-            this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(154, 22);
-            this.textBox6.TabIndex = 34;
+            this.txtBrand.Location = new System.Drawing.Point(198, 205);
+            this.txtBrand.Name = "txtBrand";
+            this.txtBrand.Size = new System.Drawing.Size(154, 22);
+            this.txtBrand.TabIndex = 34;
             // 
             // label6
             // 
@@ -230,12 +290,12 @@
             this.label6.TabIndex = 33;
             this.label6.Text = "NHÃN HÀNG:";
             // 
-            // textBox5
+            // txtType
             // 
-            this.textBox5.Location = new System.Drawing.Point(18, 205);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(173, 22);
-            this.textBox5.TabIndex = 32;
+            this.txtType.Location = new System.Drawing.Point(18, 205);
+            this.txtType.Name = "txtType";
+            this.txtType.Size = new System.Drawing.Size(173, 22);
+            this.txtType.TabIndex = 32;
             // 
             // label5
             // 
@@ -247,12 +307,12 @@
             this.label5.TabIndex = 31;
             this.label5.Text = "PHÂN LOẠI:";
             // 
-            // textBox4
+            // txtQuantity
             // 
-            this.textBox4.Location = new System.Drawing.Point(18, 158);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(173, 22);
-            this.textBox4.TabIndex = 30;
+            this.txtQuantity.Location = new System.Drawing.Point(18, 158);
+            this.txtQuantity.Name = "txtQuantity";
+            this.txtQuantity.Size = new System.Drawing.Size(173, 22);
+            this.txtQuantity.TabIndex = 30;
             // 
             // label4
             // 
@@ -264,12 +324,12 @@
             this.label4.TabIndex = 29;
             this.label4.Text = "SỐ LƯỢNG:";
             // 
-            // textBox3
+            // txtName
             // 
-            this.textBox3.Location = new System.Drawing.Point(18, 110);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(173, 22);
-            this.textBox3.TabIndex = 28;
+            this.txtName.Location = new System.Drawing.Point(18, 110);
+            this.txtName.Name = "txtName";
+            this.txtName.Size = new System.Drawing.Size(173, 22);
+            this.txtName.TabIndex = 28;
             // 
             // label3
             // 
@@ -281,12 +341,12 @@
             this.label3.TabIndex = 27;
             this.label3.Text = "TÊN SẢN PHẨM:";
             // 
-            // textBox1
+            // txtID
             // 
-            this.textBox1.Location = new System.Drawing.Point(18, 65);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(173, 22);
-            this.textBox1.TabIndex = 26;
+            this.txtID.Location = new System.Drawing.Point(18, 65);
+            this.txtID.Name = "txtID";
+            this.txtID.Size = new System.Drawing.Size(173, 22);
+            this.txtID.TabIndex = 26;
             // 
             // label2
             // 
@@ -298,16 +358,16 @@
             this.label2.TabIndex = 25;
             this.label2.Text = "MÃ SẢN PHẨM:";
             // 
-            // pictureBox1
+            // picImage
             // 
-            this.pictureBox1.ErrorImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1.ErrorImage")));
-            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(218, 65);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(114, 115);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox1.TabIndex = 24;
-            this.pictureBox1.TabStop = false;
+            this.picImage.ErrorImage = ((System.Drawing.Image)(resources.GetObject("picImage.ErrorImage")));
+            this.picImage.Image = ((System.Drawing.Image)(resources.GetObject("picImage.Image")));
+            this.picImage.Location = new System.Drawing.Point(218, 65);
+            this.picImage.Name = "picImage";
+            this.picImage.Size = new System.Drawing.Size(114, 115);
+            this.picImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.picImage.TabIndex = 24;
+            this.picImage.TabStop = false;
             // 
             // btnRefresh
             // 
@@ -317,6 +377,7 @@
             this.btnRefresh.TabIndex = 23;
             this.btnRefresh.Text = "Hiển Thị Tất Cả Voucher";
             this.btnRefresh.UseVisualStyleBackColor = true;
+            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
             // 
             // btnClearData
             // 
@@ -326,6 +387,7 @@
             this.btnClearData.TabIndex = 23;
             this.btnClearData.Text = "HOÀN TÁC DỮ LIỆU";
             this.btnClearData.UseVisualStyleBackColor = true;
+            this.btnClearData.Click += new System.EventHandler(this.btnClearData_Click);
             // 
             // btnCloseTool
             // 
@@ -335,6 +397,7 @@
             this.btnCloseTool.TabIndex = 9;
             this.btnCloseTool.Text = "X";
             this.btnCloseTool.UseVisualStyleBackColor = true;
+            this.btnCloseTool.Click += new System.EventHandler(this.btnCloseTool_Click);
             // 
             // btnTools
             // 
@@ -343,6 +406,7 @@
             this.btnTools.Size = new System.Drawing.Size(293, 85);
             this.btnTools.TabIndex = 8;
             this.btnTools.UseVisualStyleBackColor = true;
+            this.btnTools.Click += new System.EventHandler(this.btnTools_Click);
             // 
             // panel3
             // 
@@ -379,7 +443,9 @@
             // productImageURL
             // 
             this.productImageURL.DataPropertyName = "productImageURL";
-            this.productImageURL.HeaderText = "Ảnh Minh Họa";
+            this.productImageURL.HeaderText = "productImageURL";
+            this.productImageURL.Image = ((System.Drawing.Image)(resources.GetObject("productImageURL.Image")));
+            this.productImageURL.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
             this.productImageURL.MinimumWidth = 6;
             this.productImageURL.Name = "productImageURL";
             this.productImageURL.Width = 125;
@@ -448,62 +514,6 @@
             this.descript.Name = "descript";
             this.descript.Width = 125;
             // 
-            // btnUpdate
-            // 
-            this.btnUpdate.BackColor = System.Drawing.Color.Transparent;
-            this.btnUpdate.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnUpdate.BackgroundImage")));
-            this.btnUpdate.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnUpdate.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnUpdate.FlatAppearance.BorderSize = 0;
-            this.btnUpdate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnUpdate.Location = new System.Drawing.Point(0, 150);
-            this.btnUpdate.Name = "btnUpdate";
-            this.btnUpdate.Size = new System.Drawing.Size(45, 50);
-            this.btnUpdate.TabIndex = 16;
-            this.btnUpdate.UseVisualStyleBackColor = false;
-            // 
-            // btnDelete
-            // 
-            this.btnDelete.BackColor = System.Drawing.Color.Transparent;
-            this.btnDelete.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnDelete.BackgroundImage")));
-            this.btnDelete.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnDelete.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnDelete.FlatAppearance.BorderSize = 0;
-            this.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnDelete.Location = new System.Drawing.Point(0, 100);
-            this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(45, 50);
-            this.btnDelete.TabIndex = 15;
-            this.btnDelete.UseVisualStyleBackColor = false;
-            // 
-            // btnAdd
-            // 
-            this.btnAdd.BackColor = System.Drawing.Color.Transparent;
-            this.btnAdd.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnAdd.BackgroundImage")));
-            this.btnAdd.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnAdd.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnAdd.FlatAppearance.BorderSize = 0;
-            this.btnAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAdd.Location = new System.Drawing.Point(0, 50);
-            this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(45, 50);
-            this.btnAdd.TabIndex = 14;
-            this.btnAdd.UseVisualStyleBackColor = false;
-            // 
-            // btnSearch
-            // 
-            this.btnSearch.BackColor = System.Drawing.Color.Transparent;
-            this.btnSearch.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnSearch.BackgroundImage")));
-            this.btnSearch.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnSearch.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnSearch.FlatAppearance.BorderSize = 0;
-            this.btnSearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSearch.Location = new System.Drawing.Point(0, 0);
-            this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new System.Drawing.Size(45, 50);
-            this.btnSearch.TabIndex = 13;
-            this.btnSearch.UseVisualStyleBackColor = false;
-            // 
             // Product
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -515,13 +525,14 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "Product";
             this.Text = "Product";
+            this.Load += new System.EventHandler(this.Product_Load);
             this.panel2.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dtgvBill)).EndInit();
             this.panelTools.ResumeLayout(false);
             this.panelTools.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picImage)).EndInit();
             this.panel3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dtgvTable)).EndInit();
             this.ResumeLayout(false);
@@ -541,7 +552,28 @@
         private System.Windows.Forms.Button btnTools;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.DataGridView dtgvTable;
-        private System.Windows.Forms.DataGridViewTextBoxColumn productImageURL;
+        private System.Windows.Forms.PictureBox picImage;
+        private System.Windows.Forms.TextBox txtBrand;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.TextBox txtType;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TextBox txtQuantity;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TextBox txtName;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox txtID;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox txtDescript;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.TextBox txtSell;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.TextBox txtImport;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Button btnUpdate;
+        private System.Windows.Forms.Button btnDelete;
+        private System.Windows.Forms.Button btnAdd;
+        private System.Windows.Forms.Button btnSearch;
+        private System.Windows.Forms.DataGridViewImageColumn productImageURL;
         private System.Windows.Forms.DataGridViewTextBoxColumn productID;
         private System.Windows.Forms.DataGridViewTextBoxColumn productName;
         private System.Windows.Forms.DataGridViewTextBoxColumn quantity;
@@ -550,26 +582,5 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn importPrice;
         private System.Windows.Forms.DataGridViewTextBoxColumn sellPrice;
         private System.Windows.Forms.DataGridViewTextBoxColumn descript;
-        private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.TextBox textBox6;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TextBox textBox5;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox textBox4;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textBox9;
-        private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.TextBox textBox8;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.TextBox textBox7;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Button btnUpdate;
-        private System.Windows.Forms.Button btnDelete;
-        private System.Windows.Forms.Button btnAdd;
-        private System.Windows.Forms.Button btnSearch;
     }
 }

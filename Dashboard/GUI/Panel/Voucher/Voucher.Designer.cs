@@ -408,7 +408,7 @@
             // 
             // btnCloseTool
             // 
-            this.btnCloseTool.Location = new System.Drawing.Point(329, 0);
+            this.btnCloseTool.Location = new System.Drawing.Point(384, 0);
             this.btnCloseTool.Name = "btnCloseTool";
             this.btnCloseTool.Size = new System.Drawing.Size(25, 23);
             this.btnCloseTool.TabIndex = 9;

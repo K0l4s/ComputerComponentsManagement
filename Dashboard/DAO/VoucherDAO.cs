@@ -20,11 +20,9 @@ namespace Dashboard.DAO
             get { if (instance == null) instance = new VoucherDAO(); return instance; }
             private set { instance = value; }
         }
-
         public DataTable LoadTable(string voucherID = null, string voucherName = null, int? percent = null, string statusVoucher = null, DateTime? expiryDate = null, int? limitNumber = null, int? numberUsed = null)
         {
             DataTable dt = null;
-
             string query = "Select * FROM GetInforVoucher ( @voucherID , @voucherName , @percent , @statusVoucher , @expiryDate , @limitNumber , @numberUsed )";
             object[] parameters = new object[] { voucherID, voucherName, percent, statusVoucher, expiryDate, limitNumber, numberUsed };
             dt = DataProvider.Instance.ExecuteQuery(query, parameters);

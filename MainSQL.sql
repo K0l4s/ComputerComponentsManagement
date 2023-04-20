@@ -27,7 +27,7 @@ CREATE TABLE PRODUCT_TYPE(
 CREATE TABLE PRODUCT(
 				productID VARCHAR(10) PRIMARY KEY NOT NULL,
 				productName VARCHAR(255) NOT NULL,
-				productImageURL varchar(max),
+				productImageURL varbinary(max),
 				quantity INT NOT NULL,
 				CHECK(quantity >= 0));
 				GO
@@ -755,7 +755,7 @@ END
 GO
 
 CREATE PROC insertProduct 
-@productID varchar(10)=null,@productName varchar(255)=null,@productImageUR0L varchar(max) = null, @quantity int = null
+@productID varchar(10)=null,@productName varchar(255)=null,@productImageUR0L varbinary(max) = null, @quantity int = null
 , @typeID varchar(10) = null, @brandID varchar(10) = null, @importPrice float = null, @sellPrice float = null, @descript int = null
 AS BEGIN
 	IF(@typeID IS NULL)
@@ -918,7 +918,7 @@ END
 GO
 
 CREATE PROC updateProductByID
-@productID varchar(10)=null,@productName varchar(255)=null,@productImageUR0L varchar(max) = null, @quantity int = null
+@productID varchar(10)=null,@productName varchar(255)=null,@productImageUR0L varbinary(max) = null, @quantity int = null
 , @typeID varchar(10) = null, @brandID varchar(10) = null, @importPrice float = null, @sellPrice float = null, @descript int = null
 AS BEGIN
 	IF (@productID IS NULL)
@@ -1025,7 +1025,7 @@ AS
 		AND (@numberUsed IS NULL OR numberUsed = @numberUsed)
 GO
 
-CREATE FUNCTION searchProduct (@productID varchar(10)=null,@productName varchar(255)=null,@productImageUR0L varchar(max) = null, @quantity int = null
+CREATE FUNCTION searchProduct (@productID varchar(10)=null,@productName varchar(255)=null, @quantity int = null
 , @typeName varchar(255) = null, @brandName varchar(255), @importPrice float = null, @sellPrice float = null, @descript int = null)
 RETURNS TABLE
 AS
@@ -1034,7 +1034,6 @@ RETURN
 	FROM VIEW_PRODUCT
 	WHERE (@productID IS NULL OR productID = @productID)
 		AND (@productName IS NULL OR productName = @productName)
-		AND (@productImageUR0L IS NULL OR productImageURL = @productImageUR0L)
 		AND (@quantity IS NULL OR quantity = @quantity)
 		AND (@typeName IS NULL OR typeName = @typeName)
 		AND (@brandName IS NULL OR brandName = @brandName)

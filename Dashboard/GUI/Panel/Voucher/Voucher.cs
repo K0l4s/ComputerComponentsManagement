@@ -158,10 +158,10 @@ namespace Dashboard.GUI.Panel.Voucher
             {
                 string err;
                 string voucherID = null, voucherName = null, status = null;
-                int? reduction = null;
+                int? reduction = null; 
                 int? limit = null, used = null;
                 DateTime? expiry = null;
-                if (!String.IsNullOrEmpty(txtID.Text))
+                if (!String.IsNullOrEmpty(txtID.Text)) 
                     voucherID = txtID.Text;
                 if (!String.IsNullOrEmpty(txtName.Text))
                     voucherName = txtName.Text;

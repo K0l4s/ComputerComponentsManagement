@@ -1,7 +1,10 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.Drawing.Imaging;
+using System.IO;
 using System.Linq;
 using System.Net.NetworkInformation;
 using System.Text;
@@ -27,7 +30,6 @@ namespace Dashboard.DAO
             get { if (instance == null) instance = new DataProvider(); return DataProvider.instance; }
             private set { DataProvider.instance = value; }
         }
-
         //Hàm thực thi câu lệnh sqlCommand, giá trị trả về là 1 bảng giá trị
         public DataTable ExecuteQuery(string query, object[] paramenter = null)
         {
