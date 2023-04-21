@@ -62,6 +62,12 @@
     <Compile Include="GUI\Bill.Designer.cs">
       <DependentUpon>Bill.cs</DependentUpon>
     </Compile>
+    <Compile Include="GUI\MyTeam.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\MyTeam.Designer.cs">
+      <DependentUpon>MyTeam.cs</DependentUpon>
+    </Compile>
     <Compile Include="GUI\Panel\Product.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -132,6 +138,9 @@
     <Compile Include="Utilities\Utilities.cs" />
     <EmbeddedResource Include="GUI\Bill.resx">
       <DependentUpon>Bill.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\MyTeam.resx">
+      <DependentUpon>MyTeam.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\Panel\fEmployee.resx">
       <DependentUpon>fEmployee.cs</DependentUpon>

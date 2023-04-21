@@ -39,15 +39,15 @@
             this.label1 = new System.Windows.Forms.Label();
             this.dtgvBill = new System.Windows.Forms.DataGridView();
             this.panelTools = new System.Windows.Forms.Panel();
+            this.cbBrand = new System.Windows.Forms.ComboBox();
+            this.cbType = new System.Windows.Forms.ComboBox();
             this.txtDescript = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
             this.txtSell = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.txtImport = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
-            this.txtBrand = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
-            this.txtType = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.txtQuantity = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
@@ -71,6 +71,7 @@
             this.importPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.sellPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.descript = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.panel2.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dtgvBill)).BeginInit();
@@ -195,15 +196,15 @@
             // panelTools
             // 
             this.panelTools.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.panelTools.Controls.Add(this.cbBrand);
+            this.panelTools.Controls.Add(this.cbType);
             this.panelTools.Controls.Add(this.txtDescript);
             this.panelTools.Controls.Add(this.label9);
             this.panelTools.Controls.Add(this.txtSell);
             this.panelTools.Controls.Add(this.label8);
             this.panelTools.Controls.Add(this.txtImport);
             this.panelTools.Controls.Add(this.label7);
-            this.panelTools.Controls.Add(this.txtBrand);
             this.panelTools.Controls.Add(this.label6);
-            this.panelTools.Controls.Add(this.txtType);
             this.panelTools.Controls.Add(this.label5);
             this.panelTools.Controls.Add(this.txtQuantity);
             this.panelTools.Controls.Add(this.label4);
@@ -221,6 +222,22 @@
             this.panelTools.Name = "panelTools";
             this.panelTools.Size = new System.Drawing.Size(358, 917);
             this.panelTools.TabIndex = 10;
+            // 
+            // cbBrand
+            // 
+            this.cbBrand.FormattingEnabled = true;
+            this.cbBrand.Location = new System.Drawing.Point(197, 205);
+            this.cbBrand.Name = "cbBrand";
+            this.cbBrand.Size = new System.Drawing.Size(155, 24);
+            this.cbBrand.TabIndex = 40;
+            // 
+            // cbType
+            // 
+            this.cbType.FormattingEnabled = true;
+            this.cbType.Location = new System.Drawing.Point(18, 205);
+            this.cbType.Name = "cbType";
+            this.cbType.Size = new System.Drawing.Size(173, 24);
+            this.cbType.TabIndex = 39;
             // 
             // txtDescript
             // 
@@ -273,13 +290,6 @@
             this.label7.TabIndex = 35;
             this.label7.Text = "GIÁ NHẬP:";
             // 
-            // txtBrand
-            // 
-            this.txtBrand.Location = new System.Drawing.Point(198, 205);
-            this.txtBrand.Name = "txtBrand";
-            this.txtBrand.Size = new System.Drawing.Size(154, 22);
-            this.txtBrand.TabIndex = 34;
-            // 
             // label6
             // 
             this.label6.AutoSize = true;
@@ -289,13 +299,6 @@
             this.label6.Size = new System.Drawing.Size(91, 16);
             this.label6.TabIndex = 33;
             this.label6.Text = "NHÃN HÀNG:";
-            // 
-            // txtType
-            // 
-            this.txtType.Location = new System.Drawing.Point(18, 205);
-            this.txtType.Name = "txtType";
-            this.txtType.Size = new System.Drawing.Size(173, 22);
-            this.txtType.TabIndex = 32;
             // 
             // label5
             // 
@@ -553,9 +556,7 @@
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.DataGridView dtgvTable;
         private System.Windows.Forms.PictureBox picImage;
-        private System.Windows.Forms.TextBox txtBrand;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TextBox txtType;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox txtQuantity;
         private System.Windows.Forms.Label label4;
@@ -582,5 +583,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn importPrice;
         private System.Windows.Forms.DataGridViewTextBoxColumn sellPrice;
         private System.Windows.Forms.DataGridViewTextBoxColumn descript;
+        private System.Windows.Forms.ComboBox cbBrand;
+        private System.Windows.Forms.ComboBox cbType;
+        private System.ComponentModel.BackgroundWorker backgroundWorker1;
     }
 }

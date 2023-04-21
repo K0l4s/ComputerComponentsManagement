@@ -33,20 +33,63 @@ namespace Dashboard.DAO
 
             return dt;
         }
-        public string AddCustomer(ProductDTO product)
+        public void LoadComboBoxType(ComboBox cb)
+        {
+            string query = "SELECT * FROM PRODUCT_TYPE";
+            DataTable dt = DataProvider.Instance.ExecuteQuery(query);
+            cb.DataSource = dt;
+            cb.DisplayMember = "typeName";
+            cb.ValueMember = "typeID";
+        }
+        public void LoadComboBoxBrand(ComboBox cb)
+        {
+            string query = "SELECT * FROM BRAND";
+            DataTable dt = DataProvider.Instance.ExecuteQuery(query);
+            cb.DataSource = dt;
+            cb.DisplayMember = "brandName";
+            cb.ValueMember = "brandID";
+        }
+        public string AddProduct(ProductDTO product)
         {
             string err = "";
-            int e;
             try
             {
-                string query = "EXECUTE insertProduct @productID , @productName , @quantity , @typeName , @productImageUR0L , @brandName , @importPrice , @sellPrice , @descript ";
+                string query = "EXECUTE insertProduct @productID , @productName , @quantity , @typeID "
+                    + ", @brandID , @importPrice , @sellPrice , @descript , @productImageUR0L ";
                 object[] parameters = new object[] { product.productID , product.productName ,
-                product.quantity , product.typeName , product.productImageURL
-            , product.brandName , product.importPrice , product.sellPrice , product.descript };
-                e = DataProvider.Instance.ExecuteNonQuery(query, parameters);
-                err = "Tạo tài khoản thành công";
+                product.quantity , product.typeID
+                , product.brandID , product.importPrice , product.sellPrice , product.descript , product.productImageURL};
+                DataTable e = DataProvider.Instance.ExecuteQuery(query, parameters);
+                err = "Thêm sản phẩm thành công";
             }
-
+            catch (SqlException ex)
+            {
+                err = ex.Message;
+            }
+            return err;
+        }
+        public string DeleteProduct(ProductDTO product)
+        {
+            string err = "";
+            string query = "EXECUTE deleteProductByID @productID ";
+            object[] parameters = new object[] { product.productID };
+            DataTable e = DataProvider.Instance.ExecuteQuery(query, parameters);
+            err = "Xóa sản phẩm thành công";
+            return err;
+        }
+        public string UpdateProduct(ProductDTO product)
+        {
+            string err = "";
+            try
+            {
+                string query = "EXECUTE updateProductByID @productID , @productName , @quantity , @typeID "
+                    + ", @brandID , @importPrice , @sellPrice , @descript , @productImageUR0L ";
+                object[] parameters = new object[] { product.productID , product.productName ,
+                product.quantity , product.typeID
+                , product.brandID , product.importPrice , product.sellPrice , product.descript , product.productImageURL};
+                DataTable e = DataProvider.Instance.ExecuteQuery(query, parameters);
+                err = "Chỉnh sản phẩm thành công";
+            }
             catch (SqlException ex)
             {
                 err = ex.Message;

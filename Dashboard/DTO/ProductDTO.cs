@@ -14,12 +14,14 @@ namespace Dashboard.DTO
         public byte[] productImageURL { get; set; }
         public int? quantity { get; set; }
         public string typeName { get; set; }
+        public string typeID { get; set; }
+        public string brandID { get; set; }
         public string brandName { get; set; }
-        public int? importPrice { get; set; }
-        public int? sellPrice { get; set; }
+        public float? importPrice { get; set; }
+        public float? sellPrice { get; set; }
         public string descript { get; set; }
         public void ProductGet(string productID = null, string productName = null, byte[] productImageURL = null,
-            int? quantity = null, string typeName = null, string brandName = null, int? importPrice = null, int? sellPrice = null, string descript = null)
+            int? quantity = null, string typeName = null, string brandName = null, float? importPrice = null, float? sellPrice = null, string descript = null,string typeID = null, string brandID = null)
         {
             this.productID = productID;
             this.productName = productName;
@@ -30,6 +32,8 @@ namespace Dashboard.DTO
             this.importPrice = importPrice;
             this.sellPrice = sellPrice;
             this.descript = descript;
+            this.typeID = typeID;
+            this.brandID = brandID;
         }
     }
 }

@@ -35,8 +35,8 @@ CREATE TABLE PRODUCT_DETAIL(
 				productID VARCHAR(10) NOT NULL PRIMARY KEY REFERENCES PRODUCT(productID),
 				typeID VARCHAR(10) NOT NULL REFERENCES PRODUCT_TYPE(typeID),
 				brandID VARCHAR(10) NOT NULL REFERENCES BRAND(brandID),
-				importPrice INT NOT NULL,
-				sellPrice INT NOT NULL,
+				importPrice FLOAT NOT NULL,
+				sellPrice FLOAT NOT NULL,
 				Check(importPrice >=0),
 				Check(sellPrice >=0),
 				descript VARCHAR(1000));
@@ -189,7 +189,7 @@ ON PRODUCT_DETAIL
 FOR INSERT, UPDATE
 AS
 BEGIN
-	DECLARE @IP INT, @SP INT
+	DECLARE @IP FLOAT, @SP FLOAT
 	SELECT @IP = importPrice , @SP = sellPrice FROM inserted
 	IF(@IP > @SP)
 		BEGIN
@@ -754,13 +754,14 @@ BEGIN
 END
 GO
 
-CREATE PROC insertProduct 
-@productID varchar(10)=null,@productName varchar(255)=null,@productImageUR0L varbinary(max) = null, @quantity int = null
-, @typeID varchar(10) = null, @brandID varchar(10) = null, @importPrice float = null, @sellPrice float = null, @descript int = null
+CREATE PROC insertProduct @productID varchar(10)=null, @productName varchar(255)=null,
+ @quantity int = null , @typeID varchar(10) = null, 
+@brandID varchar(10) = null, @importPrice float = null, @sellPrice float = null, 
+@descript varchar(255) = null,@productImageUR0L varbinary(max) = null
 AS BEGIN
 	IF(@typeID IS NULL)
 	BEGIN
-		RAISERROR (N'Phân loại sản phẩm chưa được chọn. Vui lòng thử lại! ', 16, 1);
+		RAISERROR (N'Phân loại sản phẩm chưa được chọn. Vui lòng thử lại! ',16, 1);
         RETURN
 	END
 	IF(@brandID IS NULL)
@@ -917,9 +918,10 @@ BEGIN
 END
 GO
 
-CREATE PROC updateProductByID
-@productID varchar(10)=null,@productName varchar(255)=null,@productImageUR0L varbinary(max) = null, @quantity int = null
-, @typeID varchar(10) = null, @brandID varchar(10) = null, @importPrice float = null, @sellPrice float = null, @descript int = null
+CREATE PROC updateProductByID @productID varchar(10)=null, @productName varchar(255)=null,
+ @quantity int = null , @typeID varchar(10) = null, 
+@brandID varchar(10) = null, @importPrice float = null, @sellPrice float = null, 
+@descript varchar(255) = null,@productImageUR0L varbinary(max) = null
 AS BEGIN
 	IF (@productID IS NULL)
 	BEGIN
@@ -1026,7 +1028,7 @@ AS
 GO
 
 CREATE FUNCTION searchProduct (@productID varchar(10)=null,@productName varchar(255)=null, @quantity int = null
-, @typeName varchar(255) = null, @brandName varchar(255), @importPrice float = null, @sellPrice float = null, @descript int = null)
+, @typeName varchar(255) = null, @brandName varchar(255), @importPrice float = null, @sellPrice float = null, @descript varchar(255) = null)
 RETURNS TABLE
 AS
 RETURN 

@@ -18,6 +18,7 @@ namespace Dashboard.GUI.Panel
     public partial class Product : Form
     {
         DataTable dta = null;
+        
         public Product()
         {
             InitializeComponent();
@@ -33,6 +34,8 @@ namespace Dashboard.GUI.Panel
         private void Product_Load(object sender, EventArgs e)
         {
             TableDefault();
+            ProductDAO.Instance.LoadComboBoxType(cbType);
+            ProductDAO.Instance.LoadComboBoxBrand(cbBrand);
         }
 
         private void btnRefresh_Click(object sender, EventArgs e)
@@ -42,14 +45,14 @@ namespace Dashboard.GUI.Panel
 
         private void btnClearData_Click(object sender, EventArgs e)
         {
-            txtBrand.Text = null;
+            cbBrand.Text = null;
             txtDescript.Text = null;
             txtID.Text = null;
             txtImport.Text = null;
             txtName.Text = null;
             txtQuantity.Text = null;
             txtSell.Text = null;
-            txtType.Text = null;
+            cbType.Text = null;
         }
 
         private void btnCloseTool_Click(object sender, EventArgs e)
@@ -86,11 +89,22 @@ namespace Dashboard.GUI.Panel
             if(btnTools.Text == "Tìm kiếm")
             {
                 searchInfo();
-            }    
+            } 
+            else if(btnTools.Text == "Thêm")
+            {
+                addInfo();
+            }
+            else if (btnTools.Text == "Xóa")
+            {
+                deleteInfo();
+            }
+            else if (btnTools.Text == "Sửa")
+            {
+                updateInfo();
+            }
         }
-        private void searchInfo()
+        private void getInfo(ProductDTO product)
         {
-            ProductDTO product = new ProductDTO();
             if (!String.IsNullOrEmpty(txtID.Text))
                 product.productID = txtID.Text;
             if (!String.IsNullOrEmpty(txtName.Text))
@@ -106,14 +120,20 @@ namespace Dashboard.GUI.Panel
                 {
                     MessageBox.Show("Có lẽ tham số truyền vào không hợp lệ rồi! Thử lại sau nhé!");
                 }
-            if (!String.IsNullOrEmpty(txtType.Text))
-                product.typeName = txtType.Text;
-            if (!String.IsNullOrEmpty(txtBrand.Text))
-                product.brandName = txtBrand.Text;
+            if (!String.IsNullOrEmpty(cbType.Text))
+            {
+                product.typeName = cbType.Text;
+                product.typeID = cbType.SelectedValue.ToString();
+            }
+            if (!String.IsNullOrEmpty(cbBrand.Text))
+            {
+                product.brandName = cbBrand.Text;
+                product.brandID = cbBrand.SelectedValue.ToString();
+            }
             if (!String.IsNullOrEmpty(txtImport.Text))
                 try
                 {
-                    product.importPrice = Int32.Parse(txtImport.Text);
+                    product.importPrice = float.Parse(txtImport.Text);
                 }
                 catch (FormatException)
                 {
@@ -130,9 +150,45 @@ namespace Dashboard.GUI.Panel
                 }
             if (!String.IsNullOrEmpty(txtDescript.Text))
                 product.descript = txtDescript.Text;
+            MemoryStream ms = new MemoryStream();
+            picImage.Image.Save(ms, picImage.Image.RawFormat);
+            byte[] img = ms.ToArray();
+            product.productImageURL = img;
+        }
+        private void searchInfo()
+        {
+            ProductDTO product = new ProductDTO();
+            getInfo(product);
             dta = ProductDAO.Instance.LoadTable(product);
             dtgvTable.DataSource = dta;
         }    
-
+        private void addInfo()
+        {
+            string err = null;
+            ProductDTO product = new ProductDTO();
+            getInfo(product);
+            MessageBox.Show(product.brandID);
+            err = ProductDAO.Instance.AddProduct(product);
+            TableDefault();
+            MessageBox.Show(err);
+        }
+        private void deleteInfo()
+        {
+            string err = null;
+            ProductDTO product = new ProductDTO();
+            getInfo(product);
+            err = ProductDAO.Instance.DeleteProduct(product);
+            TableDefault();
+            MessageBox.Show(err);
+        }
+        private void updateInfo()
+        {
+            string err = null;
+            ProductDTO product = new ProductDTO();
+            getInfo(product);
+            err = ProductDAO.Instance.UpdateProduct(product);
+            TableDefault();
+            MessageBox.Show(err);
+        }
     }
 }

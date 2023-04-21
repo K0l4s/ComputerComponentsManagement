@@ -1,5 +1,6 @@
 ﻿using Dashboard.DAO;
 using Dashboard.DTO;
+using Dashboard.GUI;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -87,6 +88,12 @@ namespace Dashboard
             {
                 login();
             }
+        }
+
+        private void information_Click(object sender, EventArgs e)
+        {
+            MyTeam myteam = new MyTeam();
+            myteam.Show();
         }
     }
 }
