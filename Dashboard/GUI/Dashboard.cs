@@ -91,7 +91,7 @@ namespace Dashboard
 
         private void btnBill_Click(object sender, EventArgs e)
         {
-            btnClick(new Bill(), btnBill);
+            btnClick(new CreateBill(), btnBill);
         }
 
         private void btnHome_Click(object sender, EventArgs e)

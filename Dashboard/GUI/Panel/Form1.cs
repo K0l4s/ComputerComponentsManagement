@@ -8,14 +8,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Dashboard.GUI
+namespace Dashboard.GUI.Panel
 {
-    public partial class Bill : Form
+    public partial class Form1 : Form
     {
-        public Bill()
+        public Form1()
         {
             InitializeComponent();
-            panelAdd.Width = panelTable.Width;
         }
     }
 }
