@@ -48,6 +48,7 @@
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Size = new System.Drawing.Size(973, 440);
             this.flowLayoutPanel1.TabIndex = 1;
+            this.flowLayoutPanel1.DoubleClick += new System.EventHandler(this.flowLayoutPanel1_DoubleClick);
             // 
             // SearchProductForBill
             // 

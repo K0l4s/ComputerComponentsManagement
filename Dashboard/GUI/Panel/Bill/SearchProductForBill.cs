@@ -37,5 +37,11 @@ namespace Dashboard.GUI.Panel.Bill
                     flowLayoutPanel1.Controls.Add(productControl);
                 }
         }
+
+        private void flowLayoutPanel1_DoubleClick(object sender, EventArgs e)
+        {
+            ProductControl product = (ProductControl)sender;
+
+        }
     }
 }
