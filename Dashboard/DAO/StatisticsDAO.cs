@@ -1,6 +1,7 @@
 ﻿using Dashboard.DAO;
 using Dashboard.DTO;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -29,34 +30,20 @@ namespace Dashboard
 
         public DataTable GetTop5Product(DateTime begin, DateTime end, ref string err)
         {
-            strSQL = "SELECT * FROM dbo.FUNC_TOP5_PRODUCT(@Daystart, @Dayend)";
-            parameters = new List<SqlParameter>();
-
-            parameter = new SqlParameter("@Daystart ", begin);
-            parameters.Add(parameter);
-
-            parameter = new SqlParameter("@Dayend ", end);
-            parameters.Add(parameter);
-
-            CommandType ct = CommandType.Text;
-
-            return DataProvider.Instance.ExecuteFunction(strSQL, ct ,parameters, ref err);
+            string query = "SELECT * FROM dbo.FUNC_TOP5_PRODUCT ( @Daystart , @Dayend )";
+            object[] parameters = new object[] { begin, end };
+            DataTable dt = DataProvider.Instance.ExecuteQuery(query, parameters);
+            err = "";
+            return dt;
         }
 
         public DataTable GetTop5MinProduct(DateTime begin, DateTime end, ref string err)
         {
-            strSQL = "SELECT * FROM dbo.FUNC_BOTTOM5_PRODUCT(@Daystart, @Dayend)";
-            parameters = new List<SqlParameter>();
-
-            parameter = new SqlParameter("@Daystart ", begin);
-            parameters.Add(parameter);
-
-            parameter = new SqlParameter("@Dayend ", end);
-            parameters.Add(parameter);
-
-            CommandType ct = CommandType.Text;
-
-            return DataProvider.Instance.ExecuteFunction(strSQL, ct, parameters, ref err);
+            string query = "SELECT * FROM dbo.FUNC_BOTTOM5_PRODUCT ( @Daystart , @Dayend )";
+            object[] parameters = new object[] { begin, end };
+            DataTable dt = DataProvider.Instance.ExecuteQuery(query, parameters);
+            err = "";
+            return dt;
         }
 
         public int GetTotalBill(DateTime begin, DateTime end, ref string err)

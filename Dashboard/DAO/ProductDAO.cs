@@ -33,6 +33,7 @@ namespace Dashboard.DAO
 
             return dt;
         }
+
         public void LoadComboBoxType(ComboBox cb)
         {
             string query = "SELECT * FROM PRODUCT_TYPE";
