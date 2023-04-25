@@ -50,18 +50,18 @@
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.button10 = new System.Windows.Forms.Button();
+            this.linkLabel8 = new System.Windows.Forms.LinkLabel();
+            this.linkLabel7 = new System.Windows.Forms.LinkLabel();
+            this.linkLabel6 = new System.Windows.Forms.LinkLabel();
+            this.linkLabel2 = new System.Windows.Forms.LinkLabel();
+            this.button9 = new System.Windows.Forms.Button();
+            this.button4 = new System.Windows.Forms.Button();
             this.linkLabel5 = new System.Windows.Forms.LinkLabel();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.linkKien = new System.Windows.Forms.LinkLabel();
             this.button3 = new System.Windows.Forms.Button();
             this.fbKien = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button9 = new System.Windows.Forms.Button();
-            this.linkLabel2 = new System.Windows.Forms.LinkLabel();
-            this.linkLabel6 = new System.Windows.Forms.LinkLabel();
-            this.linkLabel7 = new System.Windows.Forms.LinkLabel();
-            this.linkLabel8 = new System.Windows.Forms.LinkLabel();
-            this.button10 = new System.Windows.Forms.Button();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel8.SuspendLayout();
@@ -80,17 +80,19 @@
             this.panel1.BackColor = System.Drawing.Color.White;
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1306, 100);
+            this.panel1.Size = new System.Drawing.Size(980, 81);
             this.panel1.TabIndex = 0;
             // 
             // panel2
             // 
             this.panel2.Controls.Add(this.panel3);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel2.Location = new System.Drawing.Point(0, 100);
+            this.panel2.Location = new System.Drawing.Point(0, 81);
+            this.panel2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1306, 699);
+            this.panel2.Size = new System.Drawing.Size(980, 528);
             this.panel2.TabIndex = 1;
             // 
             // panel3
@@ -102,8 +104,9 @@
             this.panel3.Controls.Add(this.panel4);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel3.Location = new System.Drawing.Point(0, 0);
+            this.panel3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(1306, 699);
+            this.panel3.Size = new System.Drawing.Size(980, 528);
             this.panel3.TabIndex = 2;
             // 
             // panel8
@@ -114,17 +117,19 @@
             this.panel8.Controls.Add(this.button7);
             this.panel8.Controls.Add(this.button8);
             this.panel8.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel8.Location = new System.Drawing.Point(886, 0);
+            this.panel8.Location = new System.Drawing.Point(664, 0);
+            this.panel8.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.panel8.Name = "panel8";
-            this.panel8.Size = new System.Drawing.Size(210, 699);
+            this.panel8.Size = new System.Drawing.Size(158, 528);
             this.panel8.TabIndex = 33;
             // 
             // pictureBox4
             // 
             this.pictureBox4.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox4.Image")));
-            this.pictureBox4.Location = new System.Drawing.Point(15, 0);
+            this.pictureBox4.Location = new System.Drawing.Point(11, 0);
+            this.pictureBox4.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.pictureBox4.Name = "pictureBox4";
-            this.pictureBox4.Size = new System.Drawing.Size(179, 265);
+            this.pictureBox4.Size = new System.Drawing.Size(134, 215);
             this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox4.TabIndex = 27;
             this.pictureBox4.TabStop = false;
@@ -134,9 +139,10 @@
             this.linkLabel4.AutoSize = true;
             this.linkLabel4.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline;
             this.linkLabel4.LinkColor = System.Drawing.Color.Black;
-            this.linkLabel4.Location = new System.Drawing.Point(53, 315);
+            this.linkLabel4.Location = new System.Drawing.Point(40, 256);
+            this.linkLabel4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.linkLabel4.Name = "linkLabel4";
-            this.linkLabel4.Size = new System.Drawing.Size(138, 16);
+            this.linkLabel4.Size = new System.Drawing.Size(114, 13);
             this.linkLabel4.TabIndex = 26;
             this.linkLabel4.TabStop = true;
             this.linkLabel4.Text = "Nguyễn Bùi Minh Nhật";
@@ -147,9 +153,10 @@
             this.button7.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.button7.FlatAppearance.BorderSize = 0;
             this.button7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button7.Location = new System.Drawing.Point(3, 352);
+            this.button7.Location = new System.Drawing.Point(2, 286);
+            this.button7.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(49, 48);
+            this.button7.Size = new System.Drawing.Size(37, 39);
             this.button7.TabIndex = 25;
             this.button7.UseVisualStyleBackColor = true;
             // 
@@ -159,9 +166,10 @@
             this.button8.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.button8.FlatAppearance.BorderSize = 0;
             this.button8.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button8.Location = new System.Drawing.Point(3, 298);
+            this.button8.Location = new System.Drawing.Point(2, 242);
+            this.button8.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(49, 48);
+            this.button8.Size = new System.Drawing.Size(37, 39);
             this.button8.TabIndex = 24;
             this.button8.UseVisualStyleBackColor = true;
             // 
@@ -173,17 +181,19 @@
             this.panel7.Controls.Add(this.button5);
             this.panel7.Controls.Add(this.button6);
             this.panel7.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel7.Location = new System.Drawing.Point(1096, 0);
+            this.panel7.Location = new System.Drawing.Point(822, 0);
+            this.panel7.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(210, 699);
+            this.panel7.Size = new System.Drawing.Size(158, 528);
             this.panel7.TabIndex = 35;
             // 
             // pictureBox3
             // 
             this.pictureBox3.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox3.Image")));
-            this.pictureBox3.Location = new System.Drawing.Point(19, -19);
+            this.pictureBox3.Location = new System.Drawing.Point(14, -15);
+            this.pictureBox3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(179, 265);
+            this.pictureBox3.Size = new System.Drawing.Size(134, 215);
             this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox3.TabIndex = 27;
             this.pictureBox3.TabStop = false;
@@ -193,9 +203,10 @@
             this.linkLabel3.AutoSize = true;
             this.linkLabel3.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline;
             this.linkLabel3.LinkColor = System.Drawing.Color.Black;
-            this.linkLabel3.Location = new System.Drawing.Point(52, 315);
+            this.linkLabel3.Location = new System.Drawing.Point(39, 256);
+            this.linkLabel3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.linkLabel3.Name = "linkLabel3";
-            this.linkLabel3.Size = new System.Drawing.Size(122, 16);
+            this.linkLabel3.Size = new System.Drawing.Size(100, 13);
             this.linkLabel3.TabIndex = 26;
             this.linkLabel3.TabStop = true;
             this.linkLabel3.Text = "Nguyễn Quốc Long";
@@ -206,9 +217,10 @@
             this.button5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.button5.FlatAppearance.BorderSize = 0;
             this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button5.Location = new System.Drawing.Point(3, 352);
+            this.button5.Location = new System.Drawing.Point(2, 286);
+            this.button5.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(49, 48);
+            this.button5.Size = new System.Drawing.Size(37, 39);
             this.button5.TabIndex = 25;
             this.button5.UseVisualStyleBackColor = true;
             // 
@@ -218,9 +230,10 @@
             this.button6.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.button6.FlatAppearance.BorderSize = 0;
             this.button6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button6.Location = new System.Drawing.Point(3, 298);
+            this.button6.Location = new System.Drawing.Point(2, 242);
+            this.button6.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(49, 48);
+            this.button6.Size = new System.Drawing.Size(37, 39);
             this.button6.TabIndex = 24;
             this.button6.UseVisualStyleBackColor = true;
             // 
@@ -229,17 +242,19 @@
             this.panel6.BackColor = System.Drawing.Color.White;
             this.panel6.Controls.Add(this.label1);
             this.panel6.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel6.Location = new System.Drawing.Point(420, 0);
+            this.panel6.Location = new System.Drawing.Point(316, 0);
+            this.panel6.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(886, 699);
+            this.panel6.Size = new System.Drawing.Size(664, 528);
             this.panel6.TabIndex = 34;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(6, 12);
+            this.label1.Location = new System.Drawing.Point(4, 10);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(138, 16);
+            this.label1.Size = new System.Drawing.Size(115, 13);
             this.label1.TabIndex = 0;
             this.label1.Text = "GIỚI THIỆU SƠ LƯỢC";
             // 
@@ -251,17 +266,19 @@
             this.panel5.Controls.Add(this.button1);
             this.panel5.Controls.Add(this.button2);
             this.panel5.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel5.Location = new System.Drawing.Point(210, 0);
+            this.panel5.Location = new System.Drawing.Point(158, 0);
+            this.panel5.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(210, 699);
+            this.panel5.Size = new System.Drawing.Size(158, 528);
             this.panel5.TabIndex = 33;
             // 
             // pictureBox1
             // 
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(16, 0);
+            this.pictureBox1.Location = new System.Drawing.Point(12, 0);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(179, 265);
+            this.pictureBox1.Size = new System.Drawing.Size(134, 215);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 27;
             this.pictureBox1.TabStop = false;
@@ -271,9 +288,10 @@
             this.linkLabel1.AutoSize = true;
             this.linkLabel1.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline;
             this.linkLabel1.LinkColor = System.Drawing.Color.Black;
-            this.linkLabel1.Location = new System.Drawing.Point(53, 314);
+            this.linkLabel1.Location = new System.Drawing.Point(40, 255);
+            this.linkLabel1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.linkLabel1.Name = "linkLabel1";
-            this.linkLabel1.Size = new System.Drawing.Size(151, 16);
+            this.linkLabel1.Size = new System.Drawing.Size(123, 13);
             this.linkLabel1.TabIndex = 26;
             this.linkLabel1.TabStop = true;
             this.linkLabel1.Text = "Phương Ngân (Ánh Sao)";
@@ -284,9 +302,10 @@
             this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.button1.FlatAppearance.BorderSize = 0;
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Location = new System.Drawing.Point(3, 352);
+            this.button1.Location = new System.Drawing.Point(2, 286);
+            this.button1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(49, 48);
+            this.button1.Size = new System.Drawing.Size(37, 39);
             this.button1.TabIndex = 25;
             this.button1.UseVisualStyleBackColor = true;
             // 
@@ -296,9 +315,10 @@
             this.button2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.button2.FlatAppearance.BorderSize = 0;
             this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.Location = new System.Drawing.Point(3, 298);
+            this.button2.Location = new System.Drawing.Point(2, 242);
+            this.button2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(49, 48);
+            this.button2.Size = new System.Drawing.Size(37, 39);
             this.button2.TabIndex = 24;
             this.button2.UseVisualStyleBackColor = true;
             // 
@@ -319,18 +339,111 @@
             this.panel4.Controls.Add(this.fbKien);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel4.Location = new System.Drawing.Point(0, 0);
+            this.panel4.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(210, 699);
+            this.panel4.Size = new System.Drawing.Size(158, 528);
             this.panel4.TabIndex = 32;
+            // 
+            // button10
+            // 
+            this.button10.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button10.BackgroundImage")));
+            this.button10.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button10.FlatAppearance.BorderSize = 0;
+            this.button10.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button10.Location = new System.Drawing.Point(2, 243);
+            this.button10.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button10.Name = "button10";
+            this.button10.Size = new System.Drawing.Size(37, 39);
+            this.button10.TabIndex = 33;
+            this.button10.UseVisualStyleBackColor = true;
+            // 
+            // linkLabel8
+            // 
+            this.linkLabel8.AutoSize = true;
+            this.linkLabel8.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline;
+            this.linkLabel8.LinkColor = System.Drawing.Color.Black;
+            this.linkLabel8.Location = new System.Drawing.Point(44, 256);
+            this.linkLabel8.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.linkLabel8.Name = "linkLabel8";
+            this.linkLabel8.Size = new System.Drawing.Size(55, 13);
+            this.linkLabel8.TabIndex = 32;
+            this.linkLabel8.TabStop = true;
+            this.linkLabel8.Text = "21110223";
+            // 
+            // linkLabel7
+            // 
+            this.linkLabel7.AutoSize = true;
+            this.linkLabel7.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline;
+            this.linkLabel7.LinkColor = System.Drawing.Color.Black;
+            this.linkLabel7.Location = new System.Drawing.Point(58, 202);
+            this.linkLabel7.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.linkLabel7.Name = "linkLabel7";
+            this.linkLabel7.Size = new System.Drawing.Size(50, 13);
+            this.linkLabel7.TabIndex = 27;
+            this.linkLabel7.TabStop = true;
+            this.linkLabel7.Text = "LEADER";
+            // 
+            // linkLabel6
+            // 
+            this.linkLabel6.AutoSize = true;
+            this.linkLabel6.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline;
+            this.linkLabel6.LinkColor = System.Drawing.Color.Black;
+            this.linkLabel6.Location = new System.Drawing.Point(40, 386);
+            this.linkLabel6.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.linkLabel6.Name = "linkLabel6";
+            this.linkLabel6.Size = new System.Drawing.Size(76, 13);
+            this.linkLabel6.TabIndex = 27;
+            this.linkLabel6.TabStop = true;
+            this.linkLabel6.Text = "0827.62.62.03";
+            // 
+            // linkLabel2
+            // 
+            this.linkLabel2.AutoSize = true;
+            this.linkLabel2.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline;
+            this.linkLabel2.LinkColor = System.Drawing.Color.Black;
+            this.linkLabel2.Location = new System.Drawing.Point(36, 430);
+            this.linkLabel2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.linkLabel2.Name = "linkLabel2";
+            this.linkLabel2.Size = new System.Drawing.Size(130, 13);
+            this.linkLabel2.TabIndex = 31;
+            this.linkLabel2.TabStop = true;
+            this.linkLabel2.Text = "trungkienlolas@gmail.com";
+            // 
+            // button9
+            // 
+            this.button9.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button9.BackgroundImage")));
+            this.button9.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button9.FlatAppearance.BorderSize = 0;
+            this.button9.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button9.Location = new System.Drawing.Point(2, 417);
+            this.button9.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button9.Name = "button9";
+            this.button9.Size = new System.Drawing.Size(37, 39);
+            this.button9.TabIndex = 30;
+            this.button9.UseVisualStyleBackColor = true;
+            // 
+            // button4
+            // 
+            this.button4.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button4.BackgroundImage")));
+            this.button4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button4.FlatAppearance.BorderSize = 0;
+            this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button4.Location = new System.Drawing.Point(2, 373);
+            this.button4.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(37, 39);
+            this.button4.TabIndex = 29;
+            this.button4.UseVisualStyleBackColor = true;
             // 
             // linkLabel5
             // 
             this.linkLabel5.AutoSize = true;
             this.linkLabel5.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline;
             this.linkLabel5.LinkColor = System.Drawing.Color.Black;
-            this.linkLabel5.Location = new System.Drawing.Point(48, 421);
+            this.linkLabel5.Location = new System.Drawing.Point(36, 342);
+            this.linkLabel5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.linkLabel5.Name = "linkLabel5";
-            this.linkLabel5.Size = new System.Drawing.Size(65, 16);
+            this.linkLabel5.Size = new System.Drawing.Size(56, 13);
             this.linkLabel5.TabIndex = 28;
             this.linkLabel5.TabStop = true;
             this.linkLabel5.Text = "/trunqkien";
@@ -338,9 +451,10 @@
             // pictureBox2
             // 
             this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
-            this.pictureBox2.Location = new System.Drawing.Point(12, -19);
+            this.pictureBox2.Location = new System.Drawing.Point(9, -15);
+            this.pictureBox2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(179, 265);
+            this.pictureBox2.Size = new System.Drawing.Size(134, 215);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox2.TabIndex = 27;
             this.pictureBox2.TabStop = false;
@@ -350,9 +464,10 @@
             this.linkKien.AutoSize = true;
             this.linkKien.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline;
             this.linkKien.LinkColor = System.Drawing.Color.Black;
-            this.linkKien.Location = new System.Drawing.Point(53, 368);
+            this.linkKien.Location = new System.Drawing.Point(40, 299);
+            this.linkKien.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.linkKien.Name = "linkKien";
-            this.linkKien.Size = new System.Drawing.Size(112, 16);
+            this.linkKien.Size = new System.Drawing.Size(93, 13);
             this.linkKien.TabIndex = 26;
             this.linkKien.TabStop = true;
             this.linkKien.Text = "Huỳnh Trung Kiên";
@@ -364,9 +479,10 @@
             this.button3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.button3.FlatAppearance.BorderSize = 0;
             this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button3.Location = new System.Drawing.Point(3, 405);
+            this.button3.Location = new System.Drawing.Point(2, 329);
+            this.button3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(49, 48);
+            this.button3.Size = new System.Drawing.Size(37, 39);
             this.button3.TabIndex = 25;
             this.button3.UseVisualStyleBackColor = true;
             // 
@@ -376,108 +492,26 @@
             this.fbKien.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.fbKien.FlatAppearance.BorderSize = 0;
             this.fbKien.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.fbKien.Location = new System.Drawing.Point(3, 351);
+            this.fbKien.Location = new System.Drawing.Point(2, 285);
+            this.fbKien.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.fbKien.Name = "fbKien";
-            this.fbKien.Size = new System.Drawing.Size(49, 48);
+            this.fbKien.Size = new System.Drawing.Size(37, 39);
             this.fbKien.TabIndex = 24;
             this.fbKien.UseVisualStyleBackColor = true;
             this.fbKien.Click += new System.EventHandler(this.fbKien_Click);
             // 
-            // button4
-            // 
-            this.button4.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button4.BackgroundImage")));
-            this.button4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.button4.FlatAppearance.BorderSize = 0;
-            this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button4.Location = new System.Drawing.Point(3, 459);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(49, 48);
-            this.button4.TabIndex = 29;
-            this.button4.UseVisualStyleBackColor = true;
-            // 
-            // button9
-            // 
-            this.button9.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button9.BackgroundImage")));
-            this.button9.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.button9.FlatAppearance.BorderSize = 0;
-            this.button9.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button9.Location = new System.Drawing.Point(3, 513);
-            this.button9.Name = "button9";
-            this.button9.Size = new System.Drawing.Size(49, 48);
-            this.button9.TabIndex = 30;
-            this.button9.UseVisualStyleBackColor = true;
-            // 
-            // linkLabel2
-            // 
-            this.linkLabel2.AutoSize = true;
-            this.linkLabel2.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline;
-            this.linkLabel2.LinkColor = System.Drawing.Color.Black;
-            this.linkLabel2.Location = new System.Drawing.Point(48, 529);
-            this.linkLabel2.Name = "linkLabel2";
-            this.linkLabel2.Size = new System.Drawing.Size(166, 16);
-            this.linkLabel2.TabIndex = 31;
-            this.linkLabel2.TabStop = true;
-            this.linkLabel2.Text = "trungkienlolas@gmail.com";
-            // 
-            // linkLabel6
-            // 
-            this.linkLabel6.AutoSize = true;
-            this.linkLabel6.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline;
-            this.linkLabel6.LinkColor = System.Drawing.Color.Black;
-            this.linkLabel6.Location = new System.Drawing.Point(53, 475);
-            this.linkLabel6.Name = "linkLabel6";
-            this.linkLabel6.Size = new System.Drawing.Size(86, 16);
-            this.linkLabel6.TabIndex = 27;
-            this.linkLabel6.TabStop = true;
-            this.linkLabel6.Text = "0827.62.62.03";
-            // 
-            // linkLabel7
-            // 
-            this.linkLabel7.AutoSize = true;
-            this.linkLabel7.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline;
-            this.linkLabel7.LinkColor = System.Drawing.Color.Black;
-            this.linkLabel7.Location = new System.Drawing.Point(78, 249);
-            this.linkLabel7.Name = "linkLabel7";
-            this.linkLabel7.Size = new System.Drawing.Size(61, 16);
-            this.linkLabel7.TabIndex = 27;
-            this.linkLabel7.TabStop = true;
-            this.linkLabel7.Text = "LEADER";
-            // 
-            // linkLabel8
-            // 
-            this.linkLabel8.AutoSize = true;
-            this.linkLabel8.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline;
-            this.linkLabel8.LinkColor = System.Drawing.Color.Black;
-            this.linkLabel8.Location = new System.Drawing.Point(58, 315);
-            this.linkLabel8.Name = "linkLabel8";
-            this.linkLabel8.Size = new System.Drawing.Size(63, 16);
-            this.linkLabel8.TabIndex = 32;
-            this.linkLabel8.TabStop = true;
-            this.linkLabel8.Text = "21110223";
-            // 
-            // button10
-            // 
-            this.button10.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button10.BackgroundImage")));
-            this.button10.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.button10.FlatAppearance.BorderSize = 0;
-            this.button10.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button10.Location = new System.Drawing.Point(3, 299);
-            this.button10.Name = "button10";
-            this.button10.Size = new System.Drawing.Size(49, 48);
-            this.button10.TabIndex = 33;
-            this.button10.UseVisualStyleBackColor = true;
-            // 
             // MyTeam
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.ClientSize = new System.Drawing.Size(1306, 799);
+            this.ClientSize = new System.Drawing.Size(980, 609);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "MyTeam";
-            this.Text = "MyTeam";
+            this.Text = " ";
             this.Load += new System.EventHandler(this.MyTeam_Load);
             this.panel2.ResumeLayout(false);
             this.panel3.ResumeLayout(false);

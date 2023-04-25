@@ -1,4 +1,4 @@
-﻿using Dashboard.DTO;
+﻿    using Dashboard.DTO;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -20,10 +20,11 @@ namespace Dashboard.DAO
         private static string nameView = "view_Employee";
         private static string strSQL = "";
         private static List<SqlParameter> parameters;
-        public  static List<EmployeeDTO> employees = new List<EmployeeDTO>();
+        public static List<EmployeeDTO> employees = new List<EmployeeDTO>();
         private static EmployeeDAO instance;
 
-        public static EmployeeDAO Instance {
+        public static EmployeeDAO Instance
+        {
             get { if (instance == null) instance = new EmployeeDAO(); return instance; }
             private set { instance = value; }
         }
@@ -94,114 +95,131 @@ namespace Dashboard.DAO
 
         public DataTable GetDataEmployee()
         {
-            return DataProvider.Instance.LoadData(nameView, CommandType.Text);
+            string query = "SELECT * FROM " + nameView;
+            return DataProvider.Instance.ExecuteQuery(query);
         }
 
-        public bool AddNewEmployee( EmployeeDTO employeeDTO ,ref string err)
+        public bool AddNewEmployee(EmployeeDTO employeeDTO, ref string err)
         {
-            strSQL = "PROD_InsertEmployee";
-            this.employeeDTO = employeeDTO ;
-            parameters = new List<SqlParameter>();
+            strSQL = "EXEC PROD_InsertEmployee @fullName , @sex , @formatName , @wage , @employeeImage , @phoneNumber , @address , @citizenID , @commissionRate , @dateOfBirth , @age , @authorName";
 
-            SqlParameter parameter = new SqlParameter("@fullName", employeeDTO.FullName);
-            parameters.Add(parameter);
+            object[] parameters = new object[]
+            {
+                employeeDTO.FullName,
+                employeeDTO.Sex,
+                employeeDTO.FormatName,
+                employeeDTO.Wage,
+                employeeDTO.EmployeeImage,
+                employeeDTO.PhoneNumber,
+                employeeDTO.Address,
+                employeeDTO.CitizenID,
+                employeeDTO.CommissionRate,
+                employeeDTO.DateOfBirth.Date,
+                employeeDTO.Age,
+                employeeDTO.AuthorName
+            };
 
-            parameter = new SqlParameter("@sex", employeeDTO.Sex);
-            parameters.Add(parameter);
+            DataTable result = DataProvider.Instance.ExecuteQuery(strSQL, parameters);
 
-            parameter = new SqlParameter("@formatName", employeeDTO.FormatName);
-            parameters.Add(parameter);
-
-            parameter = new SqlParameter("@wage", employeeDTO.Wage);
-            parameters.Add(parameter);
-
-            parameter = new SqlParameter("@employeeImage", employeeDTO.EmployeeImage);
-            parameters.Add(parameter);
-
-            parameter = new SqlParameter("@phoneNumber", employeeDTO.PhoneNumber);
-            parameters.Add(parameter);
-
-            parameter = new SqlParameter("@address", employeeDTO.Address);
-            parameters.Add(parameter);
-
-            parameter = new SqlParameter("@citizenID", employeeDTO.CitizenID);
-            parameters.Add(parameter);
-
-            parameter = new SqlParameter("@commissionRate", employeeDTO.CommissionRate);
-            parameters.Add(parameter);
-
-            parameter = new SqlParameter("@dateOfBirth", employeeDTO.DateOfBirth.Date);
-            parameters.Add(parameter);
-
-            parameter = new SqlParameter("@age", employeeDTO.Age);
-            parameters.Add(parameter);
-
-            parameter = new SqlParameter("@authorName", employeeDTO.AuthorName);
-            parameters.Add(parameter);
-
-            return DataProvider.Instance.ExecuteProcedure(strSQL, CommandType.StoredProcedure, parameters, ref err);
+            if (result.Rows.Count > 0)
+            {
+                err = result.Rows[0]["Error"].ToString();
+                return false;
+            }
+            else
+            {
+                err = "Thêm Nhân Viên Thành Công !";
+                return true;
+            }
+           
         }
 
         public bool DeleteEmployee(EmployeeDTO employeeDTO, ref string err)
         {
-            strSQL = "PROD_DeleteEmployee";
-            this.employeeDTO = employeeDTO;
-            parameters = new List<SqlParameter>();
-
-            SqlParameter parameter = new SqlParameter("@employeeID", employeeDTO.EmployeeID);
-            parameters.Add(parameter);
-
-            return DataProvider.Instance.ExecuteProcedure(strSQL, CommandType.StoredProcedure, parameters, ref err);
+            string query = "EXECUTE PROD_DeleteEmployee @employeeID ";
+            object[] parameters = new object[] { employeeDTO.EmployeeID };
+            DataTable result = DataProvider.Instance.ExecuteQuery(query, parameters);
+            err = "Xóa nhân viên thành công";
+            return true;
         }
 
         public bool UpdateEmployee(EmployeeDTO employeeDTO, ref string err)
         {
-            strSQL = "PROD_UpdateEmployee";
-            this.employeeDTO = employeeDTO;
-            parameters = new List<SqlParameter>();
+            //string query = "EXECUTE PROD_UpdateEmployee @employeeID, @fullName, @sex, @formatName, @wage, @employeeImage, @phoneNumber, @address, @citizenID, @commissionRate, @dateOfBirth, @age, @authorName";
+            string query = "EXECUTE PROD_UpdateEmployee @employeeID , @fullName , @sex , @formatName , @wage , @employeeImage , @phoneNumber , @address , @citizenID , @commissionRate , @dateOfBirth , @age , @authorName";
+            object[] parameters = new object[]
+            {
+                employeeDTO.EmployeeID,
+                employeeDTO.FullName,
+                employeeDTO.Sex,
+                employeeDTO.FormatName,
+                employeeDTO.Wage,
+                employeeDTO.EmployeeImage,
+                employeeDTO.PhoneNumber,
+                employeeDTO.Address,
+                employeeDTO.CitizenID,
+                employeeDTO.CommissionRate,
+                employeeDTO.DateOfBirth.Date,
+                employeeDTO.Age,
+                employeeDTO.AuthorName
+            };
+            DataTable result = DataProvider.Instance.ExecuteQuery(query, parameters);
 
-            SqlParameter parameter = new SqlParameter("@employeeID", employeeDTO.EmployeeID);
-            parameters.Add(parameter);
+            if (result.Rows.Count > 0)
+            {
+                err = result.Rows[0]["Error"].ToString();
+                return false;
+            }
+            else
+            {
+                err = "Cập nhật thông tin nhân viên thành công!";
+                return true;
+            }
+            //strSQL = "PROD_UpdateEmployee";
+            //this.employeeDTO = employeeDTO;
+            //parameters = new List<SqlParameter>();
 
-            parameter = new SqlParameter("@fullName", employeeDTO.FullName);
-            parameters.Add(parameter);
+            //SqlParameter parameter = new SqlParameter("@employeeID", employeeDTO.EmployeeID);
+            //parameters.Add(parameter);
 
-            parameter = new SqlParameter("@sex", employeeDTO.Sex);
-            parameters.Add(parameter);
+            //parameter = new SqlParameter("@fullName", employeeDTO.FullName);
+            //parameters.Add(parameter);
 
-            parameter = new SqlParameter("@formatName", employeeDTO.FormatName);
-            parameters.Add(parameter);
+            //parameter = new SqlParameter("@sex", employeeDTO.Sex);
+            //parameters.Add(parameter);
 
-            parameter = new SqlParameter("@wage", employeeDTO.Wage);
-            parameters.Add(parameter);
+            //parameter = new SqlParameter("@formatName", employeeDTO.FormatName);
+            //parameters.Add(parameter);
 
-            parameter = new SqlParameter("@employeeImage", employeeDTO.EmployeeImage);
-            parameters.Add(parameter);
+            //parameter = new SqlParameter("@wage", employeeDTO.Wage);
+            //parameters.Add(parameter);
 
-            parameter = new SqlParameter("@phoneNumber", employeeDTO.PhoneNumber);
-            parameters.Add(parameter);
+            //parameter = new SqlParameter("@employeeImage", employeeDTO.EmployeeImage);
+            //parameters.Add(parameter);
 
-            parameter = new SqlParameter("@address", employeeDTO.Address);
-            parameters.Add(parameter);
+            //parameter = new SqlParameter("@phoneNumber", employeeDTO.PhoneNumber);
+            //parameters.Add(parameter);
 
-            parameter = new SqlParameter("@citizenID", employeeDTO.CitizenID);
-            parameters.Add(parameter);
+            //parameter = new SqlParameter("@address", employeeDTO.Address);
+            //parameters.Add(parameter);
 
-            parameter = new SqlParameter("@commissionRate", employeeDTO.CommissionRate);
-            parameters.Add(parameter);
+            //parameter = new SqlParameter("@citizenID", employeeDTO.CitizenID);
+            //parameters.Add(parameter);
 
-            parameter = new SqlParameter("@dateOfBirth", employeeDTO.DateOfBirth.Date);
-            parameters.Add(parameter);
+            //parameter = new SqlParameter("@commissionRate", employeeDTO.CommissionRate);
+            //parameters.Add(parameter);
 
-            parameter = new SqlParameter("@age", employeeDTO.Age);
-            parameters.Add(parameter);
+            //parameter = new SqlParameter("@dateOfBirth", employeeDTO.DateOfBirth.Date);
+            //parameters.Add(parameter);
 
-            parameter = new SqlParameter("@authorName", employeeDTO.AuthorName);
-            parameters.Add(parameter);
+            //parameter = new SqlParameter("@age", employeeDTO.Age);
+            //parameters.Add(parameter);
 
-            return DataProvider.Instance.ExecuteProcedure(strSQL, CommandType.StoredProcedure, parameters, ref err);
+            //parameter = new SqlParameter("@authorName", employeeDTO.AuthorName);
+            //parameters.Add(parameter);
+
+            //return DataProvider.Instance.ExecuteProcedure(strSQL, CommandType.StoredProcedure, parameters, ref err);
         }
-
 
     }
 }

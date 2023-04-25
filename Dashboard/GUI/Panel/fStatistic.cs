@@ -44,7 +44,6 @@ namespace Dashboard.GUI.Panel
             String err = "";
             chartTopProducts.Series.Clear();
             DataTable dataTable = StatisticsDAO.Instance.GetTop5Product(begin, end, ref err);
-            //MessageBox.Show($"{charData.Rows[0]["productID"]}");
 
             int totalSold = 0;
             foreach (DataRow row in dataTable.Rows)
