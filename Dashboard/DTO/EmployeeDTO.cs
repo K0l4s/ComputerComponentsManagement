@@ -31,25 +31,6 @@ namespace Dashboard.DTO
 
         public EmployeeDTO() { }
 
-        public EmployeeDTO(int employeeID, string password, string fullName, string sex, string formatName, float wage, string employeeImage, string phoneNumber, string address, string citizenID, float commissionRate, DateTime dateOfBirth, string age, string statusJob, string authorName)
-        {
-            EmployeeID=employeeID;
-            Password=password;
-            FullName=fullName;
-            Sex=sex;
-            FormatName=formatName;
-            Wage=wage;
-            EmployeeImage=employeeImage;
-            PhoneNumber=phoneNumber;
-            Address=address;
-            CitizenID=citizenID;
-            CommissionRate=commissionRate;
-            DateOfBirth=dateOfBirth;
-            Age=age;
-            StatusJob=statusJob;
-            AuthorName=authorName;
-        }
-
         public EmployeeDTO( string password, string fullName, string sex, string formatName, float wage, string employeeImage, string phoneNumber, string address, string citizenID, float commissionRate, DateTime dateOfBirth, string age, string authorName)
         {
             Password=password;

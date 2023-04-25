@@ -152,7 +152,7 @@ namespace Dashboard.GUI.Panel
                 btnLast7Days.Enabled = true;
                 btnThisMonth.Enabled = true;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 MessageBox.Show("Không có dữ liệu trong khoảng thời gian này");
             }
