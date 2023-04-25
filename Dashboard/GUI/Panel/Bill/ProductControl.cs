@@ -29,8 +29,8 @@ namespace Dashboard.GUI.Panel.Bill
 
         public float Price
         {
-            get { return float.Parse(txtPrice.Text.Replace("vnđ", "")); }
-            set { txtPrice.Text =  value.ToString("0.00")+ "vnđ"; }
+            get { return float.Parse(txtPrice.Text); }
+            set { txtPrice.Text =  value.ToString(); }
         }
         public int Quantity
         {
@@ -39,8 +39,8 @@ namespace Dashboard.GUI.Panel.Bill
         }
         public float TotalMoney
         {
-            get { return float.Parse(txtMoney.Text.Replace("vnđ", "")); }
-            set { txtMoney.Text = "vnđ" + value.ToString("00000.00"); }
+            get { return float.Parse(txtMoney.Text); }
+            set { txtMoney.Text = value.ToString(); }
         }
         public string ImageFilePath
         {
@@ -84,6 +84,15 @@ namespace Dashboard.GUI.Panel.Bill
             {
                 txtQuan.Text = "1";
             }    
+        }
+        public CheckBox myCheckBox = new CheckBox();
+        
+        private void ProductControl_Load(object sender, EventArgs e)
+        {
+            myCheckBox.Text = null;
+            myCheckBox.Checked = false;
+            myCheckBox.Location = new Point(10, 10);
+            this.Controls.Add(myCheckBox);
         }
     }
 }

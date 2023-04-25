@@ -49,13 +49,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DAO\BillDAO.cs" />
     <Compile Include="DAO\CustomerDAO.cs" />
     <Compile Include="DAO\EmployeeDAO.cs" />
     <Compile Include="DAO\DataProvider.cs" />
     <Compile Include="DAO\ProductDAO.cs" />
+    <Compile Include="DAO\SalaryDAO.cs" />
+    <Compile Include="DAO\SearchProductForBillDAO.cs" />
     <Compile Include="DAO\VoucherDAO.cs" />
     <Compile Include="DAO\StatisticsDAO.cs" />
-    <Compile Include="DTO\BillDTO.cs" />
     <Compile Include="DTO\ProductDTO.cs" />
     <Compile Include="DTO\ProductInBillDTO.cs" />
     <Compile Include="GUI\Panel\Bill\BillView.cs">
@@ -87,6 +89,18 @@
     </Compile>
     <Compile Include="GUI\Panel\Bill\SearchProductForBill.Designer.cs">
       <DependentUpon>SearchProductForBill.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\Panel\Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\Panel\Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\Panel\fSalary.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\Panel\fSalary.Designer.cs">
+      <DependentUpon>fSalary.cs</DependentUpon>
     </Compile>
     <Compile Include="GUI\Panel\Product.cs">
       <SubType>Form</SubType>
@@ -182,6 +196,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\Panel\Customer.resx">
       <DependentUpon>Customer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\Panel\Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\Panel\fSalary.resx">
+      <DependentUpon>fSalary.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\Panel\fStatistic.resx">
       <DependentUpon>fStatistic.cs</DependentUpon>

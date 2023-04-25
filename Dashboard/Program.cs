@@ -17,8 +17,8 @@ namespace Dashboard
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            // Application.Run(new CreateBill());
-            Application.Run(Dashboard.Instance);
+            Application.Run(new Login());
+            //Application.Run(Dashboard.Instance);
         }
     }
 }

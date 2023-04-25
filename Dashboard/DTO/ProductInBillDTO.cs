@@ -13,12 +13,8 @@ namespace Dashboard.DTO
         public float price { get; set; }
         public int quantity { get; set; }
         public float total { get; set; }
-        public byte[] Image { get; set; }
-        public ProductInBillDTO()
-        {
-
-        }
-        public void getProductInBillDTO(string productID, string productName,float price, int quantity, float total, byte[] image)
+        public string Image { get; set; }
+        public ProductInBillDTO(string productID, string productName, float price, int quantity, float total, string image)
         {
             this.productID = productID;
             this.productName = productName;

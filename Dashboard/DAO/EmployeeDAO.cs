@@ -1,4 +1,4 @@
-﻿using Dashboard.DTO;
+﻿    using Dashboard.DTO;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -15,10 +15,10 @@ namespace Dashboard.DAO
     public class EmployeeDAO
     {
         public string username;
+        public static int userLogin { get; set; }
         private EmployeeDTO employeeDTO;
         private static string nameView = "view_Employee";
         private static string strSQL = "";
-        private static SqlParameter parameter;
         private static List<SqlParameter> parameters;
         public static List<EmployeeDTO> employees = new List<EmployeeDTO>();
         private static EmployeeDAO instance;
@@ -29,19 +29,21 @@ namespace Dashboard.DAO
             private set { instance = value; }
         }
 
-        private EmployeeDAO() { }
+        private EmployeeDAO() {}
 
         public bool Login(string username, string password)
         {
             this.username  = username;
             String query = "SELECT * FROM View_Account WHERE employeeID = "+username+" AND emp_password = '"+password+"'";
             DataTable result = DataProvider.Instance.ExecuteQuery(query);
+            userLogin = Int32.Parse(username);
             return result.Rows.Count > 0;
         }
 
         public bool ChangePassword(string newpass, string oldpass)
         {
-            string query = "EXECUTE Change_Password "+username+" , '"+newpass+"' , '"+oldpass+"'";
+            string query = "EXECUTE Change_Password @employeeID , @newPass , @oldPass ";
+            object[] parameters = new object[] { userLogin, newpass, oldpass };
             int result = DataProvider.Instance.ExecuteNonQuery(query);
             if (result == 1)
                 return true;
