@@ -23,10 +23,10 @@ namespace Dashboard.GUI.Panel
         private void LoadData(DateTime begin, DateTime end)
         {
             string err = "";
-            chartGrossRevenue.DataBind();
+            chartRevenueSpline.DataBind();
             DrawDoughtTop5(begin, end);
             DrawDoughBottom5(begin, end);
-            //chartTopProducts.DataBind();
+            DrawCharSpline(begin, end);
 
             int totalrevenue = StatisticsDAO.Instance.GetTotalRevenue(begin, end, ref err);
             lblTotalRevenue.Text = $"{totalrevenue}đ";
@@ -36,7 +36,6 @@ namespace Dashboard.GUI.Panel
 
             int totalProduct = StatisticsDAO.Instance.GetTotalProduct(begin, end, ref err);
             lblAmountComponent.Text = $"{totalProduct}";
-
         }
 
         private void DrawDoughtTop5(DateTime begin, DateTime end)
@@ -60,7 +59,6 @@ namespace Dashboard.GUI.Panel
                 chartTopProducts.Series["Series1"].Points.AddXY(row["productName"], percentage);
             }
             chartTopProducts.DataBind();
-
 
         }
 
@@ -86,6 +84,30 @@ namespace Dashboard.GUI.Panel
             }
             chartBottomProducts.DataBind();
 
+        }
+
+        private void DrawCharSpline (DateTime begin, DateTime end) {
+            string err = "";
+            DataTable dataTable = StatisticsDAO.Instance.GetRevenueByDate(begin, end, ref err);
+            chartRevenueSpline.Series["Revenue"].Points.Clear();
+            if (dataTable.Rows.Count > 0)
+            {
+                //chartRevenueSpline.Series.Add("Revenue");
+                //Series series1 = new Series("Revenue");
+                //series1.ChartType = SeriesChartType.SplineArea;
+                //chartRevenueSpline.Series.Add(series1);
+                foreach (DataRow row in dataTable.Rows)
+                {
+                    DateTime date = row["date"] != DBNull.Value ? (DateTime)row["date"] : DateTime.MinValue;
+                    int revenue = row["totalValue"] != DBNull.Value ? (int)row["totalValue"] : 0;
+                    chartRevenueSpline.Series["Revenue"].Points.AddXY(date, revenue);
+                }
+
+                chartRevenueSpline.Series[0].XValueType = ChartValueType.DateTime;
+                chartRevenueSpline.ChartAreas[0].AxisX.LabelStyle.Format = "yyyy-MM-dd";
+                chartRevenueSpline.ChartAreas[0].AxisX.LabelStyle.Format = "dd/MM/yyyy";
+
+            }
         }
 
         private void btnToday_Click(object sender, EventArgs e)

@@ -48,54 +48,81 @@ namespace Dashboard
 
         public int GetTotalBill(DateTime begin, DateTime end, ref string err)
         {
-            strSQL = "SELECT dbo.FUNC_TOTAL_COMPLETE_BILL(@Daystart, @Dayend)";
 
-            parameters = new List<SqlParameter>();
+            string query = "SELECT dbo.FUNC_TOTAL_COMPLETE_BILL ( @Daystart , @Dayend )";
+            object[] parameters = new object[] { begin, end };
+            int result = 0;
+            try
+            {
+                object o = DataProvider.Instance.ExecuteScalar(query, parameters);
 
-            parameter = new SqlParameter("@Daystart ", begin);
-            parameters.Add(parameter);
+                if (o != null)
+                {
+                    result = Convert.ToInt32(o);
+                }
+            }
+            catch (SqlException ex)
+            {
+                err = ex.Message;
+                result =  0;
+            }
+            return result;
 
-            parameter = new SqlParameter("@Dayend ", end);
-            parameters.Add(parameter);
-
-            CommandType ct = CommandType.Text;
-
-            return DataProvider.Instance.ExecuteFunctionInt(strSQL, ct, parameters, ref err);
         }
 
         public int GetTotalProduct(DateTime begin, DateTime end, ref string err)
         {
-            strSQL = "SELECT dbo.FUNC_TOTAL_COMPLETE_BILL_COMPONENT(@Daystart, @Dayend)";
-            parameters = new List<SqlParameter>();
 
-            parameter = new SqlParameter("@Daystart ", begin);
-            parameters.Add(parameter);
+            string query = "SELECT dbo.FUNC_TOTAL_COMPLETE_BILL_COMPONENT ( @Daystart , @Dayend )";
+            object[] parameters = new object[] { begin, end };
+            int result = 0;
+            try
+            {
+                object o = DataProvider.Instance.ExecuteScalar(query, parameters);
 
-            parameter = new SqlParameter("@Dayend ", end);
-            parameters.Add(parameter);
+                if (o != null)
+                {
+                    result = Convert.ToInt32(o);
+                }
+            }
+            catch (SqlException ex)
+            {
+                err = ex.Message;
+                result =  0;
+            }
+            return result;
 
-            CommandType ct = CommandType.Text;
-
-            return DataProvider.Instance.ExecuteFunctionInt(strSQL, ct, parameters, ref err);
         }
 
         public int GetTotalRevenue(DateTime begin, DateTime end, ref string err)
         {
-            strSQL = "SELECT dbo.FUNC_TOTAL_REVENUE(@Daystart, @Dayend)";
-            parameters = new List<SqlParameter>();
-
-            parameter = new SqlParameter("@Daystart ", SqlDbType.Date);
-            parameter.Value = begin.Date;
-            parameters.Add(parameter);
-
-            parameter = new SqlParameter("@Dayend ", end);
-            parameter.Value = end.Date;
-            parameters.Add(parameter);
-
-            CommandType ct = CommandType.Text;
-
-            return DataProvider.Instance.ExecuteFunctionInt(strSQL, ct, parameters, ref err);
+            string query = "SELECT dbo.FUNC_TOTAL_REVENUE ( @Daystart , @Dayend )";
+            object[] parameters = new object[] { begin.Date, end.Date };
+            int result = 0;
+            try
+            {
+                object o = DataProvider.Instance.ExecuteScalar(query, parameters);
+                
+                if (o != null) {
+                    result = Convert.ToInt32(o);
+                }
+            }
+            catch (SqlException ex)
+            {
+                err = ex.Message;
+                result =  0;
+            }
+            return result;
+            
         }
 
+        public DataTable GetRevenueByDate (DateTime begin, DateTime end, ref string err)
+        {
+            string query = "SELECT * FROM dbo.FUNC_REVENUE_SPLINE ( @Daystart , @Dayend )";
+            object[] parameters = new object[] { begin, end };
+            DataTable dt = DataProvider.Instance.ExecuteQuery(query, parameters);
+            err = "";
+            return dt;
+        }
     }
 }

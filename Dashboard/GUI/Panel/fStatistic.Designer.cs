@@ -59,7 +59,7 @@
             this.lblAmountBill = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
-            this.chartGrossRevenue = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.chartRevenueSpline = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.panel3 = new System.Windows.Forms.Panel();
             this.panel6 = new System.Windows.Forms.Panel();
             this.chartBottomProducts = new System.Windows.Forms.DataVisualization.Charting.Chart();
@@ -72,7 +72,7 @@
             this.panel5.SuspendLayout();
             this.panel7.SuspendLayout();
             this.panel4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.chartGrossRevenue)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chartRevenueSpline)).BeginInit();
             this.panel3.SuspendLayout();
             this.panel6.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chartBottomProducts)).BeginInit();
@@ -349,17 +349,17 @@
             // 
             // panel4
             // 
-            this.panel4.Controls.Add(this.chartGrossRevenue);
+            this.panel4.Controls.Add(this.chartRevenueSpline);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel4.Location = new System.Drawing.Point(20, 0);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(641, 288);
             this.panel4.TabIndex = 1;
             // 
-            // chartGrossRevenue
+            // chartRevenueSpline
             // 
-            this.chartGrossRevenue.BackColor = System.Drawing.Color.Transparent;
-            this.chartGrossRevenue.BorderlineColor = System.Drawing.Color.MediumPurple;
+            this.chartRevenueSpline.BackColor = System.Drawing.Color.Transparent;
+            this.chartRevenueSpline.BorderlineColor = System.Drawing.Color.MediumPurple;
             chartArea1.AxisX.Crossing = -1.7976931348623157E+308D;
             chartArea1.AxisX.IsMarginVisible = false;
             chartArea1.AxisX.LabelStyle.ForeColor = System.Drawing.Color.LightGray;
@@ -378,20 +378,20 @@
             chartArea1.BorderWidth = 8;
             chartArea1.Name = "ChartArea1";
             chartArea1.ShadowColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.chartGrossRevenue.ChartAreas.Add(chartArea1);
+            this.chartRevenueSpline.ChartAreas.Add(chartArea1);
             legend1.Name = "Legend1";
-            this.chartGrossRevenue.Legends.Add(legend1);
-            this.chartGrossRevenue.Location = new System.Drawing.Point(32, 29);
-            this.chartGrossRevenue.Name = "chartGrossRevenue";
+            this.chartRevenueSpline.Legends.Add(legend1);
+            this.chartRevenueSpline.Location = new System.Drawing.Point(32, 29);
+            this.chartRevenueSpline.Name = "chartRevenueSpline";
             series1.ChartArea = "ChartArea1";
             series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.SplineArea;
             series1.Color = System.Drawing.Color.MediumPurple;
             series1.Legend = "Legend1";
-            series1.Name = "Series1";
-            this.chartGrossRevenue.Series.Add(series1);
-            this.chartGrossRevenue.Size = new System.Drawing.Size(609, 199);
-            this.chartGrossRevenue.TabIndex = 0;
-            this.chartGrossRevenue.Text = "chart1";
+            series1.Name = "Revenue";
+            this.chartRevenueSpline.Series.Add(series1);
+            this.chartRevenueSpline.Size = new System.Drawing.Size(609, 199);
+            this.chartRevenueSpline.TabIndex = 0;
+            this.chartRevenueSpline.Text = "chart1";
             // 
             // panel3
             // 
@@ -534,7 +534,7 @@
             this.panel7.ResumeLayout(false);
             this.panel7.PerformLayout();
             this.panel4.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.chartGrossRevenue)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chartRevenueSpline)).EndInit();
             this.panel3.ResumeLayout(false);
             this.panel6.ResumeLayout(false);
             this.panel6.PerformLayout();
@@ -568,7 +568,7 @@
         private System.Windows.Forms.Label lblAmountBill;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Panel panel4;
-        private System.Windows.Forms.DataVisualization.Charting.Chart chartGrossRevenue;
+        private System.Windows.Forms.DataVisualization.Charting.Chart chartRevenueSpline;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Panel panel6;
         private System.Windows.Forms.DataVisualization.Charting.Chart chartTopProducts;
