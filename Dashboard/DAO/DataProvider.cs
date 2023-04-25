@@ -150,6 +150,7 @@ namespace Dashboard.DAO
 
         public int ExecuteFunctionInt(string cmdFunction, CommandType ct, List<SqlParameter> parameters, ref string error)
         {
+            // Hàm này sẽ trả về giá trị int là kết quả của cột và hàng đầu tiên khi thực thi hàm tính toán 
             int result = 0;
             error = "";
 

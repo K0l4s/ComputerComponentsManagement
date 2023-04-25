@@ -173,50 +173,7 @@ namespace Dashboard.DAO
                 err = "Cập nhật thông tin nhân viên thành công!";
                 return true;
             }
-            //strSQL = "PROD_UpdateEmployee";
-            //this.employeeDTO = employeeDTO;
-            //parameters = new List<SqlParameter>();
-
-            //SqlParameter parameter = new SqlParameter("@employeeID", employeeDTO.EmployeeID);
-            //parameters.Add(parameter);
-
-            //parameter = new SqlParameter("@fullName", employeeDTO.FullName);
-            //parameters.Add(parameter);
-
-            //parameter = new SqlParameter("@sex", employeeDTO.Sex);
-            //parameters.Add(parameter);
-
-            //parameter = new SqlParameter("@formatName", employeeDTO.FormatName);
-            //parameters.Add(parameter);
-
-            //parameter = new SqlParameter("@wage", employeeDTO.Wage);
-            //parameters.Add(parameter);
-
-            //parameter = new SqlParameter("@employeeImage", employeeDTO.EmployeeImage);
-            //parameters.Add(parameter);
-
-            //parameter = new SqlParameter("@phoneNumber", employeeDTO.PhoneNumber);
-            //parameters.Add(parameter);
-
-            //parameter = new SqlParameter("@address", employeeDTO.Address);
-            //parameters.Add(parameter);
-
-            //parameter = new SqlParameter("@citizenID", employeeDTO.CitizenID);
-            //parameters.Add(parameter);
-
-            //parameter = new SqlParameter("@commissionRate", employeeDTO.CommissionRate);
-            //parameters.Add(parameter);
-
-            //parameter = new SqlParameter("@dateOfBirth", employeeDTO.DateOfBirth.Date);
-            //parameters.Add(parameter);
-
-            //parameter = new SqlParameter("@age", employeeDTO.Age);
-            //parameters.Add(parameter);
-
-            //parameter = new SqlParameter("@authorName", employeeDTO.AuthorName);
-            //parameters.Add(parameter);
-
-            //return DataProvider.Instance.ExecuteProcedure(strSQL, CommandType.StoredProcedure, parameters, ref err);
+            
         }
 
     }
