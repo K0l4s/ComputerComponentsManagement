@@ -16,7 +16,7 @@ namespace Dashboard.GUI.Panel.Bill
         {
             InitializeComponent();
         }
-        public string productID
+         public string productID
         {
             get { return txtID.Text; }
             set { txtID.Text = value; }

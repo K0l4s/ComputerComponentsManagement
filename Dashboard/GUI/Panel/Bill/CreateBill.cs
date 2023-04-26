@@ -35,21 +35,26 @@ namespace Dashboard.GUI
         }
         private void btnAddProduct_Click(object sender, EventArgs e)
         {
+            addProduct();
+            
+        }
+        private void addProduct()
+        {
             List<ProductInBillDTO> product = new List<ProductInBillDTO>();
             SearchProductForBill search = new SearchProductForBill();
             search.ShowDialog();
             product = search.Result;
-            if(product != null)
-                foreach(ProductInBillDTO item in product)
+            if (product != null)
+                foreach (ProductInBillDTO item in product)
                 {
                     foreach (string secondItem in checkProduct)
                     {
                         if (secondItem == item.productID)
                         {
-                            MessageBox.Show("Đã lựa chọn sản phẩm! Xin vui lòng thử lại sau!"); 
+                            MessageBox.Show("Đã lựa chọn sản phẩm! Xin vui lòng thử lại sau!");
                             return;
                         }
-                    }    
+                    }
                     checkProduct.Add(item.productID);
                     productInBill.Add(item);
                     ProductDTO adding = new ProductDTO();
@@ -62,7 +67,7 @@ namespace Dashboard.GUI
                     productControl.ImageFilePath = item.Image;
                     productControl.Quantity = item.quantity;
                     flowLayoutPanel1.Controls.Add(productControl);
-                }    
+                }
         }
         private void btnCustomerCheck_Click(object sender, EventArgs e)
         {

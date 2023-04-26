@@ -21,7 +21,7 @@ namespace Dashboard
     public partial class Dashboard : Form
     {
         private static Dashboard instance;
-
+        object Formhijo;
         public static Dashboard Instance
         {
             get
@@ -41,7 +41,6 @@ namespace Dashboard
 
         private void Dashboard_Load()
         {
-            this.WindowState = FormWindowState.Maximized;
             pMenu.Width = 250;
             //btnClick(new Account());
             btnClick(new CreateBill());
@@ -90,6 +89,7 @@ namespace Dashboard
             this.pCenter.Controls.Add(fh);
             this.pCenter.Tag = fh;
             fh.Show();
+
         }
 
         private void btnBill_Click(object sender, EventArgs e)

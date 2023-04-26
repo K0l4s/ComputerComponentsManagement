@@ -30,6 +30,8 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Dashboard));
             this.pMenu = new System.Windows.Forms.Panel();
+            this.btnVoucher = new System.Windows.Forms.Button();
+            this.btnSalary = new System.Windows.Forms.Button();
             this.btnStatistic = new System.Windows.Forms.Button();
             this.btnProduct = new System.Windows.Forms.Button();
             this.btnCustomer = new System.Windows.Forms.Button();
@@ -39,8 +41,6 @@
             this.btnBill = new System.Windows.Forms.Button();
             this.btnHome = new System.Windows.Forms.PictureBox();
             this.pCenter = new System.Windows.Forms.Panel();
-            this.btnSalary = new System.Windows.Forms.Button();
-            this.btnVoucher = new System.Windows.Forms.Button();
             this.pMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btnMenu)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnHome)).BeginInit();
@@ -64,6 +64,40 @@
             this.pMenu.Name = "pMenu";
             this.pMenu.Size = new System.Drawing.Size(251, 673);
             this.pMenu.TabIndex = 0;
+            // 
+            // btnVoucher
+            // 
+            this.btnVoucher.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnVoucher.FlatAppearance.BorderSize = 0;
+            this.btnVoucher.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnVoucher.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnVoucher.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btnVoucher.Image = ((System.Drawing.Image)(resources.GetObject("btnVoucher.Image")));
+            this.btnVoucher.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnVoucher.Location = new System.Drawing.Point(0, 453);
+            this.btnVoucher.Name = "btnVoucher";
+            this.btnVoucher.Size = new System.Drawing.Size(251, 51);
+            this.btnVoucher.TabIndex = 14;
+            this.btnVoucher.Text = "VOUCHER";
+            this.btnVoucher.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnVoucher.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnVoucher.UseVisualStyleBackColor = true;
+            this.btnVoucher.Click += new System.EventHandler(this.btnVoucher_Click);
+            // 
+            // btnSalary
+            // 
+            this.btnSalary.BackColor = System.Drawing.Color.Transparent;
+            this.btnSalary.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnSalary.FlatAppearance.BorderSize = 0;
+            this.btnSalary.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSalary.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btnSalary.Location = new System.Drawing.Point(0, 408);
+            this.btnSalary.Name = "btnSalary";
+            this.btnSalary.Size = new System.Drawing.Size(251, 45);
+            this.btnSalary.TabIndex = 13;
+            this.btnSalary.Text = "Thống Kê Lương";
+            this.btnSalary.UseVisualStyleBackColor = false;
+            this.btnSalary.Click += new System.EventHandler(this.btnSalary_Click);
             // 
             // btnStatistic
             // 
@@ -209,40 +243,6 @@
             this.pCenter.Size = new System.Drawing.Size(1010, 673);
             this.pCenter.TabIndex = 2;
             // 
-            // btnSalary
-            // 
-            this.btnSalary.BackColor = System.Drawing.Color.Transparent;
-            this.btnSalary.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnSalary.FlatAppearance.BorderSize = 0;
-            this.btnSalary.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSalary.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnSalary.Location = new System.Drawing.Point(0, 408);
-            this.btnSalary.Name = "btnSalary";
-            this.btnSalary.Size = new System.Drawing.Size(251, 45);
-            this.btnSalary.TabIndex = 13;
-            this.btnSalary.Text = "Thống Kê Lương";
-            this.btnSalary.UseVisualStyleBackColor = false;
-            this.btnSalary.Click += new System.EventHandler(this.btnSalary_Click);
-            // 
-            // btnVoucher
-            // 
-            this.btnVoucher.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnVoucher.FlatAppearance.BorderSize = 0;
-            this.btnVoucher.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnVoucher.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnVoucher.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnVoucher.Image = ((System.Drawing.Image)(resources.GetObject("btnVoucher.Image")));
-            this.btnVoucher.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnVoucher.Location = new System.Drawing.Point(0, 453);
-            this.btnVoucher.Name = "btnVoucher";
-            this.btnVoucher.Size = new System.Drawing.Size(251, 51);
-            this.btnVoucher.TabIndex = 14;
-            this.btnVoucher.Text = "VOUCHER";
-            this.btnVoucher.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnVoucher.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnVoucher.UseVisualStyleBackColor = true;
-            this.btnVoucher.Click += new System.EventHandler(this.btnVoucher_Click);
-            // 
             // Dashboard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -254,6 +254,7 @@
             this.Name = "Dashboard";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Dashboard";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.Dashboard_Load);
             this.pMenu.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.btnMenu)).EndInit();
