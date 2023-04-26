@@ -16,8 +16,8 @@ namespace Dashboard.DAO
 {
     public class DataProvider
     {
-        private static string ServerName = "(local)"; //Đổi tên lại theo Server Name của SQL 
-        //private static string ServerName = "DESKTOP-M1IF6PS\\SQLEXPRESS";
+        //private static string ServerName = "(local)"; //Đổi tên lại theo Server Name của SQL 
+        private static string ServerName = "DESKTOP-M1IF6PS\\SQLEXPRESS";
         //private static string ServerName = "LAPTOP-PHUONGNG\\SQLEXPRESS"; //Đổi tên lại theo Server Name của SQL 
         private static string DatabaseName = "HEQUANTRICOSODULIEU"; //Tên database
         private string ConnStr = $@"Data Source={ServerName}; Initial Catalog={DatabaseName};Integrated Security=True";
@@ -142,45 +142,14 @@ namespace Dashboard.DAO
                         }
                     }
                 }
-                data = cmd.ExecuteScalar();
+                object scalarResult = cmd.ExecuteScalar();
+                if (scalarResult != DBNull.Value)
+                {
+                    data = scalarResult;
+                }
                 conn.Close();
             }
             return data;
-        }
-
-        public int ExecuteFunctionInt(string cmdFunction, CommandType ct, List<SqlParameter> parameters, ref string error)
-        {
-            int result = 0;
-            error = "";
-
-            using (SqlConnection conn = new SqlConnection(ConnStr))
-            {
-                using (SqlCommand cmd = new SqlCommand(cmdFunction, conn))
-                {
-                    cmd.CommandType = ct;
-
-                    foreach (SqlParameter i in parameters)
-                    {
-                        cmd.Parameters.Add(i);
-                    }
-
-                    try
-                    {
-                        conn.Open();
-                        object scalarResult = cmd.ExecuteScalar();
-                        if (scalarResult != DBNull.Value)
-                        {
-                            result = Convert.ToInt32(scalarResult);
-                        }
-                    }
-                    catch (SqlException ex)
-                    {
-                        error = ex.Message;
-                    }
-                }
-            }
-
-            return result;
         }
 
     }

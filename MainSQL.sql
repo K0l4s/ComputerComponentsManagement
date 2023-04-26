@@ -548,6 +548,31 @@ BEGIN
 END
 GO
 
+CREATE FUNCTION FUNC_REVENUE_SPLINE(@Daystart DATE, @Dayend DATE)
+RETURNS @Revenue TABLE (
+    totalValue INT,
+    date DATE
+)
+AS
+BEGIN
+    DECLARE @currentDate DATE = @Daystart;
+    WHILE @currentDate <= @Dayend
+    BEGIN
+        DECLARE @totalValue INT = (
+            SELECT SUM(totalPay)
+            FROM COMPLETED_BILL
+            WHERE billExportTime = @currentDate
+        );
+
+        INSERT INTO @Revenue (totalValue, date) VALUES (@totalValue, @currentDate);
+
+        SET @currentDate = DATEADD(day, 1, @currentDate);
+    END
+
+    RETURN;
+END
+GO
+
 CREATE FUNCTION FUNC_TOTAL_COMPLETE_BILL_COMPONENT(@Daystart DATE, @Dayend DATE)
 RETURNS INT
 AS
