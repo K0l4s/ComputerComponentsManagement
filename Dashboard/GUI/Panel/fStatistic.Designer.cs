@@ -85,10 +85,10 @@
             this.btnCustomDate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCustomDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCustomDate.ForeColor = System.Drawing.SystemColors.Control;
-            this.btnCustomDate.Location = new System.Drawing.Point(429, 16);
-            this.btnCustomDate.Margin = new System.Windows.Forms.Padding(5);
+            this.btnCustomDate.Location = new System.Drawing.Point(572, 20);
+            this.btnCustomDate.Margin = new System.Windows.Forms.Padding(7, 6, 7, 6);
             this.btnCustomDate.Name = "btnCustomDate";
-            this.btnCustomDate.Size = new System.Drawing.Size(130, 35);
+            this.btnCustomDate.Size = new System.Drawing.Size(173, 43);
             this.btnCustomDate.TabIndex = 65;
             this.btnCustomDate.Text = "Tùy chỉnh";
             this.btnCustomDate.UseVisualStyleBackColor = true;
@@ -100,10 +100,10 @@
             this.btnToday.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnToday.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnToday.ForeColor = System.Drawing.SystemColors.Control;
-            this.btnToday.Location = new System.Drawing.Point(559, 16);
-            this.btnToday.Margin = new System.Windows.Forms.Padding(5);
+            this.btnToday.Location = new System.Drawing.Point(745, 20);
+            this.btnToday.Margin = new System.Windows.Forms.Padding(7, 6, 7, 6);
             this.btnToday.Name = "btnToday";
-            this.btnToday.Size = new System.Drawing.Size(130, 35);
+            this.btnToday.Size = new System.Drawing.Size(173, 43);
             this.btnToday.TabIndex = 61;
             this.btnToday.Text = "Hôm nay";
             this.btnToday.UseVisualStyleBackColor = true;
@@ -115,10 +115,10 @@
             this.btnLast7Days.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnLast7Days.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLast7Days.ForeColor = System.Drawing.SystemColors.Control;
-            this.btnLast7Days.Location = new System.Drawing.Point(689, 16);
-            this.btnLast7Days.Margin = new System.Windows.Forms.Padding(5);
+            this.btnLast7Days.Location = new System.Drawing.Point(919, 20);
+            this.btnLast7Days.Margin = new System.Windows.Forms.Padding(7, 6, 7, 6);
             this.btnLast7Days.Name = "btnLast7Days";
-            this.btnLast7Days.Size = new System.Drawing.Size(130, 35);
+            this.btnLast7Days.Size = new System.Drawing.Size(173, 43);
             this.btnLast7Days.TabIndex = 62;
             this.btnLast7Days.Text = "7 ngày trước";
             this.btnLast7Days.UseVisualStyleBackColor = true;
@@ -129,9 +129,10 @@
             this.dtpStartDate.CustomFormat = "MMM dd, yyyy";
             this.dtpStartDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dtpStartDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpStartDate.Location = new System.Drawing.Point(108, 22);
+            this.dtpStartDate.Location = new System.Drawing.Point(144, 27);
+            this.dtpStartDate.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.dtpStartDate.Name = "dtpStartDate";
-            this.dtpStartDate.Size = new System.Drawing.Size(122, 20);
+            this.dtpStartDate.Size = new System.Drawing.Size(161, 23);
             this.dtpStartDate.TabIndex = 63;
             this.dtpStartDate.Value = new System.DateTime(2022, 6, 1, 2, 24, 0, 0);
             // 
@@ -141,9 +142,10 @@
             this.label4.BackColor = System.Drawing.Color.Transparent;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.label4.Location = new System.Drawing.Point(77, 22);
+            this.label4.Location = new System.Drawing.Point(103, 27);
+            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(25, 18);
+            this.label4.Size = new System.Drawing.Size(33, 24);
             this.label4.TabIndex = 68;
             this.label4.Text = "Từ";
             // 
@@ -153,10 +155,10 @@
             this.btnThisMonth.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnThisMonth.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnThisMonth.ForeColor = System.Drawing.SystemColors.Control;
-            this.btnThisMonth.Location = new System.Drawing.Point(817, 16);
-            this.btnThisMonth.Margin = new System.Windows.Forms.Padding(5);
+            this.btnThisMonth.Location = new System.Drawing.Point(1089, 20);
+            this.btnThisMonth.Margin = new System.Windows.Forms.Padding(7, 6, 7, 6);
             this.btnThisMonth.Name = "btnThisMonth";
-            this.btnThisMonth.Size = new System.Drawing.Size(130, 35);
+            this.btnThisMonth.Size = new System.Drawing.Size(173, 43);
             this.btnThisMonth.TabIndex = 67;
             this.btnThisMonth.Text = "Tháng này ";
             this.btnThisMonth.UseVisualStyleBackColor = true;
@@ -168,10 +170,10 @@
             this.btnOK.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnOK.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnOK.ForeColor = System.Drawing.SystemColors.Control;
-            this.btnOK.Location = new System.Drawing.Point(384, 16);
-            this.btnOK.Margin = new System.Windows.Forms.Padding(5);
+            this.btnOK.Location = new System.Drawing.Point(512, 20);
+            this.btnOK.Margin = new System.Windows.Forms.Padding(7, 6, 7, 6);
             this.btnOK.Name = "btnOK";
-            this.btnOK.Size = new System.Drawing.Size(45, 35);
+            this.btnOK.Size = new System.Drawing.Size(60, 43);
             this.btnOK.TabIndex = 66;
             this.btnOK.Text = "OK";
             this.btnOK.UseVisualStyleBackColor = true;
@@ -184,9 +186,10 @@
             this.label2.BackColor = System.Drawing.Color.Transparent;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.label2.Location = new System.Drawing.Point(236, 22);
+            this.label2.Location = new System.Drawing.Point(315, 27);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(13, 18);
+            this.label2.Size = new System.Drawing.Size(16, 24);
             this.label2.TabIndex = 69;
             this.label2.Text = "-";
             // 
@@ -195,9 +198,10 @@
             this.dtpEndDate.CustomFormat = "MMM dd, yyyy";
             this.dtpEndDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dtpEndDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpEndDate.Location = new System.Drawing.Point(254, 22);
+            this.dtpEndDate.Location = new System.Drawing.Point(339, 27);
+            this.dtpEndDate.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.dtpEndDate.Name = "dtpEndDate";
-            this.dtpEndDate.Size = new System.Drawing.Size(122, 20);
+            this.dtpEndDate.Size = new System.Drawing.Size(161, 23);
             this.dtpEndDate.TabIndex = 64;
             this.dtpEndDate.Value = new System.DateTime(2022, 6, 17, 2, 24, 0, 0);
             // 
@@ -214,8 +218,9 @@
             this.panel2.Controls.Add(this.label4);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel2.Location = new System.Drawing.Point(0, 0);
+            this.panel2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1056, 51);
+            this.panel2.Size = new System.Drawing.Size(1408, 63);
             this.panel2.TabIndex = 70;
             // 
             // tableLayoutPanel1
@@ -226,11 +231,12 @@
             this.tableLayoutPanel1.Controls.Add(this.panel1, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.panel3, 1, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 51);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 63);
+            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(1056, 584);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1408, 719);
             this.tableLayoutPanel1.TabIndex = 71;
             // 
             // panel1
@@ -238,19 +244,21 @@
             this.panel1.Controls.Add(this.panel5);
             this.panel1.Controls.Add(this.panel4);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(3, 3);
+            this.panel1.Location = new System.Drawing.Point(4, 4);
+            this.panel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.panel1.Name = "panel1";
-            this.panel1.Padding = new System.Windows.Forms.Padding(20, 0, 0, 20);
-            this.panel1.Size = new System.Drawing.Size(661, 578);
+            this.panel1.Padding = new System.Windows.Forms.Padding(27, 0, 0, 25);
+            this.panel1.Size = new System.Drawing.Size(881, 711);
             this.panel1.TabIndex = 0;
             // 
             // panel5
             // 
             this.panel5.Controls.Add(this.panel7);
             this.panel5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel5.Location = new System.Drawing.Point(20, 288);
+            this.panel5.Location = new System.Drawing.Point(27, 354);
+            this.panel5.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(641, 270);
+            this.panel5.Size = new System.Drawing.Size(854, 332);
             this.panel5.TabIndex = 2;
             // 
             // panel7
@@ -265,9 +273,9 @@
             this.panel7.Controls.Add(this.label12);
             this.panel7.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel7.Location = new System.Drawing.Point(0, 0);
-            this.panel7.Margin = new System.Windows.Forms.Padding(5);
+            this.panel7.Margin = new System.Windows.Forms.Padding(7, 6, 7, 6);
             this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(636, 270);
+            this.panel7.Size = new System.Drawing.Size(848, 332);
             this.panel7.TabIndex = 45;
             // 
             // lblTotalRevenue
@@ -275,9 +283,10 @@
             this.lblTotalRevenue.AutoSize = true;
             this.lblTotalRevenue.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTotalRevenue.ForeColor = System.Drawing.SystemColors.Control;
-            this.lblTotalRevenue.Location = new System.Drawing.Point(59, 185);
+            this.lblTotalRevenue.Location = new System.Drawing.Point(79, 228);
+            this.lblTotalRevenue.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblTotalRevenue.Name = "lblTotalRevenue";
-            this.lblTotalRevenue.Size = new System.Drawing.Size(78, 25);
+            this.lblTotalRevenue.Size = new System.Drawing.Size(97, 29);
             this.lblTotalRevenue.TabIndex = 6;
             this.lblTotalRevenue.Text = "100000";
             // 
@@ -286,9 +295,10 @@
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.SystemColors.Control;
-            this.label3.Location = new System.Drawing.Point(60, 165);
+            this.label3.Location = new System.Drawing.Point(80, 203);
+            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(121, 20);
+            this.label3.Size = new System.Drawing.Size(150, 25);
             this.label3.TabIndex = 5;
             this.label3.Text = "Tổng doanh thu";
             // 
@@ -297,9 +307,10 @@
             this.lblAmountComponent.AutoSize = true;
             this.lblAmountComponent.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblAmountComponent.ForeColor = System.Drawing.SystemColors.Control;
-            this.lblAmountComponent.Location = new System.Drawing.Point(59, 125);
+            this.lblAmountComponent.Location = new System.Drawing.Point(79, 154);
+            this.lblAmountComponent.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblAmountComponent.Name = "lblAmountComponent";
-            this.lblAmountComponent.Size = new System.Drawing.Size(78, 25);
+            this.lblAmountComponent.Size = new System.Drawing.Size(97, 29);
             this.lblAmountComponent.TabIndex = 4;
             this.lblAmountComponent.Text = "100000";
             // 
@@ -308,9 +319,10 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.SystemColors.Control;
-            this.label1.Location = new System.Drawing.Point(60, 105);
+            this.label1.Location = new System.Drawing.Point(80, 129);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(180, 20);
+            this.label1.Size = new System.Drawing.Size(225, 25);
             this.label1.TabIndex = 3;
             this.label1.Text = "Tổng số linh kiện đã bán";
             // 
@@ -319,9 +331,10 @@
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label10.ForeColor = System.Drawing.SystemColors.Control;
-            this.label10.Location = new System.Drawing.Point(10, 10);
+            this.label10.Location = new System.Drawing.Point(13, 12);
+            this.label10.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(107, 25);
+            this.label10.Size = new System.Drawing.Size(133, 29);
             this.label10.TabIndex = 2;
             this.label10.Text = "Tổng quan";
             // 
@@ -330,9 +343,10 @@
             this.lblAmountBill.AutoSize = true;
             this.lblAmountBill.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblAmountBill.ForeColor = System.Drawing.SystemColors.Control;
-            this.lblAmountBill.Location = new System.Drawing.Point(59, 65);
+            this.lblAmountBill.Location = new System.Drawing.Point(79, 80);
+            this.lblAmountBill.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblAmountBill.Name = "lblAmountBill";
-            this.lblAmountBill.Size = new System.Drawing.Size(78, 25);
+            this.lblAmountBill.Size = new System.Drawing.Size(97, 29);
             this.lblAmountBill.TabIndex = 1;
             this.lblAmountBill.Text = "100000";
             // 
@@ -341,9 +355,10 @@
             this.label12.AutoSize = true;
             this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label12.ForeColor = System.Drawing.SystemColors.Control;
-            this.label12.Location = new System.Drawing.Point(60, 45);
+            this.label12.Location = new System.Drawing.Point(80, 55);
+            this.label12.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(100, 20);
+            this.label12.Size = new System.Drawing.Size(124, 25);
             this.label12.TabIndex = 0;
             this.label12.Text = "Số đơn hàng";
             // 
@@ -351,9 +366,10 @@
             // 
             this.panel4.Controls.Add(this.chartRevenueSpline);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel4.Location = new System.Drawing.Point(20, 0);
+            this.panel4.Location = new System.Drawing.Point(27, 0);
+            this.panel4.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(641, 288);
+            this.panel4.Size = new System.Drawing.Size(854, 354);
             this.panel4.TabIndex = 1;
             // 
             // chartRevenueSpline
@@ -381,7 +397,8 @@
             this.chartRevenueSpline.ChartAreas.Add(chartArea1);
             legend1.Name = "Legend1";
             this.chartRevenueSpline.Legends.Add(legend1);
-            this.chartRevenueSpline.Location = new System.Drawing.Point(32, 29);
+            this.chartRevenueSpline.Location = new System.Drawing.Point(43, 36);
+            this.chartRevenueSpline.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.chartRevenueSpline.Name = "chartRevenueSpline";
             series1.ChartArea = "ChartArea1";
             series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.SplineArea;
@@ -389,7 +406,7 @@
             series1.Legend = "Legend1";
             series1.Name = "Revenue";
             this.chartRevenueSpline.Series.Add(series1);
-            this.chartRevenueSpline.Size = new System.Drawing.Size(609, 199);
+            this.chartRevenueSpline.Size = new System.Drawing.Size(812, 245);
             this.chartRevenueSpline.TabIndex = 0;
             this.chartRevenueSpline.Text = "chart1";
             // 
@@ -397,9 +414,10 @@
             // 
             this.panel3.Controls.Add(this.panel6);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel3.Location = new System.Drawing.Point(670, 3);
+            this.panel3.Location = new System.Drawing.Point(893, 4);
+            this.panel3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(383, 578);
+            this.panel3.Size = new System.Drawing.Size(511, 711);
             this.panel3.TabIndex = 1;
             // 
             // panel6
@@ -410,9 +428,10 @@
             this.panel6.Controls.Add(this.label5);
             this.panel6.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel6.Location = new System.Drawing.Point(0, 0);
+            this.panel6.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.panel6.Name = "panel6";
-            this.panel6.Padding = new System.Windows.Forms.Padding(5, 0, 20, 20);
-            this.panel6.Size = new System.Drawing.Size(383, 578);
+            this.panel6.Padding = new System.Windows.Forms.Padding(7, 0, 27, 25);
+            this.panel6.Size = new System.Drawing.Size(511, 711);
             this.panel6.TabIndex = 0;
             // 
             // chartBottomProducts
@@ -430,7 +449,8 @@
             this.chartBottomProducts.ChartAreas.Add(chartArea2);
             legend2.Name = "Legend1";
             this.chartBottomProducts.Legends.Add(legend2);
-            this.chartBottomProducts.Location = new System.Drawing.Point(41, 333);
+            this.chartBottomProducts.Location = new System.Drawing.Point(55, 410);
+            this.chartBottomProducts.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.chartBottomProducts.Name = "chartBottomProducts";
             this.chartBottomProducts.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.None;
             this.chartBottomProducts.PaletteCustomColors = new System.Drawing.Color[] {
@@ -449,13 +469,15 @@
             series2.Legend = "Legend1";
             series2.Name = "Series1";
             this.chartBottomProducts.Series.Add(series2);
-            this.chartBottomProducts.Size = new System.Drawing.Size(293, 206);
+            this.chartBottomProducts.Size = new System.Drawing.Size(391, 254);
             this.chartBottomProducts.TabIndex = 1;
             this.chartBottomProducts.Text = "chart2";
             // 
             // chartTopProducts
             // 
             this.chartTopProducts.BackColor = System.Drawing.Color.Transparent;
+            this.chartTopProducts.BorderSkin.BackColor = System.Drawing.Color.Transparent;
+            this.chartTopProducts.BorderSkin.BorderColor = System.Drawing.Color.Transparent;
             chartArea3.AxisX.Crossing = -1.7976931348623157E+308D;
             chartArea3.AxisX.IsMarginVisible = false;
             chartArea3.AxisY.IsMarginVisible = false;
@@ -468,7 +490,8 @@
             this.chartTopProducts.ChartAreas.Add(chartArea3);
             legend3.Name = "Legend1";
             this.chartTopProducts.Legends.Add(legend3);
-            this.chartTopProducts.Location = new System.Drawing.Point(41, 65);
+            this.chartTopProducts.Location = new System.Drawing.Point(55, 80);
+            this.chartTopProducts.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.chartTopProducts.Name = "chartTopProducts";
             this.chartTopProducts.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.None;
             this.chartTopProducts.PaletteCustomColors = new System.Drawing.Color[] {
@@ -487,7 +510,7 @@
             series3.Legend = "Legend1";
             series3.Name = "Series1";
             this.chartTopProducts.Series.Add(series3);
-            this.chartTopProducts.Size = new System.Drawing.Size(293, 206);
+            this.chartTopProducts.Size = new System.Drawing.Size(391, 254);
             this.chartTopProducts.TabIndex = 1;
             this.chartTopProducts.Text = "chart2";
             // 
@@ -496,9 +519,10 @@
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.ForeColor = System.Drawing.SystemColors.Control;
-            this.label6.Location = new System.Drawing.Point(62, 274);
+            this.label6.Location = new System.Drawing.Point(83, 337);
+            this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(199, 25);
+            this.label6.Size = new System.Drawing.Size(254, 29);
             this.label6.TabIndex = 2;
             this.label6.Text = "Top Sản Phẩm Bán Ít";
             // 
@@ -507,23 +531,24 @@
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.ForeColor = System.Drawing.SystemColors.Control;
-            this.label5.Location = new System.Drawing.Point(62, 20);
+            this.label5.Location = new System.Drawing.Point(83, 25);
+            this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(227, 25);
+            this.label5.Size = new System.Drawing.Size(289, 29);
             this.label5.TabIndex = 2;
             this.label5.Text = "Top Sản phẩm bán chạy";
             // 
             // fStatistic
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.DimGray;
-            this.ClientSize = new System.Drawing.Size(1056, 635);
+            this.ClientSize = new System.Drawing.Size(1408, 782);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.panel2);
             this.Cursor = System.Windows.Forms.Cursors.Arrow;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Margin = new System.Windows.Forms.Padding(2);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "fStatistic";
             this.Text = "Statistic";
             this.panel2.ResumeLayout(false);

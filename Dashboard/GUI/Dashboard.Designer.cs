@@ -30,9 +30,6 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Dashboard));
             this.pMenu = new System.Windows.Forms.Panel();
-            this.btnVoucher = new System.Windows.Forms.Button();
-            this.btnSalary = new System.Windows.Forms.Button();
-            this.btnStatistic = new System.Windows.Forms.Button();
             this.btnProduct = new System.Windows.Forms.Button();
             this.btnCustomer = new System.Windows.Forms.Button();
             this.btnEmployee = new System.Windows.Forms.Button();
@@ -41,6 +38,10 @@
             this.btnBill = new System.Windows.Forms.Button();
             this.btnHome = new System.Windows.Forms.PictureBox();
             this.pCenter = new System.Windows.Forms.Panel();
+            this.btnWarranty = new System.Windows.Forms.Button();
+            this.btnVoucher = new System.Windows.Forms.Button();
+            this.btnSalary = new System.Windows.Forms.Button();
+            this.btnStatistic = new System.Windows.Forms.Button();
             this.pMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btnMenu)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnHome)).BeginInit();
@@ -52,6 +53,7 @@
             this.pMenu.Controls.Add(this.btnVoucher);
             this.pMenu.Controls.Add(this.btnSalary);
             this.pMenu.Controls.Add(this.btnStatistic);
+            this.pMenu.Controls.Add(this.btnWarranty);
             this.pMenu.Controls.Add(this.btnProduct);
             this.pMenu.Controls.Add(this.btnCustomer);
             this.pMenu.Controls.Add(this.btnEmployee);
@@ -64,59 +66,6 @@
             this.pMenu.Name = "pMenu";
             this.pMenu.Size = new System.Drawing.Size(251, 673);
             this.pMenu.TabIndex = 0;
-            // 
-            // btnVoucher
-            // 
-            this.btnVoucher.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnVoucher.FlatAppearance.BorderSize = 0;
-            this.btnVoucher.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnVoucher.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnVoucher.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnVoucher.Image = ((System.Drawing.Image)(resources.GetObject("btnVoucher.Image")));
-            this.btnVoucher.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnVoucher.Location = new System.Drawing.Point(0, 453);
-            this.btnVoucher.Name = "btnVoucher";
-            this.btnVoucher.Size = new System.Drawing.Size(251, 51);
-            this.btnVoucher.TabIndex = 14;
-            this.btnVoucher.Text = "VOUCHER";
-            this.btnVoucher.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnVoucher.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnVoucher.UseVisualStyleBackColor = true;
-            this.btnVoucher.Click += new System.EventHandler(this.btnVoucher_Click);
-            // 
-            // btnSalary
-            // 
-            this.btnSalary.BackColor = System.Drawing.Color.Transparent;
-            this.btnSalary.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnSalary.FlatAppearance.BorderSize = 0;
-            this.btnSalary.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSalary.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnSalary.Location = new System.Drawing.Point(0, 408);
-            this.btnSalary.Name = "btnSalary";
-            this.btnSalary.Size = new System.Drawing.Size(251, 45);
-            this.btnSalary.TabIndex = 13;
-            this.btnSalary.Text = "Thống Kê Lương";
-            this.btnSalary.UseVisualStyleBackColor = false;
-            this.btnSalary.Click += new System.EventHandler(this.btnSalary_Click);
-            // 
-            // btnStatistic
-            // 
-            this.btnStatistic.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnStatistic.FlatAppearance.BorderSize = 0;
-            this.btnStatistic.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnStatistic.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnStatistic.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnStatistic.Image = ((System.Drawing.Image)(resources.GetObject("btnStatistic.Image")));
-            this.btnStatistic.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnStatistic.Location = new System.Drawing.Point(0, 357);
-            this.btnStatistic.Name = "btnStatistic";
-            this.btnStatistic.Size = new System.Drawing.Size(251, 51);
-            this.btnStatistic.TabIndex = 11;
-            this.btnStatistic.Text = "THỐNG KÊ";
-            this.btnStatistic.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnStatistic.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnStatistic.UseVisualStyleBackColor = true;
-            this.btnStatistic.Click += new System.EventHandler(this.btnStatistic_Click);
             // 
             // btnProduct
             // 
@@ -243,6 +192,74 @@
             this.pCenter.Size = new System.Drawing.Size(1010, 673);
             this.pCenter.TabIndex = 2;
             // 
+            // btnWarranty
+            // 
+            this.btnWarranty.BackColor = System.Drawing.Color.Transparent;
+            this.btnWarranty.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnWarranty.FlatAppearance.BorderSize = 0;
+            this.btnWarranty.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnWarranty.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btnWarranty.Location = new System.Drawing.Point(0, 357);
+            this.btnWarranty.Name = "btnWarranty";
+            this.btnWarranty.Size = new System.Drawing.Size(251, 45);
+            this.btnWarranty.TabIndex = 15;
+            this.btnWarranty.Text = "Bảo Hành";
+            this.btnWarranty.UseVisualStyleBackColor = false;
+            this.btnWarranty.Click += new System.EventHandler(this.btnWarranty_Click);
+            // 
+            // btnVoucher
+            // 
+            this.btnVoucher.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnVoucher.FlatAppearance.BorderSize = 0;
+            this.btnVoucher.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnVoucher.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnVoucher.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btnVoucher.Image = ((System.Drawing.Image)(resources.GetObject("btnVoucher.Image")));
+            this.btnVoucher.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnVoucher.Location = new System.Drawing.Point(0, 498);
+            this.btnVoucher.Name = "btnVoucher";
+            this.btnVoucher.Size = new System.Drawing.Size(251, 51);
+            this.btnVoucher.TabIndex = 18;
+            this.btnVoucher.Text = "VOUCHER";
+            this.btnVoucher.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnVoucher.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnVoucher.UseVisualStyleBackColor = true;
+            this.btnVoucher.Click += new System.EventHandler(this.btnVoucher_Click);
+            // 
+            // btnSalary
+            // 
+            this.btnSalary.BackColor = System.Drawing.Color.Transparent;
+            this.btnSalary.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnSalary.FlatAppearance.BorderSize = 0;
+            this.btnSalary.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSalary.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btnSalary.Location = new System.Drawing.Point(0, 453);
+            this.btnSalary.Name = "btnSalary";
+            this.btnSalary.Size = new System.Drawing.Size(251, 45);
+            this.btnSalary.TabIndex = 17;
+            this.btnSalary.Text = "Thống Kê Lương";
+            this.btnSalary.UseVisualStyleBackColor = false;
+            this.btnSalary.Click += new System.EventHandler(this.btnSalary_Click);
+            // 
+            // btnStatistic
+            // 
+            this.btnStatistic.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnStatistic.FlatAppearance.BorderSize = 0;
+            this.btnStatistic.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnStatistic.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnStatistic.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btnStatistic.Image = ((System.Drawing.Image)(resources.GetObject("btnStatistic.Image")));
+            this.btnStatistic.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnStatistic.Location = new System.Drawing.Point(0, 402);
+            this.btnStatistic.Name = "btnStatistic";
+            this.btnStatistic.Size = new System.Drawing.Size(251, 51);
+            this.btnStatistic.TabIndex = 16;
+            this.btnStatistic.Text = "THỐNG KÊ";
+            this.btnStatistic.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnStatistic.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnStatistic.UseVisualStyleBackColor = true;
+            this.btnStatistic.Click += new System.EventHandler(this.btnStatistic_Click);
+            // 
             // Dashboard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -270,12 +287,13 @@
         private System.Windows.Forms.Button btnBill;
         private System.Windows.Forms.Panel pCenter;
         private System.Windows.Forms.PictureBox btnMenu;
-        private System.Windows.Forms.Button btnStatistic;
         private System.Windows.Forms.Button btnProduct;
         private System.Windows.Forms.Button btnCustomer;
         private System.Windows.Forms.Button btnEmployee;
         private System.Windows.Forms.Button btnBillView;
         private System.Windows.Forms.Button btnVoucher;
         private System.Windows.Forms.Button btnSalary;
+        private System.Windows.Forms.Button btnStatistic;
+        private System.Windows.Forms.Button btnWarranty;
     }
 }

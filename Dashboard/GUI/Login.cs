@@ -8,6 +8,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -29,7 +30,8 @@ namespace Dashboard
             String password = txtPassword.Text;
             if (EmployeeDAO.Instance.Login(employeeID, password))
             {
-                Dashboard.Instance.Show();
+                Dashboard dash = new Dashboard();
+                dash.Show();
             }
             else 
                 MessageBox.Show("Đăng nhập thất bại do tài khoản hoặc mật khẩu không khớp với cơ sở dữ liệu! Vui lòng kiểm tra lại hoặc liên hệ với QUẢN TRỊ VIÊN để được cấp quyền!", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -93,7 +95,11 @@ namespace Dashboard
         private void information_Click(object sender, EventArgs e)
         {
             MyTeam myteam = new MyTeam();
-            myteam.Show();
+            myteam.ShowDialog();
+        }
+
+        private void Login_Load(object sender, EventArgs e)
+        { 
         }
     }
 }

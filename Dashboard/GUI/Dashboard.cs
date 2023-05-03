@@ -20,23 +20,10 @@ namespace Dashboard
 {
     public partial class Dashboard : Form
     {
-        private static Dashboard instance;
-        object Formhijo;
-        public static Dashboard Instance
-        {
-            get
-            {
-                if (instance == null)
-                    instance = new Dashboard();
-                return Dashboard.instance;
-            }
-            private set { Dashboard.instance = value; }
-        }
 
-        private Dashboard()
+        public Dashboard()
         {
             InitializeComponent();
-            
         }
 
         private void Dashboard_Load()
@@ -44,15 +31,16 @@ namespace Dashboard
             pMenu.Width = 250;
             //btnClick(new Account());
             btnClick(new CreateBill());
-            btnBillView.Visible = false;
+            btnBillView.Visible = true;
             btnSalary.Visible = false;
+            btnWarranty.Visible = false;
         }
 
         private void btnClick(object Fill, Button btnClick = null)
         {
             Form f = Fill as Form;
             Panel_Show(f);
-            TransBackColor(btnBill, btnCustomer, btnEmployee, btnProduct, btnStatistic, btnVoucher,btnBillView,btnSalary);
+            TransBackColor();
             if (btnClick != null)
                 btnClick.BackColor = Color.DarkGray;
         }
@@ -67,6 +55,7 @@ namespace Dashboard
                 btnCustomer.Text = "";
                 btnProduct.Text = "";
                 btnStatistic.Text = "";
+                btnVoucher.Text = "";
             }
             else
             {
@@ -76,6 +65,7 @@ namespace Dashboard
                 btnCustomer.Text = "KHÁCH HÀNG";
                 btnProduct.Text = "SẢN PHẨM";
                 btnStatistic.Text = "THỐNG KÊ";
+                btnVoucher.Text = "VOUCHER";
             }
         }
 
@@ -97,6 +87,7 @@ namespace Dashboard
             btnClick(new CreateBill(), btnBill);
             btnBillView.Visible = true;
             btnSalary.Visible = false;
+            btnWarranty.Visible = false;
         }
 
         private void btnHome_Click(object sender, EventArgs e)
@@ -104,6 +95,7 @@ namespace Dashboard
             btnClick(new Account());
             btnBillView.Visible = false;
             btnSalary.Visible = false;
+            btnWarranty.Visible = false;
         }
 
         private void btnEmployee_Click(object sender, EventArgs e)
@@ -111,6 +103,7 @@ namespace Dashboard
             btnClick(new fEmployee(), btnEmployee);
             btnBillView.Visible = false;
             btnSalary.Visible = false;
+            btnWarranty.Visible = false;
         }
 
         private void btnCustomer_Click(object sender, EventArgs e)
@@ -118,6 +111,7 @@ namespace Dashboard
             btnClick(new Customer(),btnCustomer);
             btnBillView.Visible = false;
             btnSalary.Visible = false;
+            btnWarranty.Visible = false;
         }
 
         private void btnProduct_Click(object sender, EventArgs e)
@@ -125,6 +119,7 @@ namespace Dashboard
             btnClick(new Product(), btnProduct);
             btnBillView.Visible = false;
             btnSalary.Visible = false;
+            btnWarranty.Visible = true;
         }
 
         private void btnStatistic_Click(object sender, EventArgs e)
@@ -132,6 +127,7 @@ namespace Dashboard
             btnClick(new fStatistic(), btnStatistic);
             btnBillView.Visible = false;
             btnSalary.Visible = true;
+            btnWarranty.Visible = false;
         }
 
         private void btnVoucher_Click(object sender, EventArgs e)
@@ -140,18 +136,20 @@ namespace Dashboard
 
             btnBillView.Visible = false;
             btnSalary.Visible = false;
+            btnWarranty.Visible = false;
         }
         
-        private void TransBackColor(Button One, Button Two, Button Three, Button Four, Button Five, Button Six,Button Seven,Button Eight)
+        private void TransBackColor()
         {
-            One.BackColor = Color.Transparent;
-            Two.BackColor = Color.Transparent;
-            Three.BackColor = Color.Transparent;
-            Four.BackColor = Color.Transparent;
-            Five.BackColor = Color.Transparent;
-            Six.BackColor = Color.Transparent;
-            Seven.BackColor = Color.Transparent;
-            Eight.BackColor = Color.Transparent;
+            btnWarranty.BackColor = Color.Transparent;
+            btnVoucher.BackColor = Color.Transparent;
+            btnStatistic.BackColor = Color.Transparent;
+            btnProduct.BackColor = Color.Transparent;
+            btnBill.BackColor = Color.Transparent;
+            btnBillView.BackColor = Color.Transparent;
+            btnCustomer.BackColor = Color.Transparent;
+            btnEmployee.BackColor = Color.Transparent;
+            btnSalary.BackColor = Color.Transparent;
         }
 
         private void Dashboard_Load(object sender, EventArgs e)
@@ -167,6 +165,11 @@ namespace Dashboard
         private void btnSalary_Click(object sender, EventArgs e)
         {
             btnClick(new fSalary(), btnSalary);
+        }
+
+        private void btnWarranty_Click(object sender, EventArgs e)
+        {
+            btnClick(new Warranty(), btnWarranty);
         }
     }
 }

@@ -71,7 +71,8 @@
             this.importPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.sellPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.descript = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.btnUploadPhoto = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.panel2.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dtgvBill)).BeginInit();
@@ -155,6 +156,7 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.button1);
             this.panel1.Controls.Add(this.textBox2);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
@@ -196,6 +198,7 @@
             // panelTools
             // 
             this.panelTools.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.panelTools.Controls.Add(this.btnUploadPhoto);
             this.panelTools.Controls.Add(this.cbBrand);
             this.panelTools.Controls.Add(this.cbType);
             this.panelTools.Controls.Add(this.txtDescript);
@@ -365,9 +368,9 @@
             // 
             this.picImage.ErrorImage = ((System.Drawing.Image)(resources.GetObject("picImage.ErrorImage")));
             this.picImage.Image = ((System.Drawing.Image)(resources.GetObject("picImage.Image")));
-            this.picImage.Location = new System.Drawing.Point(218, 65);
+            this.picImage.Location = new System.Drawing.Point(218, 53);
             this.picImage.Name = "picImage";
-            this.picImage.Size = new System.Drawing.Size(114, 115);
+            this.picImage.Size = new System.Drawing.Size(101, 97);
             this.picImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.picImage.TabIndex = 24;
             this.picImage.TabStop = false;
@@ -424,6 +427,8 @@
             // 
             // dtgvTable
             // 
+            this.dtgvTable.AllowUserToAddRows = false;
+            this.dtgvTable.AllowUserToDeleteRows = false;
             this.dtgvTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dtgvTable.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.productImageURL,
@@ -438,10 +443,12 @@
             this.dtgvTable.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dtgvTable.Location = new System.Drawing.Point(0, 0);
             this.dtgvTable.Name = "dtgvTable";
+            this.dtgvTable.ReadOnly = true;
             this.dtgvTable.RowHeadersWidth = 51;
             this.dtgvTable.RowTemplate.Height = 24;
             this.dtgvTable.Size = new System.Drawing.Size(904, 917);
             this.dtgvTable.TabIndex = 11;
+            this.dtgvTable.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtgvTable_CellClick);
             // 
             // productImageURL
             // 
@@ -517,6 +524,31 @@
             this.descript.Name = "descript";
             this.descript.Width = 125;
             // 
+            // btnUploadPhoto
+            // 
+            this.btnUploadPhoto.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btnUploadPhoto.FlatAppearance.BorderSize = 0;
+            this.btnUploadPhoto.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gold;
+            this.btnUploadPhoto.FlatAppearance.MouseOverBackColor = System.Drawing.Color.PaleGreen;
+            this.btnUploadPhoto.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnUploadPhoto.Location = new System.Drawing.Point(218, 156);
+            this.btnUploadPhoto.Name = "btnUploadPhoto";
+            this.btnUploadPhoto.Size = new System.Drawing.Size(101, 23);
+            this.btnUploadPhoto.TabIndex = 41;
+            this.btnUploadPhoto.Text = "Upload Photo";
+            this.btnUploadPhoto.UseVisualStyleBackColor = false;
+            this.btnUploadPhoto.Click += new System.EventHandler(this.btnUploadPhoto_Click);
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(16, 46);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(157, 23);
+            this.button1.TabIndex = 3;
+            this.button1.Text = "NHẬP HÀNG VÀO KHO";
+            this.button1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.button1.UseVisualStyleBackColor = true;
+            // 
             // Product
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -585,6 +617,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn descript;
         private System.Windows.Forms.ComboBox cbBrand;
         private System.Windows.Forms.ComboBox cbType;
-        private System.ComponentModel.BackgroundWorker backgroundWorker1;
+        private System.Windows.Forms.Button btnUploadPhoto;
+        private System.Windows.Forms.Button button1;
     }
 }

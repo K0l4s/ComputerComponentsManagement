@@ -59,5 +59,22 @@ namespace Dashboard.DAO
             }
             return err;
         }
+        public string addVoucher(string billID = null, string voucherID = null)
+        {
+            string err;
+            try
+            {
+                string query = "EXECUTE insertVoucherApply @billID , @voucherID ";
+                object[] parameters = new object[] { billID, voucherID };
+                int dt = DataProvider.Instance.ExecuteNonQuery(query, parameters);
+                err = null;
+            }
+
+            catch (SqlException ex)
+            {
+                err = ex.Message;
+            }
+            return err;
+        }
     }
 }

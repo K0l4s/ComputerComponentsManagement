@@ -9,6 +9,8 @@ using System.Text;
 using System.Threading.Tasks;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using System.Windows.Forms;
+using System.IO;
+using System.Drawing;
 
 namespace Dashboard.DAO
 {
@@ -34,7 +36,17 @@ namespace Dashboard.DAO
                 dt.productID = dr["productID"].ToString();
                 dt.productName = dr["productName"].ToString();
                 dt.price = float.Parse(dr["sellPrice"].ToString());
-                dt.Image = dr["productImageURL"].ToString();
+                Image img = null;
+                try
+                {
+                    byte[] imgBytes = null;
+                    imgBytes = (byte[])dr["productImageURL"];
+                    MemoryStream ms = new MemoryStream(imgBytes);
+                    img = Image.FromStream(ms);
+                }
+                catch (Exception)
+                { }
+                dt.Image = img;
                 dt.quantity = 1;
             }
             return dt;

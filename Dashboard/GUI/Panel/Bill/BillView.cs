@@ -76,7 +76,7 @@ namespace Dashboard.GUI
         private void btn3Days_Click(object sender, EventArgs e)
         {
             dtpEnd.Value =new DateTime(today.Year, today.Month, today.Day, 23, 59, 59);
-            dtpStart.Value = new DateTime((dtpEnd.Value.Year), (dtpEnd.Value.Month), (dtpEnd.Value.Day)-2, 0, 0, 0);
+            dtpStart.Value = today.AddDays(-2);
             btnThisMonth.BackColor = Color.LightSlateGray;
             btn3Days.BackColor = Color.DeepSkyBlue;
             btnToday.BackColor = Color.LightSlateGray;
@@ -88,7 +88,7 @@ namespace Dashboard.GUI
         private void btn7Days_Click(object sender, EventArgs e)
         {
             dtpEnd.Value = new DateTime(today.Year, today.Month, today.Day, 23, 59, 59);
-            dtpStart.Value = new DateTime((dtpEnd.Value.Year), (dtpEnd.Value.Month), (dtpEnd.Value.Day) - 6, 0, 0, 0);
+            dtpStart.Value = today.AddDays(-7);
             btnThisMonth.BackColor = Color.LightSlateGray;
             btn3Days.BackColor = Color.LightSlateGray;
             btnToday.BackColor = Color.LightSlateGray;
