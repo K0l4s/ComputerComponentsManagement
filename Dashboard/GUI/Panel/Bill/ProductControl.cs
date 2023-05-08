@@ -16,7 +16,7 @@ namespace Dashboard.GUI.Panel.Bill
         {
             InitializeComponent();
         }
-        public string productID
+         public string productID
         {
             get { return txtID.Text; }
             set { txtID.Text = value; }
@@ -42,10 +42,10 @@ namespace Dashboard.GUI.Panel.Bill
             get { return float.Parse(txtMoney.Text); }
             set { txtMoney.Text = value.ToString(); }
         }
-        public string ImageFilePath
+        public Image ImageFilePath
         {
-            get { return picImage.ImageLocation; }
-            set { picImage.ImageLocation = value; }
+            get { return picImage.Image; }
+            set { picImage.Image = value; }
         }
 
         private void txtQuan_TextChanged(object sender, EventArgs e)
@@ -89,6 +89,7 @@ namespace Dashboard.GUI.Panel.Bill
         
         private void ProductControl_Load(object sender, EventArgs e)
         {
+            this.picImage.SizeMode = PictureBoxSizeMode.Zoom;
             myCheckBox.Text = null;
             myCheckBox.Checked = false;
             myCheckBox.Location = new Point(10, 10);

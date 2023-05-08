@@ -121,7 +121,7 @@
   <data name="btnChangePassword.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAgAAAAIACAYAAAD0eNT6AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
-        vQAADr0BR/uQrQAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAJFdSURBVHhe7Z0H
+        vAAADrwBlbxySQAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAJFdSURBVHhe7Z0H
         fBNH9sf/l94J6T259EJ6vUvv7dIuPZd+aZfeSC8kEEIIJUBIQnovhCSA6c0UAwZMsaV1NzYYsHGVVtLK
         FGv+8+QxGPlZdcuM9H6fz/eTO0A7O7Mz772dnXnzfyQSSX0d2Hfa0Qd+MP6eA96fMGDf98eP3avv2IV7
         vTe2tHvfsTW79xnr3aX3mHU79xmzfsd3R4eAHd75i20n2PHdMeE/2+nd0a3wb+Df7t5njN69z9gafo3i
@@ -745,7 +745,7 @@
         93//D9z5quD80VAKAAAAAElFTkSuQmCC
 </value>
   </data>
-  <data name="pictureBox1.ErrorImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="picImage.ErrorImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAgAAAAIACAYAAAD0eNT6AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
         DAAACwwBP0AiyAAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAGpHSURBVHhe7Z0J
@@ -1205,7 +1205,7 @@
         Qf4rwVWQ/nLAT8IjxPaI9v8BYYzkoAHiKBcAAAAASUVORK5CYII=
 </value>
   </data>
-  <data name="pictureBox1.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="picImage.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAgAAAAIACAYAAAD0eNT6AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
         DAAACwwBP0AiyAAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAGpHSURBVHhe7Z0J

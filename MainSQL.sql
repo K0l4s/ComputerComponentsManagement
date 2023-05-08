@@ -246,8 +246,8 @@ CREATE TABLE BILL(
 				billExportTime DATETIME)
 				GO
 CREATE TABLE VOUCHER_APPLY(
-				billID VARCHAR(20) NOT NULL REFERENCES BILL(billID),
-				voucherID VARCHAR(15) PRIMARY KEY REFERENCES VOUCHER(voucherID));
+				billID VARCHAR(20) NOT NULL PRIMARY KEY REFERENCES BILL(billID),
+				voucherID VARCHAR(15) REFERENCES VOUCHER(voucherID));
 				GO
 CREATE TABLE BILL_DETAIL(
 				billID VARCHAR(20) NOT NULL REFERENCES BILL(billID),
@@ -272,14 +272,30 @@ CREATE TABLE WARRANTY_STATUS(
 				statusName VARCHAR(100) NOT NULL);
 				GO
 CREATE TABLE WARRANTY_CARD(
-				productID VARCHAR(10) NOT NULL PRIMARY KEY REFERENCES PRODUCT(productID),
+				warrantyID VARCHAR(10) NOT NULL PRIMARY KEY,
+				productID VARCHAR(10) NOT NULL REFERENCES PRODUCT(productID),
+				billID VARCHAR(20) NOT NULL REFERENCES BILL(billID),
+				quantity INT NOT NULL,
+				CHECK (quantity >0),
 				warr_StatusID INT NOT NULL REFERENCES WARRANTY_STATUS(warr_StatusID),
 				descript VARCHAR(1000));
 				GO
 
 --TRIGGER FINAL
-
-CREATE TRIGGER AUTO_CREATE_ACCOUNT ON EMPLOYEE
+CREATE TRIGGER CHECK_WARRANTY ON WARRANTY_CARD
+FOR INSERT, UPDATE
+AS
+BEGIN
+	DECLARE @billQuantity INT, @warrantyQuantity INT
+	SELECT @billQuantity = number FROM BILL_DETAIL WHERE productID = (SELECT productID FROM inserted)
+	SELECT @warrantyQuantity = quantity FROM inserted
+	IF(@billQuantity < @warrantyQuantity)
+	BEGIN
+		RAISERROR('Số lượng nhập vào không hợp lệ!',6,1)
+		ROLLBACK TRANSACTION
+	END
+END
+CREATE  TRIGGER AUTO_CREATE_ACCOUNT ON EMPLOYEE
 FOR INSERT
 AS
 BEGIN
@@ -605,13 +621,37 @@ CREATE VIEW COMPLETED_BILL_DETAIL AS
 	FROM BILL_DETAIL bd INNER JOIN PRODUCT_DETAIL pd
 	ON bd.productID = pd.productID;
 GO
-	
-CREATE VIEW COMPLETED_BILL AS
+
+CREATE VIEW BILL_TOTAL_MONEY AS
 	SELECT b.billID, b.employeeID, b.phoneNumber, b.billExportTime, SUM(cbd.totalMoney) as totalPay
 	FROM BILL b INNER JOIN COMPLETED_BILL_DETAIL cbd
 		ON b.billID = cbd.billID
 	GROUP BY b.billID, b.employeeID, b.phoneNumber, b.billExportTime;
 	GO
+CREATE VIEW COMPLETED_BILL
+AS
+	SELECT c.billID, employeeID, phoneNumber, billExportTime, totalPay, 
+		totalPay - (
+			CASE 
+				WHEN EXISTS (
+					SELECT percentReduction 
+					FROM VOUCHER v 
+					INNER JOIN VOUCHER_APPLY va ON v.voucherID = va.voucherID
+					WHERE va.billID = c.billID
+				) 
+				THEN (
+					SELECT percentReduction 
+					FROM VOUCHER v 
+					INNER JOIN VOUCHER_APPLY va ON v.voucherID = va.voucherID
+					WHERE va.billID = c.billID
+				)/100.0 * totalPay 
+				ELSE 0 
+			END
+		) as Payment
+	FROM BILL_TOTAL_MONEY c
+GO
+
+
 
 CREATE VIEW VIEW_PRODUCT
 AS
@@ -620,13 +660,19 @@ AS
 	FULL OUTER JOIN (SELECT pde.productID, typeName, brandName,importPrice,sellPrice,descript FROM PRODUCT_DETAIL pde, PRODUCT_TYPE pt, BRAND b WHERE pde.brandID = b.brandID AND pde.typeID = pt.typeID ) pd
 	ON p.productID = pd.productID
 GO
+CREATE VIEW VIEW_WARRANTY AS
+	SELECT w.warrantyID, w.productID, productName, w.billID, w.quantity, warr_StatusID, descript
+	FROM WARRANTY_CARD w INNER JOIN PRODUCT p ON w.productID = p.productID 
+		INNER JOIN BILL b ON w.billID = b.billID
+GO
+INSERT INTO WARRANTY_CARD(warrantyID, warr_StatusID,productID,billID,quantity) VALUES ('1',1,'1','1',1)
 
-CREATE VIEW VIEW_WARRENTY AS
+/*CREATE VIEW VIEW_WARRENTY AS
 	SELECT wr.productID, wr.warr_StatusID, wr.descript
 	FROM WARRANTY_CARD wr INNER JOIN BILL_DETAIL bld
 	ON wr.productID = bld.productID
 	GROUP BY wr.productID, wr.warr_StatusID, wr.descript;
-	GO
+	GO*/
 
 --Func + Proc
 --FUNCTION FINAL
@@ -731,7 +777,7 @@ RETURNS INT
 AS
 BEGIN
     DECLARE @TotalValue INT
-    SELECT @TotalValue = SUM(totalPay)
+    SELECT @TotalValue = SUM(Payment)
     FROM COMPLETED_BILL
     WHERE billExportTime BETWEEN @DayStart AND @DayEnd
     RETURN @TotalValue
@@ -761,7 +807,7 @@ BEGIN
     WHILE @currentDate <= @Dayend
     BEGIN
         DECLARE @totalValue INT = (
-            SELECT SUM(totalPay)
+            SELECT SUM(Payment)
             FROM COMPLETED_BILL
             WHERE billExportTime = @currentDate
         );
@@ -1272,6 +1318,21 @@ RETURN
 		AND (@descript IS NULL OR descript = @descript))
 GO
 
+Create FUNCTION searchBill 
+(@billID VARCHAR(20) = null, 
+@employeeID INT = null, 
+@dayStart DATETIME = null,
+@dayEnd DATETIME = null) RETURNS TABLE
+AS
+RETURN 
+	(SELECT c.billID, c.employeeID,e.fullName, c.phoneNumber, cus.fullName as [Customer's Name], billExportTime, c.totalPay,c.Payment
+	FROM COMPLETED_BILL c INNER JOIN EMPLOYEE e ON c.employeeID = e.employeeID
+		LEFT JOIN CUSTOMER cus ON c.phoneNumber = cus.phoneNumber
+	WHERE (@billID IS NULL OR c.billID = @billID)
+	AND (@employeeID IS NULL OR c.employeeID = @employeeID)
+	AND ((@dayEnd IS NULL OR @dayStart IS NULL) OR (billExportTime BETWEEN @dayStart AND @dayEnd)))
+GO
+
 CREATE VIEW VIEW_TOTALWORKTIME
 AS
 	SELECT w.employeeID, fullName, checkIn, checkOut, wage, SUM(DATEDIFF(MINUTE, checkIn, checkOut)) / 60 as totalTime,
@@ -1287,8 +1348,272 @@ AS
 	FROM VIEW_TOTALWORKTIME v1 INNER JOIN (SELECT employeeID, SUM(salaryInShift) as salary FROM VIEW_TOTALWORKTIME WHERE checkOut BETWEEN @dayStart and @dayEnd GROUP BY employeeID ) v2 ON v1.employeeID = v2.employeeID 
 	WHERE checkOut BETWEEN @dayStart and @dayEnd)
 GO
+CREATE PROCEDURE insertBill @billID VARCHAR(20) = NULL, @employeeID VARCHAR(36)= NULL, @phoneNumber VARCHAR(10) =NULL, @billExportTime DATETIME = NULL
+AS
+BEGIN
+	IF(@billID IS NULL)
+	BEGIN
+		RAISERROR('Mã Bill không có dữ liệu, xin hãy thử lại sau!',6,1)
+		RETURN
+	END
+	IF(@employeeID IS NULL OR @employeeID NOT IN (SELECT employeeID FROM EMPLOYEE))
+	BEGIN
+		RAISERROR('Không tìm thấy nhân viên, xin hãy thử lại sau!',6,1)
+		RETURN
+	END
+	IF (@billExportTime IS NULL)
+	BEGIN
+		RAISERROR('Không tìm thấy ngày xuất hóa đơn, hãy thử lại sau!',6,1)
+		RETURN
+	END
+	INSERT INTO BILL(billID, employeeID, phoneNumber, billExportTime) VALUES(@billID, @employeeID, @phoneNumber, @billExportTime)
+END
+GO 
+CREATE PROCEDURE insertProductInBill @billD VARCHAR(20) = NULL, @productID VARCHAR(10), @number INT
+AS
+BEGIN
+	IF(@billD NOT IN (SELECT billID FROM BILL) OR @billD IS NULL)
+	BEGIN
+		RAISERROR('Không tìm thấy Bill trong hệ thống! Vui lòng thử lại sau!',6,1)
+		RETURN
+	END
+	IF(@productID NOT IN (SELECT productID FROM PRODUCT) OR @productID IS NULL)
+	BEGIN
+		RAISERROR('Không tìm thấy sản phẩm trong hệ thống! Vui lòng thử lại sau!',6,1)
+		RETURN
+	END
+	IF(@number IS NULL)
+	BEGIN
+		RAISERROR('Số lượng nhập vào không hợp lệ! Vui lòng thử lại sau',6,1)
+		RETURN
+	END
+	IF(@number > (SELECT quantity FROM PRODUCT WHERE productID = @productID))
+	BEGIN
+		RAISERROR('Trong kho hết hàng, vui lòng thử lại!',6,1);
+		RETURN
+	END
+	INSERT INTO BILL_DETAIL(billID, productID, number) VALUES (@billD, @productID, @number)
+END
+go
+CREATE PROCEDURE insertVoucherApply @billID VARCHAR(20), @voucherID VARCHAR(15)
+AS
+BEGIN
+	IF(@billID NOT IN (SELECT billID FROM BILL))
+	BEGIN
+		RAISERROR('Bill không tồn tại',6,1)
+		RETURN
+	END
+	IF(@voucherID NOT IN (SELECT voucherID FROM VOUCHER))
+	BEGIN
+		RAISERROR('Voucher không tồn tại',6,1)
+		RETURN
+	END
+	INSERT INTO VOUCHER_APPLY(billID,voucherID) VALUES (@billID,@voucherID)
+END
+go
+CREATE FUNCTION calculate_Salary (@dateStart datetime, @dateEnd datetime)
+RETURNS TABLE
+AS
+RETURN
+(
+	SELECT E.employeeID, E.fullName,
+		   SUM(DATEDIFF(SECOND, W.checkIn, W.checkOut))/3600.0*E.wage as Salary
+	FROM EMPLOYEE E
+	JOIN WORK_TIME W ON E.employeeID = W.employeeID
+	WHERE W.checkIn >= @dateStart AND W.checkOut <= DATEADD(day, 1, @dateEnd)
+	GROUP BY E.employeeID, E.fullName, E.wage
+)
+GO
+CREATE FUNCTION PAYROLL_CALCULATION (@month int, @year int)
+RETURNS TABLE 
+AS
+RETURN
+	 	(SELECT e.employeeID, e.wage * wts.workingHours as Salary
+		 FROM EMPLOYEE e
+		 INNER JOIN (SELECT employeeID, SUM(DATEDIFF(MINUTE, checkIn, checkOut))/60.0 as workingHours
+					 FROM WORK_TIME
+					 WHERE MONTH(checkIn) = @month and YEAR(checkIn) = @year
+					 GROUP BY employeeID) wts ON e.employeeID = wts.employeeID)
+GO
+-- Tạo view số sản phẩm bán được (totalMoney, productID, brandID, employeeID, SL sản phẩm bán được)
+CREATE VIEW VIEW_SALED_PRODUCTS AS
+	SELECT	pd.productID, pd.brandID, SUM(cbd.number) as 'SL sản phẩm bán được', SUM(cbd.totalMoney) as 'Tổng tiền sản phẩm bán được', b.employeeID 
+	FROM (COMPLETED_BILL_DETAIL cbd INNER JOIN PRODUCT_DETAIL pd
+		ON cbd.productID = pd.productID) INNER JOIN BILL b ON cbd.billID = b.billID
+	GROUP BY pd.productID, pd.brandID, b.employeeID
+GO
+
+--Viết FUNCTION	tính tổng số sản phẩm và tổng số tiền bán ra được, phân loại theo brand và employee giữa 2 mốc thời gian được nhập vào
+CREATE FUNCTION FUNC_SOLD_PRODUCTS(@dayStart date, @dayEnd date)
+RETURNS TABLE
+AS
+RETURN
+	(SELECT	pd.productID, pd.brandID, SUM(cbd.number) as 'Number_of_product_sold', SUM(cbd.totalMoney) as 'Total_amount_of_products_sold', b.employeeID 
+	 FROM (COMPLETED_BILL_DETAIL cbd INNER JOIN PRODUCT_DETAIL pd
+		 ON cbd.productID = pd.productID) INNER JOIN BILL b ON cbd.billID = b.billID
+	 WHERE b.billExportTime BETWEEN @dayStart AND @dayEnd
+	 GROUP BY pd.productID, pd.brandID, b.employeeID)
+GO
+-- Viết FUNCTION tính hoa hồng cho nhân viên phân loại theo brand và employee giữa 2 mốc thời gian được nhập vào
+CREATE FUNCTION FUNC_CAL_COMMISSION(@dayStart date, @dayEnd date)
+RETURNS TABLE
+AS
+RETURN 
+	(SELECT fsp.employeeID, cd.brandID, (e.commissionRate * fsp.Total_amount_of_products_sold) as 'Commssion'
+	 FROM (COMMISSION_DETAIL cd INNER JOIN dbo.FUNC_SOLD_PRODUCTS(@dayStart, @dayEnd) fsp
+		ON cd.brandID = fsp.brandID) INNER JOIN EMPLOYEE e ON fsp.employeeID = e.employeeID
+	 WHERE fsp.Total_amount_of_products_sold >= cd.minCommission)
+
+GO
+
+CREATE FUNCTION FUNC_TOTAL_COMMISSION(@dayStart date, @dayEnd date)
+RETURNS TABLE
+AS
+RETURN 
+	(SELECT fcc.employeeID, SUM(fcc.Commssion) as 'Sum_of_commssion'
+	 FROM dbo.FUNC_CAL_COMMISSION (@dayStart, @dayEnd) fcc
+	 GROUP BY fcc.employeeID)
+go
+CREATE FUNCTION FUNC_TOTAL_SALARY (@dayStart DATETIME, @dayEnd DATETIME)
+RETURNS TABLE
+AS
+RETURN 
+	(SELECT c.employeeID, c.fullName, c.salary, ftc.Sum_of_commssion as 'Total_commssion', (c.salary + ISNULL(ftc.Sum_of_commssion, 0)) as 'Total_salary'
+	 FROM dbo.calEm(@dayStart, @dayEnd) c LEFT JOIN dbo.FUNC_TOTAL_COMMISSION(@dayStart, @dayEnd) ftc
+		ON c.employeeID = ftc.employeeID)
+go
 
 
+CREATE FUNCTION FUNC_SEARCH_TOTAL_SALARY(@employeeID int, @dayStart DATETIME, @dayEnd DATETIME)
+RETURNS TABLE
+AS
+RETURN
+	(SELECT e.employeeID, e.fullName, fts.salary, fts.Total_commssion, fts.Total_salary
+	 FROM EMPLOYEE e FULL JOIN dbo.FUNC_TOTAL_SALARY(@dayStart, @dayEnd) fts
+		ON e.employeeID = fts.employeeID
+	 WHERE @employeeID = e.employeeID)
+go
+CREATE FUNCTION searchWarranty(@warrantyID VARCHAR(10) = null, @productID VARCHAR(10) = null, @billID VARCHAR(20) =null,@quantity INT = null, @warr_StatusID INT=null) 
+RETURNS TABLE
+AS 
+RETURN
+	(SELECT *
+	FROM VIEW_WARRANTY
+	WHERE (@warrantyID IS NULL OR warrantyID = @warrantyID)
+	AND (@productID IS NULL OR productID = @productID)
+	AND (@billID IS NULL OR billID = @billID)
+	AND (@quantity IS NULL OR quantity = @quantity)
+	AND (@warr_StatusID IS NULL OR warr_StatusID = @warr_StatusID))
+GO
+CREATE PROC insertWarranty
+@warrantyID VARCHAR(10) = null,
+@productID VARCHAR(10) = null,
+@billID VARCHAR(20) = null,
+@quantity INT = null,
+@warr_StatusID INT = null,
+@descript VARCHAR(255) =null
+AS
+BEGIN
+	IF (@warrantyID IS NULL)
+	BEGIN
+		RAISERROR('Mã bảo hành không được để trống! Xin thử lại sau!',6,1)
+		RETURN
+	END
+	IF (@productID NOT IN (SELECT productID FROM PRODUCT))
+	BEGIN
+		RAISERROR('Không tìm thấy Sản phẩm trong hệ thống! Xin thử lại sau!',6,1)
+		RETURN
+	END
+	IF(@billID NOT IN (SELECT billID FROM BILL))
+	BEGIN
+		RAISERROR('Không tìm thấy Đơn Hàng trong hệ thống! Xin thử lại sau!',6,1)
+		RETURN
+	END
+	IF(@quantity <= 0)
+	BEGIN
+		RAISERROR('Số lượng không hợp lệ! Xin thử lại sau!',6,1)
+		RETURN
+	END
+	IF(@warr_StatusID IS NULL OR (@warr_StatusID NOT IN (SELECT warr_StatusID FROM WARRANTY_STATUS)))
+	BEGIN
+		SET @warr_StatusID = 2
+	END
+	INSERT INTO WARRANTY_CARD(warrantyID, productID, billID, quantity, warr_StatusID, descript) VALUES (@warrantyID, @productID, @billID, @quantity, @warr_StatusID, @descript)
+END 
+GO
+CREATE PROC deleteWarranty
+@warrantyID VARCHAR(10) = null
+AS
+BEGIN
+	IF(@warrantyID NOT IN (SELECT warrantyID FROM WARRANTY_CARD))
+	BEGIN
+		RAISERROR('Không tìm thấy mã bảo hành. Vui lòng thử lại sau!',6,1)
+		RETURN
+	END
+	DELETE WARRANTY_CARD WHERE warrantyID = @warrantyID
+END
+GO
+CREATE PROC updateWarranty
+@warrantyID VARCHAR(10) = null,
+@productID VARCHAR(10) = null,
+@billID VARCHAR(20) = null,
+@quantity INT = null,
+@warr_StatusID INT = null,
+@descript VARCHAR(255) =null
+AS
+BEGIN
+	IF (@warrantyID NOT IN (SELECT warrantyID FROM WARRANTY_CARD))
+	BEGIN
+		RAISERROR('Không tìm thấy mã bảo hành trong hệ thống! Xin thử lại sau!',6,1)
+		RETURN
+	END
+
+	IF(@productID IS NULL)
+	BEGIN
+		SELECT @productID = productID FROM WARRANTY_CARD WHERE warrantyID = @warrantyID
+	END
+	IF(@billID IS NULL)
+	BEGIN
+		SELECT @billID = billID FROM WARRANTY_CARD WHERE warrantyID = @warrantyID
+	END
+	IF(@quantity IS NULL)
+	BEGIN
+		SELECT @quantity = quantity FROM WARRANTY_CARD WHERE warrantyID = @warrantyID
+	END
+	IF(@warr_StatusID IS NULL)
+	BEGIN
+		SELECT @warr_StatusID = warr_StatusID FROM WARRANTY_CARD WHERE warrantyID = @warrantyID
+	END
+	IF(@descript IS NULL)
+	BEGIN
+		SELECT @descript = descript FROM WARRANTY_CARD WHERE warrantyID = @warrantyID
+	END
+	IF (@productID IS NOT NULL AND @productID NOT IN (SELECT productID FROM PRODUCT))
+	BEGIN
+		RAISERROR('Không tìm thấy Sản phẩm trong hệ thống! Xin thử lại sau!',6,1)
+		RETURN
+	END
+	ELSE
+	IF(@billID IS NOT NULL AND @billID NOT IN (SELECT billID FROM BILL))
+	BEGIN
+		RAISERROR('Không tìm thấy Đơn Hàng trong hệ thống! Xin thử lại sau!',6,1)
+		RETURN
+	END
+	IF(@quantity <= 0)
+	BEGIN
+		RAISERROR('Số lượng không hợp lệ! Xin thử lại sau!',6,1)
+		RETURN
+	END
+	IF(@warr_StatusID NOT IN (SELECT warr_StatusID FROM WARRANTY_STATUS))
+	BEGIN
+		SET @warr_StatusID = 2
+	END
+
+	UPDATE WARRANTY_CARD
+	SET productID = @productID, billID = @billID, quantity = @quantity, warr_StatusID = @warr_StatusID, descript = @descript
+	WHERE warrantyID = @warrantyID
+END 
+GO
 -- INSERT DATA FOR DATABASE
 INSERT INTO AUTHORIZATION_USER VALUES (1, 'Manager');
 INSERT INTO AUTHORIZATION_USER VALUES (2, 'Cashier');
@@ -1342,7 +1667,23 @@ INSERT INTO BILL_DETAIL (billID, productID, number) VALUES ('2', '1', 3);
 INSERT INTO BILL_DETAIL (billID, productID, number) VALUES ('2', '2', 3);
 INSERT INTO BILL_DETAIL (billID, productID, number) VALUES ('2', '3', 3);
 
+insert into COMMISSION_DETAIL (comAnaID, brandID, minCommission) values (001, 1, 5000)
+insert into COMMISSION_DETAIL (comAnaID, brandID, minCommission) values (002, 2, 6000)
+insert into COMMISSION_DETAIL (comAnaID, brandID, minCommission) values (003, 3, 7000)
+insert into WORK_TIME(employeeID, checkIn, checkOut) values (1, '2023-04-12 7:00:00', '2023-04-12 11:00:00')
+insert into WORK_TIME(employeeID, checkIn, checkOut) values (1, '2023-04-12 13:00:00', '2023-04-12 17:00:00')
 
+insert into WORK_TIME(employeeID, checkIn, checkOut) values (2, '2023-04-12 7:00:00', '2023-04-12 11:00:00')
+
+insert into WORK_TIME(employeeID, checkIn, checkOut) values (3, '2023-04-12 7:00:00', '2023-04-12 11:00:00')
+insert into WORK_TIME(employeeID, checkIn, checkOut) values (3, '2023-04-12 13:00:00', '2023-04-12 17:00:00')
+--------------------------------------------------------------------------------------------------------------------
+insert into WORK_TIME(employeeID, checkIn, checkOut) values (1, '2023-05-12 7:00:00', '2023-05-12 11:00:00')
+insert into WORK_TIME(employeeID, checkIn, checkOut) values (1, '2023-05-12 13:00:00', '2023-05-12 17:00:00')
+
+
+insert into WORK_TIME(employeeID, checkIn, checkOut) values (3, '2023-05-12 7:00:00', '2023-05-12 11:00:00')
+insert into WORK_TIME(employeeID, checkIn, checkOut) values (3, '2023-05-12 13:00:00', '2023-05-12 17:00:00')
 UPDATE ACCOUNT
 SET emp_password = 'admin123'
 WHERE employeeID = 1

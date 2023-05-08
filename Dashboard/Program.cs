@@ -1,4 +1,5 @@
 ﻿using Dashboard.GUI;
+using Dashboard.GUI.Panel;
 using System;
 using System.Collections.Generic;
 using System.Linq;

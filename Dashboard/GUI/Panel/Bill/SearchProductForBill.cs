@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -32,7 +33,18 @@ namespace Dashboard.GUI.Panel.Bill
                 productControl.productID = dr["productID"].ToString();
                 productControl.productName = dr["productName"].ToString();
                 productControl.Price = float.Parse(dr["sellPrice"].ToString());
-                productControl.ImageFilePath = dr["productImageURL"].ToString();
+                
+                Image img = null;
+                try
+                {
+                    byte[] imgBytes = null;
+                    imgBytes = (byte[])dr["productImageURL"];
+                    MemoryStream ms = new MemoryStream(imgBytes);
+                    img = Image.FromStream(ms);
+                }
+                catch (Exception)
+                { }
+                productControl.ImageFilePath = img;
                 productControl.Quantity = 1;
                 flowLayoutPanel1.Controls.Add(productControl);
             }

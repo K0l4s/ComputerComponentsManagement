@@ -58,8 +58,10 @@
     <Compile Include="DAO\SearchProductForBillDAO.cs" />
     <Compile Include="DAO\VoucherDAO.cs" />
     <Compile Include="DAO\StatisticsDAO.cs" />
+    <Compile Include="DAO\WarrantyDAO.cs" />
     <Compile Include="DTO\ProductDTO.cs" />
     <Compile Include="DTO\ProductInBillDTO.cs" />
+    <Compile Include="DTO\WarrantyDTO.cs" />
     <Compile Include="GUI\Panel\Bill\BillView.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -90,12 +92,6 @@
     <Compile Include="GUI\Panel\Bill\SearchProductForBill.Designer.cs">
       <DependentUpon>SearchProductForBill.cs</DependentUpon>
     </Compile>
-    <Compile Include="GUI\Panel\Form1.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="GUI\Panel\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
-    </Compile>
     <Compile Include="GUI\Panel\fSalary.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -107,6 +103,12 @@
     </Compile>
     <Compile Include="GUI\Panel\Product.Designer.cs">
       <DependentUpon>Product.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\Panel\Warranty.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\Panel\Warranty.Designer.cs">
+      <DependentUpon>Warranty.cs</DependentUpon>
     </Compile>
     <Compile Include="Utilities\Upload.cs" />
     <Compile Include="Utilities\DataConvert.cs" />
@@ -197,9 +199,6 @@
     <EmbeddedResource Include="GUI\Panel\Customer.resx">
       <DependentUpon>Customer.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="GUI\Panel\Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="GUI\Panel\fSalary.resx">
       <DependentUpon>fSalary.cs</DependentUpon>
     </EmbeddedResource>
@@ -212,6 +211,9 @@
     <EmbeddedResource Include="GUI\Panel\Voucher.resx">
       <DependentUpon>Voucher.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\Panel\Warranty.resx">
+      <DependentUpon>Warranty.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

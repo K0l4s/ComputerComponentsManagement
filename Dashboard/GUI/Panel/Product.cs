@@ -64,24 +64,28 @@ namespace Dashboard.GUI.Panel
         {
             btnTools.Text = "Tìm kiếm";
             panelTools.Visible = true;
+            btnUploadPhoto.Enabled = false;
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
             btnTools.Text = "Thêm";
             panelTools.Visible = true;
+            btnUploadPhoto.Enabled = true;
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
             btnTools.Text = "Xóa";
             panelTools.Visible = true;
+            btnUploadPhoto.Enabled = false;
         }
 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
             btnTools.Text = "Sửa";
             panelTools.Visible = true;
+            btnUploadPhoto.Enabled = true;
         }
 
         private void btnTools_Click(object sender, EventArgs e)
@@ -190,5 +194,62 @@ namespace Dashboard.GUI.Panel
             TableDefault();
             MessageBox.Show(err);
         }
+
+        private void btnUploadPhoto_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                OpenFileDialog openFileDialog = new OpenFileDialog();
+                openFileDialog.Filter = "Image Files (*.bmp;*.jpg;*.jpeg,*.png)|*.BMP;*.JPG;*.JPEG;*.PNG";
+                if (openFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    picImage.Image = new Bitmap(openFileDialog.FileName);
+                    MessageBox.Show("Upload ảnh thành công!");
+                }
+                else
+                {
+                    MessageBox.Show("Upload ảnh thất bại! vui lòng thử lại!");
+                }    
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show("Có lỗi xảy ra rồi! \nNỘI DUNG LỖI: " + ex.Message);
+            }
+        }
+
+        private void dtgvTable_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)//Để tránh lấy tên của cột
+            {
+                DataGridViewRow row = this.dtgvTable.Rows[e.RowIndex];
+                string productID = row.Cells["productID"].Value.ToString();
+                string productName = row.Cells["productName"].Value.ToString();
+                string quantity = row.Cells["quantity"].Value.ToString();
+                string typeName = row.Cells["typeName"].Value.ToString();
+                string brandName = row.Cells["brandName"].Value.ToString();
+                string importPrice = row.Cells["importPrice"].Value.ToString();
+                string sellPrice = row.Cells["sellPrice"].Value.ToString();
+                string descript = row.Cells["descript"].Value.ToString();
+                byte[] imgBytes = null;
+                try
+                {
+                    imgBytes = (byte[])row.Cells["productImageURL"].Value;
+                    MemoryStream ms = new MemoryStream(imgBytes);
+                    picImage.Image = Image.FromStream(ms);
+                }
+                catch(Exception)
+                { }
+                txtID.Text = productID;
+                txtName.Text = productName;
+                txtQuantity.Text = quantity;
+                cbType.Text = typeName;
+                cbBrand.Text = brandName;
+                txtImport.Text = importPrice;
+                txtSell.Text = sellPrice;
+                txtDescript.Text = descript;
+            }
+            
+        }
+        
     }
 }

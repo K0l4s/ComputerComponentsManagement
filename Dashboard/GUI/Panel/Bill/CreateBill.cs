@@ -35,21 +35,26 @@ namespace Dashboard.GUI
         }
         private void btnAddProduct_Click(object sender, EventArgs e)
         {
+            addProduct();
+            
+        }
+        private void addProduct()
+        {
             List<ProductInBillDTO> product = new List<ProductInBillDTO>();
             SearchProductForBill search = new SearchProductForBill();
             search.ShowDialog();
             product = search.Result;
-            if(product != null)
-                foreach(ProductInBillDTO item in product)
+            if (product != null)
+                foreach (ProductInBillDTO item in product)
                 {
                     foreach (string secondItem in checkProduct)
                     {
                         if (secondItem == item.productID)
                         {
-                            MessageBox.Show("Đã lựa chọn sản phẩm! Xin vui lòng thử lại sau!"); 
+                            MessageBox.Show("Đã lựa chọn sản phẩm! Xin vui lòng thử lại sau!");
                             return;
                         }
-                    }    
+                    }
                     checkProduct.Add(item.productID);
                     productInBill.Add(item);
                     ProductDTO adding = new ProductDTO();
@@ -62,7 +67,7 @@ namespace Dashboard.GUI
                     productControl.ImageFilePath = item.Image;
                     productControl.Quantity = item.quantity;
                     flowLayoutPanel1.Controls.Add(productControl);
-                }    
+                }
         }
         private void btnCustomerCheck_Click(object sender, EventArgs e)
         {
@@ -153,6 +158,13 @@ namespace Dashboard.GUI
                     totalMoney += productControl.TotalMoney;
                 }
             }
+            try
+            {
+                if (!String.IsNullOrEmpty(txtReduction.Text))
+                    totalMoney -= totalMoney * Int32.Parse(txtReduction.Text)/100;
+            }
+            catch(Exception)
+            { }
             txtTotalMoney.Text = totalMoney.ToString();
         }
         private void flowLayoutPanel1_ControlAdded(object sender, ControlEventArgs e)
@@ -177,25 +189,14 @@ namespace Dashboard.GUI
 
         private void btnDelProduct_Click(object sender, EventArgs e)
         {
-            foreach (Control control in flowLayoutPanel1.Controls)
+            while (flowLayoutPanel1.Controls.OfType<ProductControl>().Any(c => c.myCheckBox.Checked))
             {
-                if (flowLayoutPanel1.Controls.Count > 0 && control is ProductControl)
-                {
-                    ProductControl productControl = (ProductControl)control;
-                    if (productControl.myCheckBox.Checked == true)
-                    {
-                        flowLayoutPanel1.Controls.Remove(productControl);
-                        checkProduct.Remove(productControl.productID);
-                        foreach(ProductInBillDTO item in productInBill)
-                        {
-                            if (item.productID == productControl.productID)
-                                productInBill.Remove(item);
-                            if (productInBill.Count == 0)
-                                return;
-                        }    
-                    }
-                }
+                ProductControl productControl = flowLayoutPanel1.Controls.OfType<ProductControl>().First(c => c.myCheckBox.Checked);
+                flowLayoutPanel1.Controls.Remove(productControl);
+                checkProduct.Remove(productControl.productID);
+                productInBill.RemoveAll(p => p.productID == productControl.productID);
             }
+
         }
 
         private void voucherCheck_Click(object sender, EventArgs e)
@@ -214,6 +215,7 @@ namespace Dashboard.GUI
                         if (Name != null)
                         {
                             txtReduction.Text = Name.ToString();
+                            calculateMoney();
                             MessageBox.Show("Đủ điều kiện sử dụng voucher!");
                         }
                     }
@@ -248,32 +250,16 @@ namespace Dashboard.GUI
             txtEmployeeID.Text = EmployeeDAO.userLogin.ToString();
             Random random = new Random();
             txtBillID.Text = today.Year.ToString() + today.Month + today.Day + today.Hour + today.Minute + today.Minute +random.Next(1111,9999);
-            foreach (Control control in flowLayoutPanel1.Controls)
-            {
-                if (flowLayoutPanel1.Controls.Count > 0 && control is ProductControl)
-                {
-                    ProductControl productControl = (ProductControl)control;
-                    productControl.myCheckBox.Checked = true;
-                    if (productControl.myCheckBox.Checked == true)
-                    {
-                        flowLayoutPanel1.Controls.Remove(productControl);
-                        checkProduct.Remove(productControl.productID);
-                        foreach (ProductInBillDTO item in productInBill)
-                        {
-                            if (item.productID == productControl.productID)
-                                productInBill.Remove(item);
-                            if (productInBill.Count == 0)
-                                return;
-                        }
-                    }
-                }
-            }
+          
+            checkProduct.Clear();
+            flowLayoutPanel1.Controls.Clear();
+            flowLayoutPanel1.Controls.Add(this.btnAddProduct);
 
         }
 
         private void btnDone_Click(object sender, EventArgs e)
         {
-            string billID=null, phoneNumber=null;
+            string billID = null, phoneNumber = null, voucherID = null;
             DateTime? billExportTime=null;
             int? employeeID=null;
             if(!String.IsNullOrEmpty(txtBillID.Text))
@@ -286,7 +272,7 @@ namespace Dashboard.GUI
                 if (!String.IsNullOrEmpty(txtEmployeeID.Text))
                     employeeID = Int32.Parse(txtEmployeeID.Text);
             }
-            catch(FormatException)
+            catch(Exception)
             {
                 MessageBox.Show("Tạo bill thất bại do chưa nhập nhân viên!");
             }
@@ -300,8 +286,10 @@ namespace Dashboard.GUI
             {
                 err = BillDAO.Instance.addItem(billID, item.productID, item.quantity);
             }
+            if (!String.IsNullOrEmpty(txtVouID.Text))
+                err = BillDAO.Instance.addVoucher(billID, txtVouID.Text);
             btnDel_Click(null, null);
-            if (!String.IsNullOrEmpty(err))
+            if (err==null)
                 err = "Tạo bill mới thành công!";
             MessageBox.Show(err);
             btnDelProduct_Click(null, null);
@@ -312,6 +300,11 @@ namespace Dashboard.GUI
             btnAddCustomer.Enabled = false;
             btnCustomerCheck.Enabled = true;
             btnCanel.Visible = false;
+        }
+
+        private void flowLayoutPanel1_MouseHover(object sender, EventArgs e)
+        {
+            calculateMoney();
         }
     }
 }
