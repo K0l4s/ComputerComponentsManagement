@@ -1,4 +1,13 @@
-﻿-- Script Reset Database 
+﻿-- Script Reset User and Permission
+DECLARE @sql NVARCHAR(MAX)=''
+SELECT @sql+='DROP LOGIN '+QUOTENAME(name)+';'
+FROM sys.sql_logins
+WHERE name NOT LIKE '##%##' AND name <> 'sa' AND name <> 'NT AUTHORITY\\SYSTEM' AND name <> 'NT AUTHORITY\\NETWORK SERVICE' AND name <> 'NT AUTHORITY\\LOCAL SERVICE'
+
+PRINT @sql -- Chạy câu lệnh này trước để kiểm tra xem nó xóa được user nào không
+EXEC sp_executesql @sql
+GO
+-- Script Reset Database 
 USE master;
 GO
 IF EXISTS(SELECT * FROM sys.databases WHERE name = 'HEQUANTRICOSODULIEU')
@@ -10,6 +19,143 @@ CREATE DATABASE HEQUANTRICOSODULIEU;
 GO
 USE HEQUANTRICOSODULIEU;
 GO
+
+
+-- CREATE PERMISSION 
+CREATE OR ALTER PROCEDURE proc_permission (@user nvarchar (20), @pass nvarchar(20))
+AS
+BEGIN
+    DECLARE @state nvarchar (100), @role INT
+
+    SELECT @role = e.authorID
+    FROM ACCOUNT a
+    INNER JOIN EMPLOYEE e ON a.employeeID = e.employeeID
+    WHERE a.employeeID = @user AND a.emp_password = @pass
+    
+    PRINT @role
+    
+    BEGIN TRY
+		IF (@role = 1)
+		BEGIN
+			BEGIN TRY
+				BEGIN TRANSACTION;
+				-----------cấp quyền vào các bảng
+				SET @state = 'GRANT SELECT, UPDATE, DELETE, INSERT TO [' + @user + ']'
+				EXEC (@state)
+				SET @state = 'GRANT EXEC TO [' + @user + ']'
+				EXEC (@state)
+				COMMIT TRANSACTION;
+			END TRY
+			BEGIN CATCH
+				ROLLBACK TRANSACTION;
+				THROW;
+			END CATCH
+		END
+		ELSE IF (@role = 2)
+		BEGIN
+			BEGIN TRY
+				BEGIN TRANSACTION;
+				-----------cấp quyền vào các bảng
+				SET @state = 'GRANT SELECT, UPDATE, DELETE, INSERT TO [' + @user + ']'
+				EXEC (@state)
+				SET @state = 'GRANT EXEC TO [' + @user + ']'
+				EXEC (@state)
+
+				------------- cấm quyền vào account
+				--SET @state = 'DENY SELECT, UPDATE, INSERT, DELETE ON OBJECT::ACCOUNT TO [' + @user + ']'
+				--EXEC (@state)
+				--cấm quyền them xoa account
+				SET @state = 'DENY  INSERT, DELETE ON OBJECT::view_Account TO [' + @user + ']'
+				EXEC (@state)
+
+				----------- cấm quyền vào nhân viên
+				SET @state = 'DENY SELECT, UPDATE, INSERT, DELETE ON OBJECT::EMPLOYEE TO [' + @user + ']'
+				EXEC (@state)
+				--cấm quyền xem nhân viên
+				SET @state = 'DENY SELECT, UPDATE, INSERT, DELETE ON OBJECT::view_Employee TO [' + @user + ']'
+				EXEC (@state)
+				-- Cấm quyền thêm nhân viên
+				SET @state = 'DENY EXEC ON OBJECT::PROD_InsertEmployee TO [' + @user + ']'
+				EXEC (@state)
+				-- Cấm quyền sửa nhân viên
+				SET @state = 'DENY EXEC ON OBJECT::PROD_UpdateEmployee TO [' + @user + ']'
+				EXEC (@state)
+				-- Cấm quyền xóa nhân viên
+				SET @state = 'DENY EXEC ON OBJECT::PROD_DeleteEmployee TO [' + @user + ']'
+				EXEC (@state)
+
+				-------------Cam quyen tu them Vourcher
+				SET @state = 'DENY EXEC ON OBJECT::InsertVoucher TO [' + @user + ']'
+				EXEC (@state)
+				-- Cấm quyền xóa khach hang
+				SET @state = 'DENY EXEC ON OBJECT::Delete_Customer TO [' + @user + ']'
+				EXEC (@state)
+				COMMIT TRANSACTION;
+			END TRY
+			BEGIN CATCH
+				ROLLBACK TRANSACTION;
+				THROW;
+			END CATCH
+		END
+
+    END TRY
+    BEGIN CATCH
+        PRINT ERROR_MESSAGE();
+    END CATCH
+END;
+GO
+
+CREATE OR ALTER PROCEDURE proc_createUser
+    @user NVARCHAR(30),
+    @pass NVARCHAR(30)
+AS
+BEGIN
+    DECLARE @createLogin NVARCHAR(100)
+    DECLARE @createUser NVARCHAR(100)
+    set @createLogin = 'Create Login [' + @user + '] with password = ''' + @pass + ''''
+	set @createUser = 'Create User [' + @user + '] For Login [' + @user + ']'
+
+	print @createLogin
+	print @createUser
+
+	exec (@createLogin)
+	exec (@createUser)
+
+	exec proc_permission @user, @pass
+end	
+go
+
+create or ALTER PROCEDURE proc_deleteUser (@user nvarchar(20))
+as
+begin
+	declare @state1 nvarchar(200), @state2 nvarchar(200)
+	begin transaction deleteUser
+	begin try
+		set @state1 = 'drop login ' +@user
+		set @state2 = 'drop user ' +@user
+		exec (@state1)
+		exec (@state2)
+		commit transaction deleteUser
+	end try
+	begin catch
+		print (error_message())
+		rollback transaction deleteUser
+	end catch
+end
+go
+
+CREATE OR ALTER PROCEDURE proc_updateUser 
+    @user varchar(20), 
+    @newPass varchar(30), 
+    @oldPass varchar(30)
+AS
+BEGIN 
+    DECLARE @state nvarchar(max)
+    SET @state = 'ALTER LOGIN '+@user+' WITH PASSWORD = '''+@newPass+''' OLD_PASSWORD = '''+@oldPass+''''
+    EXEC (@state)
+END
+GO
+
 
 -- CREATE DATATABLE
 CREATE TABLE AUTHORIZATION_USER(
@@ -133,18 +279,64 @@ CREATE TABLE WARRANTY_CARD(
 
 --TRIGGER FINAL
 
-CREATE  TRIGGER AUTO_CREATE_ACCOUNT ON EMPLOYEE
+CREATE TRIGGER AUTO_CREATE_ACCOUNT ON EMPLOYEE
 FOR INSERT
 AS
 BEGIN
-  DECLARE @employeeID INT, @employeeName VARCHAR(255), @password VARCHAR(255)
-  SELECT @employeeID = employeeID FROM inserted
-  SET @password = SUBSTRING(CAST(NEWID() AS VARCHAR(36)), 1, 6)
-  INSERT INTO Account (employeeID, emp_Password)
-  VALUES (@employeeID, @password)
-  Print('Tao tai khoan nhan vien thanh cong!');
+  SET NOCOUNT ON;
+
+  BEGIN TRY
+    BEGIN TRANSACTION
+
+    DECLARE @employeeID INT, @password VARCHAR(255) ,@employeeID_str VARCHAR(20)
+    SELECT @employeeID = employeeID FROM inserted
+    SET @password = SUBSTRING(CAST(NEWID() AS VARCHAR(36)), 1, 6)
+	SET @employeeID_str = CAST(@employeeID AS VARCHAR(20))
+
+    INSERT INTO Account (employeeID, emp_Password)
+    VALUES (@employeeID, @password)
+  
+    EXEC proc_createUser @employeeID_str, @password
+  
+    COMMIT TRANSACTION
+    PRINT('Thêm mới nhân viên và tạo tài khoản thành công!')
+  
+  END TRY
+
+  BEGIN CATCH
+    PRINT('Thêm mới nhân viên và tạo tài khoản thất bại! Lỗi: ' + ERROR_MESSAGE())
+    ROLLBACK TRANSACTION
+  END CATCH
 END;
 GO
+
+--OLD
+--CREATE  TRIGGER AUTO_CREATE_ACCOUNT ON EMPLOYEE
+--FOR INSERT
+--AS
+--BEGIN
+--  DECLARE @employeeID INT, @employeeName VARCHAR(255), @password VARCHAR(255)
+--  SELECT @employeeID = employeeID FROM inserted
+--  SET @password = SUBSTRING(CAST(NEWID() AS VARCHAR(36)), 1, 6)
+--  INSERT INTO Account (employeeID, emp_Password)
+--  VALUES (@employeeID, @password)
+--  Print('Tao tai khoan nhan vien thanh cong!');
+--END;
+--GO
+
+
+--OLD
+--CREATE TRIGGER AUTO_DELETE_ACCOUNT
+--ON Employee
+--AFTER UPDATE
+--AS
+--BEGIN
+--    IF UPDATE(statusJob) AND EXISTS(SELECT 1 FROM inserted WHERE statusJob = 'Non-Active') -- kiểm tra xem cột statusJob có được cập nhật hay không
+--    BEGIN
+--        DELETE FROM ACCOUNT WHERE employeeID  = (SELECT employeeID FROM inserted)
+--    END
+--END;
+--GO
 
 CREATE TRIGGER AUTO_DELETE_ACCOUNT
 ON Employee
@@ -153,7 +345,17 @@ AS
 BEGIN
     IF UPDATE(statusJob) AND EXISTS(SELECT 1 FROM inserted WHERE statusJob = 'Non-Active') -- kiểm tra xem cột statusJob có được cập nhật hay không
     BEGIN
-        DELETE FROM ACCOUNT WHERE employeeID  = (SELECT employeeID FROM inserted)
+        DECLARE @employeeID INT
+        SELECT @employeeID = employeeID FROM inserted
+        DECLARE @employeeID_str VARCHAR(20)
+		SET @employeeID_str = CAST(@employeeID AS VARCHAR(20))
+
+        BEGIN TRANSACTION
+        
+        EXEC proc_deleteUser @user =  @employeeID_str
+        DELETE FROM Account WHERE employeeID  = @employeeID
+        
+        COMMIT TRANSACTION
     END
 END;
 GO
@@ -899,6 +1101,7 @@ BEGIN
 	--
 END
 GO
+
 CREATE PROCEDURE UpdateVoucherByID 
 @voucherID VARCHAR(15) = NULL,
 @voucherName VARCHAR(255) = NULL,
@@ -1144,4 +1347,6 @@ UPDATE ACCOUNT
 SET emp_password = 'admin123'
 WHERE employeeID = 1
 GO
+
+SELECT * FROM ACCOUNT
 
