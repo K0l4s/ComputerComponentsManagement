@@ -24,16 +24,22 @@ namespace Dashboard.DAO
         private static DataProvider instance;
         public static string ServerName = "DESKTOP-M1IF6PS\\SQLEXPRESS";
         public static string DatabaseName = "HEQUANTRICOSODULIEU";
-        public static string UserName = "3";
-        public static string Password = "28EE7C";
-        private string ConnStr = $@"Data Source={ServerName}; Initial Catalog={DatabaseName};User Id={UserName};Password={Password}";
+        public static string UserName = "1";
+        public static string Password = "admin123";
+        public  string ConnStr = $@"Data Source={ServerName}; Initial Catalog={DatabaseName};User Id={UserName};Password={Password}";
 
 
         private DataProvider() { }
 
         public static DataProvider Instance
         {
-            get { if (instance == null) instance = new DataProvider(); return DataProvider.instance; }
+            get { 
+                //if (instance == null)
+                //{
+                    instance = new DataProvider();
+                //}
+                return DataProvider.instance; 
+            }
             private set { DataProvider.instance = value; }
         }
         //Hàm thực thi câu lệnh sqlCommand, giá trị trả về là 1 bảng giá trị

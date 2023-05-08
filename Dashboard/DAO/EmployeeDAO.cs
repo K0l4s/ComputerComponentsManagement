@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace Dashboard.DAO
 {
@@ -33,11 +34,25 @@ namespace Dashboard.DAO
 
         public bool Login(string username, string password)
         {
-            this.username  = username;
-            String query = "SELECT * FROM View_Account WHERE employeeID = "+username+" AND emp_password = '"+password+"'";
-            DataTable result = DataProvider.Instance.ExecuteQuery(query);
-            userLogin = Int32.Parse(username);
-            return result.Rows.Count > 0;
+            DataProvider.UserName = username;
+            DataProvider.Password = password;
+
+            bool check = false;
+            try
+            {
+                //MessageBox.Show(DataProvider.Instance.ConnStr);
+                this.username  = username;
+                String query = "SELECT * FROM View_Account WHERE employeeID = "+username+" AND emp_password = '"+password+"'";
+                DataTable result = DataProvider.Instance.ExecuteQuery(query);
+                userLogin = Int32.Parse(username);
+                return result.Rows.Count > 0;
+            }
+            catch(Exception e)
+            {
+                MessageBox.Show(e.ToString());
+            }
+            return check;
+
         }
 
         public bool ChangePassword(string newpass, string oldpass)

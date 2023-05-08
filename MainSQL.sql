@@ -61,9 +61,7 @@ BEGIN
 				SET @state = 'GRANT EXEC TO [' + @user + ']'
 				EXEC (@state)
 
-				------------- cấm quyền vào account
-				--SET @state = 'DENY SELECT, UPDATE, INSERT, DELETE ON OBJECT::ACCOUNT TO [' + @user + ']'
-				--EXEC (@state)
+				
 				--cấm quyền them xoa account
 				SET @state = 'DENY  INSERT, DELETE ON OBJECT::view_Account TO [' + @user + ']'
 				EXEC (@state)
@@ -295,6 +293,7 @@ BEGIN
 		ROLLBACK TRANSACTION
 	END
 END
+GO
 CREATE  TRIGGER AUTO_CREATE_ACCOUNT ON EMPLOYEE
 FOR INSERT
 AS
@@ -306,8 +305,11 @@ BEGIN
 
     DECLARE @employeeID INT, @password VARCHAR(255) ,@employeeID_str VARCHAR(20)
     SELECT @employeeID = employeeID FROM inserted
-    SET @password = SUBSTRING(CAST(NEWID() AS VARCHAR(36)), 1, 6)
+	
 	SET @employeeID_str = CAST(@employeeID AS VARCHAR(20))
+    --SET @password = SUBSTRING(CAST(NEWID() AS VARCHAR(36)), 1, 6)
+
+	SET @password = 'admin123'
 
     INSERT INTO Account (employeeID, emp_Password)
     VALUES (@employeeID, @password)
@@ -376,31 +378,31 @@ BEGIN
 END;
 GO
 
-CREATE TRIGGER AUTO_CREATE_ACCOUNT_CONTINUE_WORK
-ON EMPLOYEE
-AFTER UPDATE
-AS
-BEGIN
-IF ((SELECT statusJob FROM inserted) = 'Active')
-BEGIN
-	DECLARE @employeeID INT, @employeeName VARCHAR(255), @password VARCHAR(255)
-	SELECT @employeeID = employeeID FROM inserted
-		-- Kiểm tra xem đã có bản ghi nào trong bảng ACCOUNT có cùng employeeID chưa
-		IF NOT EXISTS (SELECT * FROM ACCOUNT WHERE employeeID = @employeeID)
-		BEGIN
-			SET @password = SUBSTRING(CAST(NEWID() AS VARCHAR(36)), 1, 6)
-			INSERT INTO Account (employeeID, emp_Password)
-			VALUES (@employeeID, @password) 
-		END
-		ELSE
-		BEGIN
-			-- Nếu đã có bản ghi thì cập nhật lại mật khẩu
-			SET @password = SUBSTRING(CAST(NEWID() AS VARCHAR(36)), 1, 6)
-			UPDATE ACCOUNT SET emp_Password = @password WHERE employeeID = @employeeID
-		END
-	END
-END;
-GO
+--CREATE TRIGGER AUTO_CREATE_ACCOUNT_CONTINUE_WORK
+--ON EMPLOYEE
+--AFTER UPDATE
+--AS
+--BEGIN
+--IF ((SELECT statusJob FROM inserted) = 'Active')
+--BEGIN
+--	DECLARE @employeeID INT, @employeeName VARCHAR(255), @password VARCHAR(255)
+--	SELECT @employeeID = employeeID FROM inserted
+--		-- Kiểm tra xem đã có bản ghi nào trong bảng ACCOUNT có cùng employeeID chưa
+--		IF NOT EXISTS (SELECT * FROM ACCOUNT WHERE employeeID = @employeeID)
+--		BEGIN
+--			SET @password = SUBSTRING(CAST(NEWID() AS VARCHAR(36)), 1, 6)
+--			INSERT INTO Account (employeeID, emp_Password)
+--			VALUES (@employeeID, @password) 
+--		END
+--		ELSE
+--		BEGIN
+--			-- Nếu đã có bản ghi thì cập nhật lại mật khẩu
+--			SET @password = SUBSTRING(CAST(NEWID() AS VARCHAR(36)), 1, 6)
+--			UPDATE ACCOUNT SET emp_Password = @password WHERE employeeID = @employeeID
+--		END
+--	END
+--END;
+--GO
 
 CREATE TRIGGER CHECK_PRICE
 ON PRODUCT_DETAIL
@@ -665,7 +667,8 @@ CREATE VIEW VIEW_WARRANTY AS
 	FROM WARRANTY_CARD w INNER JOIN PRODUCT p ON w.productID = p.productID 
 		INNER JOIN BILL b ON w.billID = b.billID
 GO
-INSERT INTO WARRANTY_CARD(warrantyID, warr_StatusID,productID,billID,quantity) VALUES ('1',1,'1','1',1)
+--INSERT INTO WARRANTY_CARD(warrantyID, warr_StatusID,productID,billID,quantity) VALUES ('1',1,'1','1',1);
+GO
 
 /*CREATE VIEW VIEW_WARRENTY AS
 	SELECT wr.productID, wr.warr_StatusID, wr.descript
@@ -676,7 +679,6 @@ INSERT INTO WARRANTY_CARD(warrantyID, warr_StatusID,productID,billID,quantity) V
 
 --Func + Proc
 --FUNCTION FINAL
-
 CREATE FUNCTION FUNC_GetMaxEmployeeId()
 RETURNS INT
 AS
@@ -1684,10 +1686,10 @@ insert into WORK_TIME(employeeID, checkIn, checkOut) values (1, '2023-05-12 13:0
 
 insert into WORK_TIME(employeeID, checkIn, checkOut) values (3, '2023-05-12 7:00:00', '2023-05-12 11:00:00')
 insert into WORK_TIME(employeeID, checkIn, checkOut) values (3, '2023-05-12 13:00:00', '2023-05-12 17:00:00')
-UPDATE ACCOUNT
-SET emp_password = 'admin123'
-WHERE employeeID = 1
-GO
+--UPDATE ACCOUNT
+--SET emp_password = 'admin123'
+--WHERE employeeID = 1
+--GO
 
-SELECT * FROM ACCOUNT
+--SELECT * FROM ACCOUNT
 
