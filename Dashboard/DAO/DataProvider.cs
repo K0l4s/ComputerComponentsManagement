@@ -24,7 +24,7 @@ namespace Dashboard.DAO
         private static DataProvider instance;
         public static string ServerName = "DESKTOP-M1IF6PS\\SQLEXPRESS";
         public static string DatabaseName = "HEQUANTRICOSODULIEU";
-        public static string UserName = "1";
+        public static string UserName = "";
         public static string Password = "admin123";
         public  string ConnStr = $@"Data Source={ServerName}; Initial Catalog={DatabaseName};User Id={UserName};Password={Password}";
 

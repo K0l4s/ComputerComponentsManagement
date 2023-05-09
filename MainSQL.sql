@@ -1630,22 +1630,10 @@ INSERT INTO EMPLOYEE(employeeID,fullName,formatName,phoneNumber,Em_address,citiz
 values (1,'Nguyen Ngan','Full Time','0123456799','Ho Chi Minh','050303116553','2003-8-20',27000,'Female',1,0.5,'20230415135620453_45412b9b-d7b6-4fb9-8498-1fc5aa5648e5.png');
 INSERT INTO EMPLOYEE(employeeID,fullName,formatName,phoneNumber,Em_address,citizenID,dateOfBirth,wage,sex,authorID,commissionRate,employeeImage)
 values (2,'Nguyen Van Ba','Part Time','0123409799','Ho Chi Minh','050303116663','2003-8-20',23000,'Female',2,0.2,'20230415135628769_72dc12d9-7230-4aca-8c6e-0198ba3aa40c.png');
---INSERT INTO EMPLOYEE(employeeID,fullName,formatName,phoneNumber,Em_address,citizenID,dateOfBirth,wage,sex,authorID,commissionRate,employeeImage)
---values (3,'Nguyen A','Full Time','0123477799','Ho Chi Minh','050303110053','2003-8-20',21000,'Female',2,0.4,'20230415135312990_383f8789-49f8-4533-af40-81a7dec43f8d.png');
---GO
-EXEC PROD_InsertEmployee 
-  'Nguyen A', 
-  'Female', 
-  'Full Time', 
-  21000, 
-  '20230415135312990_383f8789-49f8-4533-af40-81a7dec43f8d.png', 
-  '0123477799', 
-  'Ho Chi Minh', 
-  '050303110053', 
-  0.4, 
-  '2003-8-20', 
-  53, 
-  'Manager';
+INSERT INTO EMPLOYEE(employeeID,fullName,formatName,phoneNumber,Em_address,citizenID,dateOfBirth,wage,sex,authorID,commissionRate,employeeImage)
+values (3,'Nguyen A','Full Time','0123477799','Ho Chi Minh','050303110053','2003-8-20',21000,'Female',2,0.4,'20230415135312990_383f8789-49f8-4533-af40-81a7dec43f8d.png');
+GO
+
 
 
 
@@ -1654,10 +1642,10 @@ INSERT INTO CUSTOMER (phoneNumber, fullName, cus_address) VALUES ('0123456789', 
 INSERT INTO CUSTOMER (phoneNumber, fullName, cus_address) VALUES ('0987654321', 'Trần Thị B', '456 Đường XYZ, Quận 2, TP. HCM');
 INSERT INTO CUSTOMER (phoneNumber, fullName, cus_address) VALUES ('0909090909', 'Lê Văn C', '789 Đường LMN, Quận 3, TP. HCM');
 
-INSERT INTO PRODUCT (productID, productName, productImageURL, quantity) VALUES (1, 'Product A', NULL, 10);
-INSERT INTO PRODUCT (productID, productName, productImageURL, quantity) VALUES (2, 'Product B', NULL, 15);
-INSERT INTO PRODUCT (productID, productName, productImageURL, quantity) VALUES (3, 'Product C', NULL, 10);
-INSERT INTO PRODUCT (productID, productName, productImageURL, quantity) VALUES (4, 'Product D', NULL, 20);
+INSERT INTO PRODUCT (productID, productName, productImageURL, quantity) VALUES (1, 'Product A', NULL, 100);
+INSERT INTO PRODUCT (productID, productName, productImageURL, quantity) VALUES (2, 'Product B', NULL, 150);
+INSERT INTO PRODUCT (productID, productName, productImageURL, quantity) VALUES (3, 'Product C', NULL, 100);
+INSERT INTO PRODUCT (productID, productName, productImageURL, quantity) VALUES (4, 'Product D', NULL, 200);
 
 INSERT INTO BRAND (brandID, brandName) VALUES ('1', 'Brand A');
 INSERT INTO BRAND (brandID, brandName) VALUES ('2', 'Brand B');
