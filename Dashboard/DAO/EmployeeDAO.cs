@@ -1,5 +1,6 @@
 ﻿    using Dashboard.DTO;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -82,7 +83,7 @@ namespace Dashboard.DAO
 
         public bool AddNewEmployee(EmployeeDTO employeeDTO, ref string err)
         {
-            strSQL = "EXEC PROD_InsertEmployee @fullName , @sex , @formatName , @wage , @employeeImage , @phoneNumber , @address , @citizenID , @commissionRate , @dateOfBirth , @age , @authorName";
+            string query = "EXEC PROD_InsertEmployee @fullName , @sex , @formatName , @wage , @employeeImage , @phoneNumber , @address , @citizenID , @commissionRate , @dateOfBirth , @age , @authorName";
 
             object[] parameters = new object[]
             {
@@ -100,33 +101,32 @@ namespace Dashboard.DAO
                 employeeDTO.AuthorName
             };
 
-            DataTable result = DataProvider.Instance.ExecuteQuery(strSQL, parameters);
+            int result = DataProvider.Instance.ExecuteNonQuery(query, parameters);
 
-            if (result.Rows.Count > 0)
+            if (result == 0)
             {
-                err = result.Rows[0]["Error"].ToString();
-                return false;
+                err = "Lỗi khi cập nhật thông tin nhân viên";
+                return true;
             }
             else
             {
-                err = "Thêm Nhân Viên Thành Công !";
-                return true;
+                err = "Cập nhật thông tin nhân viên thành công!";
+                return false;
             }
-           
+
         }
 
         public bool DeleteEmployee(EmployeeDTO employeeDTO, ref string err)
         {
             string query = "EXECUTE PROD_DeleteEmployee @employeeID ";
             object[] parameters = new object[] { employeeDTO.EmployeeID };
-            DataTable result = DataProvider.Instance.ExecuteQuery(query, parameters);
+            int result = DataProvider.Instance.ExecuteNonQuery(query, parameters);
             err = "Xóa nhân viên thành công";
             return true;
         }
 
         public bool UpdateEmployee(EmployeeDTO employeeDTO, ref string err)
         {
-            //string query = "EXECUTE PROD_UpdateEmployee @employeeID, @fullName, @sex, @formatName, @wage, @employeeImage, @phoneNumber, @address, @citizenID, @commissionRate, @dateOfBirth, @age, @authorName";
             string query = "EXECUTE PROD_UpdateEmployee @employeeID , @fullName , @sex , @formatName , @wage , @employeeImage , @phoneNumber , @address , @citizenID , @commissionRate , @dateOfBirth , @age , @authorName";
             object[] parameters = new object[]
             {
@@ -144,19 +144,19 @@ namespace Dashboard.DAO
                 employeeDTO.Age,
                 employeeDTO.AuthorName
             };
-            DataTable result = DataProvider.Instance.ExecuteQuery(query, parameters);
+            int result = DataProvider.Instance.ExecuteNonQuery(query, parameters);
 
-            if (result.Rows.Count > 0)
+            if (result == 0)
             {
-                err = result.Rows[0]["Error"].ToString();
-                return false;
+                err = "Lỗi khi cập nhật thông tin nhân viên";
+                return true;
             }
             else
             {
                 err = "Cập nhật thông tin nhân viên thành công!";
-                return true;
+                return false;
             }
-            
+
         }
 
     }

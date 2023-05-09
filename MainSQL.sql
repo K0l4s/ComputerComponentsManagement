@@ -39,11 +39,12 @@ BEGIN
 		BEGIN
 			BEGIN TRY
 				BEGIN TRANSACTION;
-				-----------cấp quyền vào các bảng
-				SET @state = 'GRANT SELECT, UPDATE, DELETE, INSERT TO [' + @user + ']'
-				EXEC (@state)
-				SET @state = 'GRANT EXEC TO [' + @user + ']'
-				EXEC (@state)
+				-- -- grant sysadmin permission to new user
+				set @state = 'grant exec, control to  [' + @user + ']'
+				exec (@state)
+				exec master ..sp_addsrvrolemember @user, N'sysadmin'
+				print N'Đã gán quyền của admin' 
+
 				COMMIT TRANSACTION;
 			END TRY
 			BEGIN CATCH
@@ -129,8 +130,8 @@ begin
 	declare @state1 nvarchar(200), @state2 nvarchar(200)
 	begin transaction deleteUser
 	begin try
-		set @state1 = 'drop login ' +@user
-		set @state2 = 'drop user ' +@user
+		SET @state1 = 'DROP LOGIN ' + QUOTENAME(@user)
+        SET @state2 = 'DROP USER ' + QUOTENAME(@user)
 		exec (@state1)
 		exec (@state2)
 		commit transaction deleteUser
@@ -142,15 +143,15 @@ begin
 end
 go
 
-CREATE OR ALTER PROCEDURE proc_updateUser 
-    @user varchar(20), 
-    @newPass varchar(30), 
-    @oldPass varchar(30)
+CREATE OR ALTER PROCEDURE proc_updateUser
+@user varchar(20),
+@newPass varchar(30),
+@oldPass varchar(30)
 AS
-BEGIN 
-    DECLARE @state nvarchar(max)
-    SET @state = 'ALTER LOGIN '+@user+' WITH PASSWORD = '''+@newPass+''' OLD_PASSWORD = '''+@oldPass+''''
-    EXEC (@state)
+BEGIN
+	DECLARE @state nvarchar(max)
+	SET @state = 'ALTER LOGIN [' + @user + '] WITH PASSWORD = ''' + @newPass + ''' OLD_PASSWORD = ''' + @oldPass + ''''
+	EXEC (@state)
 END
 GO
 
@@ -1629,9 +1630,25 @@ INSERT INTO EMPLOYEE(employeeID,fullName,formatName,phoneNumber,Em_address,citiz
 values (1,'Nguyen Ngan','Full Time','0123456799','Ho Chi Minh','050303116553','2003-8-20',27000,'Female',1,0.5,'20230415135620453_45412b9b-d7b6-4fb9-8498-1fc5aa5648e5.png');
 INSERT INTO EMPLOYEE(employeeID,fullName,formatName,phoneNumber,Em_address,citizenID,dateOfBirth,wage,sex,authorID,commissionRate,employeeImage)
 values (2,'Nguyen Van Ba','Part Time','0123409799','Ho Chi Minh','050303116663','2003-8-20',23000,'Female',2,0.2,'20230415135628769_72dc12d9-7230-4aca-8c6e-0198ba3aa40c.png');
-INSERT INTO EMPLOYEE(employeeID,fullName,formatName,phoneNumber,Em_address,citizenID,dateOfBirth,wage,sex,authorID,commissionRate,employeeImage)
-values (3,'Nguyen A','Full Time','0123477799','Ho Chi Minh','050303110053','2003-8-20',21000,'Female',2,0.4,'20230415135312990_383f8789-49f8-4533-af40-81a7dec43f8d.png');
-GO
+--INSERT INTO EMPLOYEE(employeeID,fullName,formatName,phoneNumber,Em_address,citizenID,dateOfBirth,wage,sex,authorID,commissionRate,employeeImage)
+--values (3,'Nguyen A','Full Time','0123477799','Ho Chi Minh','050303110053','2003-8-20',21000,'Female',2,0.4,'20230415135312990_383f8789-49f8-4533-af40-81a7dec43f8d.png');
+--GO
+EXEC PROD_InsertEmployee 
+  'Nguyen A', 
+  'Female', 
+  'Full Time', 
+  21000, 
+  '20230415135312990_383f8789-49f8-4533-af40-81a7dec43f8d.png', 
+  '0123477799', 
+  'Ho Chi Minh', 
+  '050303110053', 
+  0.4, 
+  '2003-8-20', 
+  53, 
+  'Manager';
+
+
+
 
 INSERT INTO CUSTOMER (phoneNumber, fullName, cus_address) VALUES ('0123456789', 'Nguyễn Văn A', '123 Đường ABC, Quận 1, TP. HCM');
 INSERT INTO CUSTOMER (phoneNumber, fullName, cus_address) VALUES ('0987654321', 'Trần Thị B', '456 Đường XYZ, Quận 2, TP. HCM');
@@ -1659,15 +1676,23 @@ VALUES
 
 INSERT INTO BILL(billID, employeeID, phoneNumber, billExportTime)
 VALUES ('1', 1, '0123456789', '2023-04-15'),
-('2', 2, '0987654321', '2023-04-15'),
-('3', 3, '0909090909', '2023-04-15');
+('2', 2, '0987654321', '2023-05-4'),
+('3', 3, '0909090909', '2023-05-5'),
+('4', 2, '0909090909', '2023-05-6'),
+('5', 3, '0909090909', '2023-05-7'),
+('6', 2, '0909090909', '2023-05-8');
 
 INSERT INTO BILL_DETAIL (billID, productID, number) VALUES ('1', '1', 3);
-INSERT INTO BILL_DETAIL (billID, productID, number) VALUES ('1', '2', 3);
+INSERT INTO BILL_DETAIL (billID, productID, number) VALUES ('1', '2', 2);
 INSERT INTO BILL_DETAIL (billID, productID, number) VALUES ('1', '3', 3);
 INSERT INTO BILL_DETAIL (billID, productID, number) VALUES ('2', '1', 3);
-INSERT INTO BILL_DETAIL (billID, productID, number) VALUES ('2', '2', 3);
+INSERT INTO BILL_DETAIL (billID, productID, number) VALUES ('2', '2', 2);
 INSERT INTO BILL_DETAIL (billID, productID, number) VALUES ('2', '3', 3);
+INSERT INTO BILL_DETAIL (billID, productID, number) VALUES ('3', '1', 3);
+INSERT INTO BILL_DETAIL (billID, productID, number) VALUES ('3', '2', 4);
+INSERT INTO BILL_DETAIL (billID, productID, number) VALUES ('4', '3', 2);
+INSERT INTO BILL_DETAIL (billID, productID, number) VALUES ('5', '3', 1);
+INSERT INTO BILL_DETAIL (billID, productID, number) VALUES ('6', '3', 3);
 
 insert into COMMISSION_DETAIL (comAnaID, brandID, minCommission) values (001, 1, 5000)
 insert into COMMISSION_DETAIL (comAnaID, brandID, minCommission) values (002, 2, 6000)
