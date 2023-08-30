@@ -1,3 +1,14 @@
+#Description
+This project is submit the course "Database Management System"
+#Teammate
+1. Huỳnh Trung Kiên (me - Leader)
+2. Nguyễn Hoàng Phương Ngân
+3. Nguyễn Bùi Minh Nhật
+4. Nguyễn Quốc Long
+
+
+
+
 # Cách connect tới database:
 Bước 1: Trước hết bạn chạy file dưới trong SQL Server
 ```
@@ -12,6 +23,10 @@ trong Visual Code Studio và nhấn nút Run để test chương trình. Nếu l
 MainSQL2.sql
 ```
 rồi thực hiện lại từ bước 2
+
+
+
+
 # Cách làm việc với git
 ## Mới bắt đầu code
 Trước khi bắt đầu code thì dùng dòng lệnh dưới đây trước
