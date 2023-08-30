@@ -1,5 +1,6 @@
 # Description
-This project is submit the course ````"Database Management System"````
+This project involves submitting for the course ````"Database Management System".````
+In this project, we utilized our knowledge of databases to create functionalities such as functions, triggers, procedures, etc.
 # Teammate
 ````
 1. Huỳnh Trung Kiên (me - Leader)
